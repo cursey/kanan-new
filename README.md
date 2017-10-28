@@ -16,7 +16,7 @@ A reimagining of Kanan for Mabinogi written in C++ with many improvements.
 * Visual Studio 2017
 
 ## Usage
-Once the project has been built successfully in Release mode just run Loader.exe as an administrator. Loader.exe will automatically look for any instances of Mabinogi and load Kanan.dll into it.
+Once the project has been built successfully in Release mode just run Loader.exe as an administrator. Loader.exe will automatically look for any instances of Mabinogi and load Kanan.dll into it. Press the INSERT key to toggle the UI.
 
 ## This project is still a work in progress
 Once this project reaches (or approaches) feature parity with the original Kanan the URL for it will probably change to replace the original. I may periodically release official binaries for those who don't want to build the project themselves.
