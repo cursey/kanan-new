@@ -11,7 +11,7 @@ namespace kanan {
         m_entityListPtr{ nullptr },
         m_worldPtr{ nullptr }
     {
-        g_log << "Entering Game constructor." << endl;
+        log("Entering Game constructor.");
 
         // Find the games global renderer pointer.
         auto rendererAddress = scan("client.exe", "8B 0D ? ? ? ? 8D 55 C8 52 8D 45 DC");
@@ -19,10 +19,10 @@ namespace kanan {
         if (rendererAddress) {
             m_rendererPtr = *(CRendererPtr**)(*rendererAddress + 2);
 
-            g_log << "Got CRendererPtr " << hex << m_rendererPtr << endl;
+            log("Got CRendererPtr %p", m_rendererPtr);
         }
         else {
-            errorMsg("Failed to find address of CRendererPtr.");
+            error("Failed to find address of CRendererPtr.");
         }
 
         // Find the games global entity list pointer.
@@ -31,10 +31,10 @@ namespace kanan {
         if (entityListAddress) {
             m_entityListPtr = *(CEntityListPtr**)(*entityListAddress + 2);
 
-            g_log << "Got CEntityListPtr " << hex << m_entityListPtr << endl;
+            log("Got CEntityListPtr %p", m_entityListPtr);
         }
         else {
-            errorMsg("Failed to find CEntityListPtr.");
+            error("Failed to find CEntityListPtr.");
         }
 
         // Find the games global world pointer.
@@ -43,13 +43,13 @@ namespace kanan {
         if (worldAddress) {
             m_worldPtr = *(CWorldPtr**)(*worldAddress + 2);
 
-            g_log << "Got CWorldPtr " << hex << m_worldPtr << endl;
+            log("Got CWorldPtr %p", m_worldPtr);
         }
         else {
-            errorMsg("Failed to find CWorldPtr.");
+            error("Failed to find CWorldPtr.");
         }
 
-        g_log << "Leaving Game constructor." << endl;
+        log("Leaving Game constructor.");
     }
 
     KCharacter* Game::getCharacterByID(uint64_t id) {

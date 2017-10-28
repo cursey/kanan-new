@@ -18,11 +18,11 @@ namespace kanan {
     {
         if (g_dinputHook == nullptr) {
             if (hook()) {
-                g_log << "DInputHook hooked successfully." << endl;
+                log("DInputHook hooked successfully.");
                 g_dinputHook = this;
             }
             else {
-                g_log << "DInputHook failed to hook." << endl;
+                log("DInputHook failed to hook.");
             }
         }
     }
@@ -35,7 +35,7 @@ namespace kanan {
     }
 
     bool DInputHook::hook() {
-        g_log << "Entering DInputHook::hook()." << endl;
+        log("Entering DInputHook::hook().");
 
         // All we do here is create an IDirectInputDevice so that we can get the 
         // addresses of the methods we want to hook from its vtable.
@@ -45,36 +45,36 @@ namespace kanan {
         auto dinput8Create = (DirectInput8CreateFn)GetProcAddress(dinput8, "DirectInput8Create");
 
         if (dinput8Create == nullptr) {
-            g_log << "Failed to find DirectInput8Create." << endl;
+            log("Failed to find DirectInput8Create.");
             return false;
         }
 
-        g_log << "Got DirectInput8Create " << hex << dinput8Create << endl;
+        log("Got DirectInput8Create %p", dinput8Create);
 
         auto instance = (HINSTANCE)GetModuleHandle(nullptr);
         IDirectInput* dinput{ nullptr };
 
         if (FAILED(dinput8Create(instance, DIRECTINPUT_VERSION, IID_IDirectInput8W, (LPVOID*)&dinput, nullptr))) {
-            g_log << "Failed to create IDirectInput." << endl;
+            log("Failed to create IDirectInput.");
             return false;
         }
         
-        g_log << "Got IDirectInput " << hex << dinput << endl;
+        log("Got IDirectInput %p", dinput);
 
         IDirectInputDevice* device{ nullptr };
 
         if (FAILED(dinput->CreateDevice(GUID_SysKeyboard, &device, nullptr))) {
-            g_log << "Failed to create IDirectInputDevice." << endl;
+            log("Failed to create IDirectInputDevice.");
             dinput->Release();
             return false;
         }
 
-        g_log << "Got IDirectInputDevice " << hex << device << endl;
+        log("Got IDirectInputDevice %p", device);
 
         // Get the addresses of the methods we want to hook.
         auto getDeviceData = (*(uintptr_t**)device)[10];
 
-        g_log << "Got IDirectInputDevice::GetDeviceData " << hex << getDeviceData << endl;
+        log("Got IDirectInputDevice::GetDeviceData %p", getDeviceData);
 
         device->Release();
         dinput->Release();

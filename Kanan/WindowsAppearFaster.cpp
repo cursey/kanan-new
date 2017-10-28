@@ -21,10 +21,10 @@ namespace kanan {
         m_patches[1].bytes = { 0x31, 0xC9, 0x90 };
 
         if (address0 && address1) {
-            g_log << "Found all addresses for WindowsAppearFaster." << endl;
+            log("Found all addresses for WindowsAppearFaster.");
         }
         else {
-            g_log << "Failed to find one or more addresses for WindowsAppearFaster." << endl;
+            log("Failed to find one or more addresses for WindowsAppearFaster.");
         }
     }
 
@@ -62,7 +62,7 @@ namespace kanan {
             }
         }
 
-        g_log << "Toggling WindowsAppearFaster..." << endl;
+        log("Toggling WindowsAppearFaster...");
 
         if (m_isEnabled) {
             for (auto& p : m_patches) {

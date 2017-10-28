@@ -14,19 +14,19 @@ namespace kanan {
         : m_isEnabled{ false },
         m_hook{ nullptr }
     {
-        g_log << "Entering DisableNagle constructor." << endl;
+        log("Entering DisableNagle constructor.");
 
         auto ws2_32 = LoadLibrary(L"ws2_32.dll");
         
         if (ws2_32 == nullptr) {
-            g_log << "Failed to get address of ws2_32.dll" << endl;
+            log("Failed to get address of ws2_32.dll");
             return;
         }
 
         auto socketAddress = GetProcAddress(ws2_32, "socket");
 
         if (socketAddress == nullptr) {
-            g_log << "Failed to get address of ws2_32.socket" << endl;
+            log("Failed to get address of ws2_32.socket");
             return;
         }
 
@@ -34,13 +34,13 @@ namespace kanan {
         m_hook = make_unique<FunctionHook>((uintptr_t)socketAddress, (uintptr_t)&DisableNagle::socket);
 
         if (m_hook->isValid()) {
-            g_log << "Successfully hooked ws2_32.socket" << endl;
+            log("Successfully hooked ws2_32.socket");
         }
         else {
-            g_log << "Failed to hook ws2_32.socket" << endl;
+            log("Failed to hook ws2_32.socket");
         }
 
-        g_log << "Leaving DisableNagle constructor." << endl;
+        log("Leaving DisableNagle constructor.");
     }
 
     DisableNagle::~DisableNagle() {
@@ -76,10 +76,10 @@ namespace kanan {
             int nodelay = 1;
 
             if (setsockopt(result, IPPROTO_TCP, TCP_NODELAY, (const char*)&nodelay, sizeof(nodelay)) == 0) {
-                g_log << "Nagle disabled successfully." << endl;
+                log("Nagle disabled successfully.");
             }
             else {
-                g_log << "Failed to disable nagle!" << endl;
+                log("Failed to disable nagle!");
             }
         }
 

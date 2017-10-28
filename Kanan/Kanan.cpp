@@ -29,12 +29,12 @@ namespace kanan {
         m_isInitialized{ false },
         m_wnd{ nullptr }
     {
-        g_log << "Entering Kanan constructor." << endl;
+        log("Entering Kanan constructor.");
 
         //
         // Hook D3D9 and set the callbacks.
         //
-        g_log << "Hooking D3D9..." << endl;
+        log("Hooking D3D9...");
 
         m_d3d9Hook = make_unique<D3D9Hook>();
 
@@ -43,17 +43,17 @@ namespace kanan {
         m_d3d9Hook->onPostReset = [](auto&) { ImGui_ImplDX9_CreateDeviceObjects(); };
 
         if (!m_d3d9Hook->isValid()) {
-            errorMsg("Failed to hook D3D9.");
+            error("Failed to hook D3D9.");
         }
 
-        g_log << "Leaving Kanan constructor." << endl;
+        log("Leaving Kanan constructor.");
     }
 
     void Kanan::onInitialize() {
-        g_log << "Begginging intialization... " << endl;
+        log("Begginging intialization... ");
 
         // Grab the HWND from the device's creation parameters.
-        g_log << "Getting window from D3D9 device..." << endl;
+        log("Getting window from D3D9 device...");
 
         auto device = m_d3d9Hook->getDevice();
         D3DDEVICE_CREATION_PARAMETERS creationParams{};
@@ -65,12 +65,12 @@ namespace kanan {
         //
         // ImGui.
         //
-        g_log << "Initializing ImGui..." << endl;
+        log("Initializing ImGui...");
 
         ImGui::GetIO().IniFilename = m_uiConfigPath.c_str();
 
         if (!ImGui_ImplDX9_Init(m_wnd, device)) {
-            errorMsg("Failed to initialize ImGui.");
+            error("Failed to initialize ImGui.");
         }
 
         // These render strangely in Mabinogi so we disable them.
@@ -87,18 +87,18 @@ namespace kanan {
         //
         // DInputHook.
         //
-        g_log << "Hooking DInput..." << endl;
+        log("Hooking DInput...");
 
         m_dinputHook = make_unique<DInputHook>(m_wnd);
 
         if (!m_dinputHook->isValid()) {
-            errorMsg("Failed to hook DInput.");
+            error("Failed to hook DInput.");
         }
 
         // 
         // WindowsMessageHook.
         //
-        g_log << "Hooking the windows message procedure..." << endl;
+        log("Hooking the windows message procedure...");
 
         m_wmHook = make_unique<WindowsMessageHook>(m_wnd);
 
@@ -107,24 +107,24 @@ namespace kanan {
         };
 
         if (!m_wmHook->isValid()) {
-            errorMsg("Failed to hook windows message procedure.");
+            error("Failed to hook windows message procedure.");
         }
 
         //
         // Initialize the Game object.
         //
-        g_log << "Creating the Game object..." << endl;
+        log("Creating the Game object...");
 
         m_game = make_unique<Game>();
         
         //
         // Initialize all the mods.
         //
-        g_log << "Creating Mods object..." << endl;
+        log("Creating Mods object...");
 
         m_mods = make_unique<Mods>();
 
-        g_log << "Calling Mod::onInitialize callbacks..." << endl;
+        log("Calling Mod::onInitialize callbacks...");
 
         for (const auto& mod : m_mods->getMods()) {
             mod->onInitialize();
@@ -133,11 +133,11 @@ namespace kanan {
         // 
         // Load the config.
         // 
-        g_log << "Loading config..." << endl;
+        log("Loading config...");
 
         loadConfig();
 
-        g_log << "Done initializing." << endl;
+        log("Done initializing.");
     }
 
     void Kanan::onFrame() {
@@ -209,7 +209,7 @@ namespace kanan {
             return;
         }
 
-        g_log << "Loading config " << m_path << "/config.toml" << endl;
+        log("Loading config %s/config.toml", m_path.c_str());
 
         try {
             auto cfg = cpptoml::parse_file(m_path + "/config.toml");
@@ -218,10 +218,10 @@ namespace kanan {
                 mod->onConfigLoad(cfg);
             }
 
-            g_log << "Config loading done." << endl;
+            log("Config loading done.");
         }
         catch (const cpptoml::parse_exception& e) {
-            errorMsg(e.what());
+            error(e.what());
         }
     }
 
@@ -230,7 +230,7 @@ namespace kanan {
             return;
         }
 
-        g_log << "Saving config " << m_path << "/config.toml" << endl;
+        log("Saving config %s/config.toml", m_path.c_str());
 
         auto cfg = cpptoml::make_table();
 
@@ -241,13 +241,13 @@ namespace kanan {
         ofstream cfgFile{ m_path + "/config.toml" };
 
         if (!cfgFile.is_open()) {
-            errorMsg("Failed to open config.toml for writing!");
+            error("Failed to open config.toml for writing!");
             return;
         }
 
 
         cfgFile << *cfg << endl;
 
-        g_log << "Config saving done." << endl;
+        log("Config saving done.");
     }
 }

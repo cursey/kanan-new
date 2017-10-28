@@ -32,10 +32,10 @@ namespace kanan {
         m_patches[3].bytes = { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, -1, -1, -1, -1, -1, -1, 0x90, 0x90, 0x90, 0xB0, 0x01, -1, -1, -1, -1, 0xEB };
 
         if (address0 && address1 && address2 && address3) {
-            g_log << "Found all the addressess required for BitmapFont." << endl;
+            log("Found all the addressess required for BitmapFont.");
         }
         else {
-            g_log << "Failed to find one or more addresses for BitmapFont!" << endl;
+            log("Failed to find one or more addresses for BitmapFont!");
         }
     }
 
@@ -75,7 +75,7 @@ namespace kanan {
             }
         }
 
-        g_log << "Toggling BitmapFont..." << endl;
+        log("Toggling BitmapFont...");
 
         if (m_isEnabled) {
             for (auto& p : m_patches) {

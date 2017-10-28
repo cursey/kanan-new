@@ -1,3 +1,5 @@
+#include <cstdarg>
+
 #include <Windows.h>
 
 #include "String.hpp"
@@ -23,5 +25,27 @@ namespace kanan {
         MultiByteToWideChar(CP_UTF8, 0, str.c_str(), (int)str.length(), (LPWSTR)wideStr.c_str(), length);
 
         return wideStr;
+    }
+
+    string formatString(const char* format, va_list args) {
+        va_list argsCopy{};
+
+        va_copy(argsCopy, args);
+
+        auto len = vsnprintf(nullptr, 0, format, argsCopy);
+
+        va_end(argsCopy);
+
+        if (len <= 0) {
+            return {};
+        }
+
+        string buffer{};
+
+        buffer.resize(len + 1, 0);
+        vsnprintf(buffer.data(), buffer.size(), format, args);
+        buffer.resize(buffer.size() - 1); // Removes the extra 0 vsnprintf adds.
+
+        return buffer;
     }
 }

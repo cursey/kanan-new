@@ -15,13 +15,13 @@ namespace kanan {
         auto address = scan("client.exe", "0F 86 ? ? ? ? 8B 4D E8 8B 11");
 
         if (address) {
-            g_log << "Got OneClickRevive " << hex << *address << endl;
+            log("Got OneClickRevive %p", *address);
 
             m_patch.address = *address;
             m_patch.bytes = { 0x90, 0xE9 };
         }
         else {
-            g_log << "Failed to find OneClickRevive address." << endl;
+            log("Failed to find OneClickRevive address.");
         }
     }
 
@@ -55,7 +55,7 @@ namespace kanan {
             return;
         }
 
-        g_log << "Toggling OneClickRevive..." << endl;
+        log("Toggling OneClickRevive...");
 
         if (m_isEnabled) {
             patch(m_patch);

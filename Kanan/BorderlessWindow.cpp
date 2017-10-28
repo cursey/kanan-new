@@ -63,7 +63,7 @@ namespace kanan {
     }
 
     void BorderlessWindow::apply() {
-        g_log << "Applying Borderless Window setting..." << endl;
+        log("Applying Borderless Window setting...");
 
         // Get the window we want to change the style of.
         auto wnd = g_kanan->getWindow();

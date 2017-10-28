@@ -15,13 +15,13 @@ namespace kanan {
         auto address = scan("client.exe", "55 8B EC 56 57 8B F9 8B 07 8B 50 0C");
 
         if (address) {
-            g_log << "Got ElfLagFix " << hex << *address << endl;
+            log("Got ElfLagFix %p", *address);
 
             m_patch.address = *address;
             m_patch.bytes = { 0x32, 0xC0, 0xC2, 0x04, 0x00 };
         }
         else {
-            g_log << "Failed to find ElfLagFix address" << endl;
+            log("Failed to find ElfLagFix address");
         }
     }
 
@@ -55,7 +55,7 @@ namespace kanan {
             return;
         }
 
-        g_log << "Toggling ElfLagFix..." << endl;
+        log("Toggling ElfLagFix...");
 
         if (m_isEnabled) {
             patch(m_patch);

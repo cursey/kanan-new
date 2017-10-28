@@ -3,8 +3,9 @@
 #include <fstream>
 
 namespace kanan {
-    extern std::ofstream g_log;
+    void startLog(const std::string& filepath);
 
-    void msg(const std::string& msg);
-    void errorMsg(const std::string& msg);
+    void log(const char* format, ...);
+    void msg(const char* format, ...);
+    void error(const char* format, ...);
 }

@@ -18,11 +18,11 @@ namespace kanan {
     {
         if (g_d3d9Hook == nullptr) {
             if (hook()) {
-                g_log << "D3D9Hook hooked successfully." << endl;
+                log("D3D9Hook hooked successfully.");
                 g_d3d9Hook = this;
             }
             else {
-                g_log << "D3D9Hook failed to hook." << endl;
+                log("D3D9Hook failed to hook.");
             }
         }
     }
@@ -36,7 +36,7 @@ namespace kanan {
     }
 
     bool D3D9Hook::hook() {
-        g_log << "Entering D3D9Hook::hook()." << endl;
+        log("Entering D3D9Hook::hook().");
 
         // All we do here is create a IDirect3DDevice9 so that we can get the address
         // of the methods we want to hook from its vtable.
@@ -46,20 +46,20 @@ namespace kanan {
         auto d3dCreate9 = (D3DCreate9Fn)GetProcAddress(d3d9, "Direct3DCreate9");
 
         if (d3dCreate9 == nullptr) {
-            g_log << "Couldn't find Direct3DCreate9." << endl;
+            log("Couldn't find Direct3DCreate9.");
             return false;
         }
 
-        g_log << "Got Direct3DCreate9 " << hex << d3dCreate9 << endl;
+        log("Got Direct3DCreate9 %p", d3dCreate9);
 
         auto d3d = d3dCreate9(D3D_SDK_VERSION);
 
         if (d3d == nullptr) {
-            g_log << "Failed to create IDirect3D9." << endl;
+            log("Failed to create IDirect3D9.");
             return false;
         }
 
-        g_log << "Got IDirect3D9 " << hex << d3d << endl;
+        log("Got IDirect3D9 %p", d3d);
 
         D3DPRESENT_PARAMETERS pp{};
 
@@ -82,19 +82,19 @@ namespace kanan {
             &pp,
             &device)))
         {
-            g_log << "Failed to create IDirect3DDevice9." << endl;
+            log("Failed to create IDirect3DDevice9.");
             d3d->Release();
             return false;
         }
 
-        g_log << "Got IDirect3DDevice9 " << hex << device << endl;
+        log("Got IDirect3DDevice9 %p", device);
 
         // Grab the addresses of the methods we want to hook.
         auto present = (*(uintptr_t**)device)[17];
         auto reset = (*(uintptr_t**)device)[16];
 
-        g_log << "Got IDirect3DDevice9::Present " << hex << present << endl;
-        g_log << "Got IDirect3DDevice9::Reset " << hex << reset << endl;
+        log("Got IDirect3DDevice9::Present %p", present);
+        log("Got IDirect3DDevice9::Reset %p", reset);
 
         device->Release();
         d3d->Release();

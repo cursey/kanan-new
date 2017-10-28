@@ -16,13 +16,13 @@ namespace kanan {
         auto address = scan("client.exe", "0F 85 ? ? ? ? 8B 97 ? ? ? ? 8B 87");
 
         if (address) {
-            g_log << "Got ShowCombatPower " << hex << *address << endl;
+            log("Got ShowCombatPower %p", *address);
 
             m_patch.address = *address;
             m_patch.bytes = { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 };
         }
         else {
-            g_log << "Failed to find ShowCombatPower address." << endl;
+            log("Failed to find ShowCombatPower address.");
         }
     }
 
@@ -56,7 +56,7 @@ namespace kanan {
             return;
         }
 
-        g_log << "Toggling ShowCombatPower..." << endl;
+        log("Toggling ShowCombatPower...");
 
         if (m_isEnabled) {
             patch(m_patch);

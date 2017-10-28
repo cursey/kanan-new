@@ -22,30 +22,30 @@ namespace kanan {
         m_normalMTU{ 0 },
         m_hook{}
     {
-        g_log << "Entering AutoSetMTU constructor." << endl;
-        g_log << "Looking for connection address..." << endl;
+        log("Entering AutoSetMTU constructor.");
+        log("Looking for connection address...");
 
         auto connectionAddress = scan("client.exe", "55 8B EC 83 EC 08 56 57 8B 7D 0C 8B CF");
 
         if (connectionAddress) {
-            g_log << "Got connection address " << hex << *connectionAddress << endl;
+            log("Got connection address %p", *connectionAddress);
 
             g_autoSetMTU = this;
             m_hook = make_unique<FunctionHook>(*connectionAddress, (uintptr_t)&AutoSetMTU::createConnection);
 
             if (m_hook->isValid()) {
-                g_log << "Hooked the connection function." << endl;
+                log("Hooked the connection function.");
             }
             else {
-                g_log << "Failed to hook the connection function." << endl;
+                log("Failed to hook the connection function.");
             }
 
         }
         else{
-            g_log << "Failed to find connection address." << endl;
+            log("Failed to find connection address.");
         }
 
-        g_log << "Leaving AutoSetMTU constructor." << endl;
+        log("Leaving AutoSetMTU constructor.");
     }
 
     AutoSetMTU::~AutoSetMTU() {
@@ -95,7 +95,7 @@ namespace kanan {
         startupInfo.cb = sizeof(startupInfo);
 
         if (CreateProcess(nullptr, (LPWSTR)commandLine.c_str(), nullptr, nullptr, FALSE, CREATE_NO_WINDOW | NORMAL_PRIORITY_CLASS, nullptr, nullptr, &startupInfo, &processInfo) == FALSE) {
-            g_log << "Failed to CreateProcess for " << name << " " << params << endl;
+            log("Failed to CreateProcess for %s %s", name.c_str(), params.c_str());
             return {};
         }
 
@@ -103,12 +103,12 @@ namespace kanan {
         DWORD exitCode = 0;
 
         if (WaitForSingleObject(processHandle, 5000) != WAIT_OBJECT_0) {
-            g_log << "Failed to wait for " << name << " " << params << " to end." << endl;
+            log("Failed to wait for %s %s", name.c_str(), params.c_str());
             return {};
         }
 
         if (GetExitCodeProcess(processHandle, &exitCode) == FALSE) {
-            g_log << "Failed to get the exit code for " << name << " " << params << endl;
+            log("Failed to get the exit code for %s %s", name.c_str(), params.c_str());
             return {};
         }
 
@@ -124,7 +124,7 @@ namespace kanan {
             auto interface1 = string{ mtu->m_interface.data() };
 
             if (mtu->runProcess("netsh.exe", "interface ipv4 set subinterface \"" + interface1 + "\" mtu=" + lowMTU + " store=persistent")) {
-                g_log << "Lowered MTU successfully." << endl;
+                log("Lowered MTU successfully.");
             }
         }
         
@@ -138,7 +138,7 @@ namespace kanan {
             auto interface1 = string{ mtu->m_interface.data() };
 
             if (mtu->runProcess("netsh.exe", "interface ipv4 set subinterface \"" + interface1 + "\" mtu=" + normalMTU + " store=persistent")) {
-                g_log << "Restored MTU successfully." << endl;
+                log("Restored MTU successfully.");
             }
         }
 

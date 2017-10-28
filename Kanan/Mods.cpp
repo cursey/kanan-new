@@ -18,7 +18,7 @@ namespace kanan {
     Mods::Mods()
         : m_mods{}
     {
-        g_log << "Entering Mods cosntructor." << endl;
+        log("Entering Mods cosntructor.");
 
         m_mods.emplace_back(make_unique<BitmapFont>());
         m_mods.emplace_back(make_unique<ShowCombatPower>());
@@ -31,6 +31,6 @@ namespace kanan {
         m_mods.emplace_back(make_unique<BorderlessWindow>());
         m_mods.emplace_back(make_unique<EntityViewer>());
 
-        g_log << "Leaving Mods constructor." << endl;
+        log("Leaving Mods constructor.");
     }
 }

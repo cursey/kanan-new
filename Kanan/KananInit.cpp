@@ -12,18 +12,14 @@ using namespace kanan;
 //
 extern "C" __declspec(dllexport) int kananInit(const char* path) {
     // First and most important thing is opening the log file.
-    g_log.open(string{ path } +"/log.txt");
+    startLog(string{ path } + "/log.txt");
 
-    if (!g_log.is_open()) {
-        MessageBox(GetDesktopWindow(), L"Failed to open log.txt!", L"Kanan Error!", MB_ICONERROR | MB_OK);
-    }
-
-    g_log << "Welcome to Kanan for Mabinogi." << endl;
-    g_log << "Creating Kanan object." << endl;
+    log("Welcome to Kanan for Mabinogi.");
+    log("Creating Kanan object.");
 
     g_kanan = make_unique<Kanan>(path);
 
-    g_log << "Leaving kananInit." << endl;
+    log("Leaving kananInit.");
 
     return 0;
 }
