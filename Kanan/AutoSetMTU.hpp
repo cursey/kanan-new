@@ -12,7 +12,7 @@ namespace kanan {
     class AutoSetMTU : public Mod {
     public:
         AutoSetMTU();
-        virtual ~AutoSetMTU();
+        virtual ~AutoSetMTU() override;
 
         void onUI() override;
         void onConfigLoad(ConfigPtr cfg) override;

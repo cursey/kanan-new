@@ -7,6 +7,8 @@ namespace kanan {
     public:
         using ConfigPtr = std::shared_ptr<cpptoml::table>;
 
+        virtual ~Mod() = default;
+
         virtual bool onInitialize() { return true; };
         virtual void onFrame() {};
 
