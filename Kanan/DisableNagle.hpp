@@ -10,7 +10,7 @@ namespace kanan {
     class DisableNagle : public Mod {
     public:
         DisableNagle();
-        virtual ~DisableNagle();
+        virtual ~DisableNagle() override;
 
         void onUI() override;
 
