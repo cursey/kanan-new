@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Config.cpp" />
     <ClCompile Include="FunctionHook.cpp" />
     <ClCompile Include="Module.cpp" />
     <ClCompile Include="Patch.cpp" />
@@ -33,6 +34,7 @@
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Config.hpp" />
     <ClInclude Include="FunctionHook.hpp" />
     <ClInclude Include="Module.hpp" />
     <ClInclude Include="Patch.hpp" />

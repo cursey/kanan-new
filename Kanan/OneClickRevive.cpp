@@ -35,19 +35,16 @@ namespace kanan {
         }
     }
 
-    void OneClickRevive::onConfigLoad(ConfigPtr cfg) {
-        m_isEnabled = cfg->get_qualified_as<bool>("OneClickRevive.Enabled").value_or(false);
+    void OneClickRevive::onConfigLoad(const Config& cfg) {
+        m_isEnabled = cfg.get<bool>("OneClickRevive.Enabled").value_or(false);
 
         if (m_isEnabled) {
             apply();
         }
     }
 
-    void OneClickRevive::onConfigSave(ConfigPtr cfg) {
-        auto tbl = cpptoml::make_table();
-
-        tbl->insert("Enabled", m_isEnabled);
-        cfg->insert("OneClickRevive", tbl);
+    void OneClickRevive::onConfigSave(Config& cfg) {
+        cfg.set<bool>("OneClickRevive.Enabled", m_isEnabled);
     }
 
     void OneClickRevive::apply() {

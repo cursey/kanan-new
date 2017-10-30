@@ -47,19 +47,16 @@ namespace kanan {
         }
     }
 
-    void BorderlessWindow::onConfigLoad(ConfigPtr cfg) {
-        m_choice = cfg->get_qualified_as<int>("BorderlessWindow.Choice").value_or(0);
+    void BorderlessWindow::onConfigLoad(const Config& cfg) {
+        m_choice = cfg.get<int>("BorderlessWindow.Choice").value_or(0);
 
         if (m_choice != 0) {
             apply();
         }
     }
 
-    void BorderlessWindow::onConfigSave(ConfigPtr cfg) {
-        auto tbl = cpptoml::make_table();
-
-        tbl->insert("Choice", m_choice);
-        cfg->insert("BorderlessWindow", tbl);
+    void BorderlessWindow::onConfigSave(Config& cfg) {
+        cfg.set<int>("BorderlessWindow.Choice", m_choice);
     }
 
     void BorderlessWindow::apply() {

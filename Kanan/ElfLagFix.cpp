@@ -35,19 +35,16 @@ namespace kanan {
         }
     }
 
-    void ElfLagFix::onConfigLoad(ConfigPtr cfg) {
-        m_isEnabled = cfg->get_qualified_as<bool>("ElfLagFix.Enabled").value_or(false);
+    void ElfLagFix::onConfigLoad(const Config& cfg) {
+        m_isEnabled = cfg.get<bool>("ElfLagFix.Enabled").value_or(false);
 
         if (m_isEnabled) {
             apply();
         }
     }
 
-    void ElfLagFix::onConfigSave(ConfigPtr cfg) {
-        auto tbl = cpptoml::make_table();
-
-        tbl->insert("Enabled", m_isEnabled);
-        cfg->insert("ElfLagFix", tbl);
+    void ElfLagFix::onConfigSave(Config& cfg) {
+        cfg.set<bool>("ElfLagFix.Enabled", m_isEnabled);
     }
 
     void ElfLagFix::apply() {

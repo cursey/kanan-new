@@ -1,10 +1,7 @@
-#include <filesystem>
-
-#include <cpptoml.h>
-
 #include <imgui.h>
 #include <imgui_impl_dx9.h>
 
+#include <Config.hpp>
 #include <String.hpp>
 #include <Utility.hpp>
 
@@ -12,7 +9,6 @@
 #include "Kanan.hpp"
 
 using namespace std;
-using namespace std::experimental::filesystem;
 
 namespace kanan {
     unique_ptr<Kanan> g_kanan{ nullptr };
@@ -204,25 +200,15 @@ namespace kanan {
             return;
         }
 
-        // Only attempt loading the config if the config file actually exists.
-        if (!exists(m_path + "/config.toml")) {
-            return;
+        log("Loading config %s/config.txt", m_path.c_str());
+
+        Config cfg{ m_path + "/config.txt" };
+
+        for (auto& mod : m_mods->getMods()) {
+            mod->onConfigLoad(cfg);
         }
 
-        log("Loading config %s/config.toml", m_path.c_str());
-
-        try {
-            auto cfg = cpptoml::parse_file(m_path + "/config.toml");
-
-            for (auto& mod : m_mods->getMods()) {
-                mod->onConfigLoad(cfg);
-            }
-
-            log("Config loading done.");
-        }
-        catch (const cpptoml::parse_exception& e) {
-            error(e.what());
-        }
+        log("Config loading done.");
     }
 
     void Kanan::saveConfig() {
@@ -230,23 +216,17 @@ namespace kanan {
             return;
         }
 
-        log("Saving config %s/config.toml", m_path.c_str());
+        log("Saving config %s/config.txt", m_path.c_str());
 
-        auto cfg = cpptoml::make_table();
+        Config cfg{};
 
         for (auto& mod : m_mods->getMods()) {
             mod->onConfigSave(cfg);
         }
 
-        ofstream cfgFile{ m_path + "/config.toml" };
-
-        if (!cfgFile.is_open()) {
-            error("Failed to open config.toml for writing!");
-            return;
+        if (!cfg.save(m_path + "/config.txt")) {
+            log("Failed to save the config %s/config.txt", m_path.c_str());
         }
-
-
-        cfgFile << *cfg << endl;
 
         log("Config saving done.");
     }

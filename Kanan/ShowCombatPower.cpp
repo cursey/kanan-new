@@ -36,19 +36,16 @@ namespace kanan {
         }
     }
 
-    void ShowCombatPower::onConfigLoad(ConfigPtr cfg) {
-        m_isEnabled = cfg->get_qualified_as<bool>("ShowCombatPower.Enabled").value_or(false);
+    void ShowCombatPower::onConfigLoad(const Config& cfg) {
+        m_isEnabled = cfg.get<bool>("ShowCombatPower.Enabled").value_or(false);
 
         if (m_isEnabled) {
             apply();
         }
     }
 
-    void ShowCombatPower::onConfigSave(ConfigPtr cfg) {
-        auto tbl = cpptoml::make_table();
-
-        tbl->insert("Enabled", m_isEnabled);
-        cfg->insert("ShowCombatPower", tbl);
+    void ShowCombatPower::onConfigSave(Config& cfg) {
+        cfg.set<bool>("ShowCombatPower.Enabled", m_isEnabled);
     }
 
     void ShowCombatPower::apply() {

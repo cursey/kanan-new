@@ -12,8 +12,8 @@ namespace kanan {
         void onFrame() override;
         void onUI() override;
 
-        void onConfigLoad(ConfigPtr cfg) override;
-        void onConfigSave(ConfigPtr cfg) override;
+        void onConfigLoad(const Config& cfg) override;
+        void onConfigSave(Config& cfg) override;
 
     private:
         LONG m_defaultStyle;

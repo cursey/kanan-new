@@ -55,15 +55,12 @@ namespace kanan {
         }
     }
 
-    void DisableNagle::onConfigLoad(ConfigPtr cfg) {
-        m_isEnabled = cfg->get_qualified_as<bool>("DisableNagle.Enabled").value_or(false);
+    void DisableNagle::onConfigLoad(const Config& cfg) {
+        m_isEnabled = cfg.get<bool>("DisableNagle.Enabled").value_or(false);
     }
 
-    void DisableNagle::onConfigSave(ConfigPtr cfg) {
-        auto tbl = cpptoml::make_table();
-
-        tbl->insert("Enabled", m_isEnabled);
-        cfg->insert("DisableNagle", tbl);
+    void DisableNagle::onConfigSave(Config& cfg) {
+        cfg.set<bool>("DisableNagle.Enabled", m_isEnabled);
     }
 
     SOCKET WSAAPI DisableNagle::socket(int af, int type, int protocol) {

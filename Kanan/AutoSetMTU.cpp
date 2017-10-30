@@ -67,24 +67,20 @@ namespace kanan {
         }
     }
 
-    void AutoSetMTU::onConfigLoad(ConfigPtr cfg) {
-        m_isEnabled = cfg->get_qualified_as<bool>("AutoSetMTU.Enabled").value_or(false);
-        auto interface1 = cfg->get_qualified_as<string>("AutoSetMTU.Interface").value_or("Ethernet");
-        m_lowMTU = cfg->get_qualified_as<int>("AutoSetMTU.LoweredMTU").value_or(386);
-        m_normalMTU = cfg->get_qualified_as<int>("AutoSetMTU.NormalMTU").value_or(1500);
-        
+    void AutoSetMTU::onConfigLoad(const Config& cfg) {
+        m_isEnabled = cfg.get<bool>("AutoSetMTU.Enabled").value_or(false);
+        auto interface1 = cfg.get("AutoSetMTU.Interface").value_or("Ethernet");
+        m_lowMTU = cfg.get<int>("AutoSetMTU.LoweredMTU").value_or(386);
+        m_normalMTU = cfg.get<int>("AutoSetMTU.NormalMTU").value_or(1500);
+
         strcpy_s(m_interface.data(), m_interface.size(), interface1.c_str());
     }
 
-    void AutoSetMTU::onConfigSave(ConfigPtr cfg) {
-        auto tbl = cpptoml::make_table();
-
-        tbl->insert("Enabled", m_isEnabled);
-        tbl->insert("Interface", string{ m_interface.data() });
-        tbl->insert("LoweredMTU", m_lowMTU);
-        tbl->insert("NormalMTU", m_normalMTU);
-
-        cfg->insert("AutoSetMTU", tbl);
+    void AutoSetMTU::onConfigSave(Config& cfg) {
+        cfg.set<bool>("AutoSetMTU.Enabled", m_isEnabled);
+        cfg.set("AutoSetMTU.Interface", string{ m_interface.data() });
+        cfg.set<int>("AutoSetMTU.LoweredMTU", m_lowMTU);
+        cfg.set<int>("AutoSetMTU.NormalMTU", m_normalMTU);
     }
 
     optional<DWORD> AutoSetMTU::runProcess(const string& name, const string& params) {

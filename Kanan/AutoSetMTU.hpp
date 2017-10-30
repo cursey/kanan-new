@@ -3,6 +3,7 @@
 #include <array>
 #include <string>
 #include <optional>
+#include <memory>
 
 #include <FunctionHook.hpp>
 
@@ -15,8 +16,9 @@ namespace kanan {
         virtual ~AutoSetMTU();
 
         void onUI() override;
-        void onConfigLoad(ConfigPtr cfg) override;
-        void onConfigSave(ConfigPtr cfg) override;
+
+        void onConfigLoad(const Config& cfg) override;
+        void onConfigSave(Config& cfg) override;
 
     private:
         bool m_isEnabled;

@@ -23,7 +23,6 @@ Once this project reaches (or approaches) feature parity with the original Kanan
 
 ## Todo
 * Add more patches and mods that were previously available in the original Kanan.
-* Change the configuration system from `cpptoml` to something even lighter weight. Specifically, I don't like that it requires RTTI and uses exceptions (these are perfectly fine for most projects, but I dislike them in this project).
 
 ![Preview](preview.png)
 

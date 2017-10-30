@@ -52,19 +52,16 @@ namespace kanan {
         }
     }
 
-    void BitmapFont::onConfigLoad(ConfigPtr cfg) {
-        m_isEnabled = cfg->get_qualified_as<bool>("BitmapFont.Enabled").value_or(false);
+    void BitmapFont::onConfigLoad(const Config& cfg) {
+        m_isEnabled = cfg.get<bool>("BitmapFont.Enabled").value_or(false);
 
         if (m_isEnabled) {
             apply();
         }
     }
 
-    void BitmapFont::onConfigSave(ConfigPtr cfg) {
-        auto tbl = cpptoml::make_table();
-
-        tbl->insert("Enabled", m_isEnabled);
-        cfg->insert("BitmapFont", tbl);
+    void BitmapFont::onConfigSave(Config& cfg) {
+        cfg.set<bool>("BitmapFont.Enabled", m_isEnabled);
     }
 
     void BitmapFont::apply() {

@@ -11,8 +11,8 @@ namespace kanan {
 
         void onPatchUI() override;
 
-        void onConfigLoad(ConfigPtr cfg) override;
-        void onConfigSave(ConfigPtr cfg) override;
+        void onConfigLoad(const Config& cfg) override;
+        void onConfigSave(Config& cfg) override;
 
     private:
         bool m_isEnabled;
