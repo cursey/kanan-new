@@ -8,7 +8,7 @@ using namespace kanan;
 
 //
 // This is the entrypoint for kanan. It's only responsible for setting up the global
-// log file and creating the global kanan object. 
+// log file and creating the global kanan object.
 //
 extern "C" __declspec(dllexport) int kananInit(const char* path) {
     // First and most important thing is opening the log file.

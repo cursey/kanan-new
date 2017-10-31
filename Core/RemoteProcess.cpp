@@ -54,7 +54,7 @@ namespace kanan {
 
         // Write the string there.
         if (!paramMemory.isValid() ||
-            !paramMemory.write(param.c_str(), param.length() * sizeof(char))) 
+            !paramMemory.write(param.c_str(), param.length() * sizeof(char)))
         {
             return false;
         }
@@ -68,8 +68,8 @@ namespace kanan {
         RemoteMemory paramMemory{ *this, param.length() * sizeof(wchar_t), PAGE_READWRITE };
 
         // Write the string there.
-        if (!paramMemory.isValid() || 
-            !paramMemory.write(param.c_str(), param.length() * sizeof(wchar_t))) 
+        if (!paramMemory.isValid() ||
+            !paramMemory.write(param.c_str(), param.length() * sizeof(wchar_t)))
         {
             return false;
         }
@@ -89,7 +89,7 @@ namespace kanan {
         if (auto module = getModule(name)) {
             return module;
         }
-        
+
         // Otherwise, try loading the module by executing a thread on LoadLibraryW.
         auto kernel32 = getModule("kernel32.dll");
 

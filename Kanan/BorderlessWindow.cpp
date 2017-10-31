@@ -19,7 +19,7 @@ namespace kanan {
     }
 
     // NOTE: Mabinogi is stubborn about its window position and style when it first
-    // starts up so we try setting the requested style multiple times over multiple 
+    // starts up so we try setting the requested style multiple times over multiple
     // frames in the onFrame callback instead of just doing it once in apply().
     void BorderlessWindow::onFrame() {
         if (m_choice == 0 || m_setStyleCounter > 10) {
@@ -69,7 +69,7 @@ namespace kanan {
             return;
         }
 
-        // If we haven't recorded what the default style of the window is, then 
+        // If we haven't recorded what the default style of the window is, then
         // get it.
         if (m_defaultStyle == 0) {
             m_defaultStyle = GetWindowLong(wnd, GWL_STYLE);
@@ -98,14 +98,14 @@ namespace kanan {
             break;
         }
 
-        case 2: 
+        case 2:
             m_w = GetSystemMetrics(SM_CXSCREEN);
             m_h = GetSystemMetrics(SM_CYSCREEN);
             m_style &= ~(WS_BORDER | WS_CAPTION | WS_THICKFRAME);
 
             break;
 
-        default: 
+        default:
             break;
         }
 

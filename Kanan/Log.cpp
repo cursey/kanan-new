@@ -19,7 +19,7 @@ namespace kanan {
             error("Failed to open log file: {}!", filepath);
         }
     }
-    
+
     void log(const string& msg) {
         if (g_log.is_open()) {
             g_log << msg << endl;

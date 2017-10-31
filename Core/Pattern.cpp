@@ -35,7 +35,7 @@ namespace kanan {
             auto p1 = pattern[i];
 
             if (p1 != '?') {
-                // Bytes require 2 hex characters to encode, make sure we don't read 
+                // Bytes require 2 hex characters to encode, make sure we don't read
                 // past the end of the pattern string attempting to read the next char.
                 if (i + 1 >= length) {
                     break;

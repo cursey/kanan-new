@@ -123,11 +123,11 @@ namespace kanan {
                 log("Lowered MTU successfully.");
             }
         }
-        
+
         // Call the original connection function to actually create the connection.
         auto originalConnection = (decltype(createConnection)*)mtu->m_hook->getOriginal();
         auto result = originalConnection(a1, a2);
-        
+
         // Restore the MTU to normal now that the connection has been created.
         if (mtu->m_isEnabled) {
             auto normalMTU = to_string(mtu->m_normalMTU);

@@ -17,7 +17,7 @@ namespace kanan {
         log("Entering DisableNagle constructor.");
 
         auto ws2_32 = LoadLibrary(L"ws2_32.dll");
-        
+
         if (ws2_32 == nullptr) {
             log("Failed to get address of ws2_32.dll");
             return;

@@ -24,9 +24,9 @@ namespace kanan {
 
         bool execute(uintptr_t functionAddress, uintptr_t paramAddress);
 
-        // 
+        //
         // Helpers that just pass a string as a parameter to a new thread.
-        // 
+        //
         bool execute(uintptr_t functionAddress, const std::string& param);
         bool execute(uintptr_t functionAddress, const std::wstring& param);
 

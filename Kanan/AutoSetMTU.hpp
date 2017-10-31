@@ -28,7 +28,7 @@ namespace kanan {
         std::unique_ptr<FunctionHook> m_hook;
 
         std::optional<DWORD> runProcess(const std::string& name, const std::string& params);
-        
+
         static char __cdecl createConnection(int a1, int a2);
     };
 }

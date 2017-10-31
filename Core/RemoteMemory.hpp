@@ -19,7 +19,7 @@ namespace kanan {
         // automatically when the object is destroyed.
         bool free();
 
-        // Call this if you don't want the memory to be freed after the object is 
+        // Call this if you don't want the memory to be freed after the object is
         // destroyed.
         void dontFree();
 

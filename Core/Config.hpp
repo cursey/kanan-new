@@ -64,7 +64,7 @@ namespace kanan {
 
             return {};
         }
-        
+
         // get method for strings.
         std::optional<std::string> get(const std::string& key) const;
 

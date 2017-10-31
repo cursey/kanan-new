@@ -47,7 +47,7 @@ namespace kanan {
 
         uintptr_t address{ 0 };
 
-        // Find the named export. 
+        // Find the named export.
         for (uint32_t i = 0; i < exportDirectory->NumberOfNames; ++i) {
             auto name = (char*)ptrFromRVA(dll, names[i]).value_or(0);
 

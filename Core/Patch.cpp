@@ -59,7 +59,7 @@ namespace kanan {
 
     optional<DWORD> protect(uintptr_t address, size_t size, DWORD protection) {
         DWORD oldProtection{ 0 };
-        
+
         if (VirtualProtect((LPVOID)address, size, protection, &oldProtection) != FALSE) {
             return oldProtection;
         }

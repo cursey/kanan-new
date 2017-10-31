@@ -17,7 +17,7 @@ namespace kanan {
         WindowsMessageHook(HWND wnd);
         virtual ~WindowsMessageHook();
 
-        // This gets called automatically by the destructor but you can call it 
+        // This gets called automatically by the destructor but you can call it
         // explicitly if you need to remove the message hook for some reason.
         bool remove();
 

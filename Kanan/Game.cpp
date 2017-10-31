@@ -6,7 +6,7 @@
 using namespace std;
 
 namespace kanan {
-    Game::Game() 
+    Game::Game()
         : m_rendererPtr{ nullptr },
         m_entityListPtr{ nullptr },
         m_worldPtr{ nullptr }

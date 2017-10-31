@@ -37,7 +37,7 @@ namespace kanan {
     bool DInputHook::hook() {
         log("Entering DInputHook::hook().");
 
-        // All we do here is create an IDirectInputDevice so that we can get the 
+        // All we do here is create an IDirectInputDevice so that we can get the
         // addresses of the methods we want to hook from its vtable.
         using DirectInput8CreateFn = HRESULT(WINAPI*)(HINSTANCE, DWORD, REFIID, LPVOID*, LPUNKNOWN);
 
@@ -58,7 +58,7 @@ namespace kanan {
             log("Failed to create IDirectInput.");
             return false;
         }
-        
+
         log("Got IDirectInput %p", dinput);
 
         IDirectInputDevice* device{ nullptr };
@@ -89,7 +89,7 @@ namespace kanan {
         auto dinput = g_dinputHook;
         auto originalGetDeviceData = (decltype(DInputHook::getDeviceData)*)dinput->m_getDeviceDataHook->getOriginal();
 
-        // If we are ignoring input then we call the original to remove buffered 
+        // If we are ignoring input then we call the original to remove buffered
         // input events from the devices queue without modifying the out parameters.
         if (dinput->m_isIgnoringInput) {
             device->Unacquire();

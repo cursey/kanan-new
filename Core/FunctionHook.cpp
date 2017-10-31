@@ -7,7 +7,7 @@ using namespace std;
 namespace kanan {
     bool g_isMinHookInitialized{ false };
 
-    FunctionHook::FunctionHook(uintptr_t target, uintptr_t destination) 
+    FunctionHook::FunctionHook(uintptr_t target, uintptr_t destination)
         : m_target{ 0 },
         m_destination{ 0 },
         m_original{ 0 }
@@ -41,7 +41,7 @@ namespace kanan {
         }
 
         // Disable then remove the hook.
-        if (MH_DisableHook((LPVOID)m_target) != MH_OK || 
+        if (MH_DisableHook((LPVOID)m_target) != MH_OK ||
             MH_RemoveHook((LPVOID)m_target) != MH_OK) {
             return false;
         }

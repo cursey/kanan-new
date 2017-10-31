@@ -11,7 +11,7 @@ namespace kanan {
     LRESULT WINAPI windowProc(HWND wnd, UINT message, WPARAM wParam, LPARAM lParam) {
         // Call our onMessage callback.
         auto& onMessage = g_windowsMessageHook->onMessage;
-        
+
         if (onMessage) {
             // If it returns false we don't call the original window procedure.
             if (!onMessage(wnd, message, wParam, lParam)) {

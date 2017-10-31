@@ -15,7 +15,7 @@ namespace kanan {
         RemoteModule() = delete;
         RemoteModule(std::string name, std::string path, uintptr_t address);
 
-        // NOTE: Only handles named exports (not exported ordinals or forwarded 
+        // NOTE: Only handles named exports (not exported ordinals or forwarded
         // exports).
         std::optional<uintptr_t> getProcAddress(const std::string& procName);
 

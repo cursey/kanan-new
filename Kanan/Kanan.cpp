@@ -91,7 +91,7 @@ namespace kanan {
             error("Failed to hook DInput.");
         }
 
-        // 
+        //
         // WindowsMessageHook.
         //
         log("Hooking the windows message procedure...");
@@ -112,7 +112,7 @@ namespace kanan {
         log("Creating the Game object...");
 
         m_game = make_unique<Game>();
-        
+
         //
         // Initialize all the mods.
         //
@@ -126,9 +126,9 @@ namespace kanan {
             mod->onInitialize();
         }
 
-        // 
+        //
         // Load the config.
-        // 
+        //
         log("Loading config...");
 
         loadConfig();

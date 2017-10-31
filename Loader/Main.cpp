@@ -79,7 +79,7 @@ BOOL CALLBACK enumWindow(HWND wnd, LPARAM param) {
     }
 
     DWORD clientID{ 0 };
-    
+
     GetWindowThreadProcessId(wnd, &clientID);
 
     // Skip mabinogi's we've already injected into.
@@ -101,8 +101,8 @@ int main(int argc, char* argv[]) {
     cout << endl;
     cout << "Waiting for Mabinogi window(s)..." << endl;
 
-    // All we do is enumerate the top-level windows using EnumWindows. Then if we 
-    // find a window belonging to Mabinogi, we get its process ID. If we haven't 
+    // All we do is enumerate the top-level windows using EnumWindows. Then if we
+    // find a window belonging to Mabinogi, we get its process ID. If we haven't
     // injected into that process, we inject then repeat the process constantly
     // looking for new instances of Mabinogi to inject into.
     do {

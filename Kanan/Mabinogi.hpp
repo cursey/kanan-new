@@ -4,7 +4,7 @@
 #include <cstdint>
 
 //
-// ReClass.NET generates code that expects these types to be defined. Instead of 
+// ReClass.NET generates code that expects these types to be defined. Instead of
 // making more elaborate types for these, we just use an array for now.
 //
 using Vector2 = std::array<float, 2>;

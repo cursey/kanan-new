@@ -5,8 +5,8 @@
 namespace kanan {
     class Mod {
     public:
-		virtual ~Mod() = default;
-		
+        virtual ~Mod() = default;
+
         virtual bool onInitialize() { return true; };
         virtual void onFrame() {};
 
