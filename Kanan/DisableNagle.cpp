@@ -43,10 +43,6 @@ namespace kanan {
         log("Leaving DisableNagle constructor.");
     }
 
-    DisableNagle::~DisableNagle() {
-        g_disableNagle = nullptr;
-    }
-
     void DisableNagle::onUI() {
         if (ImGui::CollapsingHeader("Disable Nagle")) {
             ImGui::Text("Disabling the nagle algorithm will reduce apparent lag to the server.");

@@ -48,10 +48,6 @@ namespace kanan {
         log("Leaving AutoSetMTU constructor.");
     }
 
-    AutoSetMTU::~AutoSetMTU() {
-        g_autoSetMTU = nullptr;
-    }
-
     void AutoSetMTU::onUI() {
         if (ImGui::CollapsingHeader("Auto Set MTU")) {
             ImGui::Text("This mod automatically sets your MTU when you login or change channels.");
@@ -85,8 +81,8 @@ namespace kanan {
 
     optional<DWORD> AutoSetMTU::runProcess(const string& name, const string& params) {
         auto commandLine = widen(name + " " + params);
-        STARTUPINFO startupInfo{ 0 };
-        PROCESS_INFORMATION processInfo{ 0 };
+        STARTUPINFO startupInfo{};
+        PROCESS_INFORMATION processInfo{};
 
         startupInfo.cb = sizeof(startupInfo);
 

@@ -16,7 +16,7 @@ namespace kanan {
         g_log.open(filepath);
 
         if (!g_log.is_open()) {
-            error("Failed to open log file: {}!", filepath);
+            error("Failed to open log file: %s!", filepath.c_str());
         }
     }
 

@@ -99,7 +99,7 @@ namespace kanan {
                 continue;
             }
 
-            if (ImGui::TreeNode(character, name->c_str())) {
+            if (ImGui::TreeNode(character, "%s", name->c_str())) {
                 displayCharacter(character);
                 ImGui::TreePop();
             }
@@ -119,7 +119,7 @@ namespace kanan {
                 continue;
             }
 
-            if (ImGui::TreeNode(item, name->c_str())) {
+            if (ImGui::TreeNode(item, "%s", name->c_str())) {
                 displayItem(item);
                 ImGui::TreePop();
             }

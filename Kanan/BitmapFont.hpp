@@ -12,6 +12,7 @@ namespace kanan {
         BitmapFont();
 
         void onPatchUI() override;
+
         void onConfigLoad(const Config& cfg) override;
         void onConfigSave(Config& cfg) override;
 
