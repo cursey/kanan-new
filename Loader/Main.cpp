@@ -67,7 +67,7 @@ BOOL CALLBACK enumWindow(HWND wnd, LPARAM param) {
     // do more important things.
     this_thread::yield();
 
-    array<wchar_t, 256> className{ 0 };
+    array<wchar_t, 256> className{ { 0 } };
 
     if (GetClassName(wnd, className.data(), (int)className.size()) == 0) {
         return TRUE;

@@ -137,7 +137,6 @@ namespace kanan {
             return;
         }
 
-
         ImGui::BulletText("Address: %p", character);
         ImGui::BulletText("Name: %s", name->c_str());
         ImGui::BulletText("ID: %llX", *id);
