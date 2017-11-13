@@ -7,6 +7,7 @@
 #include "AutoSetMTU.hpp"
 #include "DisableNagle.hpp"
 #include "BorderlessWindow.hpp"
+#include "EnableMultiClient.hpp"
 #include "EntityViewer.hpp"
 
 #include "Log.hpp"
@@ -29,6 +30,7 @@ namespace kanan {
         m_mods.emplace_back(make_unique<AutoSetMTU>());
         m_mods.emplace_back(make_unique<DisableNagle>());
         m_mods.emplace_back(make_unique<BorderlessWindow>());
+        m_mods.emplace_back(make_unique<EnableMultiClient>());
         m_mods.emplace_back(make_unique<EntityViewer>());
 
         log("Leaving Mods constructor.");
