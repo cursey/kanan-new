@@ -19,9 +19,11 @@ namespace kanan {
         LONG m_defaultStyle;
         LONG m_style;
         int m_x, m_y, m_w, m_h;
+        bool m_changeStyle;
+        bool m_changePos;
 
         int m_choice;
-        int m_setStyleCounter;
+        bool m_isChoiceFulfilled;
 
         void apply();
     };
