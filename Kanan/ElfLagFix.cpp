@@ -33,6 +33,10 @@ namespace kanan {
         if (ImGui::Checkbox("Elf Lag Fix", &m_isEnabled)) {
             apply();
         }
+
+        if (ImGui::IsItemHovered()) {
+            ImGui::SetTooltip("Credits: Blade3575");
+        }
     }
 
     void ElfLagFix::onConfigLoad(const Config& cfg) {

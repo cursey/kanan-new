@@ -38,6 +38,10 @@ namespace kanan {
         if (ImGui::Checkbox("Windows Appear Faster", &m_isEnabled)) {
             apply();
         }
+
+        if (ImGui::IsItemHovered()) {
+            ImGui::SetTooltip("Credits: Step29");
+        }
     }
 
     void WindowsAppearFaster::onConfigLoad(const Config& cfg) {

@@ -34,6 +34,10 @@ namespace kanan {
         if (ImGui::Checkbox("Show Combat Power", &m_isEnabled)) {
             apply();
         }
+
+        if (ImGui::IsItemHovered()) {
+            ImGui::SetTooltip("Credits: Rydian");
+        }
     }
 
     void ShowCombatPower::onConfigLoad(const Config& cfg) {

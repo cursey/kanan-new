@@ -33,6 +33,10 @@ namespace kanan {
         if (ImGui::Checkbox("One Click Revive", &m_isEnabled)) {
             apply();
         }
+
+        if (ImGui::IsItemHovered()) {
+            ImGui::SetTooltip("Credits: Step29");
+        }
     }
 
     void OneClickRevive::onConfigLoad(const Config& cfg) {

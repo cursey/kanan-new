@@ -50,6 +50,10 @@ namespace kanan {
         if (ImGui::Checkbox("Use Bitmap Font", &m_isEnabled)) {
             apply();
         }
+
+        if (ImGui::IsItemHovered()) {
+            ImGui::SetTooltip("Credits: Blade3575");
+        }
     }
 
     void BitmapFont::onConfigLoad(const Config& cfg) {
