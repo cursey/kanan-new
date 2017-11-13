@@ -96,6 +96,7 @@
     <ClCompile Include="KItem.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="Mods.cpp" />
+    <ClCompile Include="NoMountTimeout.cpp" />
     <ClCompile Include="OneClickRevive.cpp" />
     <ClCompile Include="ShowCombatPower.cpp" />
     <ClCompile Include="WindowsAppearFaster.cpp" />
@@ -119,6 +120,7 @@
     <ClInclude Include="Mabinogi.hpp" />
     <ClInclude Include="Mod.hpp" />
     <ClInclude Include="Mods.hpp" />
+    <ClInclude Include="NoMountTimeout.hpp" />
     <ClInclude Include="OneClickRevive.hpp" />
     <ClInclude Include="ShowCombatPower.hpp" />
     <ClInclude Include="WindowsAppearFaster.hpp" />

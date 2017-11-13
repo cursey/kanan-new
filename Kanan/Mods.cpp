@@ -3,6 +3,7 @@
 #include "ElfLagFix.hpp"
 #include "WindowsAppearFaster.hpp"
 #include "OneClickRevive.hpp"
+#include "NoMountTimeout.hpp"
 
 #include "AutoSetMTU.hpp"
 #include "DisableNagle.hpp"
@@ -26,6 +27,7 @@ namespace kanan {
         m_mods.emplace_back(make_unique<ElfLagFix>());
         m_mods.emplace_back(make_unique<WindowsAppearFaster>());
         m_mods.emplace_back(make_unique<OneClickRevive>());
+        m_mods.emplace_back(make_unique<NoMountTimeout>());
 
         m_mods.emplace_back(make_unique<AutoSetMTU>());
         m_mods.emplace_back(make_unique<DisableNagle>());
