@@ -10,7 +10,6 @@ using namespace std;
 namespace kanan {
     RangedAttackSwap::RangedAttackSwap()
         : m_choice{0},
-        m_applied_choice{0},
         m_patch{}
     {
         auto address = scan("client.exe", "B8 09 52 00 00 5F");
@@ -26,15 +25,13 @@ namespace kanan {
         }
     }
 
-    void RangedAttackSwap::onUI() {
+    void RangedAttackSwap::onPatchUI() {
         if (m_patch.address == 0) {
             return;
         }
-        if (ImGui::CollapsingHeader("Ranged Attack Swap")) {
-            ImGui::Combo("Skill", &m_choice, "Disabled\0Magnum Shot\0Arrow Revolver\0Support Shot\0Mirage Missile\0Crash Shot\0Spider Shot\0Urgent Shot\0\0");
-            if (m_choice != m_applied_choice) {
-                apply();
-            }
+
+        if (ImGui::Combo("Ranged Attack Swap", &m_choice, "Disabled\0Magnum Shot\0Arrow Revolver\0Support Shot\0Mirage Missile\0Crash Shot\0Spider Shot\0Urgent Shot\0\0")) {
+            apply();
         }
     }
 
@@ -54,7 +51,9 @@ namespace kanan {
         if (m_patch.address == 0) {
             return;
         }
+
         log("Applying RangedAttackSwap...");
+        
         switch (m_choice) {
         case 1: //Magnum Shot
             m_patch.bytes = { 0x0A, 0x52 };
@@ -81,7 +80,7 @@ namespace kanan {
         case 0: //Disabled
             m_patch.bytes = { 0x09, 0x52 };
         }
+
         patch(m_patch);
-        m_applied_choice = m_choice;
     }
 }
