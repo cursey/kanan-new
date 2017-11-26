@@ -89,6 +89,7 @@
     <ClCompile Include="ElfLagFix.cpp" />
     <ClCompile Include="EnableMultiClient.cpp" />
     <ClCompile Include="EntityViewer.cpp" />
+    <ClCompile Include="FreeZoom.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Kanan.cpp" />
     <ClCompile Include="KananInit.cpp" />
@@ -112,6 +113,7 @@
     <ClInclude Include="ElfLagFix.hpp" />
     <ClInclude Include="EnableMultiClient.hpp" />
     <ClInclude Include="EntityViewer.hpp" />
+    <ClInclude Include="FreeZoom.hpp" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="Kanan.hpp" />
     <ClInclude Include="KCharacter.hpp" />
