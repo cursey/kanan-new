@@ -5,6 +5,7 @@
 #include "OneClickRevive.hpp"
 #include "NoMountTimeout.hpp"
 #include "RangedAttackSwap.hpp"
+#include "FreeZoom.hpp"
 
 #include "AutoSetMTU.hpp"
 #include "DisableNagle.hpp"
@@ -29,6 +30,7 @@ namespace kanan {
         m_mods.emplace_back(make_unique<WindowsAppearFaster>());
         m_mods.emplace_back(make_unique<OneClickRevive>());
         m_mods.emplace_back(make_unique<NoMountTimeout>());
+		m_mods.emplace_back(make_unique<FreeZoom>());
 
         m_mods.emplace_back(make_unique<AutoSetMTU>());
         m_mods.emplace_back(make_unique<DisableNagle>());
