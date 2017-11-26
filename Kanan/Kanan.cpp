@@ -182,6 +182,12 @@ namespace kanan {
             m_dinputHook->acknowledgeInput();
         }
 
+        // This fixes mabi's Film Style Post Shader making ImGui render as a black box.
+        auto device = m_d3d9Hook->getDevice();
+
+        device->SetTextureStageState(1, D3DTSS_COLOROP, D3DTOP_DISABLE);
+        device->SetTextureStageState(1, D3DTSS_ALPHAOP, D3DTOP_DISABLE);
+
         ImGui::Render();
     }
 
