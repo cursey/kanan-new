@@ -98,6 +98,7 @@
     <ClCompile Include="Mods.cpp" />
     <ClCompile Include="NoMountTimeout.cpp" />
     <ClCompile Include="OneClickRevive.cpp" />
+    <ClCompile Include="RangedAttackSwap.cpp" />
     <ClCompile Include="ShowCombatPower.cpp" />
     <ClCompile Include="WindowsAppearFaster.cpp" />
     <ClCompile Include="WindowsMessageHook.cpp" />
@@ -122,6 +123,7 @@
     <ClInclude Include="Mods.hpp" />
     <ClInclude Include="NoMountTimeout.hpp" />
     <ClInclude Include="OneClickRevive.hpp" />
+    <ClInclude Include="RangedAttackSwap.hpp" />
     <ClInclude Include="ShowCombatPower.hpp" />
     <ClInclude Include="WindowsAppearFaster.hpp" />
     <ClInclude Include="WindowsMessageHook.hpp" />

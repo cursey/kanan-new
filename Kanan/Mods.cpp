@@ -4,6 +4,7 @@
 #include "WindowsAppearFaster.hpp"
 #include "OneClickRevive.hpp"
 #include "NoMountTimeout.hpp"
+#include "RangedAttackSwap.hpp"
 
 #include "AutoSetMTU.hpp"
 #include "DisableNagle.hpp"
@@ -32,6 +33,7 @@ namespace kanan {
         m_mods.emplace_back(make_unique<AutoSetMTU>());
         m_mods.emplace_back(make_unique<DisableNagle>());
         m_mods.emplace_back(make_unique<BorderlessWindow>());
+		m_mods.emplace_back(make_unique<RangedAttackSwap>());
         m_mods.emplace_back(make_unique<EnableMultiClient>());
         m_mods.emplace_back(make_unique<EntityViewer>());
 
