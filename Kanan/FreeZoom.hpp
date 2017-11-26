@@ -16,8 +16,8 @@ namespace kanan {
 
     private:
         bool m_isEnabled;
-        Patch m_patch_jp;
-        Patch m_patch_jnz;
+        Patch m_patchJp;
+        Patch m_patchJnz;
 
         void apply();
     };

@@ -17,8 +17,8 @@ namespace kanan {
     // Change a jp and jnz above it to jmp.
     FreeZoom::FreeZoom()
         : m_isEnabled{ false },
-        m_patch_jp{},
-        m_patch_jnz{}
+        m_patchJp{},
+        m_patchJnz{}
     {
         auto address = scan("client.exe", "7A 05 D9 5D 08 EB 02 DD D8 D9 45 08 D9 45 F8");
 
@@ -26,11 +26,11 @@ namespace kanan {
             log("Got FreeZoom address %p", *address);
 
             //We want to patch the jp and jnz to jmp
-            m_patch_jp.address = *address;
-            m_patch_jp.bytes = { 0xEB };
+            m_patchJp.address = *address;
+            m_patchJp.bytes = { 0xEB };
 
-            m_patch_jnz.address = *address + 22;
-            m_patch_jnz.bytes = { 0xEB };
+            m_patchJnz.address = *address + 22;
+            m_patchJnz.bytes = { 0xEB };
         }
         else {
             log("Failed to find FreeZoom address.");
@@ -38,7 +38,7 @@ namespace kanan {
     }
 
     void FreeZoom::onPatchUI() {
-        if (m_patch_jp.address == 0 || m_patch_jnz.address == 0) {
+        if (m_patchJp.address == 0 || m_patchJnz.address == 0) {
             return;
         }
 
@@ -60,19 +60,19 @@ namespace kanan {
     }
 
     void FreeZoom::apply() {
-        if (m_patch_jp.address == 0 || m_patch_jnz.address == 0) {
+        if (m_patchJp.address == 0 || m_patchJnz.address == 0) {
             return;
         }
 
         log("Toggling FreeZoom...");
 
         if (m_isEnabled) {
-            patch(m_patch_jp);
-            patch(m_patch_jnz);
+            patch(m_patchJp);
+            patch(m_patchJnz);
         }
         else {
-            undoPatch(m_patch_jp);
-            undoPatch(m_patch_jnz);
+            undoPatch(m_patchJp);
+            undoPatch(m_patchJnz);
         }
     }
 }
