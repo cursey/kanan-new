@@ -1,13 +1,10 @@
 #pragma once
 
-#include <Patch.hpp>
-
-#include "Mod.hpp"
-#include "SimpleToggleMod.hpp"
+#include "PatchMod.hpp"
 
 namespace kanan {
-	class RemoveDungeonFog : public SimpleToggleMod {
-	public:
-		RemoveDungeonFog();
-	};
+    class RemoveDungeonFog : public PatchMod {
+    public:
+        RemoveDungeonFog();
+    };
 }

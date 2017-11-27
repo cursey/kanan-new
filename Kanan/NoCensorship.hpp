@@ -1,13 +1,10 @@
 #pragma once
 
-#include <Patch.hpp>
-
-#include "Mod.hpp"
-#include "SimpleToggleMod.hpp"
+#include "PatchMod.hpp"
 
 namespace kanan {
-	class NoCensorship : public SimpleToggleMod {
-	public:
-		NoCensorship();
-	};
+    class NoCensorship : public PatchMod {
+    public:
+        NoCensorship();
+    };
 }

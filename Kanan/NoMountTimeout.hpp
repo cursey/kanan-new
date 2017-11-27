@@ -1,23 +1,10 @@
 #pragma once
 
-#include <Patch.hpp>
-
-#include "Mod.hpp"
+#include "PatchMod.hpp"
 
 namespace kanan {
-    class NoMountTimeout : public Mod {
+    class NoMountTimeout : public PatchMod {
     public:
         NoMountTimeout();
-
-        void onPatchUI() override;
-
-        void onConfigLoad(const Config& cfg) override;
-        void onConfigSave(Config& cfg) override;
-
-    private:
-        bool m_isEnabled;
-        Patch m_patch;
-
-        void apply();
     };
 }

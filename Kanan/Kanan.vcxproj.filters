@@ -105,12 +105,6 @@
     <ClCompile Include="RemoveScreenShake.cpp">
       <Filter>Source Files\Mods</Filter>
     </ClCompile>
-    <ClCompile Include="SimpleToggleMod.hpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SimpleToggleMod.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="RemoveDungeonFog.cpp">
       <Filter>Source Files\Mods</Filter>
     </ClCompile>
@@ -137,6 +131,9 @@
     </ClCompile>
     <ClCompile Include="LogoutInConversation.cpp">
       <Filter>Source Files\Mods</Filter>
+    </ClCompile>
+    <ClCompile Include="PatchMod.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -241,6 +238,9 @@
     </ClInclude>
     <ClInclude Include="NoLogoutPenaltyMsg.hpp">
       <Filter>Header Files\Mods</Filter>
+    </ClInclude>
+    <ClInclude Include="PatchMod.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

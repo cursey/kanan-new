@@ -106,13 +106,12 @@
     <ClCompile Include="NoMountTimeout.cpp" />
     <ClCompile Include="NoSkillRankupWindow.cpp" />
     <ClCompile Include="OneClickRevive.cpp" />
+    <ClCompile Include="PatchMod.cpp" />
     <ClCompile Include="RangedAttackSwap.cpp" />
     <ClCompile Include="PartyNoClose.cpp" />
     <ClCompile Include="RemoveDungeonFog.cpp" />
     <ClCompile Include="RemoveScreenShake.cpp" />
     <ClCompile Include="ShowCombatPower.cpp" />
-    <ClCompile Include="SimpleToggleMod.cpp" />
-    <ClCompile Include="SimpleToggleMod.hpp" />
     <ClCompile Include="WindowsAppearFaster.cpp" />
     <ClCompile Include="WindowsMessageHook.cpp" />
   </ItemGroup>
@@ -144,6 +143,7 @@
     <ClInclude Include="NoMountTimeout.hpp" />
     <ClInclude Include="NoSkillRankupWindow.hpp" />
     <ClInclude Include="OneClickRevive.hpp" />
+    <ClInclude Include="PatchMod.hpp" />
     <ClInclude Include="RangedAttackSwap.hpp" />
     <ClInclude Include="PartyNoClose.hpp" />
     <ClInclude Include="RemoveDungeonFog.hpp" />

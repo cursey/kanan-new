@@ -1,13 +1,10 @@
 #pragma once
 
-#include <Patch.hpp>
-
-#include "Mod.hpp"
-#include "SimpleToggleMod.hpp"
+#include "PatchMod.hpp"
 
 namespace kanan {
-	class NoSkillRankupWindow : public SimpleToggleMod {
-	public:
-		NoSkillRankupWindow();
-	};
+    class NoSkillRankupWindow : public PatchMod {
+    public:
+        NoSkillRankupWindow();
+    };
 }

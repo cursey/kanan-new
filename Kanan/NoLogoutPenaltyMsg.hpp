@@ -1,13 +1,10 @@
 #pragma once
 
-#include <Patch.hpp>
-
-#include "Mod.hpp"
-#include "SimpleToggleMod.hpp"
+#include "PatchMod.hpp"
 
 namespace kanan {
-	class NoLogoutPenaltyMsg : public SimpleToggleMod {
-	public:
-		NoLogoutPenaltyMsg();
-	};
+    class NoLogoutPenaltyMsg : public PatchMod {
+    public:
+        NoLogoutPenaltyMsg();
+    };
 }

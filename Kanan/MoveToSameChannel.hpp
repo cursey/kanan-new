@@ -1,13 +1,10 @@
 #pragma once
 
-#include <Patch.hpp>
-
-#include "Mod.hpp"
-#include "SimpleToggleMod.hpp"
+#include "PatchMod.hpp"
 
 namespace kanan {
-	class MoveToSameChannel : public SimpleToggleMod {
-	public:
-		MoveToSameChannel();
-	};
+    class MoveToSameChannel : public PatchMod {
+    public:
+        MoveToSameChannel();
+    };
 }

@@ -1,23 +1,10 @@
 #pragma once
 
-#include <Patch.hpp>
-
-#include "Mod.hpp"
+#include "PatchMod.hpp"
 
 namespace kanan {
-    class OneClickRevive : public Mod {
+    class OneClickRevive : public PatchMod {
     public:
         OneClickRevive();
-
-        void onPatchUI() override;
-
-        void onConfigLoad(const Config& cfg) override;
-        void onConfigSave(Config& cfg) override;
-
-    private:
-        bool m_isEnabled;
-        Patch m_patch;
-
-        void apply();
     };
 }

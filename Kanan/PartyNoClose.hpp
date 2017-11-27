@@ -1,13 +1,10 @@
 #pragma once
 
-#include <Patch.hpp>
-
-#include "Mod.hpp"
-#include "SimpleToggleMod.hpp"
+#include "PatchMod.hpp"
 
 namespace kanan {
-	class PartyNoClose : public SimpleToggleMod {
-	public:
-		PartyNoClose();
-	};
+    class PartyNoClose : public PatchMod {
+    public:
+        PartyNoClose();
+    };
 }

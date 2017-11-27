@@ -53,7 +53,7 @@ namespace kanan {
         }
 
         log("Applying RangedAttackSwap...");
-        
+
         switch (m_choice) {
         case 1: //Magnum Shot
             m_patch.bytes = { 0x0A, 0x52 };

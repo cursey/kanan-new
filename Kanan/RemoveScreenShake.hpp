@@ -1,13 +1,10 @@
 #pragma once
 
-#include <Patch.hpp>
-
-#include "Mod.hpp"
-#include "SimpleToggleMod.hpp"
+#include "PatchMod.hpp"
 
 namespace kanan {
-	class RemoveScreenShake : public SimpleToggleMod {
-	public:
-		RemoveScreenShake();
-	};
+    class RemoveScreenShake : public PatchMod {
+    public:
+        RemoveScreenShake();
+    };
 }
