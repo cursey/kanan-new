@@ -1,3 +1,5 @@
 .vs/
 Release/
 Debug/
+
+*.orig

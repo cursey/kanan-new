@@ -43,22 +43,22 @@ namespace kanan {
         m_mods.emplace_back(make_unique<WindowsAppearFaster>());
         m_mods.emplace_back(make_unique<OneClickRevive>());
         m_mods.emplace_back(make_unique<NoMountTimeout>());
-		m_mods.emplace_back(make_unique<FreeZoom>());
-		m_mods.emplace_back(make_unique<LogoutInConversation>());
-		m_mods.emplace_back(make_unique<MoveToSameChannel>());
-		m_mods.emplace_back(make_unique<NoCensorship>());
-		m_mods.emplace_back(make_unique<NoChannelMoveDenial>());
-		m_mods.emplace_back(make_unique<NoChannelMoveDescription>());
-		m_mods.emplace_back(make_unique<NoLogoutPenaltyMsg>());
-		m_mods.emplace_back(make_unique<NoSkillRankupWindow>());
-		m_mods.emplace_back(make_unique<PartyNoClose>());
-		m_mods.emplace_back(make_unique<RemoveDungeonFog>());
-		m_mods.emplace_back(make_unique<RemoveScreenShake>());
+        m_mods.emplace_back(make_unique<LogoutInConversation>());
+        m_mods.emplace_back(make_unique<MoveToSameChannel>());
+        m_mods.emplace_back(make_unique<NoCensorship>());
+        m_mods.emplace_back(make_unique<NoChannelMoveDenial>());
+        m_mods.emplace_back(make_unique<NoChannelMoveDescription>());
+        m_mods.emplace_back(make_unique<NoLogoutPenaltyMsg>());
+        m_mods.emplace_back(make_unique<NoSkillRankupWindow>());
+        m_mods.emplace_back(make_unique<PartyNoClose>());
+        m_mods.emplace_back(make_unique<RemoveDungeonFog>());
+        m_mods.emplace_back(make_unique<RemoveScreenShake>());
+        m_mods.emplace_back(make_unique<FreeZoom>());
+        m_mods.emplace_back(make_unique<RangedAttackSwap>());
 
         m_mods.emplace_back(make_unique<AutoSetMTU>());
         m_mods.emplace_back(make_unique<DisableNagle>());
         m_mods.emplace_back(make_unique<BorderlessWindow>());
-		m_mods.emplace_back(make_unique<RangedAttackSwap>());
         m_mods.emplace_back(make_unique<EnableMultiClient>());
         m_mods.emplace_back(make_unique<EntityViewer>());
 

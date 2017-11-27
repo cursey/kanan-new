@@ -1,0 +1,5 @@
+[cpp]
+bears = SpaceConsistencyBear
+files = Kanan/*.*pp,Core/*.*pp,Loader/*.*pp
+use_spaces = True
+default_actions = *: ApplyPatchAction

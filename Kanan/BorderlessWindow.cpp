@@ -99,7 +99,7 @@ namespace kanan {
             m_w = r.right - r.left;
             m_h = r.bottom - r.top;
             m_style &= ~(WS_BORDER | WS_CAPTION | WS_THICKFRAME);
-            
+
             m_changeStyle = true;
             m_changePos = true;
 

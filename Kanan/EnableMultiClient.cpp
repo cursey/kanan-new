@@ -8,7 +8,7 @@
 using namespace std;
 
 namespace kanan {
-    EnableMultiClient::EnableMultiClient() 
+    EnableMultiClient::EnableMultiClient()
         : m_isEnabled{ false },
         m_handlePtr{ nullptr }
     {
