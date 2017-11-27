@@ -346,3 +346,16 @@ public:
     class CWorld* world; //0x0000
     char pad_0004[60]; //0x0004
 }; //Size: 0x0040
+
+class CAccount
+{
+public:
+    char pad_0000[68]; //0x0000
+}; //Size: 0x0044
+
+class CAccountPtr
+{
+public:
+    class CAccount* account; //0x0000
+    char pad_0004[60]; //0x0004
+}; //Size: 0x0040

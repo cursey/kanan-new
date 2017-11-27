@@ -18,10 +18,12 @@ namespace kanan {
         CRenderer* getRenderer() const;
         CEntityList* getEntityList() const;
         CWorld* getWorld() const;
+        CAccount* getAccount() const;
 
     private:
         CRendererPtr* m_rendererPtr;
         CEntityListPtr* m_entityListPtr;
         CWorldPtr* m_worldPtr;
+        CAccountPtr* m_accountPtr;
     };
 }

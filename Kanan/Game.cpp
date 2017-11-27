@@ -9,7 +9,8 @@ namespace kanan {
     Game::Game()
         : m_rendererPtr{ nullptr },
         m_entityListPtr{ nullptr },
-        m_worldPtr{ nullptr }
+        m_worldPtr{ nullptr },
+        m_accountPtr{ nullptr }
     {
         log("Entering Game constructor.");
 
@@ -47,6 +48,18 @@ namespace kanan {
         }
         else {
             error("Failed to find CWorldPtr.");
+        }
+
+        // find the games global account pointer.
+        auto accountAddress = scan("client.exe", "8B 0D ? ? ? ? 6A 00 53 E8 ? ? ? ? 8B 06");
+
+        if (accountAddress) {
+            m_accountPtr = *(CAccountPtr**)(*accountAddress + 2);
+
+            log("Got CAccountPtr %p", m_accountPtr);
+        }
+        else {
+            error("Failed to find CAccountPtr.");
         }
 
         log("Leaving Game constructor.");
@@ -117,5 +130,13 @@ namespace kanan {
         }
 
         return m_worldPtr->world;
+    }
+
+    CAccount* Game::getAccount() const {
+        if (m_accountPtr == nullptr || m_accountPtr->account == nullptr) {
+            return nullptr;
+        }
+
+        return m_accountPtr->account;
     }
 }
