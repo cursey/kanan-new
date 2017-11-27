@@ -61,6 +61,7 @@
 #include "SkipGraphicsCardMsg.hpp"
 #include "TalkToEgo.hpp"
 #include "ViewNPCEquipment.hpp"
+#include "ColorAltText.hpp"
 
 #include "Log.hpp"
 #include "Mods.hpp"
@@ -128,8 +129,7 @@ namespace kanan {
 		m_mods.emplace_back(make_unique<SkipGraphicsCardMsg>());
 		m_mods.emplace_back(make_unique<TalkToEgo>());
 		m_mods.emplace_back(make_unique<ViewNPCEquipment>());
-
-
+		m_mods.emplace_back(make_unique<ColorAltText>());
 
         m_mods.emplace_back(make_unique<AutoSetMTU>());
         m_mods.emplace_back(make_unique<DisableNagle>());
