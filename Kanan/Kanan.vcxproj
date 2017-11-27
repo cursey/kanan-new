@@ -89,6 +89,7 @@
     <ClCompile Include="ChatNoRateLimit.cpp" />
     <ClCompile Include="ChatToMiniGamers.cpp" />
     <ClCompile Include="ClientSideDevCat.cpp" />
+    <ClCompile Include="ColorAltText.cpp" />
     <ClCompile Include="D3D9Hook.cpp" />
     <ClCompile Include="DInputHook.cpp" />
     <ClCompile Include="DisableNagle.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="ChatNoRateLimit.hpp" />
     <ClInclude Include="ChatToMiniGamers.hpp" />
     <ClInclude Include="ClientSideDevCat.hpp" />
+    <ClInclude Include="ColorAltText.hpp" />
     <ClInclude Include="D3D9Hook.hpp" />
     <ClInclude Include="DInputHook.hpp" />
     <ClInclude Include="DisableNagle.hpp" />

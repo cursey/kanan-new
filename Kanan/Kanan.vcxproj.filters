@@ -246,6 +246,9 @@
     <ClCompile Include="ViewNPCEquipment.cpp">
       <Filter>Source Files\Mods</Filter>
     </ClCompile>
+    <ClCompile Include="ColorAltText.cpp">
+      <Filter>Source Files\Mods</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D3D9Hook.hpp">
@@ -462,6 +465,9 @@
       <Filter>Header Files\Mods</Filter>
     </ClInclude>
     <ClInclude Include="ViewNPCEquipment.hpp">
+      <Filter>Header Files\Mods</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorAltText.hpp">
       <Filter>Header Files\Mods</Filter>
     </ClInclude>
   </ItemGroup>
