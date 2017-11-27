@@ -13,6 +13,7 @@ namespace kanan {
     PatchMod::PatchMod(string patchName, string tooltip)
         : m_isEnabled{ false },
         m_patches{},
+        m_hasFailingPatch{ false },
         m_patchName{ move(patchName) },
         m_tooltip{ move(tooltip) },
         m_configName{}
@@ -32,6 +33,9 @@ namespace kanan {
 
         if (!address) {
             log("[%s] Failed to find pattern %s", m_patchName.c_str(), pattern.c_str());
+
+            m_hasFailingPatch = true;
+
             return false;
         }
 
@@ -48,7 +52,7 @@ namespace kanan {
     }
 
     void PatchMod::onPatchUI() {
-        if (m_patches.empty()) {
+        if (m_patches.empty() || m_hasFailingPatch) {
             return;
         }
 
@@ -74,7 +78,7 @@ namespace kanan {
     }
 
     void PatchMod::apply() {
-        if (m_patches.empty()) {
+        if (m_patches.empty() || m_hasFailingPatch) {
             return;
         }
 

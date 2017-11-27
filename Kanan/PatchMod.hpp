@@ -24,6 +24,7 @@ namespace kanan {
     private:
         bool m_isEnabled;
         std::vector<Patch> m_patches;
+        bool m_hasFailingPatch;
         std::string m_patchName;
         std::string m_tooltip;
         std::string m_configName;
