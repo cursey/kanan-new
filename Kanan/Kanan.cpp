@@ -195,7 +195,7 @@ namespace kanan {
 
 
             ImGui::SetNextWindowSize(ImVec2{ 450.0f, 200.0f }, ImGuiSetCond_FirstUseEver);
-            ImGui::Begin("Kanan's New Mabinogi Mod");
+            ImGui::Begin("Kanan's New Mabinogi Mod", &m_isUIOpen);
             ImGui::Text("Input to the game is blocked while this window is open!");
 
             if (ImGui::CollapsingHeader("Patches")) {
