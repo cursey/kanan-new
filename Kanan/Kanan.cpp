@@ -161,7 +161,7 @@ namespace kanan {
 			ImGui::SetNextWindowPosCenter();
 			ImGui::SetNextWindowSize(ImVec2{ 450.0f, 200.0f }, ImGuiSetCond_FirstUseEver);
 			if (ImGui::BeginPopupModal("Loading...")) {
-				ImGui::Text("Kanan is currently loading. We'll be done soon :)");
+				ImGui::Text("Kanan is currently setting up. Please wait a moment...");
 				ImGui::EndPopup();
 			}
 
