@@ -23,6 +23,7 @@ namespace kanan {
         m_mods{ nullptr },
         m_isUIOpen{ true },
         m_isInitialized{ false },
+		m_isModsLoaded{ false },
         m_wnd{ nullptr }
     {
         log("Entering Kanan constructor.");
@@ -41,9 +42,48 @@ namespace kanan {
         if (!m_d3d9Hook->isValid()) {
             error("Failed to hook D3D9.");
         }
+		std::lock_guard<std::mutex> mabiLock(m_mabiLoadLock);
 
         log("Leaving Kanan constructor.");
     }
+
+	void Kanan::onInject() {
+		std::unique_lock<std::mutex> lock(m_mabiLoadLock);
+		m_mabiReady.wait(lock);
+		initializeMods();
+		m_isModsLoaded = true;
+	}
+
+	void Kanan::initializeMods() {
+		//
+		// Initialize the Game object.
+		//
+		log("Creating the Game object...");
+
+		m_game = make_unique<Game>();
+
+		//
+		// Initialize all the mods.
+		//
+		log("Creating Mods object...");
+
+		m_mods = make_unique<Mods>();
+
+		log("Calling Mod::onInitialize callbacks...");
+
+		for (const auto& mod : m_mods->getMods()) {
+			mod->onInitialize();
+		}
+
+		//
+		// Load the config.
+		//
+		log("Loading config...");
+
+		loadConfig();
+
+		log("Done initializing.");
+	}
 
     void Kanan::onInitialize() {
         log("Begginging intialization... ");
@@ -105,35 +145,7 @@ namespace kanan {
         if (!m_wmHook->isValid()) {
             error("Failed to hook windows message procedure.");
         }
-
-        //
-        // Initialize the Game object.
-        //
-        log("Creating the Game object...");
-
-        m_game = make_unique<Game>();
-
-        //
-        // Initialize all the mods.
-        //
-        log("Creating Mods object...");
-
-        m_mods = make_unique<Mods>();
-
-        log("Calling Mod::onInitialize callbacks...");
-
-        for (const auto& mod : m_mods->getMods()) {
-            mod->onInitialize();
-        }
-
-        //
-        // Load the config.
-        //
-        log("Loading config...");
-
-        loadConfig();
-
-        log("Done initializing.");
+		m_mabiReady.notify_all();
     }
 
     void Kanan::onFrame() {
@@ -143,6 +155,27 @@ namespace kanan {
         }
 
         ImGui_ImplDX9_NewFrame();
+
+		if (!m_isModsLoaded) {
+			ImGui::OpenPopup("Loading...");
+			ImGui::SetNextWindowPosCenter();
+			ImGui::SetNextWindowSize(ImVec2{ 450.0f, 200.0f }, ImGuiSetCond_FirstUseEver);
+			if (ImGui::BeginPopupModal("Loading...")) {
+				ImGui::Text("Kanan is currently loading. We'll be done soon :)");
+				ImGui::EndPopup();
+			}
+
+			m_dinputHook->ignoreInput();
+
+			auto device = m_d3d9Hook->getDevice();
+
+			device->SetTextureStageState(1, D3DTSS_COLOROP, D3DTOP_DISABLE);
+			device->SetTextureStageState(1, D3DTSS_ALPHAOP, D3DTOP_DISABLE);
+
+			ImGui::Render();
+			
+			return;
+		}
 
         for (const auto& mod : m_mods->getMods()) {
             mod->onFrame();

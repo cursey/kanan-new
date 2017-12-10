@@ -2,6 +2,8 @@
 
 #include <memory>
 #include <string>
+#include <mutex>
+#include <condition_variable>
 
 #include <Windows.h>
 
@@ -28,6 +30,7 @@ namespace kanan {
         auto getWindow() const {
             return m_wnd;
         }
+		void onInject();
 
     private:
         std::string m_path;
@@ -38,9 +41,14 @@ namespace kanan {
         std::unique_ptr<Game> m_game;
         std::unique_ptr<Mods> m_mods;
         bool m_isUIOpen;
-        bool m_isInitialized;
+        
+		std::mutex m_mabiLoadLock;
+		std::condition_variable m_mabiReady;
+		bool m_isModsLoaded;
+		bool m_isInitialized;
         HWND m_wnd;
 
+		void initializeMods();
         // These are callbacks that get called from the hooks that get created.
         void onInitialize();
         void onFrame();
