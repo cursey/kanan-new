@@ -10,6 +10,10 @@ namespace kanan {
         return scan(GetModuleHandle(widen(module).c_str()), pattern);
     }
 
+	optional<uintptr_t> scan(const string& module, uintptr_t start, const string& pattern) {
+		return scan(start, getModuleSize(GetModuleHandle(widen(module).c_str())).value_or(0), pattern);
+	}
+
     optional<uintptr_t> scan(HMODULE module, const string& pattern) {
         return scan((uintptr_t)module, getModuleSize(module).value_or(0), pattern);
     }
