@@ -29,6 +29,8 @@ DWORD WINAPI kananInit(LPVOID params) {
     g_kanan = make_unique<Kanan>(path);
 
     log("Leaving kananInit.");
+
+    return 0;
 }
 
 BOOL APIENTRY DllMain(HINSTANCE module, DWORD reason, LPVOID reserved) {
