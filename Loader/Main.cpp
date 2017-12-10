@@ -41,20 +41,6 @@ bool inject(DWORD clientID) {
         return false;
     }
 
-    cout << "Running init..." << endl;
-
-    auto kananInit = kanan->getProcAddress("kananInit");
-
-    if (!kananInit) {
-        cerr << "Failed to find kananInit." << endl;
-        return false;
-    }
-
-    if (!client.execute(*kananInit, current_path().string())) {
-        cerr << "Failed to run kananInit." << endl;
-        return false;
-    }
-
     cout << "Success!" << endl;
 
     return true;

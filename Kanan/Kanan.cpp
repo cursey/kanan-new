@@ -23,6 +23,8 @@ namespace kanan {
         m_mods{ nullptr },
         m_isUIOpen{ true },
         m_isInitialized{ false },
+        m_areModsReady{ false },
+        m_areModsLoaded{ false },
         m_wnd{ nullptr }
     {
         log("Entering Kanan constructor.");
@@ -42,10 +44,44 @@ namespace kanan {
             error("Failed to hook D3D9.");
         }
 
+        //
+        // We initialize mods now because this constructor is still being executed
+        // from the startup thread so we can take as long as necessary to do so here.
+        //
+        initializeMods();
+
         log("Leaving Kanan constructor.");
     }
 
+    void Kanan::initializeMods() {
+        if (m_areModsReady) {
+            return;
+        }
+
+        //
+        // Initialize the Game object.
+        //
+        log("Creating the Game object...");
+
+        m_game = make_unique<Game>();
+
+        //
+        // Initialize all the mods.
+        //
+        log("Creating Mods object...");
+
+        m_mods = make_unique<Mods>();
+
+        log("Done initializing.");
+
+        m_areModsReady = true;
+    }
+
     void Kanan::onInitialize() {
+        if (m_isInitialized) {
+            return;
+        }
+
         log("Begginging intialization... ");
 
         // Grab the HWND from the device's creation parameters.
@@ -106,80 +142,70 @@ namespace kanan {
             error("Failed to hook windows message procedure.");
         }
 
-        //
-        // Initialize the Game object.
-        //
-        log("Creating the Game object...");
-
-        m_game = make_unique<Game>();
-
-        //
-        // Initialize all the mods.
-        //
-        log("Creating Mods object...");
-
-        m_mods = make_unique<Mods>();
-
-        log("Calling Mod::onInitialize callbacks...");
-
-        for (const auto& mod : m_mods->getMods()) {
-            mod->onInitialize();
-        }
-
-        //
-        // Load the config.
-        //
-        log("Loading config...");
-
-        loadConfig();
-
-        log("Done initializing.");
+        m_isInitialized = true;
     }
 
     void Kanan::onFrame() {
         if (!m_isInitialized) {
             onInitialize();
-            m_isInitialized = true;
         }
 
         ImGui_ImplDX9_NewFrame();
 
-        for (const auto& mod : m_mods->getMods()) {
-            mod->onFrame();
-        }
-
-        if (wasKeyPressed(VK_INSERT)) {
-            m_isUIOpen = !m_isUIOpen;
-
-            // Save the config whenever the menu closes.
-            if (!m_isUIOpen) {
-                saveConfig();
-            }
-        }
-
-        if (m_isUIOpen) {
-            m_dinputHook->ignoreInput();
-
-
-            ImGui::SetNextWindowSize(ImVec2{ 450.0f, 200.0f }, ImGuiSetCond_FirstUseEver);
-            ImGui::Begin("Kanan's New Mabinogi Mod");
-            ImGui::Text("Input to the game is blocked while this window is open!");
-
-            if (ImGui::CollapsingHeader("Patches")) {
-                for (const auto& mod : m_mods->getMods()) {
-                    mod->onPatchUI();
-                }
+        if (m_areModsReady) {
+            // Make sure the config for all the mods gets loaded.
+            if (!m_areModsLoaded) {
+                loadConfig();
             }
 
             for (const auto& mod : m_mods->getMods()) {
-                mod->onUI();
+                mod->onFrame();
             }
 
-            ImGui::End();
+            if (wasKeyPressed(VK_INSERT)) {
+                m_isUIOpen = !m_isUIOpen;
 
+                // Save the config whenever the menu closes.
+                if (!m_isUIOpen) {
+                    saveConfig();
+                }
+            }
+
+            if (m_isUIOpen) {
+                m_dinputHook->ignoreInput();
+
+                ImGui::SetNextWindowSize(ImVec2{ 450.0f, 200.0f }, ImGuiSetCond_FirstUseEver);
+                ImGui::Begin("Kanan's New Mabinogi Mod", &m_isUIOpen);
+                ImGui::Text("Input to the game is blocked while this window is open!");
+
+                if (ImGui::CollapsingHeader("Patches")) {
+                    for (const auto& mod : m_mods->getMods()) {
+                        mod->onPatchUI();
+                    }
+                }
+
+                for (const auto& mod : m_mods->getMods()) {
+                    mod->onUI();
+                }
+
+                ImGui::End();
+
+            }
+            else {
+                m_dinputHook->acknowledgeInput();
+            }
         }
         else {
-            m_dinputHook->acknowledgeInput();
+            ImGui::OpenPopup("Loading...");
+            ImGui::SetNextWindowPosCenter();
+            ImGui::SetNextWindowSize(ImVec2{ 450.0f, 200.0f }, ImGuiSetCond_FirstUseEver);
+
+            if (ImGui::BeginPopupModal("Loading...")) {
+                ImGui::Text("Kanan is currently setting up. Please wait a moment...");
+                ImGui::EndPopup();
+            }
+
+            m_dinputHook->ignoreInput();
         }
 
         // This fixes mabi's Film Style Post Shader making ImGui render as a black box.
@@ -215,6 +241,8 @@ namespace kanan {
         }
 
         log("Config loading done.");
+        
+        m_areModsLoaded = true;
     }
 
     void Kanan::saveConfig() {
