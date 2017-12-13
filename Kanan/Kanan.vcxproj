@@ -133,6 +133,7 @@
     <ClCompile Include="NoPersonalShopCreationMsg.cpp" />
     <ClCompile Include="NoPlayerZoomTransparency.cpp" />
     <ClCompile Include="NoRenderSky.cpp" />
+    <ClCompile Include="NoRewardWindow.cpp" />
     <ClCompile Include="NoSkillRankupWindow.cpp" />
     <ClCompile Include="NPCFastText.cpp" />
     <ClCompile Include="OneClickRevive.cpp" />
@@ -152,6 +153,7 @@
     <ClCompile Include="ViewNPCEquipment.cpp" />
     <ClCompile Include="WindowsAppearFaster.cpp" />
     <ClCompile Include="WindowsMessageHook.cpp" />
+    <ClCompile Include="ZeroFogDistance.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AlwaysTransCollectMode.hpp" />
@@ -209,6 +211,7 @@
     <ClInclude Include="NoPersonalShopCreationMsg.hpp" />
     <ClInclude Include="NoPlayerZoomTransparency.hpp" />
     <ClInclude Include="NoRenderSky.hpp" />
+    <ClInclude Include="NoRewardWindow.hpp" />
     <ClInclude Include="NoSkillRankupWindow.hpp" />
     <ClInclude Include="NPCFastText.hpp" />
     <ClInclude Include="OneClickRevive.hpp" />
@@ -227,6 +230,7 @@
     <ClInclude Include="ViewNPCEquipment.hpp" />
     <ClInclude Include="WindowsAppearFaster.hpp" />
     <ClInclude Include="WindowsMessageHook.hpp" />
+    <ClInclude Include="ZeroFogDistance.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ShowDeadlyHP.hpp" />

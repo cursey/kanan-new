@@ -62,6 +62,8 @@
 #include "TalkToEgo.hpp"
 #include "ViewNPCEquipment.hpp"
 #include "ColorAltText.hpp"
+#include "ZeroFogDistance.hpp"
+#include "NoRewardWindow.hpp"
 
 #include "Log.hpp"
 #include "Mods.hpp"
@@ -130,6 +132,8 @@ namespace kanan {
 		m_mods.emplace_back(make_unique<TalkToEgo>());
 		m_mods.emplace_back(make_unique<ViewNPCEquipment>());
 		m_mods.emplace_back(make_unique<ColorAltText>());
+		m_mods.emplace_back(make_unique<ZeroFogDistance>());
+		m_mods.emplace_back(make_unique<NoRewardWindow>());
 
         m_mods.emplace_back(make_unique<AutoSetMTU>());
         m_mods.emplace_back(make_unique<DisableNagle>());
