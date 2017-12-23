@@ -727,5 +727,16 @@
                 "patch": "8B"
             }
         ]
+    },
+    {
+        "name": "No Reward Window",
+        "desc": "Removes the reward window that shows up when acquiring items, stats or exp",
+        "patches": [
+            {
+                "pattern": "3B D6 0F 85 ? ? ? ? 33 DB",
+                "offset": 0,
+                "patch": "39 DB 0F 84"
+            }
+        ]
     }
 ]

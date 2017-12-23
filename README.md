@@ -2,7 +2,7 @@
 A reimagining of Kanan for Mabinogi written in C++ with many improvements.
 
 ## Download
-Downloads for the latest _official_ releases are located [here](https://github.com/cursey/kanan-new/releases). You can always download the latest development build from our CI server [here](https://ci.appveyor.com/project/cursey/kanan-new/build/artifacts).
+Downloads for the latest _official_ releases are located [here](https://github.com/cursey/kanan-new/releases).
 
 ## What's new
 * Entirely written from the ground up in modern C++17. 

@@ -11,6 +11,7 @@
 #include "EnableMultiClient.hpp"
 #include "EntityViewer.hpp"
 #include "ColorAltText.hpp"
+#include "ZeroFogDistance.hpp"
 
 #include "Log.hpp"
 
@@ -44,6 +45,7 @@ namespace kanan {
             m_mods.emplace_back(move(patchMod));
         }
 
+		m_mods.emplace_back(make_unique<ZeroFogDistance>());
         m_mods.emplace_back(make_unique<RangedAttackSwap>());
 		m_mods.emplace_back(make_unique<ColorAltText>());
 

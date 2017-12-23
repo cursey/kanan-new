@@ -110,6 +110,7 @@
     <ClCompile Include="PatchMod.cpp" />
     <ClCompile Include="RangedAttackSwap.cpp" />
     <ClCompile Include="WindowsMessageHook.cpp" />
+    <ClCompile Include="ZeroFogDistance.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AutoSetMTU.hpp" />
@@ -131,6 +132,7 @@
     <ClInclude Include="PatchMod.hpp" />
     <ClInclude Include="RangedAttackSwap.hpp" />
     <ClInclude Include="WindowsMessageHook.hpp" />
+    <ClInclude Include="ZeroFogDistance.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Patches.json" />
