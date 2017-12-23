@@ -5,7 +5,6 @@
         "patches": [
             {
                 "pattern": "0F 85 ? ? ? ? 8B 97 ? ? ? ? 8B 87",
-                "offset": 0,
                 "patch": "90 90 90 90 90 90"
             }
         ]
@@ -16,22 +15,18 @@
         "patches": [
             {
                 "pattern": "74 0D 8B 45 08 50 8B CB E8 ? ? ? ? EB 0B",
-                "offset": 0,
                 "patch": "90 90"
             },
             {
                 "pattern": "75 3D 83 BE ? ? ? ? ?",
-                "offset": 0,
                 "patch": "EB"
             },
             {
                 "pattern": "74 25 80 7B 73 00",
-                "offset": 0,
                 "patch": "EB"
             },
             {
                 "pattern": "0F 84 ? ? ? ? 8B 0D ? ? ? ? E8 ? ? ? ? 57",
-                "offset": 0,
                 "patch": "90 90 90 90 90 90 ? ? ? ? ? ? 90 90 90 B0 01 ? ? ? ? EB"
             }
         ]
@@ -42,7 +37,6 @@
         "patches": [
             {
                 "pattern": "55 8B EC 56 57 8B F9 8B 07 8B 50 0C FF D2 8B C8",
-                "offset": 0,
                 "patch": "32 C0 C2 04 00"
             }
         ]
@@ -53,12 +47,10 @@
         "patches": [
             {
                 "pattern": "74 6F E8 ? ? ? ? 85 C0 74 10",
-                "offset": 0,
                 "patch": "EB"
             },
             {
                 "pattern": "8B 4D 18 6A 00 51 8B 8E ? ? ? ?",
-                "offset": 0,
                 "patch": "31 C9 90"
             }
         ]
@@ -69,7 +61,6 @@
         "patches": [
             {
                 "pattern": "0F 86 ? ? ? ? 8B 4D E8 8B 11",
-                "offset": 0,
                 "patch": "90 E9"
             }
         ]
@@ -80,7 +71,6 @@
         "patches": [
             {
                 "pattern": "89 90 58 02 00 00",
-                "offset": 0,
                 "patch": "90 90 90 90 90 90"
             }
         ]
@@ -91,7 +81,6 @@
         "patches": [
             {
                 "pattern": "7A 05 D9 5D 08 EB 02 DD D8 D9 45 08 D9 45 F8",
-                "offset": 0,
                 "patch": "EB"
             },
             {
@@ -118,7 +107,6 @@
         "patches": [
             {
                 "pattern": "0F 84 ? ? ? ? 68 ? ? ? ? 8D 4D E0 E8 ? ? ? ? C6 45 FC 04 8D 55 E0 52 8D 45 B8",
-                "offset": 0,
                 "patch": "90 E9"
             }
         ]
@@ -129,7 +117,6 @@
         "patches": [
             {
                 "pattern": "0F 84 ? ? ? ? 80 7D F3 00 0F 84 ? ? ? ? 85 D2",
-                "offset": 0,
                 "patch": "90 E9"
             }
         ]
@@ -140,7 +127,6 @@
         "patches": [
             {
                 "pattern": "0F 84 ? ? ? ? 89 5D F0 89 5D FC 8B CE",
-                "offset": 0,
                 "patch": "90 E9"
             }
         ]
@@ -151,7 +137,6 @@
         "patches": [
             {
                 "pattern": "6A 01 53 53 6A 01 53 6A 01 56 8D 4D DC",
-                "offset": 0,
                 "patch": "90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90"
             }
         ]
@@ -162,7 +147,6 @@
         "patches": [
             {
                 "pattern": "0F 84 ? ? ? ? 88 5D F2 88 5D F3",
-                "offset": 0,
                 "patch": "90 E9"
             }
         ]
@@ -200,7 +184,6 @@
         "patches": [
             {
                 "pattern": "0F B6 41 05 C1 E8 02 83 E0 01 C3",
-                "offset": 0,
                 "patch": "33 C0 C3 90 90 90 90 90 90 90 90"
             }
         ]
@@ -211,7 +194,6 @@
         "patches": [
             {
                 "pattern": "D9 01 8B 46 64",
-                "offset": 0,
                 "patch": "D9 EE"
             },
             {
@@ -248,7 +230,6 @@
         "patches": [
             {
                 "pattern": "55 8B EC 6A FF 68 ? ? ? ? 64 A1 ? ? ? ? 50 83 EC 0C 53 56 57 A1 ? ? ? ? 33 C5 50 8D 45 F4 64 A3 ? ? ? ? E8 ? ? ? ? 84 C0 0F 84 ? ? ? ? E8",
-                "offset": 0,
                 "patch": "B0 01 C2 04 00"
             }
         ]
@@ -259,12 +240,10 @@
         "patches": [
             {
                 "pattern": "0F 85 ? ? ? ? 33 FF C6 45 F3 01",
-                "offset": 0,
                 "patch": "90 90 90 90 90 90"
             },
             {
                 "pattern": "0F 85 ? ? ? ? 33 FF 80 7D 10 00",
-                "offset": 0,
                 "patch": "90 90 90 90 90 90"
             }
         ]
@@ -275,7 +254,6 @@
         "patches": [
             {
                 "pattern": "76 B0 68 ? ? ? ? 8D 4D DC",
-                "offset": 0,
                 "patch": "EB"
             }
         ]
@@ -286,7 +264,6 @@
         "patches": [
             {
                 "pattern": "75 13 8D 4D 08 56",
-                "offset": 0,
                 "patch": "EB"
             }
         ]
@@ -297,7 +274,6 @@
         "patches": [
             {
                 "pattern": "74 21 8B 16 8B 82 94 00 00 00 8B CE",
-                "offset": 0,
                 "patch": "EB"
             }
         ]
@@ -335,7 +311,6 @@
         "patches": [
             {
                 "pattern": "53 FF D2 8B 0D ? ? ? ? 6A 0C E8 ? ? ? ? 68 ? ? ? ? 89 45 D0",
-                "offset": 0,
                 "patch": "90 90 90"
             }
         ]
@@ -346,7 +321,6 @@
         "patches": [
             {
                 "pattern": "FF 87 ? ? ? ? EB 11",
-                "offset": 0,
                 "patch": "90 90 90 90 90 90"
             }
         ]
@@ -368,7 +342,6 @@
         "patches": [
             {
                 "pattern": "0F 85 ? ? ? ? D9 EE D9 45 D4",
-                "offset": 0,
                 "patch": "90 90 90 90 90 90"
             }
         ]
@@ -439,7 +412,6 @@
         "patches": [
             {
                 "pattern": "55 8B EC 8A 45 08 56 8B F1 38 06",
-                "offset": 0,
                 "patch": "B0 00 C2 04 00 90 90 90 90 90 90"
             }
         ]
@@ -531,12 +503,10 @@
         "patches": [
             {
                 "pattern": "89 45 C4 39 9F",
-                "offset": 0,
                 "patch": "90 90 90"
             },
             {
                 "pattern": "89 4D C4 39 9F",
-                "offset": 0,
                 "patch": "90 90 90"
             }
         ]
@@ -547,7 +517,6 @@
         "patches": [
             {
                 "pattern": "B8 ? ? ? ? F7 E6 C1 EA 03 42",
-                "offset": 0,
                 "patch": "90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90"
             },
             {
@@ -562,7 +531,6 @@
             },
             {
                 "pattern": "C1 E6 04 68 ? ? ? ? 8D 4D EC",
-                "offset": 0,
                 "patch": "90 90 90"
             },
             {
@@ -600,7 +568,6 @@
         "patches": [
             {
                 "pattern": "6A 01 53 53 6A 01 53 6A 01 53 53 8D 55 E8 52 E8 ? ? ? ? C6 45 FC 04",
-                "offset": 0,
                 "patch": "90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90"
             }
         ]
@@ -611,7 +578,6 @@
         "patches": [
             {
                 "pattern": "74 42 8B 4E 04 8B 11 8B 82 E4 00 00 00 6A 04 FF D0 8B C8 E8",
-                "offset": 0,
                 "patch": "EB"
             },
             {
@@ -627,7 +593,6 @@
         "patches": [
             {
                 "pattern": "0F 85 ? ? ? ? 3B D3 0F 85 ? ? ? ? 8B 8E ? ? ? ? E8 ? ? ? ? 84 C0 74 4A",
-                "offset": 0,
                 "patch": "90 E9"
             }
         ]
@@ -638,32 +603,26 @@
         "patches": [
             {
                 "pattern": "75 18 68 ? ? ? ? 8D 8D",
-                "offset": 0,
                 "patch": "EB"
             },
             {
                 "pattern": "75 07 68 ? ? ? ? EB 1F 6A 0A 68 ? ? ? ? 8D 8D ? ? ? ? 51 53",
-                "offset": 0,
                 "patch": "EB"
             },
             {
                 "pattern": "75 07 68 ? ? ? ? EB 1F 6A 0A 68 ? ? ? ? 8D 8D ? ? ? ? 51 50",
-                "offset": 0,
                 "patch": "EB"
             },
             {
                 "pattern": "33 DB 85 F6 75 1C",
-                "offset": 0,
                 "patch": "90 90"
             },
             {
                 "pattern": "33 DB 85 FF 75 0B",
-                "offset": 0,
                 "patch": "90 90"
             },
             {
                 "pattern": "C7 85 ? ? ? ? ? ? ? ? 8B 85 ? ? ? ? 85 F6",
-                "offset": 0,
                 "patch": "90 90 90 90 90 90 90 90 90 90"
             }
         ]
@@ -685,7 +644,6 @@
         "patches": [
             {
                 "pattern": "0F 85 ? ? ? ? 68 ? ? ? ? 8D 4D F0 E8 ? ? ? ? 68 ? ? ? ? 8D 4D D0",
-                "offset": 0,
                 "patch": "90 90 90 90 90 90"
             }
         ]
@@ -707,7 +665,6 @@
         "patches": [
             {
                 "pattern": "0F 85 90 00 00 00 68 ? ? ? ? 8D 4D DC E8",
-                "offset": 0,
                 "patch": "90 E9"
             }
         ]
@@ -718,7 +675,6 @@
         "patches": [
             {
                 "pattern": "84 C0 0F 85 A7 ? ? ? 8B CF",
-                "offset": 0,
                 "patch": "38"
             },
             {
@@ -734,7 +690,6 @@
         "patches": [
             {
                 "pattern": "3B D6 0F 85 ? ? ? ? 33 DB",
-                "offset": 0,
                 "patch": "39 DB 0F 84"
             }
         ]

@@ -103,13 +103,20 @@ namespace kanan {
     }
 
     void from_json(const json& j, PatchMod& mod) {
-        mod.m_patchName = j["name"].get<string>();
-        mod.m_tooltip = j["desc"].get<string>();
+        mod.m_patchName = j.at("name").get<string>();
 
-        for (const auto& patch : j["patches"]) {
-            auto pattern = patch["pattern"].get<string>();
-            auto offset = patch["offset"].get<int>();
-            auto patchPattern = patch["patch"].get<string>();
+        if (j.find("desc") != j.end()) {
+            mod.m_tooltip = j.at("desc").get<string>();
+        }
+
+        for (const auto& patch : j.at("patches")) {
+            auto pattern = patch.at("pattern").get<string>();
+            auto patchPattern = patch.at("patch").get<string>();
+            int offset{ 0 };
+
+            if (patch.find("offset") != patch.end()) {
+                offset = patch.at("offset").get<int>();
+            }
 
             mod.addPatch(pattern, offset, buildPattern(patchPattern));
         }
