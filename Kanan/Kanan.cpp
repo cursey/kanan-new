@@ -107,17 +107,6 @@ namespace kanan {
             error("Failed to initialize ImGui.");
         }
 
-        // These render strangely in Mabinogi so we disable them.
-        auto& style = ImGui::GetStyle();
-
-        style.AntiAliasedLines = false;
-        style.AntiAliasedShapes = false;
-        style.WindowRounding = 0.0f;
-        style.ChildWindowRounding = 0.0f;
-        style.FrameRounding = 0.0f;
-        style.ScrollbarRounding = 0.0f;
-        style.GrabRounding = 0.0f;
-
         //
         // DInputHook.
         //
@@ -313,9 +302,11 @@ namespace kanan {
         ImGui::Text("Kanan's New Mabinogi Mod");
         ImGui::Text("https://github.com/cursey/kanan-new");
         ImGui::Spacing();
-        ImGui::Text("Please come by the repository and let us know if there are");
-        ImGui::Text("any problems or mods you would like to see added! Contributors");
-        ImGui::Text("are always welcome");
+        ImGui::TextWrapped(
+            "Please come by the repository and let us know if there are "
+            "any problems or mods you would like to see added. Contributors "
+            "are always welcome!"
+        );
         ImGui::Spacing();
         ImGui::Text("Kanan uses the following third-party libraries");
         ImGui::Text("    Dear ImGui (https://github.com/ocornut/imgui)");
