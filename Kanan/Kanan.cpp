@@ -261,7 +261,11 @@ namespace kanan {
 
     void Kanan::drawUI() {
         ImGui::SetNextWindowSize(ImVec2{ 450.0f, 200.0f }, ImGuiSetCond_FirstUseEver);
-        ImGui::Begin("Kanan's New Mabinogi Mod", &m_isUIOpen, ImGuiWindowFlags_MenuBar);
+
+        if (!ImGui::Begin("Kanan's New Mabinogi Mod", &m_isUIOpen, ImGuiWindowFlags_MenuBar)) {
+            ImGui::End();
+            return;
+        }
 
         //
         // Menu bar
