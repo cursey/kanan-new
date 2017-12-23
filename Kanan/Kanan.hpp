@@ -38,7 +38,11 @@ namespace kanan {
         std::unique_ptr<WindowsMessageHook> m_wmHook;
         std::unique_ptr<Game> m_game;
         std::unique_ptr<Mods> m_mods;
+
         bool m_isUIOpen;
+        bool m_isLogOpen;
+        bool m_isAboutOpen;
+
         bool m_isInitialized;
         std::atomic_bool m_areModsReady;
         bool m_areModsLoaded;
@@ -53,6 +57,9 @@ namespace kanan {
 
         void loadConfig();
         void saveConfig();
+
+        void drawUI();
+        void drawAbout();
     };
 
     extern std::unique_ptr<Kanan> g_kanan;

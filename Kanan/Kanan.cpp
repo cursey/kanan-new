@@ -22,6 +22,8 @@ namespace kanan {
         m_game{ nullptr },
         m_mods{ nullptr },
         m_isUIOpen{ true },
+        m_isLogOpen{ false },
+        m_isAboutOpen{ false },
         m_isInitialized{ false },
         m_areModsReady{ false },
         m_areModsLoaded{ false },
@@ -173,23 +175,15 @@ namespace kanan {
 
             if (m_isUIOpen) {
                 m_dinputHook->ignoreInput();
+                drawUI();
 
-                ImGui::SetNextWindowSize(ImVec2{ 450.0f, 200.0f }, ImGuiSetCond_FirstUseEver);
-                ImGui::Begin("Kanan's New Mabinogi Mod", &m_isUIOpen);
-                ImGui::Text("Input to the game is blocked while this window is open!");
-
-                if (ImGui::CollapsingHeader("Patches")) {
-                    for (const auto& mod : m_mods->getMods()) {
-                        mod->onPatchUI();
-                    }
+                if (m_isLogOpen) {
+                    drawLog(&m_isLogOpen);
                 }
 
-                for (const auto& mod : m_mods->getMods()) {
-                    mod->onUI();
+                if (m_isAboutOpen) {
+                    drawAbout();
                 }
-
-                ImGui::End();
-
             }
             else {
                 m_dinputHook->acknowledgeInput();
@@ -198,10 +192,10 @@ namespace kanan {
         else {
             ImGui::OpenPopup("Loading...");
             ImGui::SetNextWindowPosCenter();
-            ImGui::SetNextWindowSize(ImVec2{ 450.0f, 200.0f }, ImGuiSetCond_FirstUseEver);
+            ImGui::SetNextWindowSize(ImVec2{ 450.0f, 200.0f });
 
-            if (ImGui::BeginPopupModal("Loading...")) {
-                ImGui::Text("Kanan is currently setting up. Please wait a moment...");
+            if (ImGui::BeginPopupModal("Loading...", nullptr, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize)) {
+                ImGui::Text("Kanan is currently setting things up. Please wait a moment...");
                 ImGui::EndPopup();
             }
 
@@ -263,5 +257,67 @@ namespace kanan {
         }
 
         log("Config saving done.");
+    }
+
+    void Kanan::drawUI() {
+        ImGui::SetNextWindowSize(ImVec2{ 450.0f, 200.0f }, ImGuiSetCond_FirstUseEver);
+        ImGui::Begin("Kanan's New Mabinogi Mod", &m_isUIOpen, ImGuiWindowFlags_MenuBar);
+
+        //
+        // Menu bar
+        //
+        if (ImGui::BeginMenuBar()) {
+            if (ImGui::BeginMenu("View")) {
+                ImGui::MenuItem("Show Log", nullptr, &m_isLogOpen);
+                ImGui::EndMenu();
+            }
+
+            if (ImGui::BeginMenu("Help")) {
+                ImGui::MenuItem("About Kanan", nullptr, &m_isAboutOpen);
+                ImGui::EndMenu();
+            }
+
+            ImGui::EndMenuBar();
+        }
+
+        // 
+        // Rest of the UI
+        //
+        ImGui::Text("Input to the game is blocked while this window is open!");
+
+        if (ImGui::CollapsingHeader("Patches")) {
+            for (const auto& mod : m_mods->getMods()) {
+                mod->onPatchUI();
+            }
+        }
+
+        for (const auto& mod : m_mods->getMods()) {
+            mod->onUI();
+        }
+
+        ImGui::End();
+    }
+
+    void Kanan::drawAbout() {
+        ImGui::SetNextWindowSize(ImVec2{ 450.0f, 200.0f });
+
+        if (!ImGui::Begin("About", &m_isAboutOpen, ImGuiWindowFlags_NoResize)) {
+            ImGui::End();
+            return;
+        }
+
+        ImGui::Text("Kanan's New Mabinogi Mod");
+        ImGui::Text("https://github.com/cursey/kanan-new");
+        ImGui::Spacing();
+        ImGui::Text("Please come by the repository and let us know if there are");
+        ImGui::Text("any problems or mods you would like to see added! Contributors");
+        ImGui::Text("are always welcome");
+        ImGui::Spacing();
+        ImGui::Text("Kanan uses the following third-party libraries");
+        ImGui::Text("    Dear ImGui (https://github.com/ocornut/imgui)");
+        ImGui::Text("    JSON for Modern C++ (https://github.com/nlohmann/json)");
+        ImGui::Text("    MinHook (https://github.com/TsudaKageyu/minhook)");
+
+        ImGui::End();
     }
 }
