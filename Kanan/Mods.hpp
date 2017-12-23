@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <string>
 #include <vector>
 
 #include "Mod.hpp"
@@ -8,7 +9,7 @@
 namespace kanan {
     class Mods {
     public:
-        Mods();
+        Mods(const std::string& patchesFilepath);
 
         const auto& getMods() const {
             return m_mods;

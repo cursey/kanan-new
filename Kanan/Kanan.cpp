@@ -70,7 +70,7 @@ namespace kanan {
         //
         log("Creating Mods object...");
 
-        m_mods = make_unique<Mods>();
+        m_mods = make_unique<Mods>(m_path + "/Patches.json");
 
         log("Done initializing.");
 

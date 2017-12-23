@@ -2,12 +2,14 @@
 
 #include <imgui.h>
 
+#include <Pattern.hpp>
 #include <Scan.hpp>
 
 #include "Log.hpp"
 #include "PatchMod.hpp"
 
 using namespace std;
+using nlohmann::json;
 
 namespace kanan {
     PatchMod::PatchMod(string patchName, string tooltip)
@@ -18,14 +20,7 @@ namespace kanan {
         m_tooltip{ move(tooltip) },
         m_configName{}
     {
-        // Generate the config name from the name of the patch.
-        m_configName = m_patchName;
-
-        // Remove spaces.
-        m_configName.erase(remove_if(begin(m_configName), end(m_configName), isspace), end(m_configName));
-
-        // Add .Enabled
-        m_configName.append(".Enabled");
+        buildConfigName();
     }
 
     bool PatchMod::addPatch(const string& pattern, int offset, vector<int16_t> patchBytes) {
@@ -49,6 +44,17 @@ namespace kanan {
         m_patches.emplace_back(patch);
 
         return true;
+    }
+
+    void PatchMod::buildConfigName() {
+        // Generate the config name from the name of the patch.
+        m_configName = m_patchName;
+
+        // Remove spaces.
+        m_configName.erase(remove_if(begin(m_configName), end(m_configName), isspace), end(m_configName));
+
+        // Add .Enabled
+        m_configName.append(".Enabled");
     }
 
     void PatchMod::onPatchUI() {
@@ -94,5 +100,20 @@ namespace kanan {
                 undoPatch(p);
             }
         }
+    }
+
+    void from_json(const json& j, PatchMod& mod) {
+        mod.m_patchName = j["name"].get<string>();
+        mod.m_tooltip = j["desc"].get<string>();
+
+        for (const auto& patch : j["patches"]) {
+            auto pattern = patch["pattern"].get<string>();
+            auto offset = patch["offset"].get<int>();
+            auto patchPattern = patch["patch"].get<string>();
+
+            mod.addPatch(pattern, offset, buildPattern(patchPattern));
+        }
+
+        mod.buildConfigName();
     }
 }
