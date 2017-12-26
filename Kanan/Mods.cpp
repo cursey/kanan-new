@@ -1,4 +1,5 @@
 #include <fstream>
+#include <filesystem>
 
 #include <json.hpp>
 #include <String.hpp>
@@ -18,31 +19,46 @@
 #include "Mods.hpp"
 
 using namespace std;
+using namespace std::experimental::filesystem;
 using nlohmann::json;
 
 namespace kanan {
-    Mods::Mods(const std::string& patchesFilepath)
-        : m_mods{}
+    Mods::Mods(const std::string& filepath)
+        : m_mods{},
+        m_patchMods{}
     {
         log("Entering Mods cosntructor.");
 
-        // Load patches from the patches json file.
-        // HACK: Use microsoft's wstring constructor even though its not standard
-        // because utf8 filepaths aren't valid in windows.
-        ifstream patchesFile{ widen(patchesFilepath) };
+        // Load all .json files.
+        for (const auto& p : directory_iterator(filepath)) {
+            auto& path = p.path();
 
-        if (!patchesFile) {
-            log("Failed to load patches file: %s", patchesFilepath.c_str());
-        }
+            if (path.extension() != ".json") {
+                continue;
+            }
 
-        json patches{};
+            // Load patches from the patches json file.
+            // HACK: Use microsoft's wstring constructor even though its not standard
+            // because utf8 filepaths aren't valid in windows.
+            ifstream patchesFile{ path };
 
-        patchesFile >> patches;
+            if (!patchesFile) {
+                log("Failed to load patches file: %s", path.c_str());
+            }
 
-        for (auto& patch : patches) {
-            auto patchMod = make_unique<PatchMod>();
-            *patchMod = patch;
-            m_mods.emplace_back(move(patchMod));
+            json patches{};
+
+            patchesFile >> patches;
+
+            for (auto& patch : patches) {
+                // Create the new PatchMod
+                auto patchMod = make_unique<PatchMod>();
+
+                // Load it from json.
+                *patchMod = patch;
+
+                m_patchMods[patchMod->getCategory()].emplace_back(move(patchMod));
+            }
         }
 
 		m_mods.emplace_back(make_unique<ZeroFogDistance>());

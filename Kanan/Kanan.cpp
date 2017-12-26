@@ -72,7 +72,7 @@ namespace kanan {
         //
         log("Creating Mods object...");
 
-        m_mods = make_unique<Mods>(m_path + "/Patches.json");
+        m_mods = make_unique<Mods>(m_path);
 
         log("Done initializing.");
 
@@ -223,6 +223,13 @@ namespace kanan {
             mod->onConfigLoad(cfg);
         }
 
+        // Patch mods.
+        for (auto& mods : m_mods->getPatchMods()) {
+            for (auto& mod : mods.second) {
+                mod->onConfigLoad(cfg);
+            }
+        }
+
         log("Config loading done.");
         
         m_areModsLoaded = true;
@@ -239,6 +246,13 @@ namespace kanan {
 
         for (auto& mod : m_mods->getMods()) {
             mod->onConfigSave(cfg);
+        }
+
+        // Patch mods.
+        for (auto& mods : m_mods->getPatchMods()) {
+            for (auto& mod : mods.second) {
+                mod->onConfigSave(cfg);
+            }
         }
 
         if (!cfg.save(m_path + "/config.txt")) {
@@ -279,8 +293,25 @@ namespace kanan {
         ImGui::Text("Input to the game is blocked while this window is open!");
 
         if (ImGui::CollapsingHeader("Patches")) {
-            for (const auto& mod : m_mods->getMods()) {
+            for (auto& mod : m_mods->getMods()) {
                 mod->onPatchUI();
+            }
+
+            // Patch mods.
+            for (auto& mods : m_mods->getPatchMods()) {
+                auto& category = mods.first;
+
+                if (!category.empty() && !ImGui::TreeNode(category.c_str())) {
+                    continue;
+                }
+
+                for (auto& mod : mods.second) {
+                    mod->onPatchUI();
+                }
+
+                if (!category.empty()) {
+                    ImGui::TreePop();
+                }
             }
         }
 

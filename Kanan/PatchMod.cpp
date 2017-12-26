@@ -18,7 +18,8 @@ namespace kanan {
         m_hasFailingPatch{ false },
         m_patchName{ move(patchName) },
         m_tooltip{ move(tooltip) },
-        m_configName{}
+        m_configName{},
+        m_category{}
     {
         buildConfigName();
     }
@@ -107,6 +108,10 @@ namespace kanan {
 
         if (j.find("desc") != j.end()) {
             mod.m_tooltip = j.at("desc").get<string>();
+        }
+
+        if (j.find("category") != j.end()) {
+            mod.m_category = j.at("category").get<string>();
         }
 
         for (const auto& patch : j.at("patches")) {
