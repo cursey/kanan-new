@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="FunctionHook.cpp" />
+    <ClCompile Include="Memory.cpp" />
     <ClCompile Include="Module.cpp" />
     <ClCompile Include="Patch.cpp" />
     <ClCompile Include="Pattern.cpp" />
@@ -28,6 +29,7 @@
   <ItemGroup>
     <ClInclude Include="Config.hpp" />
     <ClInclude Include="FunctionHook.hpp" />
+    <ClInclude Include="Memory.hpp" />
     <ClInclude Include="Module.hpp" />
     <ClInclude Include="Patch.hpp" />
     <ClInclude Include="Pattern.hpp" />

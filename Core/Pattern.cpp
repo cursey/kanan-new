@@ -2,6 +2,7 @@
 
 #include <Windows.h>
 
+#include "Memory.hpp"
 #include "Pattern.hpp"
 
 using namespace std;
@@ -38,7 +39,8 @@ namespace kanan {
             auto failedToMatch = false;
 
             // Make sure the address is readable.
-            if (IsBadReadPtr((const void*)i, patternLength) != FALSE) {
+            //if (IsBadReadPtr((const void*)i, patternLength) != FALSE) {
+            if (!isGoodReadPtr(i, patternLength)) {
                 i += patternLength - 1;
                 continue;
             }

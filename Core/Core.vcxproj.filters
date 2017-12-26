@@ -66,6 +66,9 @@
     <ClCompile Include="Config.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Memory.cpp">
+      <Filter>Source Files\Utility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Pattern.hpp">
@@ -106,6 +109,9 @@
     </ClInclude>
     <ClInclude Include="Config.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory.hpp">
+      <Filter>Header Files\Utility</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
