@@ -63,6 +63,11 @@ namespace kanan {
 
     void EquipmentOverride::onUI() {
         if (ImGui::CollapsingHeader("Equipment Override")) {
+            ImGui::TextWrapped("After enabling an override you must re-equip an item in that slot to see the changes.");
+            ImGui::Spacing();
+            ImGui::Text("Special thanks to Rydian!");
+            ImGui::Spacing();
+
             for (auto& overrideInfo : m_equipmentOverrides) {
                 if (overrideInfo.name.empty()) {
                     continue;
@@ -93,7 +98,13 @@ namespace kanan {
         }
 
         // Filter out inventoryIDs.
-        auto& overrideInfo = g_equipmentOverride->m_equipmentOverrides[convertInventoryIDToEquipmentSlot(inventoryID)];
+        auto equipmentSlot = convertInventoryIDToEquipmentSlot(inventoryID);
+
+        if (equipmentSlot < 0 || equipmentSlot >= g_equipmentOverride->m_equipmentOverrides.size()) {
+            return orig(equipment, EDX, inventoryID, itemID, a4, a5, color, a7, a8, a9, a10, a11);
+        }
+
+        auto& overrideInfo = g_equipmentOverride->m_equipmentOverrides[equipmentSlot];
 
         if (overrideInfo.isOverridingColor) {
             // Convert float color to int.
@@ -109,13 +120,13 @@ namespace kanan {
             color[1] = convertFloatColorToInt(overrideInfo.color2);
             color[2] = convertFloatColorToInt(overrideInfo.color3);
 
-            log("[EquipmentOverride] Overrode a color!");
+            log("[EquipmentOverride] Color overwritten!");
         }
 
         if (overrideInfo.isOverridingItem) {
             itemID = overrideInfo.itemID;
 
-            log("[EquipmentOverride] Overrode an item!");
+            log("[EquipmentOverride] Item overwritten!");
         }
 
         return orig(equipment, EDX, inventoryID, itemID, a4, a5, color, a7, a8, a9, a10, a11);
