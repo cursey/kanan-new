@@ -36,6 +36,7 @@ namespace kanan {
         m_equipmentOverrides[2].name = "Head\\Helmet\\Hat";
         m_equipmentOverrides[4].name = "Hands\\Gauntlets\\Gloves";
         m_equipmentOverrides[5].name = "Feet\\Boots\\Shoes";
+        m_equipmentOverrides[7].name = "Hair";
         m_equipmentOverrides[8].name = "Back\\Wings\\Robe";
         m_equipmentOverrides[10].name = "Weapon 1";
         m_equipmentOverrides[11].name = "Weapon 2";
@@ -63,7 +64,8 @@ namespace kanan {
 
     void EquipmentOverride::onUI() {
         if (ImGui::CollapsingHeader("Equipment Override")) {
-            ImGui::TextWrapped("After enabling an override you must re-equip an item in that slot to see the changes.");
+            ImGui::TextWrapped("After enabling an override you must re-equip an item in that slot to see the changes. "
+                "NOTE: For the Hair slot, you need to change your hair in the dressing room to see the changes.");
             ImGui::Spacing();
             ImGui::Text("Special thanks to Rydian!");
             ImGui::Spacing();
