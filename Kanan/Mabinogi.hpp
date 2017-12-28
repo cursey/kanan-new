@@ -110,16 +110,18 @@ public:
     char pad_002C[24]; //0x002C
     uint32_t price; //0x0044
     uint32_t sellPrice; //0x0048
-    char pad_004C[4]; //0x004C
-    uint32_t durability; //0x0050
-    uint32_t maxDurability; //0x0054
-    uint32_t originalDurability; //0x0058
-    char pad_005C[96]; //0x005C
+    char pad_004C[8]; //0x004C
+    uint32_t durability; //0x0054
+    uint32_t maxDurability; //0x0058
+    uint32_t originalDurability; //0x005C
+    char pad_0060[92]; //0x0060
     class SItemDBDesc* dbDesc; //0x00BC
-    char pad_00C0[76]; //0x00C0
+    char pad_00C0[32]; //0x00C0
+    uint64_t ownerID; //0x00E0
+    char pad_00E8[36]; //0x00E8
     class CString* name; //0x010C
-    char pad_0110[52]; //0x0110
-}; //Size: 0x0144
+    char pad_0110[56]; //0x0110
+}; //Size: 0x0148
 
 class CItemListNodeEntry
 {
@@ -278,6 +280,23 @@ public:
     char pad_0048[1020]; //0x0048
 }; //Size: 0x0444
 
+class CEquipmentItemInfo
+{
+public:
+    char pad_0000[28]; //0x0000
+    uint32_t color1; //0x001C
+    uint32_t color2; //0x0020
+    uint32_t color3; //0x0024
+    char pad_0028[12]; //0x0028
+}; //Size: 0x0034
+
+class CEquipment
+{
+public:
+    CEquipmentItemInfo itemInfo[19]; //0x0000
+    char pad_03DC[384]; //0x03DC
+}; //Size: 0x055C
+
 class CCharacter
 {
 public:
@@ -286,8 +305,10 @@ public:
     char pad_0008[136]; //0x0008
     class CParameter* parameter; //0x0090
     class CAction* action; //0x0094
-    char pad_0098[172]; //0x0098
-}; //Size: 0x0144
+    char pad_0098[396]; //0x0098
+    class CEquipment* equipment; //0x0224
+    char pad_0228[796]; //0x0228
+}; //Size: 0x0544
 
 class CCharacterListNodeEntry
 {

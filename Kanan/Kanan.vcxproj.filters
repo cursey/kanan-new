@@ -90,7 +90,7 @@
     <ClCompile Include="ZeroFogDistance.cpp">
       <Filter>Source Files\Mods</Filter>
     </ClCompile>
-    <ClCompile Include="NoRewardWindow.cpp">
+    <ClCompile Include="EquipmentOverride.cpp">
       <Filter>Source Files\Mods</Filter>
     </ClCompile>
   </ItemGroup>
@@ -155,7 +155,7 @@
     <ClInclude Include="ZeroFogDistance.hpp">
       <Filter>Header Files\Mods</Filter>
     </ClInclude>
-    <ClInclude Include="NoRewardWindow.hpp">
+    <ClInclude Include="EquipmentOverride.hpp">
       <Filter>Header Files\Mods</Filter>
     </ClInclude>
   </ItemGroup>
