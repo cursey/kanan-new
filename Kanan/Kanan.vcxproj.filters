@@ -93,6 +93,9 @@
     <ClCompile Include="EquipmentOverride.cpp">
       <Filter>Source Files\Mods</Filter>
     </ClCompile>
+    <ClCompile Include="FieldOfView.cpp">
+      <Filter>Source Files\Mods</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D3D9Hook.hpp">
@@ -156,6 +159,9 @@
       <Filter>Header Files\Mods</Filter>
     </ClInclude>
     <ClInclude Include="EquipmentOverride.hpp">
+      <Filter>Header Files\Mods</Filter>
+    </ClInclude>
+    <ClInclude Include="FieldOfView.hpp">
       <Filter>Header Files\Mods</Filter>
     </ClInclude>
   </ItemGroup>

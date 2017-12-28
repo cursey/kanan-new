@@ -101,6 +101,7 @@
     <ClCompile Include="EnableMultiClient.cpp" />
     <ClCompile Include="EntityViewer.cpp" />
     <ClCompile Include="EquipmentOverride.cpp" />
+    <ClCompile Include="FieldOfView.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Kanan.cpp" />
     <ClCompile Include="KananInit.cpp" />
@@ -123,6 +124,7 @@
     <ClInclude Include="EnableMultiClient.hpp" />
     <ClInclude Include="EntityViewer.hpp" />
     <ClInclude Include="EquipmentOverride.hpp" />
+    <ClInclude Include="FieldOfView.hpp" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="Kanan.hpp" />
     <ClInclude Include="KCharacter.hpp" />

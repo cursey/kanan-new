@@ -14,6 +14,7 @@
 #include "ColorAltText.hpp"
 #include "ZeroFogDistance.hpp"
 #include "EquipmentOverride.hpp"
+#include "FieldOfView.hpp"
 
 #include "Log.hpp"
 
@@ -72,6 +73,7 @@ namespace kanan {
         m_mods.emplace_back(make_unique<EnableMultiClient>());
         m_mods.emplace_back(make_unique<EntityViewer>());
         m_mods.emplace_back(make_unique<EquipmentOverride>());
+        m_mods.emplace_back(make_unique<FieldOfView>());
 
         log("Leaving Mods constructor.");
     }
