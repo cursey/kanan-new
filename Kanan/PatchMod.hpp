@@ -29,7 +29,7 @@ namespace kanan {
         }
 
     protected:
-        bool addPatch(const std::string& pattern, int offset, std::vector<int16_t> patchBytes);
+        bool addPatch(const std::string& pattern, int offset, std::vector<int16_t> patchBytes, int n = 0);
         void buildConfigName();
 
     private:

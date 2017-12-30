@@ -24,15 +24,27 @@ namespace kanan {
         buildConfigName();
     }
 
-    bool PatchMod::addPatch(const string& pattern, int offset, vector<int16_t> patchBytes) {
+    bool PatchMod::addPatch(const string& pattern, int offset, vector<int16_t> patchBytes, int n) {
         auto address = scan("client.exe", pattern);
-
+        
         if (!address) {
             log("[%s] Failed to find pattern %s", m_patchName.c_str(), pattern.c_str());
 
             m_hasFailingPatch = true;
 
             return false;
+        }
+
+        for (int i = 0; i < n; ++i) {
+            address = scan("client.exe", *address + 1, pattern);
+
+            if (!address) {
+                log("[%s] Failed to find pattern (I=%d, N=%d) %s", m_patchName.c_str(), i, n, pattern.c_str());
+
+                m_hasFailingPatch = true;
+
+                return false;
+            }
         }
 
         log("[%s] Found address %p for pattern %s", m_patchName.c_str(), *address, pattern.c_str());
@@ -123,7 +135,13 @@ namespace kanan {
                 offset = patch.at("offset").get<int>();
             }
 
-            mod.addPatch(pattern, offset, buildPattern(patchPattern));
+            int n{ 0 };
+
+            if (patch.find("n") != patch.end()) {
+                n = patch.at("n").get<int>();
+            }
+
+            mod.addPatch(pattern, offset, buildPattern(patchPattern), n);
         }
 
         mod.buildConfigName();
