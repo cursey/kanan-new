@@ -170,7 +170,16 @@ namespace kanan {
             }
 
             if (m_isUIOpen) {
-                m_dinputHook->ignoreInput();
+                // Block input if the user is interacting with the UI.
+                auto& io = ImGui::GetIO();
+
+                if (io.WantCaptureMouse || io.WantCaptureKeyboard || io.WantTextInput) {
+                    m_dinputHook->ignoreInput();
+                }
+                else {
+                    m_dinputHook->acknowledgeInput();
+                }
+
                 drawUI();
 
                 if (m_isLogOpen) {
@@ -182,6 +191,7 @@ namespace kanan {
                 }
             }
             else {
+                // UI is closed so always pass input to the game.
                 m_dinputHook->acknowledgeInput();
             }
         }
@@ -191,11 +201,18 @@ namespace kanan {
             ImGui::SetNextWindowSize(ImVec2{ 450.0f, 200.0f });
 
             if (ImGui::BeginPopupModal("Loading...", nullptr, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize)) {
-                ImGui::Text("Kanan is currently setting things up. Please wait a moment...");
+                ImGui::TextWrapped("Kanan is currently setting things up. Please wait a moment...");
                 ImGui::EndPopup();
             }
 
-            m_dinputHook->ignoreInput();
+            auto& io = ImGui::GetIO();
+
+            if (io.WantCaptureMouse || io.WantCaptureKeyboard || io.WantTextInput) {
+                m_dinputHook->ignoreInput();
+            }
+            else {
+                m_dinputHook->acknowledgeInput();
+            }
         }
 
         // This fixes mabi's Film Style Post Shader making ImGui render as a black box.
@@ -210,7 +227,12 @@ namespace kanan {
     bool Kanan::onMessage(HWND wnd, UINT message, WPARAM wParam, LPARAM lParam) {
         if (m_isUIOpen) {
             if (ImGui_ImplDX9_WndProcHandler(wnd, message, wParam, lParam) != 0) {
-                return false;
+                // If the user is interacting with the UI we block the message from going to the game.
+                auto& io = ImGui::GetIO();
+
+                if (io.WantCaptureMouse || io.WantCaptureKeyboard || io.WantTextInput) {
+                    return false;
+                }
             }
         }
 
@@ -289,7 +311,11 @@ namespace kanan {
         // 
         // Rest of the UI
         //
-        ImGui::Text("Input to the game is blocked while this window is open!");
+        ImGui::TextWrapped(
+            "Input to the game is blocked while interacting with this UI. "
+            "Press the INSERT key to toggle this UI."
+        );
+        ImGui::Spacing();
 
         if (ImGui::CollapsingHeader("Patches")) {
             for (auto& mod : m_mods.getMods()) {
