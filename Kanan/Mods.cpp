@@ -1,8 +1,10 @@
 #include <fstream>
 #include <filesystem>
+#include <thread>
 
 #include <json.hpp>
 #include <String.hpp>
+#include <Config.hpp>
 
 #include "PatchMod.hpp"
 #include "RangedAttackSwap.hpp"
@@ -15,6 +17,7 @@
 #include "ZeroFogDistance.hpp"
 #include "EquipmentOverride.hpp"
 #include "FieldOfView.hpp"
+#include "UseDataFolder.hpp"
 
 #include "Log.hpp"
 
@@ -25,14 +28,42 @@ using namespace std::experimental::filesystem;
 using nlohmann::json;
 
 namespace kanan {
-    Mods::Mods(const std::string& filepath)
-        : m_mods{},
+    Mods::Mods(std::string filepath)
+        : m_filepath{ move(filepath) },
+        m_mods{},
         m_patchMods{}
     {
-        log("Entering Mods cosntructor.");
+        log("[Mods] Entering cosntructor.");
+        log("[Mods] Leaving constructor.");
+    }
+
+    void Mods::loadTimeCriticalMods() {
+        log("[Mods] Loading time critical mods...");
+
+        m_mods.emplace_back(make_unique<UseDataFolder>());
+
+        // Time critical mods need to have their settings loaded from the config
+        // right away.
+        Config cfg{ m_filepath + "/config.txt" };
+
+        for (auto& mod : m_mods) {
+            mod->onConfigLoad(cfg);
+        }
+
+        log("[Mods] Finished loading time critical mods.");
+
+        m_areTimeCriticalModsLoaded = true;
+    }
+
+    void Mods::loadMods() {
+        while (!m_areTimeCriticalModsLoaded) {
+            this_thread::yield();
+        }
+
+        log("[Mods] Loading mods...");
 
         // Load all .json files.
-        for (const auto& p : directory_iterator(filepath)) {
+        for (const auto& p : directory_iterator(m_filepath)) {
             auto& path = p.path();
 
             if (path.extension() != ".json") {
@@ -40,8 +71,6 @@ namespace kanan {
             }
 
             // Load patches from the patches json file.
-            // HACK: Use microsoft's wstring constructor even though its not standard
-            // because utf8 filepaths aren't valid in windows.
             ifstream patchesFile{ path };
 
             if (!patchesFile) {
@@ -75,6 +104,6 @@ namespace kanan {
         m_mods.emplace_back(make_unique<EquipmentOverride>());
         m_mods.emplace_back(make_unique<FieldOfView>());
 
-        log("Leaving Mods constructor.");
+        log("[Mods] Finished loading mods.");
     }
 }

@@ -20,7 +20,7 @@ namespace kanan {
         m_dinputHook{ nullptr },
         m_wmHook{ nullptr },
         m_game{ nullptr },
-        m_mods{ nullptr },
+        m_mods{ m_path },
         m_isUIOpen{ true },
         m_isLogOpen{ false },
         m_isAboutOpen{ false },
@@ -70,9 +70,9 @@ namespace kanan {
         //
         // Initialize all the mods.
         //
-        log("Creating Mods object...");
+        log("Loading mods...");
 
-        m_mods = make_unique<Mods>(m_path);
+        m_mods.loadMods();
 
         log("Done initializing.");
 
@@ -133,6 +133,13 @@ namespace kanan {
             error("Failed to hook windows message procedure.");
         }
 
+        //
+        // Time critical mods.
+        //
+        log("Loading time critical mods...");
+
+        m_mods.loadTimeCriticalMods();
+
         m_isInitialized = true;
     }
 
@@ -149,7 +156,7 @@ namespace kanan {
                 loadConfig();
             }
 
-            for (const auto& mod : m_mods->getMods()) {
+            for (const auto& mod : m_mods.getMods()) {
                 mod->onFrame();
             }
 
@@ -211,20 +218,16 @@ namespace kanan {
     }
 
     void Kanan::loadConfig() {
-        if (!m_mods) {
-            return;
-        }
-
         log("Loading config %s/config.txt", m_path.c_str());
 
         Config cfg{ m_path + "/config.txt" };
 
-        for (auto& mod : m_mods->getMods()) {
+        for (auto& mod : m_mods.getMods()) {
             mod->onConfigLoad(cfg);
         }
 
         // Patch mods.
-        for (auto& mods : m_mods->getPatchMods()) {
+        for (auto& mods : m_mods.getPatchMods()) {
             for (auto& mod : mods.second) {
                 mod->onConfigLoad(cfg);
             }
@@ -236,20 +239,16 @@ namespace kanan {
     }
 
     void Kanan::saveConfig() {
-        if (!m_mods) {
-            return;
-        }
-
         log("Saving config %s/config.txt", m_path.c_str());
 
         Config cfg{};
 
-        for (auto& mod : m_mods->getMods()) {
+        for (auto& mod : m_mods.getMods()) {
             mod->onConfigSave(cfg);
         }
 
         // Patch mods.
-        for (auto& mods : m_mods->getPatchMods()) {
+        for (auto& mods : m_mods.getPatchMods()) {
             for (auto& mod : mods.second) {
                 mod->onConfigSave(cfg);
             }
@@ -293,12 +292,12 @@ namespace kanan {
         ImGui::Text("Input to the game is blocked while this window is open!");
 
         if (ImGui::CollapsingHeader("Patches")) {
-            for (auto& mod : m_mods->getMods()) {
+            for (auto& mod : m_mods.getMods()) {
                 mod->onPatchUI();
             }
 
             // Patch mods.
-            for (auto& mods : m_mods->getPatchMods()) {
+            for (auto& mods : m_mods.getPatchMods()) {
                 auto& category = mods.first;
 
                 if (!category.empty() && !ImGui::TreeNode(category.c_str())) {
@@ -315,7 +314,7 @@ namespace kanan {
             }
         }
 
-        for (const auto& mod : m_mods->getMods()) {
+        for (const auto& mod : m_mods.getMods()) {
             mod->onUI();
         }
 

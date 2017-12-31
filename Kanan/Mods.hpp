@@ -1,5 +1,6 @@
 #pragma once
 
+#include <atomic>
 #include <map>
 #include <memory>
 #include <set>
@@ -12,7 +13,10 @@
 namespace kanan {
     class Mods {
     public:
-        Mods(const std::string& filepath);
+        Mods(std::string filepath);
+
+        void loadTimeCriticalMods();
+        void loadMods();
 
         const auto& getMods() const {
             return m_mods;
@@ -23,7 +27,9 @@ namespace kanan {
         }
 
     private:
+        std::string m_filepath;
         std::vector<std::unique_ptr<Mod>> m_mods;
         std::map<std::string, std::vector<std::unique_ptr<PatchMod>>> m_patchMods;
+        std::atomic_bool m_areTimeCriticalModsLoaded;
     };
 }

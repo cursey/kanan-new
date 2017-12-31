@@ -22,8 +22,8 @@ namespace kanan {
             return m_game.get();
         }
 
-        auto getMods() const {
-            return m_mods.get();
+        auto& getMods() const {
+            return m_mods;
         }
 
         auto getWindow() const {
@@ -37,7 +37,7 @@ namespace kanan {
         std::unique_ptr<DInputHook> m_dinputHook;
         std::unique_ptr<WindowsMessageHook> m_wmHook;
         std::unique_ptr<Game> m_game;
-        std::unique_ptr<Mods> m_mods;
+        Mods m_mods;
 
         bool m_isUIOpen;
         bool m_isLogOpen;
