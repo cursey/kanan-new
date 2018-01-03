@@ -18,6 +18,7 @@
 #include "EquipmentOverride.hpp"
 #include "FieldOfView.hpp"
 #include "UseDataFolder.hpp"
+#include "FreezeTimeOfDay.hpp"
 
 #include "Log.hpp"
 
@@ -103,6 +104,7 @@ namespace kanan {
         m_mods.emplace_back(make_unique<EntityViewer>());
         m_mods.emplace_back(make_unique<EquipmentOverride>());
         m_mods.emplace_back(make_unique<FieldOfView>());
+        m_mods.emplace_back(make_unique<FreezeTimeOfDay>());
 
         log("[Mods] Finished loading mods.");
     }

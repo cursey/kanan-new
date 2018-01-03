@@ -102,6 +102,7 @@
     <ClCompile Include="EntityViewer.cpp" />
     <ClCompile Include="EquipmentOverride.cpp" />
     <ClCompile Include="FieldOfView.cpp" />
+    <ClCompile Include="FreezeTimeOfDay.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Kanan.cpp" />
     <ClCompile Include="KananInit.cpp" />
@@ -126,6 +127,7 @@
     <ClInclude Include="EntityViewer.hpp" />
     <ClInclude Include="EquipmentOverride.hpp" />
     <ClInclude Include="FieldOfView.hpp" />
+    <ClInclude Include="FreezeTimeOfDay.hpp" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="Kanan.hpp" />
     <ClInclude Include="KCharacter.hpp" />

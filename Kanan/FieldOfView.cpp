@@ -33,7 +33,7 @@ namespace kanan {
 
     void FieldOfView::onUI() {
         if (ImGui::CollapsingHeader("Field Of View")) {
-            ImGui::SliderFloat("FOV", &m_fov, 10.0f, 120.0f);
+            ImGui::SliderFloat("FOV", &m_fov, 10.0f, 120.0f, "%.0f");
             
             if (ImGui::Button("Reset")) {
                 m_fov = 45.0f;
