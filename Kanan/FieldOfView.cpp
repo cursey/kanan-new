@@ -28,13 +28,15 @@ namespace kanan {
             return;
         }
 
-        cameraState->fov = m_fov;
+        if (m_isEnabled) {
+            cameraState->fov = m_fov;
+        }
     }
 
     void FieldOfView::onUI() {
         if (ImGui::CollapsingHeader("Field Of View")) {
+            ImGui::Checkbox("Enable Field Of View", &m_isEnabled);
             ImGui::SliderFloat("FOV", &m_fov, 10.0f, 120.0f, "%.0f");
-            
             if (ImGui::Button("Reset")) {
                 m_fov = 45.0f;
             }
@@ -47,5 +49,6 @@ namespace kanan {
 
     void FieldOfView::onConfigSave(Config& cfg) {
         cfg.set<float>("FieldOfView.FOV", m_fov);
+        cfg.set<bool>("FieldOfView.Enabled", m_isEnabled);
     }
 }

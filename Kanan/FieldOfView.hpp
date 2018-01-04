@@ -16,5 +16,6 @@ namespace kanan {
 
     private:
         float m_fov;
+        bool m_isEnabled;
     };
 }
