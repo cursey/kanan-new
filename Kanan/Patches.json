@@ -741,11 +741,28 @@
     {
         "name": "Disable Reward Window",
         "desc": "Removes the reward window that shows up when acquiring items, stats or exp.",
-		"category": "Interface",
+        "category": "Interface",
         "patches": [
             {
                 "pattern": "3B D6 0F 85 ? ? ? ? 33 DB",
                 "patch": "39 DB 0F 84"
+            }
+        ]
+    },
+    {
+        "name": "Zero Fog Distance",
+        "desc": "Stops fog from rendering in the distance.",
+        "category": "Graphics",
+        "patches": [
+            {
+                "pattern": "D9 45 14 5D C2 10",
+                "patch": "? EB 90",
+                "n": 0
+            },
+            {
+                "pattern": "D9 45 14 5D C2 10",
+                "patch": "? EB 90",
+                "n": 1
             }
         ]
     }
