@@ -11,7 +11,7 @@
         ]
     },
     {
-        "name": "Bitmap Font",
+        "name": "Use Bitmap Font",
         "desc": "Uses a sharper and much faster to render font.\nCredits: Blade3575",
 		"category": "Text",
         "patches": [
@@ -36,7 +36,7 @@
     {
         "name": "Elf Lag Fix",
         "desc": "Removes lag elves have with archery.\nCredits: Blade3575",
-		"category": "Speedup",
+		"category": "Fixes",
         "patches": [
             {
                 "pattern": "55 8B EC 56 57 8B F9 8B 07 8B 50 0C FF D2 8B C8",
@@ -71,7 +71,7 @@
         ]
     },
     {
-        "name": "No Mount Timeout",
+        "name": "Disable Mount Timeout",
         "desc": "Lets you mount/dismount your pet as fast as you want.\nCredits: Licat",
 		"category": "Speedup",
         "patches": [
@@ -110,7 +110,7 @@
         ]
     },
     {
-        "name": "Move To Same Channel",
+        "name": "Allow Moving To Same Channel",
         "desc": "Allows you to move to the same channel you're currently on.",
 		"category": "Speedup",
         "patches": [
@@ -121,7 +121,7 @@
         ]
     },
     {
-        "name": "No Censorship",
+        "name": "Disable Censorship",
         "desc": "Disables the word filter for your outgoing chat.",
 		"category": "Quality of Life",
         "patches": [
@@ -132,7 +132,7 @@
         ]
     },
     {
-        "name": "No Channel Move Denial",
+        "name": "Disable Channel Move Denial",
         "desc": "Allows you change channel while in conversation with an NPC.",
 		"category": "Speedup",
         "patches": [
@@ -143,7 +143,7 @@
         ]
     },
     {
-        "name": "No Channel Move Description",
+        "name": "Disable Channel Move Description",
         "desc": "Hides the warning when selecting which channel to change to.",
 		"category": "Speedup",
         "patches": [
@@ -154,7 +154,7 @@
         ]
     },
     {
-        "name": "No Logout Penalty Msg",
+        "name": "Disable Logout Penalty Msg",
         "desc": "Automatically skips the logout penalty warning message if you've recently been in combat.",
 		"category": "Speedup",
         "patches": [
@@ -182,7 +182,7 @@
         ]
     },
     {
-        "name": "Party No Close",
+        "name": "Infinite Party Ad Time",
         "desc": "Keeps your party ad open until you choose to close it.",
 		"category": "Quality of Life",
         "patches": [
@@ -243,7 +243,7 @@
         ]
     },
     {
-        "name": "Cancelable Lance Counter",
+        "name": "Allow Canceling Lance Counter",
         "desc": "Allows you to cancel lance counter once loaded.",
 		"category": "Quality of Life",
         "patches": [
@@ -280,7 +280,7 @@
         ]
     },
     {
-        "name": "Chat To Mini-gamers",
+        "name": "Enable Chat To Mini-gamers",
         "desc": "Allow you to start a chat with friends who have their status set to In Mini-game.",
 		"category": "Quality of Life",
         "patches": [
@@ -291,8 +291,8 @@
         ]
     },
     {
-        "name": "Client Side DevCAT",
-        "desc": "Enables client side effects provided by the DevCAT title.\nNOTE: This mod can cause random issues, use with caution",
+        "name": "Force Client Side DevCAT",
+        "desc": "Enables client side effects provided by the DevCAT title.\nNOTE: This mod can cause random issues, use with caution!",
 		"category": "Information",
         "patches": [
             {
@@ -365,7 +365,7 @@
         ]
     },
     {
-        "name": "Far Alt Text",
+        "name": "Increase Alt Text Distance",
         "desc": "Allows you to see name tags while holding down ALT from much further away.",
 		"category": "Text",
         "patches": [
@@ -405,7 +405,7 @@
         ]
     },
     {
-        "name": "Free Indoor Camera",
+        "name": "Enable Free Indoor Camera",
         "desc": "Allows you to freely rotate the camera while indoors.",
 		"category": "Graphics",
         "patches": [
@@ -417,7 +417,7 @@
         ]
     },
     {
-        "name": "Hide Main Title",
+        "name": "Hide Main Titles",
         "desc": "Hides all main titles for all players, pets and enemies\nNOTE: This includes ancients",
 		"category": "Text",
         "patches": [
@@ -429,7 +429,7 @@
         ]
     },
     {
-        "name": "Hide Second Title",
+        "name": "Hide Second Titles",
         "desc": "Hides all second titles for all players.",
 		"category": "Text",
         "patches": [
@@ -464,7 +464,7 @@
         ]
     },
     {
-        "name": "Hotkey Any Item",
+        "name": "Allow Hotkey For Any Item",
         "desc": "Allows usable items to be hotkeyed.",
 		"category": "Quality of Life",
         "patches": [
@@ -476,7 +476,7 @@
         ]
     },
     {
-        "name": "Ignore Maintain Frame",
+        "name": "Ignore Maintain Frame Number",
         "desc": "Ignore the maintain frame setting during character minimization so it always minimizes.\nNOTE: This makes the setting active only if you have it turned on.",
 		"category": "Speedup",
         "patches": [
@@ -517,7 +517,7 @@
         ]
     },
     {
-        "name": "Mini Title Menu",
+        "name": "Clean Up Title Menu",
         "desc": "Removes all unknown titles (???) in the title selection menu.",
 		"category": "Interface",
         "patches": [
@@ -539,7 +539,7 @@
         ]
     },
     {
-        "name": "Minute Clock",
+        "name": "Show Clock Minutes",
         "desc": "Updates the in-game clock on a 1 minute basis as opposed to every 10 minutes.",
 		"category": "Interface",
         "patches": [
@@ -554,7 +554,7 @@
         ]
     },
     {
-        "name": "Mission Timer Seconds",
+        "name": "Show Mission Timer Seconds",
         "desc": "Updates the timer in shadow missions every 1 second instead of every 15.",
 		"category": "Interface",
         "patches": [
@@ -596,7 +596,7 @@
         ]
     },
     {
-        "name": "Fast NPC Text",
+        "name": "Speed Up NPC Text",
         "desc": "Speed up dialogues while chatting to NPCs, making them render their text instantly.",
 		"category": "Speedup",
         "patches": [
@@ -608,7 +608,7 @@
         ]
     },
     {
-        "name": "No Personal Shop Creation Message",
+        "name": "Skip Personal Shop Creation Message",
         "desc": "Automatically confirms the shop creation message.",
 		"category": "Quality of Life",
         "patches": [
@@ -646,7 +646,7 @@
         ]
     },
     {
-        "name": "Show Deadly HP",
+        "name": "Show Negative HP When Deadly",
         "desc": "Shows what your negative HP actually is when you're in DEADLY status.",
 		"category": "Information",
         "patches": [
@@ -712,7 +712,7 @@
         ]
     },
     {
-        "name": "Talk to Unequipped Ego",
+        "name": "Enable Talking to Unequipped Ego",
         "desc": "Lets you talk to your ego even when its not equipped.",
 		"category": "Quality of Life",
         "patches": [
