@@ -171,16 +171,16 @@ namespace kanan {
 	double EntityViewer::durabilityToDouble(uint32_t dura, uint32_t maxDura) {
 		// Get the length of max dura to determine where to place the decimal
 		if (std::to_string(maxDura).length() > 5) {
-			return double(dura) * 0.0001;
-		} else return double(dura) * 0.001;
+			return (double)dura * 0.0001;
+		} else return (double)dura * 0.001;
 
 	}
 
 	double EntityViewer::durabilityToDouble(uint32_t maxDura) {
 		// same as above, but return maxDura instead
 		if (std::to_string(maxDura).length() > 5) {
-			return double(maxDura) * 0.0001;
-		} else return double(maxDura) * 0.001;
+			return (double)maxDura * 0.0001;
+		} else return (double)maxDura * 0.001;
 	}
 
 	char* EntityViewer::raceToString(uint32_t raceType) {
