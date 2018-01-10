@@ -14,7 +14,6 @@
 #include "EnableMultiClient.hpp"
 #include "EntityViewer.hpp"
 #include "ColorAltText.hpp"
-#include "ZeroFogDistance.hpp"
 #include "EquipmentOverride.hpp"
 #include "FieldOfView.hpp"
 #include "UseDataFolder.hpp"
@@ -93,9 +92,16 @@ namespace kanan {
             }
         }
 
-		m_mods.emplace_back(make_unique<ZeroFogDistance>());
-        m_mods.emplace_back(make_unique<RangedAttackSwap>());
-		m_mods.emplace_back(make_unique<ColorAltText>());
+        m_patchMods["Quality of Life"].emplace_back(make_unique<RangedAttackSwap>());
+		m_patchMods["Text"].emplace_back(make_unique<ColorAltText>());
+
+        for (auto& categories : m_patchMods) {
+            auto& mods = categories.second;
+
+            sort(mods.begin(), mods.end(), [](const auto& a, const auto& b) {
+                return a->getName() < b->getName();
+            });
+        }
 
         m_mods.emplace_back(make_unique<AutoSetMTU>());
         m_mods.emplace_back(make_unique<DisableNagle>());

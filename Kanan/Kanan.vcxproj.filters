@@ -87,9 +87,6 @@
     <ClCompile Include="ColorAltText.cpp">
       <Filter>Source Files\Mods</Filter>
     </ClCompile>
-    <ClCompile Include="ZeroFogDistance.cpp">
-      <Filter>Source Files\Mods</Filter>
-    </ClCompile>
     <ClCompile Include="EquipmentOverride.cpp">
       <Filter>Source Files\Mods</Filter>
     </ClCompile>
@@ -159,9 +156,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ColorAltText.hpp">
-      <Filter>Header Files\Mods</Filter>
-    </ClInclude>
-    <ClInclude Include="ZeroFogDistance.hpp">
       <Filter>Header Files\Mods</Filter>
     </ClInclude>
     <ClInclude Include="EquipmentOverride.hpp">

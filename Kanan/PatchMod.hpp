@@ -10,7 +10,7 @@
 
 namespace kanan {
     // Easier to use Mod that works for any mods that are just simple toggleable patches.
-    class PatchMod final : public Mod {
+    class PatchMod : public Mod {
     public:
         PatchMod() = default;
         PatchMod(std::string patchName, std::string tooltip);
@@ -20,7 +20,11 @@ namespace kanan {
         void onConfigLoad(const Config& cfg) override;
         void onConfigSave(Config& cfg) override;
 
-        const auto& getCategory() {
+        const auto& getName() const {
+            return m_patchName;
+        }
+
+        const auto& getCategory() const {
             return m_category;
         }
 

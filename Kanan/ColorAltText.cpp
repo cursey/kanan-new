@@ -9,7 +9,8 @@ using namespace std;
 
 namespace kanan {
 	ColorAltText::ColorAltText()
-		: m_isEnabledOthers{ false },
+		: PatchMod{ "Color Alt Text", "" },
+        m_isEnabledOthers{ false },
 		argbValOthers{ 0xFFFFFFFF },
 		rgbaOthers{ 1.0f, 1.0f, 1.0f },
 		m_isEnabledSelf{ false },
@@ -101,7 +102,6 @@ namespace kanan {
 		}
 
 		log("Toggling ColorAltText...");
-
 
 		if (m_isEnabledSelf) {
 			int16_t a = (argbValSelf >> 24) & 0xFF;

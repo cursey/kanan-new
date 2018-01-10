@@ -2,10 +2,10 @@
 
 #include <Patch.hpp>
 
-#include "Mod.hpp"
+#include "PatchMod.hpp"
 
 namespace kanan {
-	class ColorAltText : public Mod {
+	class ColorAltText : public PatchMod {
 	public:
 		ColorAltText();
 

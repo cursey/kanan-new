@@ -2,7 +2,7 @@
     {
         "name": "Show Combat Power",
         "desc": "Shows the combat power of players and enemies.\nCredits: Rydian",
-		"category": "Information",
+        "category": "Information",
         "patches": [
             {
                 "pattern": "0F 85 ? ? ? ? 8B 97 ? ? ? ? 8B 87",
@@ -11,9 +11,9 @@
         ]
     },
     {
-        "name": "Bitmap Font",
+        "name": "Use Bitmap Font",
         "desc": "Uses a sharper and much faster to render font.\nCredits: Blade3575",
-		"category": "Text",
+        "category": "Text",
         "patches": [
             {
                 "pattern": "74 0D 8B 45 08 50 8B CB E8 ? ? ? ? EB 0B",
@@ -36,7 +36,7 @@
     {
         "name": "Elf Lag Fix",
         "desc": "Removes lag elves have with archery.\nCredits: Blade3575",
-		"category": "Speedup",
+        "category": "Fixes",
         "patches": [
             {
                 "pattern": "55 8B EC 56 57 8B F9 8B 07 8B 50 0C FF D2 8B C8",
@@ -47,7 +47,7 @@
     {
         "name": "Windows Appear Faster",
         "desc": "Various interface windows will appear faster.\nCredits: Step29",
-		"category": "Speedup",
+        "category": "Speedup",
         "patches": [
             {
                 "pattern": "74 6F E8 ? ? ? ? 85 C0 74 10",
@@ -62,7 +62,7 @@
     {
         "name": "One Click Revive",
         "desc": "Lets you revive by just clicking 'Revive Here' without the confirmation dialog.\nCredits: Step29",
-		"category": "Speedup",
+        "category": "Speedup",
         "patches": [
             {
                 "pattern": "0F 86 ? ? ? ? 8B 4D E8 8B 11",
@@ -71,9 +71,9 @@
         ]
     },
     {
-        "name": "No Mount Timeout",
+        "name": "Disable Mount Timeout",
         "desc": "Lets you mount/dismount your pet as fast as you want.\nCredits: Licat",
-		"category": "Speedup",
+        "category": "Speedup",
         "patches": [
             {
                 "pattern": "89 90 58 02 00 00",
@@ -84,7 +84,7 @@
     {
         "name": "Unlimited Zoom",
         "desc": "Lets you zoom in and out as far as you want.",
-		"category": "Graphics",
+        "category": "Graphics",
         "patches": [
             {
                 "pattern": "7A 05 D9 5D 08 EB 02 DD D8 D9 45 08 D9 45 F8",
@@ -100,7 +100,7 @@
     {
         "name": "Logout In Conversation",
         "desc": "Allows you to logout in the middle of a conversation with an NPC.",
-		"category": "Fixes",
+        "category": "Fixes",
         "patches": [
             {
                 "pattern": "84 C0 74 19 B8 ? ? ? ? 8B 4D F4 64 89 0D ? ? ? ? 59 5F 5E 5B 8B E5 5D C2 04 00",
@@ -110,9 +110,9 @@
         ]
     },
     {
-        "name": "Move To Same Channel",
+        "name": "Allow Moving To Same Channel",
         "desc": "Allows you to move to the same channel you're currently on.",
-		"category": "Speedup",
+        "category": "Speedup",
         "patches": [
             {
                 "pattern": "0F 84 ? ? ? ? 68 ? ? ? ? 8D 4D E0 E8 ? ? ? ? C6 45 FC 04 8D 55 E0 52 8D 45 B8",
@@ -121,9 +121,9 @@
         ]
     },
     {
-        "name": "No Censorship",
+        "name": "Disable Censorship",
         "desc": "Disables the word filter for your outgoing chat.",
-		"category": "Quality of Life",
+        "category": "Quality of Life",
         "patches": [
             {
                 "pattern": "0F 84 ? ? ? ? 80 7D F3 00 0F 84 ? ? ? ? 85 D2",
@@ -132,9 +132,9 @@
         ]
     },
     {
-        "name": "No Channel Move Denial",
+        "name": "Disable Channel Move Denial",
         "desc": "Allows you change channel while in conversation with an NPC.",
-		"category": "Speedup",
+        "category": "Speedup",
         "patches": [
             {
                 "pattern": "0F 84 ? ? ? ? 89 5D F0 89 5D FC 8B CE",
@@ -143,9 +143,9 @@
         ]
     },
     {
-        "name": "No Channel Move Description",
+        "name": "Disable Channel Move Description",
         "desc": "Hides the warning when selecting which channel to change to.",
-		"category": "Speedup",
+        "category": "Speedup",
         "patches": [
             {
                 "pattern": "6A 01 53 53 6A 01 53 6A 01 56 8D 4D DC",
@@ -154,9 +154,9 @@
         ]
     },
     {
-        "name": "No Logout Penalty Msg",
+        "name": "Disable Logout Penalty Msg",
         "desc": "Automatically skips the logout penalty warning message if you've recently been in combat.",
-		"category": "Speedup",
+        "category": "Speedup",
         "patches": [
             {
                 "pattern": "0F 84 ? ? ? ? 88 5D F2 88 5D F3",
@@ -167,7 +167,7 @@
     {
         "name": "Disable Skill Rankup Window",
         "desc": "Skips the popup after you advance a skill.",
-		"category": "Interface",
+        "category": "Interface",
         "patches": [
             {
                 "pattern": "8B F0 33 DB 3B F3 75 16 32 C0",
@@ -182,9 +182,9 @@
         ]
     },
     {
-        "name": "Party No Close",
+        "name": "Infinite Party Ad Time",
         "desc": "Keeps your party ad open until you choose to close it.",
-		"category": "Quality of Life",
+        "category": "Quality of Life",
         "patches": [
             {
                 "pattern": "55 8B EC 56 8B F1 8B 46 64 83 78 08 00 74 32",
@@ -196,7 +196,7 @@
     {
         "name": "Remove Dungeon Fog",
         "desc": "Remove the fog on the map while in dungeons, automatically revealing it.",
-		"category": "Quality of Life",
+        "category": "Quality of Life",
         "patches": [
             {
                 "pattern": "0F B6 41 05 C1 E8 02 83 E0 01 C3",
@@ -207,7 +207,7 @@
     {
         "name": "Disable Screen Shake",
         "desc": "Stops the screen from shaking when using Fireball, summoning a dragon, etc.",
-		"category": "Graphics",
+        "category": "Graphics",
         "patches": [
             {
                 "pattern": "D9 01 8B 46 64",
@@ -233,7 +233,7 @@
     {
         "name": "Always Trans Collect Mode",
         "desc": "Automatically enable Transformation Mastery's Collect Mode.",
-		"category": "Quality of Life",
+        "category": "Quality of Life",
         "patches": [
             {
                 "pattern": "38 5F 78 0F 84 CF 02 00 00 8B CE",
@@ -243,9 +243,9 @@
         ]
     },
     {
-        "name": "Cancelable Lance Counter",
+        "name": "Allow Canceling Lance Counter",
         "desc": "Allows you to cancel lance counter once loaded.",
-		"category": "Quality of Life",
+        "category": "Quality of Life",
         "patches": [
             {
                 "pattern": "55 8B EC 6A FF 68 ? ? ? ? 64 A1 ? ? ? ? 50 83 EC 0C 53 56 57 A1 ? ? ? ? 33 C5 50 8D 45 F4 64 A3 ? ? ? ? E8 ? ? ? ? 84 C0 0F 84 ? ? ? ? E8",
@@ -256,7 +256,7 @@
     {
         "name": "Allow Same Chat Messages",
         "desc": "Bypass the error for repeating the same chat message.",
-		"category": "Quality of Life",
+        "category": "Quality of Life",
         "patches": [
             {
                 "pattern": "0F 85 ? ? ? ? 33 FF C6 45 F3 01",
@@ -271,7 +271,7 @@
     {
         "name": "Allow Rapid Chat Messages",
         "desc": "Bypass the error message for chatting too quickly.",
-		"category": "Quality of Life",
+        "category": "Quality of Life",
         "patches": [
             {
                 "pattern": "76 B0 68 ? ? ? ? 8D 4D DC",
@@ -280,9 +280,9 @@
         ]
     },
     {
-        "name": "Chat To Mini-gamers",
+        "name": "Enable Chat To Mini-gamers",
         "desc": "Allow you to start a chat with friends who have their status set to In Mini-game.",
-		"category": "Quality of Life",
+        "category": "Quality of Life",
         "patches": [
             {
                 "pattern": "75 13 8D 4D 08 56",
@@ -291,9 +291,9 @@
         ]
     },
     {
-        "name": "Client Side DevCAT",
-        "desc": "Enables client side effects provided by the DevCAT title.\nNOTE: This mod can cause random issues, use with caution",
-		"category": "Information",
+        "name": "Force Client Side DevCAT",
+        "desc": "Enables client side effects provided by the DevCAT title.\nNOTE: This mod can cause random issues, use with caution!",
+        "category": "Information",
         "patches": [
             {
                 "pattern": "74 21 8B 16 8B 82 94 00 00 00 8B CE",
@@ -304,7 +304,7 @@
     {
         "name": "Disable Screen Flash",
         "desc": "Disables white screen flashes from occuring while loading or executing certain skills.",
-		"category": "Graphics",
+        "category": "Graphics",
         "patches": [
             {
                 "pattern": "55 1C 53 ? ? ? ? ? ? ? ? 56",
@@ -316,7 +316,7 @@
     {
         "name": "Allow Dungeon Map Resize",
         "desc": "Lets you resize the map while inside dungeons.",
-		"category": "Interface",
+        "category": "Interface",
         "patches": [
             {
                 "pattern": "C2 8D ? ? ? ? ? ? B8 B4 00 00 00",
@@ -333,7 +333,7 @@
     {
         "name": "Allow FSAA (Setting)",
         "desc": "Enables the option to turn on FSAA in Mabi's option menu.\nNOTE: that the setting only takes effect in full screen.",
-		"category": "Graphics",
+        "category": "Graphics",
         "patches": [
             {
                 "pattern": "53 FF D2 8B 0D ? ? ? ? 6A 0C E8 ? ? ? ? 68 ? ? ? ? 89 45 D0",
@@ -344,7 +344,7 @@
     {
         "name": "Allow Interface While Dead",
         "desc": "Allows you to interact with your entire user interface while unconcious.",
-		"category": "Interface",
+        "category": "Interface",
         "patches": [
             {
                 "pattern": "FF 87 ? ? ? ? EB 11",
@@ -355,7 +355,7 @@
     {
         "name": "Allow Minimap Zoom",
         "desc": "Allows zooming out on all minimaps.",
-		"category": "Interface",
+        "category": "Interface",
         "patches": [
             {
                 "pattern": "89 4E 74 80 78 40 00 74 16",
@@ -365,9 +365,9 @@
         ]
     },
     {
-        "name": "Far Alt Text",
+        "name": "Increase Alt Text Distance",
         "desc": "Allows you to see name tags while holding down ALT from much further away.",
-		"category": "Text",
+        "category": "Text",
         "patches": [
             {
                 "pattern": "0F 85 ? ? ? ? D9 EE D9 45 D4",
@@ -378,7 +378,7 @@
     {
         "name": "Disable Fighter Forced Interface",
         "desc": "While in hide interface mode, using chain combo fighter skills will turn the interface back on.\nThis disables this trigger, persisting the interface to stay hidden",
-		"category": "Graphics",
+        "category": "Graphics",
         "patches": [
             {
                 "pattern": "83 79 44 01 75 09 6A 00 6A 00 E8",
@@ -395,7 +395,7 @@
     {
         "name": "Fix Pet Note Cursor",
         "desc": "Causes the cursor to jump to the end when editing a pet note, allowing you to erase what was previously written.",
-		"category": "Fixes",
+        "category": "Fixes",
         "patches": [
             {
                 "pattern": "C7 45 08 00 00 00 00 FF 86 10 01 00 00",
@@ -405,9 +405,9 @@
         ]
     },
     {
-        "name": "Free Indoor Camera",
+        "name": "Enable Free Indoor Camera",
         "desc": "Allows you to freely rotate the camera while indoors.",
-		"category": "Graphics",
+        "category": "Graphics",
         "patches": [
             {
                 "pattern": "57 8B 7D 08 0F 84 22 02 00 00",
@@ -417,9 +417,9 @@
         ]
     },
     {
-        "name": "Hide Main Title",
+        "name": "Hide Main Titles",
         "desc": "Hides all main titles for all players, pets and enemies\nNOTE: This includes ancients",
-		"category": "Text",
+        "category": "Text",
         "patches": [
             {
                 "pattern": "08 00 66 8B 41 10 C3",
@@ -429,9 +429,9 @@
         ]
     },
     {
-        "name": "Hide Second Title",
+        "name": "Hide Second Titles",
         "desc": "Hides all second titles for all players.",
-		"category": "Text",
+        "category": "Text",
         "patches": [
             {
                 "pattern": "C1 E9 14 F6 C1 01 75 ? 8B",
@@ -443,7 +443,7 @@
     {
         "name": "Hide NPC Curtains",
         "desc": "Hides the upper and lower black curtains that show up when talking to NPCs.",
-		"category": "Graphics",
+        "category": "Graphics",
         "patches": [
             {
                 "pattern": "55 8B EC 8A 45 08 56 8B F1 38 06",
@@ -454,7 +454,7 @@
     {
         "name": "Hide Objects",
         "desc": "Stops all objects from loading.",
-		"category": "Graphics",
+        "category": "Graphics",
         "patches": [
             {
                 "pattern": "39 78 0C 0F 94 C0 84 C0 0F 84 92 00 00 00 8B 45",
@@ -464,9 +464,9 @@
         ]
     },
     {
-        "name": "Hotkey Any Item",
+        "name": "Allow Hotkey For Any Item",
         "desc": "Allows usable items to be hotkeyed.",
-		"category": "Quality of Life",
+        "category": "Quality of Life",
         "patches": [
             {
                 "pattern": "84 C0 74 06 B0 01 5D C2 04 00 32 C0 5D C2 04 00 CC",
@@ -476,9 +476,9 @@
         ]
     },
     {
-        "name": "Ignore Maintain Frame",
+        "name": "Ignore Maintain Frame Number",
         "desc": "Ignore the maintain frame setting during character minimization so it always minimizes.\nNOTE: This makes the setting active only if you have it turned on.",
-		"category": "Speedup",
+        "category": "Speedup",
         "patches": [
             {
                 "pattern": "89 4E 50 8B 57 54 89 56 54 0F B6 47 58 88 46 58 0F B6 4F 59",
@@ -490,7 +490,7 @@
     {
         "name": "Disable Translucency",
         "desc": "Stops objects from becoming translucent when blocking the view of your character.",
-		"category": "Graphics",
+        "category": "Graphics",
         "patches": [
             {
                 "pattern": "39 70 04 75 39 3B FE",
@@ -502,7 +502,7 @@
     {
         "name": "Disable Player Zoom Translucency",
         "desc": "Stops others players from becoming translucent when blocking the view of your character.",
-		"category": "Graphics",
+        "category": "Graphics",
         "patches": [
             {
                 "pattern": "4E F7 DE 1B F6 81 E6 FE 07 00 00",
@@ -517,9 +517,9 @@
         ]
     },
     {
-        "name": "Mini Title Menu",
+        "name": "Clean Up Title Menu",
         "desc": "Removes all unknown titles (???) in the title selection menu.",
-		"category": "Interface",
+        "category": "Interface",
         "patches": [
             {
                 "pattern": "85 C0 0F 88 ? ? ? ? 83 F8 01 7E ? 83 F8 02 0F 85 ? ? ? ? 8B 0D",
@@ -539,9 +539,9 @@
         ]
     },
     {
-        "name": "Minute Clock",
+        "name": "Show Clock Minutes",
         "desc": "Updates the in-game clock on a 1 minute basis as opposed to every 10 minutes.",
-		"category": "Interface",
+        "category": "Interface",
         "patches": [
             {
                 "pattern": "89 45 C4 39 9F",
@@ -554,9 +554,9 @@
         ]
     },
     {
-        "name": "Mission Timer Seconds",
+        "name": "Show Mission Timer Seconds",
         "desc": "Updates the timer in shadow missions every 1 second instead of every 15.",
-		"category": "Interface",
+        "category": "Interface",
         "patches": [
             {
                 "pattern": "B8 ? ? ? ? F7 E6 C1 EA 03 42",
@@ -586,7 +586,7 @@
     {
         "name": "Mute Commerce Imp",
         "desc": "Disables chat from the trade imp while commercing.",
-		"category": "Interface",
+        "category": "Interface",
         "patches": [
             {
                 "pattern": "8B ? ? 03 ? ? 3B ? 08 0F 83",
@@ -596,9 +596,9 @@
         ]
     },
     {
-        "name": "Fast NPC Text",
+        "name": "Speed Up NPC Text",
         "desc": "Speed up dialogues while chatting to NPCs, making them render their text instantly.",
-		"category": "Speedup",
+        "category": "Speedup",
         "patches": [
             {
                 "pattern": "8B 08 33 FF 3B CF 76 2A",
@@ -608,9 +608,9 @@
         ]
     },
     {
-        "name": "No Personal Shop Creation Message",
+        "name": "Skip Personal Shop Creation Message",
         "desc": "Automatically confirms the shop creation message.",
-		"category": "Quality of Life",
+        "category": "Quality of Life",
         "patches": [
             {
                 "pattern": "6A 01 53 53 6A 01 53 6A 01 53 53 8D 55 E8 52 E8 ? ? ? ? C6 45 FC 04",
@@ -621,7 +621,7 @@
     {
         "name": "Disable Sky Rendering",
         "desc": "Stops the sky from being rendered in the background.",
-		"category": "Graphics",
+        "category": "Graphics",
         "patches": [
             {
                 "pattern": "74 42 8B 4E 04 8B 11 8B 82 E4 00 00 00 6A 04 FF D0 8B C8 E8",
@@ -637,7 +637,7 @@
     {
         "name": "Enable Right-Clicking Self",
         "desc": "Allows you to right-click yourself",
-		"category": "Interface",
+        "category": "Interface",
         "patches": [
             {
                 "pattern": "0F 85 ? ? ? ? 3B D3 0F 85 ? ? ? ? 8B 8E ? ? ? ? E8 ? ? ? ? 84 C0 74 4A",
@@ -646,9 +646,9 @@
         ]
     },
     {
-        "name": "Show Deadly HP",
+        "name": "Show Negative HP When Deadly",
         "desc": "Shows what your negative HP actually is when you're in DEADLY status.",
-		"category": "Information",
+        "category": "Information",
         "patches": [
             {
                 "pattern": "75 18 68 ? ? ? ? 8D 8D",
@@ -679,7 +679,7 @@
     {
         "name": "Show Item Class",
         "desc": "Toggles on the dev item class ID and attribute flag view.\nNOTE: The AttrActionFlag denotes tradability of the item class.",
-		"category": "Information",
+        "category": "Information",
         "patches": [
             {
                 "pattern": "66 3B C1 0F 85 ? 02 00 00 68 ? ? ? ? B9",
@@ -691,7 +691,7 @@
     {
         "name": "Show Item Trade Price",
         "desc": "Shows the price of the item if you were to sell it to an NPC.",
-		"category": "Information",
+        "category": "Information",
         "patches": [
             {
                 "pattern": "0F 85 ? ? ? ? 68 ? ? ? ? 8D 4D F0 E8 ? ? ? ? 68 ? ? ? ? 8D 4D D0",
@@ -702,7 +702,7 @@
     {
         "name": "Skip Graphics Card Message",
         "desc": "Skips the message saying the graphics card installed on your system isn't good enough.",
-		"category": "Quality of Life",
+        "category": "Quality of Life",
         "patches": [
             {
                 "pattern": "83 C4 08 84 C0 75 7F 8D",
@@ -712,9 +712,9 @@
         ]
     },
     {
-        "name": "Talk to Unequipped Ego",
+        "name": "Enable Talking to Unequipped Ego",
         "desc": "Lets you talk to your ego even when its not equipped.",
-		"category": "Quality of Life",
+        "category": "Quality of Life",
         "patches": [
             {
                 "pattern": "0F 85 90 00 00 00 68 ? ? ? ? 8D 4D DC E8",
@@ -725,7 +725,7 @@
     {
         "name": "Enable NPC Equipment View",
         "desc": "Adds the option to view the equipment of NPCs and monsters.",
-		"category": "Information",
+        "category": "Information",
         "patches": [
             {
                 "pattern": "84 C0 0F 85 A7 ? ? ? 8B CF",
@@ -741,11 +741,28 @@
     {
         "name": "Disable Reward Window",
         "desc": "Removes the reward window that shows up when acquiring items, stats or exp.",
-		"category": "Interface",
+        "category": "Interface",
         "patches": [
             {
                 "pattern": "3B D6 0F 85 ? ? ? ? 33 DB",
                 "patch": "39 DB 0F 84"
+            }
+        ]
+    },
+    {
+        "name": "Zero Fog Distance",
+        "desc": "Stops fog from rendering in the distance.",
+        "category": "Graphics",
+        "patches": [
+            {
+                "pattern": "D9 45 14 5D C2 10",
+                "patch": "? EB 90",
+                "n": 0
+            },
+            {
+                "pattern": "D9 45 14 5D C2 10",
+                "patch": "? EB 90",
+                "n": 1
             }
         ]
     }
