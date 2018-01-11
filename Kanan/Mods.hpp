@@ -1,8 +1,8 @@
 #pragma once
 
-#include <atomic>
 #include <map>
 #include <memory>
+#include <mutex>
 #include <set>
 #include <string>
 #include <vector>
@@ -30,6 +30,9 @@ namespace kanan {
         std::string m_filepath;
         std::vector<std::unique_ptr<Mod>> m_mods;
         std::map<std::string, std::vector<std::unique_ptr<PatchMod>>> m_patchMods;
-        std::atomic_bool m_areTimeCriticalModsLoaded;
+        std::mutex m_modsMutex;
+
+        void addMod(std::unique_ptr<Mod>&& mod);
+        void addPatchMod(const std::string& category, std::unique_ptr<PatchMod>&& mod);
     };
 }

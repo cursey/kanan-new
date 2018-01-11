@@ -31,7 +31,8 @@ namespace kanan {
     Mods::Mods(std::string filepath)
         : m_filepath{ move(filepath) },
         m_mods{},
-        m_patchMods{}
+        m_patchMods{},
+        m_modsMutex{}
     {
         log("[Mods] Entering cosntructor.");
         log("[Mods] Leaving constructor.");
@@ -40,7 +41,7 @@ namespace kanan {
     void Mods::loadTimeCriticalMods() {
         log("[Mods] Loading time critical mods...");
 
-        m_mods.emplace_back(make_unique<UseDataFolder>());
+        addMod(make_unique<UseDataFolder>());
 
         // Time critical mods need to have their settings loaded from the config
         // right away.
@@ -51,15 +52,9 @@ namespace kanan {
         }
 
         log("[Mods] Finished loading time critical mods.");
-
-        m_areTimeCriticalModsLoaded = true;
     }
 
     void Mods::loadMods() {
-        while (!m_areTimeCriticalModsLoaded) {
-            this_thread::yield();
-        }
-
         log("[Mods] Loading mods...");
 
         // Load all .json files.
@@ -88,12 +83,12 @@ namespace kanan {
                 // Load it from json.
                 *patchMod = patch;
 
-                m_patchMods[patchMod->getCategory()].emplace_back(move(patchMod));
+                addPatchMod(patchMod->getCategory(), move(patchMod));
             }
         }
 
-        m_patchMods["Quality of Life"].emplace_back(make_unique<RangedAttackSwap>());
-		m_patchMods["Text"].emplace_back(make_unique<ColorAltText>());
+        addPatchMod("Quality of Life", make_unique<RangedAttackSwap>());
+        addPatchMod("Text", make_unique<ColorAltText>());
 
         for (auto& categories : m_patchMods) {
             auto& mods = categories.second;
@@ -103,15 +98,27 @@ namespace kanan {
             });
         }
 
-        m_mods.emplace_back(make_unique<AutoSetMTU>());
-        m_mods.emplace_back(make_unique<DisableNagle>());
-        m_mods.emplace_back(make_unique<BorderlessWindow>());
-        m_mods.emplace_back(make_unique<EnableMultiClient>());
-        m_mods.emplace_back(make_unique<EntityViewer>());
-        m_mods.emplace_back(make_unique<EquipmentOverride>());
-        m_mods.emplace_back(make_unique<FieldOfView>());
-        m_mods.emplace_back(make_unique<FreezeTimeOfDay>());
+        addMod(make_unique<AutoSetMTU>());
+        addMod(make_unique<DisableNagle>());
+        addMod(make_unique<BorderlessWindow>());
+        addMod(make_unique<EnableMultiClient>());
+        addMod(make_unique<EntityViewer>());
+        addMod(make_unique<EquipmentOverride>());
+        addMod(make_unique<FieldOfView>());
+        addMod(make_unique<FreezeTimeOfDay>());
 
         log("[Mods] Finished loading mods.");
+    }
+
+    void Mods::addMod(std::unique_ptr<Mod>&& mod) {
+        scoped_lock<mutex> _{ m_modsMutex };
+
+        m_mods.emplace_back(move(mod));
+    }
+
+    void Mods::addPatchMod(const std::string& category, std::unique_ptr<PatchMod>&& mod) {
+        scoped_lock<mutex> _{ m_modsMutex };
+
+        m_patchMods[category].emplace_back(move(mod));
     }
 }
