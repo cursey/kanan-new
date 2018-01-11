@@ -66,7 +66,7 @@ namespace kanan {
 
     void FreezeTimeOfDay::onConfigSave(Config& cfg) {
         cfg.set<bool>("FreezeTimeOfDay.Enabled", m_isEnabled);
-        cfg.set<float>("FreezeTimeOfDay.Time", 0.0f);
+        cfg.set<float>("FreezeTimeOfDay.Time", m_timeOfDay);
     }
 
     int FreezeTimeOfDay::hookedSetTimeOfDay(uintptr_t object, float timeOfDay) {
