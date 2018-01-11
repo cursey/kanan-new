@@ -25,8 +25,8 @@ namespace kanan {
         void displayCharacter(KCharacter* character);
         void displayItem(KItem* item);
 
-		double durabilityToDouble(uint32_t dura, uint32_t maxDura);
-		double durabilityToDouble(uint32_t maxDura);
-		char* raceToString(uint32_t raceType);
+        double durabilityToDouble(uint32_t dura, uint32_t maxDura);
+        double durabilityToDouble(uint32_t maxDura);
+        char* raceToString(uint32_t raceType);
     };
 }
