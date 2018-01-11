@@ -232,28 +232,30 @@ public:
     CMemberULong extra3; //0x0174
     CMemberFloat combatPower; //0x0184
     CMemberString motionType; //0x0194
-    CMemberFloat life; //0x01A4
-    CMemberFloat lifeMaxBase; //0x01B4
-    CMemberFloat lifeDamaged; //0x01C4
-    CMemberFloat lifeMaxMod; //0x01D4
-    CMemberFloat mana; //0x01E4
-    CMemberFloat manaMaxBase; //0x01F4
-    CMemberFloat manaMaxMod; //0x0204
-    CMemberFloat stamina; //0x0214
-    CMemberFloat staminaMaxBase; //0x0224
-    CMemberFloat staminaMaxMod; //0x0234
-    CMemberFloat food; //0x0244
-    CMemberFloat foodMinRatio; //0x0254
-    CMemberUShort level; //0x0264
-    CMemberULong cumulatedLevel; //0x0270
-    CMemberUShort maxLevel; //0x0280
-    CMemberUShort rebirthCount; //0x028C
-    CMemberUShort lifeTimeSkill; //0x0298
-    char pad_02A4[4]; //0x02A4
-    CMemberUInt64 experienceInt; //0x02A8
-    CMemberUShort age; //0x02C0
-    char pad_02CC[1148]; //0x02CC
-}; //Size: 0x0748
+    CMemberUChar oddEyeLeftColor; //0x01A4
+    CMemberUChar oddEyeRightColor; //0x01B0
+    CMemberFloat life; //0x01BC
+    CMemberFloat lifeMaxBase; //0x01CC
+    CMemberFloat lifeDamaged; //0x01DC
+    CMemberFloat lifeMaxMod; //0x01EC
+    CMemberFloat mana; //0x01FC
+    CMemberFloat manaMaxBase; //0x020C
+    CMemberFloat manaMaxMod; //0x021C
+    CMemberFloat stamina; //0x022C
+    CMemberFloat staminaMaxBase; //0x023C
+    CMemberFloat staminaMaxMod; //0x024C
+    CMemberFloat food; //0x025C
+    CMemberFloat foodMinRatio; //0x026C
+    CMemberUShort level; //0x027C
+    CMemberULong cumulatedLevel; //0x0288
+    CMemberUShort maxLevel; //0x0298
+    CMemberUShort rebirthCount; //0x02A4
+    CMemberUShort lifeTimeSkill; //0x02B0
+    char pad_02BC[4]; //0x02BC
+    CMemberUInt64 experienceInt; //0x02C0
+    CMemberUShort age; //0x02D8
+    char pad_02E4[1148]; //0x02E4
+}; //Size: 0x0760
 
 class CFramework
 {
@@ -353,13 +355,10 @@ public:
 class CWorld
 {
 public:
-    char pad_0000[152]; //0x0000
-    uint64_t localPlayerID; //0x0098
-    char pad_00A0[328]; //0x00A0
-    uint64_t localPlayerID_0; //0x01E8
-    uint64_t targetID; //0x01F0
-    char pad_01F8[600]; //0x01F8
-}; //Size: 0x0450
+    char pad_0000[160]; //0x0000
+    uint64_t localPlayerID; //0x00A0
+    char pad_00A8[944]; //0x00A8
+}; //Size: 0x0458
 
 class CWorldPtr
 {
