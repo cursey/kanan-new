@@ -50,11 +50,11 @@
         "category": "Speedup",
         "patches": [
             {
-                "pattern": "74 6F E8 ? ? ? ? 85 C0 74 10",
+                "pattern": "74 ? E8 ? ? ? ? 85 C0 74 ? F6 46 14 ? 75 ? 8B 10 8B C8 8B 82 74 01 00 00 FF D0 84 C0 75 ? 83 BE A8 00 00 00 ? C6 86 A4 00 00 00 ? 75 ? B9 ? ? ? ? E8 ? ? ? ? 89 86 A8 00 00 00 8B 4D 08",
                 "patch": "EB"
             },
             {
-                "pattern": "8B 4D 18 6A 00 51 8B 8E ? ? ? ?",
+                "pattern": "8B 4D 18 6A ? 51 8B 8E A8 00 00 00",
                 "patch": "31 C9 90"
             }
         ]
@@ -76,7 +76,7 @@
         "category": "Speedup",
         "patches": [
             {
-                "pattern": "89 90 58 02 00 00",
+                "pattern": "89 90 5C 02 00 00",
                 "patch": "90 90 90 90 90 90"
             }
         ]
@@ -115,7 +115,7 @@
         "category": "Speedup",
         "patches": [
             {
-                "pattern": "0F 84 ? ? ? ? 68 ? ? ? ? 8D 4D E0 E8 ? ? ? ? C6 45 FC 04 8D 55 E0 52 8D 45 B8",
+                "pattern": "0F 84 ? ? ? ? 68 ? ? ? ? 8D 4D DC E8 ? ? ? ? C6 45 FC ? 8D 55 DC 52 8D 45 B4",
                 "patch": "90 E9"
             }
         ]
@@ -137,7 +137,7 @@
         "category": "Speedup",
         "patches": [
             {
-                "pattern": "0F 84 ? ? ? ? 89 5D F0 89 5D FC 8B CE",
+                "pattern": "0F 84 ? ? ? ? 89 5D F0 89 5D FC 8B CF E8 ? ? ? ? 8B 10",
                 "patch": "90 E9"
             }
         ]
@@ -370,7 +370,7 @@
         "category": "Text",
         "patches": [
             {
-                "pattern": "0F 85 ? ? ? ? D9 EE D9 45 D4",
+                "pattern": "0F 85 ? ? ? ? D9 ? D9 ? ? D8 ? DF E0 F6 C4 ?",
                 "patch": "90 90 90 90 90 90"
             }
         ]
@@ -544,11 +544,11 @@
         "category": "Interface",
         "patches": [
             {
-                "pattern": "89 45 C4 39 9F",
+                "pattern": "89 45 C8 39 9F 58 01 00 00",
                 "patch": "90 90 90"
             },
             {
-                "pattern": "89 4D C4 39 9F",
+                "pattern": "89 4D C8 39 9F 58 01 00 00",
                 "patch": "90 90 90"
             }
         ]
@@ -613,8 +613,8 @@
         "category": "Quality of Life",
         "patches": [
             {
-                "pattern": "6A 01 53 53 6A 01 53 6A 01 53 53 8D 55 E8 52 E8 ? ? ? ? C6 45 FC 04",
-                "patch": "90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90"
+                "pattern": "52 53 6A ? 53 53 6A ? 53 6A ? 53 53 8D 45 E4 50 E8 ? ? ? ? C6 45 FC ? 8B 4D EC 3B CB 74 ? E8 ? ? ? ? 89 5D EC C6 45 FC ? 8B 4D E4 3B CB 74 ? E8 ? ? ? ? 89 5D E4 C6 45 FC ?",
+                "patch": "90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90"
             }
         ]
     },
@@ -640,7 +640,7 @@
         "category": "Interface",
         "patches": [
             {
-                "pattern": "0F 85 ? ? ? ? 3B D3 0F 85 ? ? ? ? 8B 8E ? ? ? ? E8 ? ? ? ? 84 C0 74 4A",
+                "pattern": "0F 85 ? ? ? ? 3B D7 0F 85 ? ? ? ? 8B 8E 90 00 00 00",
                 "patch": "90 E9"
             }
         ]
