@@ -488,31 +488,14 @@
         ]
     },
     {
-        "name": "Disable Translucency",
-        "desc": "Stops objects from becoming translucent when blocking the view of your character.",
+        "name": "Disable Translucency Changes",
+        "desc": "Stops players and objects from becoming translucent when blocking the view of your character.",
         "category": "Graphics",
         "patches": [
             {
                 "pattern": "39 70 04 75 39 3B FE",
                 "offset": 3,
                 "patch": "90 90"
-            }
-        ]
-    },
-    {
-        "name": "Disable Player Zoom Translucency",
-        "desc": "Stops others players from becoming translucent when blocking the view of your character.",
-        "category": "Graphics",
-        "patches": [
-            {
-                "pattern": "4E F7 DE 1B F6 81 E6 FE 07 00 00",
-                "offset": 6,
-                "patch": "C7 F0 0F"
-            },
-            {
-                "pattern": "74 17 53 57 6A 02 57",
-                "offset": 5,
-                "patch": "05"
             }
         ]
     },
