@@ -64,7 +64,7 @@
       <AdditionalDependencies>ws2_32.lib;MinHook.lib;ImGui.lib;Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(ProjectDir)Patches.json $(OutDir)</Command>
+      <Command>copy "$(ProjectDir)Patches.json" "$(OutDir)Patches.json"</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Copying Patches.json to output directory</Message>
@@ -86,7 +86,7 @@
       <AdditionalDependencies>ws2_32.lib;MinHook.lib;ImGui.lib;Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(ProjectDir)Patches.json" "$(OutDir)"</Command>
+      <Command>copy "$(ProjectDir)Patches.json" "$(OutDir)Patches.json"</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Copying Patches.json to output directory</Message>
