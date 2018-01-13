@@ -45,6 +45,7 @@ namespace kanan {
 
     void FieldOfView::onConfigLoad(const Config& cfg) {
         m_fov = cfg.get<float>("FieldOfView.FOV").value_or(45.0f);
+        m_isEnabled = cfg.get<bool>("FieldOfView.Enabled").value_or(m_isEnabled);
     }
 
     void FieldOfView::onConfigSave(Config& cfg) {
