@@ -309,7 +309,9 @@ public:
     class CAction* action; //0x0094
     char pad_0098[396]; //0x0098
     class CEquipment* equipment; //0x0224
-    char pad_0228[796]; //0x0228
+    char pad_0228[104]; //0x0228
+    uint64_t aggroTargetID; //0x0290
+    char pad_0298[684]; //0x0298
 }; //Size: 0x0544
 
 class CCharacterListNodeEntry
