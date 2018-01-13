@@ -137,6 +137,8 @@ namespace kanan {
             return;
         }
 
+        auto target = g_kanan->getGame()->getCharacterByID(character->aggroTargetID);
+
         ImGui::BulletText("Address: %p", character);
         ImGui::BulletText("Name: %s", name->c_str());
         ImGui::BulletText("ID: %llX", *id);
@@ -145,6 +147,7 @@ namespace kanan {
         ImGui::BulletText("Age: %d", parameter->age.value);
         ImGui::BulletText("Health: %f/%f", parameter->life.value, parameter->lifeMaxBase.value + parameter->lifeMaxMod.value);
         ImGui::BulletText("Race: %s", raceToString(parameter->type.value));
+        ImGui::BulletText("Target: %s", (!target) ? "No Target" : target->getName()->c_str());
     }
 
     void EntityViewer::displayItem(KItem* item) {
