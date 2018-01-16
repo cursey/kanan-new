@@ -12,7 +12,7 @@ namespace kanan {
     static EquipmentOverride* g_equipmentOverride{ nullptr };
 
     int convertInventoryIDToEquipmentSlot(int inventoryID) {
-        static auto fn = (int(__cdecl*)(int))scan("client.exe", "55 8B EC 8B 45 08 83 C0 ? 83 F8 ? 77 ? 0F B6 80 8C 64 66 01").value_or(0);
+        static auto fn = (int(__cdecl*)(int))scan("client.exe", "55 8B EC 8B 45 08 83 C0 ? 83 F8 ? 77 ? 0F B6 80 CC 18 69 01").value_or(0);
         static bool logged{ false };
 
         if (!logged) {
