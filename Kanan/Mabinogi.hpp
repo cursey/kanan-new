@@ -307,12 +307,12 @@ public:
     char pad_0008[136]; //0x0008
     class CParameter* parameter; //0x0090
     class CAction* action; //0x0094
-    char pad_0098[396]; //0x0098
-    class CEquipment* equipment; //0x0224
-    char pad_0228[104]; //0x0228
-    uint64_t aggroTargetID; //0x0290
-    char pad_0298[684]; //0x0298
-}; //Size: 0x0544
+    char pad_0098[404]; //0x0098
+    class CEquipment* equipment; //0x022C
+    char pad_0230[96]; //0x0230
+    uint64_t targetID; //0x0290
+    char pad_0298[696]; //0x0298
+}; //Size: 0x0550
 
 class CCharacterListNodeEntry
 {
@@ -381,3 +381,9 @@ public:
     class CAccount* account; //0x0000
     char pad_0004[60]; //0x0004
 }; //Size: 0x0040
+
+class N000007C5
+{
+public:
+    char pad_0000[68]; //0x0000
+}; //Size: 0x0044

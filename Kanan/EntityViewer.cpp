@@ -137,7 +137,7 @@ namespace kanan {
             return;
         }
 
-        auto target = g_kanan->getGame()->getCharacterByID(character->aggroTargetID);
+        auto target = g_kanan->getGame()->getCharacterByID(character->targetID);
 
         ImGui::BulletText("Address: %p", character);
         ImGui::BulletText("Name: %s", name->c_str());
