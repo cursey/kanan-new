@@ -748,5 +748,17 @@
                 "n": 1
             }
         ]
+    },
+	    {
+        "name": "Center Giant Camera",
+        "desc": "Makes the giant camera act like other cameras and look at the center of the character.",
+        "category": "Quality of Life",
+        "patches": [
+            {
+                "pattern": "74 2C 68 ? ? ? ? 8B CF E8",
+                "patch": "EB",
+				"n": 1
+            }
+        ]
     }
 ]
