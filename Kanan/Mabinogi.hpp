@@ -19,23 +19,23 @@ using Matrix4x4 = std::array<float, 4 * 4>;
 class CCameraState
 {
 public:
-    char pad_0000[12]; //0x0000
-    Vector3 target; //0x000C
-    char pad_0018[4]; //0x0018
-    Vector3 position; //0x001C
-    char pad_0028[8]; //0x0028
-    Vector4 forward; //0x0030
-    char pad_0040[4]; //0x0040
-    float zNear; //0x0044
-    float zFar; //0x0048
-    float fov; //0x004C
-    float screenWidth; //0x0050
-    float screenHeight; //0x0054
-    char pad_0058[28]; //0x0058
-    float aspectRatio; //0x0074
-    char pad_0078[212]; //0x0078
-    Matrix4x4 viewMatrix; //0x014C
-    char pad_018C[84]; //0x018C
+	char pad_0000[4]; //0x0000
+	Vector3 target; //0x0004
+	char pad_0010[8]; //0x0010
+	Vector3 position; //0x0018
+	char pad_0024[8]; //0x0024
+	Vector4 forward; //0x002C
+	char pad_003C[8]; //0x003C
+	float zNear; //0x0044
+	float zFar; //0x0048
+	float fov; //0x004C
+	float screenWidth; //0x0050
+	float screenHeight; //0x0054
+	char pad_0058[28]; //0x0058
+	float aspectRatio; //0x0074
+	char pad_0078[212]; //0x0078
+	Matrix4x4 viewMatrix; //0x014C
+	char pad_018C[84]; //0x018C
 }; //Size: 0x01E0
 
 class CCamera
@@ -83,44 +83,44 @@ public:
 class SItemDBDesc
 {
 public:
-    char pad_0000[40]; //0x0000
-    class CString* type; //0x0028
-    char pad_002C[16]; //0x002C
-    class CString* displayName; //0x003C
-    char pad_0040[4]; //0x0040
-    class CString* name; //0x0044
-    class CString* description; //0x0048
-    char pad_004C[244]; //0x004C
+	char pad_0000[40]; //0x0000
+	class CString* type; //0x0028
+	char pad_002C[16]; //0x002C
+	class CString* displayName; //0x003C
+	char pad_0040[4]; //0x0040
+	class CString* name; //0x0044
+	class CString* description; //0x0048
+	char pad_004C[244]; //0x004C
 }; //Size: 0x0140
 
 class CItem
 {
 public:
-    char pad_0000[4]; //0x0000
-    class CEntityID* entityID; //0x0004
-    uint32_t inventoryID; //0x0008
-    uint32_t itemID; //0x000C
-    uint32_t color1; //0x0010
-    uint32_t color2; //0x0014
-    uint32_t color3; //0x0018
-    uint32_t stackCount; //0x001C
-    char pad_0020[4]; //0x0020
-    uint32_t positionX; //0x0024
-    uint32_t positionY; //0x0028
-    char pad_002C[24]; //0x002C
-    uint32_t price; //0x0044
-    uint32_t sellPrice; //0x0048
-    char pad_004C[8]; //0x004C
-    uint32_t durability; //0x0054
-    uint32_t maxDurability; //0x0058
-    uint32_t originalDurability; //0x005C
-    char pad_0060[92]; //0x0060
-    class SItemDBDesc* dbDesc; //0x00BC
-    char pad_00C0[32]; //0x00C0
-    uint64_t ownerID; //0x00E0
-    char pad_00E8[36]; //0x00E8
-    class CString* name; //0x010C
-    char pad_0110[56]; //0x0110
+	char pad_0000[4]; //0x0000
+	class CEntityID* entityID; //0x0004
+	uint32_t inventoryID; //0x0008
+	uint32_t itemID; //0x000C
+	uint32_t color1; //0x0010
+	uint32_t color2; //0x0014
+	uint32_t color3; //0x0018
+	uint32_t stackCount; //0x001C
+	char pad_0020[4]; //0x0020
+	uint32_t positionX; //0x0024
+	uint32_t positionY; //0x0028
+	char pad_002C[28]; //0x002C
+	uint32_t price; //0x0048
+	uint32_t sellPrice; //0x004C
+	char pad_0050[4]; //0x0050
+	uint32_t durability; //0x0054
+	uint32_t maxDurability; //0x0058
+	uint32_t originalDurability; //0x005C
+	char pad_0060[92]; //0x0060
+	class SItemDBDesc* dbDesc; //0x00BC
+	char pad_00C0[32]; //0x00C0
+	uint64_t ownerID; //0x00E0
+	char pad_00E8[36]; //0x00E8
+	class CString* name; //0x010C
+	char pad_0110[56]; //0x0110
 }; //Size: 0x0148
 
 class CItemListNodeEntry
@@ -285,11 +285,13 @@ public:
 class CEquipmentItemInfo
 {
 public:
-    char pad_0000[28]; //0x0000
-    uint32_t color1; //0x001C
-    uint32_t color2; //0x0020
-    uint32_t color3; //0x0024
-    char pad_0028[12]; //0x0028
+	char pad_0000[12]; //0x0000
+	uint32_t classID; //0x000C
+	char pad_0010[12]; //0x0010
+	uint32_t color1; //0x001C
+	uint32_t color2; //0x0020
+	uint32_t color3; //0x0024
+	char pad_0028[12]; //0x0028
 }; //Size: 0x0034
 
 class CEquipment
@@ -382,8 +384,10 @@ public:
     char pad_0004[60]; //0x0004
 }; //Size: 0x0040
 
-class N000007C5
+class CUI
 {
 public:
-    char pad_0000[68]; //0x0000
-}; //Size: 0x0044
+	char pad_0000[344]; //0x0000
+	uint32_t chatTab; //0x0158
+	char pad_015C[40]; //0x015C
+}; //Size: 0x0184
