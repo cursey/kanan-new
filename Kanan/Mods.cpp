@@ -18,6 +18,7 @@
 #include "FieldOfView.hpp"
 #include "UseDataFolder.hpp"
 #include "FreezeTimeOfDay.hpp"
+#include "TTFFontSize.hpp"
 
 #include "Log.hpp"
 
@@ -88,6 +89,7 @@ namespace kanan {
         }
 
         addPatchMod("Quality of Life", make_unique<RangedAttackSwap>());
+		addPatchMod("Text", make_unique<TTFFontSize>());
         addPatchMod("Text", make_unique<ColorAltText>());
 
         for (auto& categories : m_patchMods) {
