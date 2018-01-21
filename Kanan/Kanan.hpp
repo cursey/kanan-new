@@ -1,5 +1,6 @@
 #pragma once
 
+#include <atomic>
 #include <memory>
 #include <string>
 
@@ -21,8 +22,8 @@ namespace kanan {
             return m_game.get();
         }
 
-        auto getMods() const {
-            return m_mods.get();
+        auto& getMods() const {
+            return m_mods;
         }
 
         auto getWindow() const {
@@ -36,10 +37,18 @@ namespace kanan {
         std::unique_ptr<DInputHook> m_dinputHook;
         std::unique_ptr<WindowsMessageHook> m_wmHook;
         std::unique_ptr<Game> m_game;
-        std::unique_ptr<Mods> m_mods;
+        Mods m_mods;
+
         bool m_isUIOpen;
+        bool m_isLogOpen;
+        bool m_isAboutOpen;
+
         bool m_isInitialized;
+        std::atomic_bool m_areModsReady;
+        bool m_areModsLoaded;
         HWND m_wnd;
+
+        void initializeMods();
 
         // These are callbacks that get called from the hooks that get created.
         void onInitialize();
@@ -48,6 +57,9 @@ namespace kanan {
 
         void loadConfig();
         void saveConfig();
+
+        void drawUI();
+        void drawAbout();
     };
 
     extern std::unique_ptr<Kanan> g_kanan;

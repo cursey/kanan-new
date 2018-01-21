@@ -1,5 +1,11 @@
-# Kanan's New Mabinogi Mod
+# Kanan's New Mabinogi Mod [![Build status](https://ci.appveyor.com/api/projects/status/frp20d9y14rpxha0?svg=true)](https://ci.appveyor.com/project/cursey/kanan-new)
 A reimagining of Kanan for Mabinogi written in C++ with many improvements.
+
+## Download
+Downloads for the latest _official_ releases are located [here](https://github.com/cursey/kanan-new/releases).
+
+## Requirements
+You need the Microsoft Visual C++ Redistributable for Visual Studio 2017 available at the bottom of [this page](https://www.visualstudio.com/downloads/). Make sure to choose the x86 version of the download!
 
 ## What's new
 * Entirely written from the ground up in modern C++17. 

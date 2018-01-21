@@ -51,9 +51,6 @@
     <ClCompile Include="WindowsMessageHook.cpp">
       <Filter>Source Files\Hooks</Filter>
     </ClCompile>
-    <ClCompile Include="ShowCombatPower.cpp">
-      <Filter>Source Files\Mods</Filter>
-    </ClCompile>
     <ClCompile Include="Mods.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -72,22 +69,34 @@
     <ClCompile Include="AutoSetMTU.cpp">
       <Filter>Source Files\Mods</Filter>
     </ClCompile>
-    <ClCompile Include="BitmapFont.cpp">
-      <Filter>Source Files\Mods</Filter>
-    </ClCompile>
     <ClCompile Include="BorderlessWindow.cpp">
       <Filter>Source Files\Mods</Filter>
     </ClCompile>
     <ClCompile Include="DisableNagle.cpp">
       <Filter>Source Files\Mods</Filter>
     </ClCompile>
-    <ClCompile Include="ElfLagFix.cpp">
+    <ClCompile Include="EnableMultiClient.cpp">
       <Filter>Source Files\Mods</Filter>
     </ClCompile>
-    <ClCompile Include="WindowsAppearFaster.cpp">
+    <ClCompile Include="RangedAttackSwap.cpp">
       <Filter>Source Files\Mods</Filter>
     </ClCompile>
-    <ClCompile Include="OneClickRevive.cpp">
+    <ClCompile Include="PatchMod.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ColorAltText.cpp">
+      <Filter>Source Files\Mods</Filter>
+    </ClCompile>
+    <ClCompile Include="EquipmentOverride.cpp">
+      <Filter>Source Files\Mods</Filter>
+    </ClCompile>
+    <ClCompile Include="FieldOfView.cpp">
+      <Filter>Source Files\Mods</Filter>
+    </ClCompile>
+    <ClCompile Include="UseDataFolder.cpp">
+      <Filter>Source Files\Mods</Filter>
+    </ClCompile>
+    <ClCompile Include="FreezeTimeOfDay.cpp">
       <Filter>Source Files\Mods</Filter>
     </ClCompile>
   </ItemGroup>
@@ -113,9 +122,6 @@
     <ClInclude Include="Mod.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ShowCombatPower.hpp">
-      <Filter>Header Files\Mods</Filter>
-    </ClInclude>
     <ClInclude Include="Mods.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -134,23 +140,38 @@
     <ClInclude Include="AutoSetMTU.hpp">
       <Filter>Header Files\Mods</Filter>
     </ClInclude>
-    <ClInclude Include="BitmapFont.hpp">
-      <Filter>Header Files\Mods</Filter>
-    </ClInclude>
     <ClInclude Include="BorderlessWindow.hpp">
       <Filter>Header Files\Mods</Filter>
     </ClInclude>
     <ClInclude Include="DisableNagle.hpp">
       <Filter>Header Files\Mods</Filter>
     </ClInclude>
-    <ClInclude Include="ElfLagFix.hpp">
+    <ClInclude Include="EnableMultiClient.hpp">
       <Filter>Header Files\Mods</Filter>
     </ClInclude>
-    <ClInclude Include="WindowsAppearFaster.hpp">
+    <ClInclude Include="RangedAttackSwap.hpp">
       <Filter>Header Files\Mods</Filter>
     </ClInclude>
-    <ClInclude Include="OneClickRevive.hpp">
+    <ClInclude Include="PatchMod.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorAltText.hpp">
       <Filter>Header Files\Mods</Filter>
     </ClInclude>
+    <ClInclude Include="EquipmentOverride.hpp">
+      <Filter>Header Files\Mods</Filter>
+    </ClInclude>
+    <ClInclude Include="FieldOfView.hpp">
+      <Filter>Header Files\Mods</Filter>
+    </ClInclude>
+    <ClInclude Include="UseDataFolder.hpp">
+      <Filter>Header Files\Mods</Filter>
+    </ClInclude>
+    <ClInclude Include="FreezeTimeOfDay.hpp">
+      <Filter>Header Files\Mods</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Patches.json" />
   </ItemGroup>
 </Project>

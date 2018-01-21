@@ -92,7 +92,7 @@ namespace kanan {
         }
 
         auto processHandle = processInfo.hProcess;
-        DWORD exitCode = 0;
+        DWORD exitCode{ 0 };
 
         if (WaitForSingleObject(processHandle, 5000) != WAIT_OBJECT_0) {
             log("Failed to wait for %s %s", name.c_str(), params.c_str());

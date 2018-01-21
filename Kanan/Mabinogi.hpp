@@ -19,23 +19,23 @@ using Matrix4x4 = std::array<float, 4 * 4>;
 class CCameraState
 {
 public:
-    char pad_0000[12]; //0x0000
-    Vector3 target; //0x000C
-    char pad_0018[4]; //0x0018
-    Vector3 position; //0x001C
-    char pad_0028[8]; //0x0028
-    Vector4 forward; //0x0030
-    char pad_0040[4]; //0x0040
-    float zNear; //0x0044
-    float zFar; //0x0048
-    float fov; //0x004C
-    float screenWidth; //0x0050
-    float screenHeight; //0x0054
-    char pad_0058[28]; //0x0058
-    float aspectRatio; //0x0074
-    char pad_0078[212]; //0x0078
-    Matrix4x4 viewMatrix; //0x014C
-    char pad_018C[84]; //0x018C
+	char pad_0000[4]; //0x0000
+	Vector3 target; //0x0004
+	char pad_0010[8]; //0x0010
+	Vector3 position; //0x0018
+	char pad_0024[8]; //0x0024
+	Vector4 forward; //0x002C
+	char pad_003C[8]; //0x003C
+	float zNear; //0x0044
+	float zFar; //0x0048
+	float fov; //0x004C
+	float screenWidth; //0x0050
+	float screenHeight; //0x0054
+	char pad_0058[28]; //0x0058
+	float aspectRatio; //0x0074
+	char pad_0078[212]; //0x0078
+	Matrix4x4 viewMatrix; //0x014C
+	char pad_018C[84]; //0x018C
 }; //Size: 0x01E0
 
 class CCamera
@@ -83,43 +83,45 @@ public:
 class SItemDBDesc
 {
 public:
-    char pad_0000[40]; //0x0000
-    class CString* type; //0x0028
-    char pad_002C[16]; //0x002C
-    class CString* displayName; //0x003C
-    char pad_0040[4]; //0x0040
-    class CString* name; //0x0044
-    class CString* description; //0x0048
-    char pad_004C[244]; //0x004C
+	char pad_0000[40]; //0x0000
+	class CString* type; //0x0028
+	char pad_002C[16]; //0x002C
+	class CString* displayName; //0x003C
+	char pad_0040[4]; //0x0040
+	class CString* name; //0x0044
+	class CString* description; //0x0048
+	char pad_004C[244]; //0x004C
 }; //Size: 0x0140
 
 class CItem
 {
 public:
-    char pad_0000[4]; //0x0000
-    class CEntityID* entityID; //0x0004
-    uint32_t inventoryID; //0x0008
-    uint32_t itemID; //0x000C
-    uint32_t color1; //0x0010
-    uint32_t color2; //0x0014
-    uint32_t color3; //0x0018
-    uint32_t stackCount; //0x001C
-    char pad_0020[4]; //0x0020
-    uint32_t positionX; //0x0024
-    uint32_t positionY; //0x0028
-    char pad_002C[24]; //0x002C
-    uint32_t price; //0x0044
-    uint32_t sellPrice; //0x0048
-    char pad_004C[4]; //0x004C
-    uint32_t durability; //0x0050
-    uint32_t maxDurability; //0x0054
-    uint32_t originalDurability; //0x0058
-    char pad_005C[96]; //0x005C
-    class SItemDBDesc* dbDesc; //0x00BC
-    char pad_00C0[76]; //0x00C0
-    class CString* name; //0x010C
-    char pad_0110[52]; //0x0110
-}; //Size: 0x0144
+	char pad_0000[4]; //0x0000
+	class CEntityID* entityID; //0x0004
+	uint32_t inventoryID; //0x0008
+	uint32_t itemID; //0x000C
+	uint32_t color1; //0x0010
+	uint32_t color2; //0x0014
+	uint32_t color3; //0x0018
+	uint32_t stackCount; //0x001C
+	char pad_0020[4]; //0x0020
+	uint32_t positionX; //0x0024
+	uint32_t positionY; //0x0028
+	char pad_002C[28]; //0x002C
+	uint32_t price; //0x0048
+	uint32_t sellPrice; //0x004C
+	char pad_0050[4]; //0x0050
+	uint32_t durability; //0x0054
+	uint32_t maxDurability; //0x0058
+	uint32_t originalDurability; //0x005C
+	char pad_0060[92]; //0x0060
+	class SItemDBDesc* dbDesc; //0x00BC
+	char pad_00C0[32]; //0x00C0
+	uint64_t ownerID; //0x00E0
+	char pad_00E8[36]; //0x00E8
+	class CString* name; //0x010C
+	char pad_0110[56]; //0x0110
+}; //Size: 0x0148
 
 class CItemListNodeEntry
 {
@@ -230,28 +232,30 @@ public:
     CMemberULong extra3; //0x0174
     CMemberFloat combatPower; //0x0184
     CMemberString motionType; //0x0194
-    CMemberFloat life; //0x01A4
-    CMemberFloat lifeMaxBase; //0x01B4
-    CMemberFloat lifeDamaged; //0x01C4
-    CMemberFloat lifeMaxMod; //0x01D4
-    CMemberFloat mana; //0x01E4
-    CMemberFloat manaMaxBase; //0x01F4
-    CMemberFloat manaMaxMod; //0x0204
-    CMemberFloat stamina; //0x0214
-    CMemberFloat staminaMaxBase; //0x0224
-    CMemberFloat staminaMaxMod; //0x0234
-    CMemberFloat food; //0x0244
-    CMemberFloat foodMinRatio; //0x0254
-    CMemberUShort level; //0x0264
-    CMemberULong cumulatedLevel; //0x0270
-    CMemberUShort maxLevel; //0x0280
-    CMemberUShort rebirthCount; //0x028C
-    CMemberUShort lifeTimeSkill; //0x0298
-    char pad_02A4[4]; //0x02A4
-    CMemberUInt64 experienceInt; //0x02A8
-    CMemberUShort age; //0x02C0
-    char pad_02CC[1148]; //0x02CC
-}; //Size: 0x0748
+    CMemberUChar oddEyeLeftColor; //0x01A4
+    CMemberUChar oddEyeRightColor; //0x01B0
+    CMemberFloat life; //0x01BC
+    CMemberFloat lifeMaxBase; //0x01CC
+    CMemberFloat lifeDamaged; //0x01DC
+    CMemberFloat lifeMaxMod; //0x01EC
+    CMemberFloat mana; //0x01FC
+    CMemberFloat manaMaxBase; //0x020C
+    CMemberFloat manaMaxMod; //0x021C
+    CMemberFloat stamina; //0x022C
+    CMemberFloat staminaMaxBase; //0x023C
+    CMemberFloat staminaMaxMod; //0x024C
+    CMemberFloat food; //0x025C
+    CMemberFloat foodMinRatio; //0x026C
+    CMemberUShort level; //0x027C
+    CMemberULong cumulatedLevel; //0x0288
+    CMemberUShort maxLevel; //0x0298
+    CMemberUShort rebirthCount; //0x02A4
+    CMemberUShort lifeTimeSkill; //0x02B0
+    char pad_02BC[4]; //0x02BC
+    CMemberUInt64 experienceInt; //0x02C0
+    CMemberUShort age; //0x02D8
+    char pad_02E4[1148]; //0x02E4
+}; //Size: 0x0760
 
 class CFramework
 {
@@ -278,6 +282,25 @@ public:
     char pad_0048[1020]; //0x0048
 }; //Size: 0x0444
 
+class CEquipmentItemInfo
+{
+public:
+	char pad_0000[12]; //0x0000
+	uint32_t classID; //0x000C
+	char pad_0010[12]; //0x0010
+	uint32_t color1; //0x001C
+	uint32_t color2; //0x0020
+	uint32_t color3; //0x0024
+	char pad_0028[12]; //0x0028
+}; //Size: 0x0034
+
+class CEquipment
+{
+public:
+    CEquipmentItemInfo itemInfo[19]; //0x0000
+    char pad_03DC[384]; //0x03DC
+}; //Size: 0x055C
+
 class CCharacter
 {
 public:
@@ -286,8 +309,12 @@ public:
     char pad_0008[136]; //0x0008
     class CParameter* parameter; //0x0090
     class CAction* action; //0x0094
-    char pad_0098[172]; //0x0098
-}; //Size: 0x0144
+    char pad_0098[404]; //0x0098
+    class CEquipment* equipment; //0x022C
+    char pad_0230[96]; //0x0230
+    uint64_t targetID; //0x0290
+    char pad_0298[696]; //0x0298
+}; //Size: 0x0550
 
 class CCharacterListNodeEntry
 {
@@ -332,13 +359,10 @@ public:
 class CWorld
 {
 public:
-    char pad_0000[152]; //0x0000
-    uint64_t localPlayerID; //0x0098
-    char pad_00A0[328]; //0x00A0
-    uint64_t localPlayerID_0; //0x01E8
-    uint64_t targetID; //0x01F0
-    char pad_01F8[600]; //0x01F8
-}; //Size: 0x0450
+    char pad_0000[160]; //0x0000
+    uint64_t localPlayerID; //0x00A0
+    char pad_00A8[944]; //0x00A8
+}; //Size: 0x0458
 
 class CWorldPtr
 {
@@ -346,3 +370,24 @@ public:
     class CWorld* world; //0x0000
     char pad_0004[60]; //0x0004
 }; //Size: 0x0040
+
+class CAccount
+{
+public:
+    char pad_0000[68]; //0x0000
+}; //Size: 0x0044
+
+class CAccountPtr
+{
+public:
+    class CAccount* account; //0x0000
+    char pad_0004[60]; //0x0004
+}; //Size: 0x0040
+
+class CUI
+{
+public:
+	char pad_0000[344]; //0x0000
+	uint32_t chatTab; //0x0158
+	char pad_015C[40]; //0x015C
+}; //Size: 0x0184

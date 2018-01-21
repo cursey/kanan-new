@@ -41,20 +41,6 @@ bool inject(DWORD clientID) {
         return false;
     }
 
-    cout << "Running init..." << endl;
-
-    auto kananInit = kanan->getProcAddress("kananInit");
-
-    if (!kananInit) {
-        cerr << "Failed to find kananInit." << endl;
-        return false;
-    }
-
-    if (!client.execute(*kananInit, current_path().string())) {
-        cerr << "Failed to run kananInit." << endl;
-        return false;
-    }
-
     cout << "Success!" << endl;
 
     return true;
@@ -67,7 +53,7 @@ BOOL CALLBACK enumWindow(HWND wnd, LPARAM param) {
     // do more important things.
     this_thread::yield();
 
-    array<wchar_t, 256> className{ 0 };
+    array<wchar_t, 256> className{ { 0 } };
 
     if (GetClassName(wnd, className.data(), (int)className.size()) == 0) {
         return TRUE;

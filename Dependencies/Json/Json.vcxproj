@@ -10,53 +10,21 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Config.cpp" />
-    <ClCompile Include="FunctionHook.cpp" />
-    <ClCompile Include="Memory.cpp" />
-    <ClCompile Include="Module.cpp" />
-    <ClCompile Include="Patch.cpp" />
-    <ClCompile Include="Pattern.cpp" />
-    <ClCompile Include="Process.cpp" />
-    <ClCompile Include="RemoteMemory.cpp" />
-    <ClCompile Include="RemoteModule.cpp" />
-    <ClCompile Include="RemoteProcess.cpp" />
-    <ClCompile Include="RemoteThread.cpp" />
-    <ClCompile Include="Scan.cpp" />
-    <ClCompile Include="String.cpp" />
-    <ClCompile Include="Utility.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Config.hpp" />
-    <ClInclude Include="FunctionHook.hpp" />
-    <ClInclude Include="Memory.hpp" />
-    <ClInclude Include="Module.hpp" />
-    <ClInclude Include="Patch.hpp" />
-    <ClInclude Include="Pattern.hpp" />
-    <ClInclude Include="Process.hpp" />
-    <ClInclude Include="RemoteMemory.hpp" />
-    <ClInclude Include="RemoteModule.hpp" />
-    <ClInclude Include="RemoteProcess.hpp" />
-    <ClInclude Include="RemoteThread.hpp" />
-    <ClInclude Include="Scan.hpp" />
-    <ClInclude Include="String.hpp" />
-    <ClInclude Include="Utility.hpp" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{015DA2A6-4E4B-4AC1-8D5D-60B8B542C7CD}</ProjectGuid>
-    <RootNamespace>Core</RootNamespace>
+    <ProjectGuid>{ADA5D96A-5784-49A3-B2E0-F3E253242426}</ProjectGuid>
+    <RootNamespace>Json</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Utility</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Utility</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -75,17 +43,6 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies/MinHook;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-      <RuntimeTypeInfo>
-      </RuntimeTypeInfo>
-    </ClCompile>
-  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -93,17 +50,24 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies/MinHook;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-      <RuntimeTypeInfo>
-      </RuntimeTypeInfo>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="json.hpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

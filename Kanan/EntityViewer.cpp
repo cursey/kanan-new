@@ -137,6 +137,7 @@ namespace kanan {
             return;
         }
 
+        auto target = g_kanan->getGame()->getCharacterByID(character->targetID);
 
         ImGui::BulletText("Address: %p", character);
         ImGui::BulletText("Name: %s", name->c_str());
@@ -145,6 +146,8 @@ namespace kanan {
         ImGui::BulletText("Combat Power: %f", parameter->combatPower.value);
         ImGui::BulletText("Age: %d", parameter->age.value);
         ImGui::BulletText("Health: %f/%f", parameter->life.value, parameter->lifeMaxBase.value + parameter->lifeMaxMod.value);
+        ImGui::BulletText("Race: %s", raceToString(parameter->type.value));
+        ImGui::BulletText("Target: %s", (!target) ? "No Target" : target->getName()->c_str());
     }
 
     void EntityViewer::displayItem(KItem* item) {
@@ -165,6 +168,35 @@ namespace kanan {
         ImGui::BulletText("Color: %X %X %X", item->color1, item->color2, item->color3);
         ImGui::BulletText("Price: %d", item->price);
         ImGui::BulletText("Sell price: %d", item->sellPrice);
-        ImGui::BulletText("Durability: %d/%d", item->durability, item->maxDurability);
+        ImGui::BulletText("Durability: %0.4f/%0.4f", durabilityToDouble(item->durability, item->maxDurability), durabilityToDouble(item->maxDurability));
+    }
+
+    double EntityViewer::durabilityToDouble(uint32_t dura, uint32_t maxDura) {
+        // Get the length of max dura to determine where to place the decimal
+        if (std::to_string(maxDura).length() > 5) {
+            return (double)dura * 0.0001;
+        }
+        else return (double)dura * 0.001;
+
+    }
+
+    double EntityViewer::durabilityToDouble(uint32_t maxDura) {
+        // same as above, but return maxDura instead
+        if (std::to_string(maxDura).length() > 5) {
+            return (double)maxDura * 0.0001;
+        }
+        else return (double)maxDura * 0.001;
+    }
+
+    char* EntityViewer::raceToString(uint32_t raceType) {
+        switch (raceType) {
+        case  8001: return "Female Giant";
+        case  8002: return "Male Giant";
+        case  9001: return "Female Elf";
+        case  9002: return "Male Elf";
+        case 10001: return "Female Human";
+        case 10002: return "Male Human";
+        default: return "Error: Unknown Race";
+        }
     }
 }

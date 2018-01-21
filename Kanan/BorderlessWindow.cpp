@@ -13,8 +13,10 @@ namespace kanan {
         : m_defaultStyle{ 0 },
         m_style{ 0 },
         m_x{ 0 }, m_y{ 0 }, m_w{ 0 }, m_h{ 0 },
+        m_changeStyle{ false },
+        m_changePos{ false },
         m_choice{ 0 },
-        m_setStyleCounter{ 0 }
+        m_isChoiceFulfilled{ false }
     {
     }
 
@@ -22,19 +24,23 @@ namespace kanan {
     // starts up so we try setting the requested style multiple times over multiple
     // frames in the onFrame callback instead of just doing it once in apply().
     void BorderlessWindow::onFrame() {
-        if (m_choice == 0 || m_setStyleCounter > 10) {
+        if (m_isChoiceFulfilled) {
             return;
         }
 
         auto wnd = g_kanan->getWindow();
 
         // Set the style.
-        SetWindowLong(wnd, GWL_STYLE, m_style);
+        if (m_changeStyle && SetWindowLong(wnd, GWL_STYLE, m_style) != m_style) {
+            return;
+        }
 
         // Move the window.
-        SetWindowPos(wnd, HWND_TOP, m_x, m_y, m_w, m_h, SWP_FRAMECHANGED);
+        if (m_changePos && SetWindowPos(wnd, HWND_TOP, m_x, m_y, m_w, m_h, SWP_FRAMECHANGED) == FALSE) {
+            return;
+        }
 
-        ++m_setStyleCounter;
+        m_isChoiceFulfilled = true;
     }
 
     void BorderlessWindow::onUI() {
@@ -75,15 +81,14 @@ namespace kanan {
             m_defaultStyle = GetWindowLong(wnd, GWL_STYLE);
         }
 
-        // If the choice is 0 just restore the default style.
-        if (m_choice == 0) {
-            SetWindowLong(wnd, GWL_STYLE, m_defaultStyle);
-            return;
-        }
-
         m_style = m_defaultStyle;
 
         switch (m_choice) {
+        case 0:
+            m_changeStyle = true;
+            m_changePos = false;
+            break;
+
         case 1: {
             RECT r{};
 
@@ -95,6 +100,9 @@ namespace kanan {
             m_h = r.bottom - r.top;
             m_style &= ~(WS_BORDER | WS_CAPTION | WS_THICKFRAME);
 
+            m_changeStyle = true;
+            m_changePos = true;
+
             break;
         }
 
@@ -103,13 +111,16 @@ namespace kanan {
             m_h = GetSystemMetrics(SM_CYSCREEN);
             m_style &= ~(WS_BORDER | WS_CAPTION | WS_THICKFRAME);
 
+            m_changeStyle = true;
+            m_changePos = true;
+
             break;
 
         default:
             break;
         }
 
-        // Reset the counter so that onFrame attempts to set the desired styling.
-        m_setStyleCounter = 0;
+        // At this point the style choice hasn't been fulfilled.
+        m_isChoiceFulfilled = false;
     }
 }

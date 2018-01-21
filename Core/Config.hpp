@@ -15,9 +15,7 @@ namespace kanan {
 
         // Helper for differentiating between boolean and arithmetic values.
         template <typename T>
-        struct is_arithmetic_not_bool : std::integral_constant<bool,
-            std::is_arithmetic_v<T> && !std::is_same_v<T, bool>>
-        {};
+        using is_arithmetic_not_bool = std::bool_constant<std::is_arithmetic_v<T> && !std::is_same_v<T, bool>>;
 
         template <typename T>
         static constexpr bool is_arithmetic_not_bool_v = is_arithmetic_not_bool<T>::value;

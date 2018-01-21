@@ -1,22 +1,22 @@
 #pragma once
 
-#include <Patch.hpp>
+#include <Windows.h>
 
 #include "Mod.hpp"
 
 namespace kanan {
-    class ShowCombatPower : public Mod {
+    class EnableMultiClient : public Mod {
     public:
-        ShowCombatPower();
+        EnableMultiClient();
 
-        void onPatchUI() override;
+        void onUI() override;
 
         void onConfigLoad(const Config& cfg) override;
         void onConfigSave(Config& cfg) override;
 
     private:
         bool m_isEnabled;
-        Patch m_patch;
+        HANDLE** m_handlePtr;
 
         void apply();
     };

@@ -1,24 +1,23 @@
 #pragma once
 
-#include <array>
-
-#include <Patch.hpp>
+#include <cstdint>
 
 #include "Mod.hpp"
 
 namespace kanan {
-    class WindowsAppearFaster : public Mod {
+    class UseDataFolder : public Mod {
     public:
-        WindowsAppearFaster();
+        UseDataFolder();
 
-        void onPatchUI() override;
+        void onUI() override;
 
         void onConfigLoad(const Config& cfg) override;
         void onConfigSave(Config& cfg) override;
 
     private:
         bool m_isEnabled;
-        std::array<Patch, 2> m_patches;
+        uintptr_t m_fileSystem;
+        int(__thiscall* m_setLookUpOrder)(uintptr_t fileSystem, int a2);
 
         void apply();
     };

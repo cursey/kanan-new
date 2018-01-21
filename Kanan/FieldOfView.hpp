@@ -1,23 +1,21 @@
 #pragma once
 
-#include <Patch.hpp>
-
 #include "Mod.hpp"
 
 namespace kanan {
-    class OneClickRevive : public Mod {
+    class FieldOfView : public Mod {
     public:
-        OneClickRevive();
+        FieldOfView();
 
-        void onPatchUI() override;
+        void onFrame() override;
+
+        void onUI() override;
 
         void onConfigLoad(const Config& cfg) override;
         void onConfigSave(Config& cfg) override;
 
     private:
+        float m_fov;
         bool m_isEnabled;
-        Patch m_patch;
-
-        void apply();
     };
 }

@@ -1,15 +1,13 @@
 #pragma once
 
-#include <array>
-
 #include <Patch.hpp>
 
-#include "Mod.hpp"
+#include "PatchMod.hpp"
 
 namespace kanan {
-    class BitmapFont : public Mod {
+    class RangedAttackSwap : public PatchMod {
     public:
-        BitmapFont();
+        RangedAttackSwap();
 
         void onPatchUI() override;
 
@@ -17,8 +15,8 @@ namespace kanan {
         void onConfigSave(Config& cfg) override;
 
     private:
-        bool m_isEnabled;
-        std::array<Patch, 4> m_patches;
+        Patch m_patch;
+        int m_choice;
 
         void apply();
     };

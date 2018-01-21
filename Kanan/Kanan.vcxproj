@@ -9,14 +9,6 @@
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug|x64">
-      <Configuration>Debug</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|x64">
-      <Configuration>Release</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -38,19 +30,6 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -62,12 +41,6 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -77,11 +50,12 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Core;$(SolutionDir)Dependencies/ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;$(SolutionDir)Dependencies/ImGui;$(SolutionDir)Dependencies/Json;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PreprocessorDefinitions>NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeTypeInfo>
       </RuntimeTypeInfo>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -89,13 +63,19 @@
       <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>ws2_32.lib;MinHook.lib;ImGui.lib;Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>copy "$(ProjectDir)Patches.json" "$(OutDir)Patches.json"</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Copying Patches.json to output directory</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Core;$(SolutionDir)Dependencies/ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;$(SolutionDir)Dependencies/ImGui;$(SolutionDir)Dependencies/Json;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PreprocessorDefinitions>NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeTypeInfo>
@@ -105,52 +85,25 @@
       <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>ws2_32.lib;MinHook.lib;ImGui.lib;Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Core;$(SolutionDir)Dependencies/ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-      <PreprocessorDefinitions>NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeTypeInfo>
-      </RuntimeTypeInfo>
-    </ClCompile>
-    <Link>
-      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>ws2_32.lib;MinHook.lib;ImGui.lib;Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Core;$(SolutionDir)Dependencies/ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-      <PreprocessorDefinitions>NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeTypeInfo>
-      </RuntimeTypeInfo>
-    </ClCompile>
-    <Link>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>ws2_32.lib;MinHook.lib;ImGui.lib;Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
+    <PostBuildEvent>
+      <Command>copy "$(ProjectDir)Patches.json" "$(OutDir)Patches.json"</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Copying Patches.json to output directory</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AutoSetMTU.cpp" />
-    <ClCompile Include="BitmapFont.cpp" />
     <ClCompile Include="BorderlessWindow.cpp" />
+    <ClCompile Include="ColorAltText.cpp" />
     <ClCompile Include="D3D9Hook.cpp" />
     <ClCompile Include="DInputHook.cpp" />
     <ClCompile Include="DisableNagle.cpp" />
-    <ClCompile Include="ElfLagFix.cpp" />
+    <ClCompile Include="EnableMultiClient.cpp" />
     <ClCompile Include="EntityViewer.cpp" />
+    <ClCompile Include="EquipmentOverride.cpp" />
+    <ClCompile Include="FieldOfView.cpp" />
+    <ClCompile Include="FreezeTimeOfDay.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Kanan.cpp" />
     <ClCompile Include="KananInit.cpp" />
@@ -158,20 +111,23 @@
     <ClCompile Include="KItem.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="Mods.cpp" />
-    <ClCompile Include="OneClickRevive.cpp" />
-    <ClCompile Include="ShowCombatPower.cpp" />
-    <ClCompile Include="WindowsAppearFaster.cpp" />
+    <ClCompile Include="PatchMod.cpp" />
+    <ClCompile Include="RangedAttackSwap.cpp" />
+    <ClCompile Include="UseDataFolder.cpp" />
     <ClCompile Include="WindowsMessageHook.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AutoSetMTU.hpp" />
-    <ClInclude Include="BitmapFont.hpp" />
     <ClInclude Include="BorderlessWindow.hpp" />
+    <ClInclude Include="ColorAltText.hpp" />
     <ClInclude Include="D3D9Hook.hpp" />
     <ClInclude Include="DInputHook.hpp" />
     <ClInclude Include="DisableNagle.hpp" />
-    <ClInclude Include="ElfLagFix.hpp" />
+    <ClInclude Include="EnableMultiClient.hpp" />
     <ClInclude Include="EntityViewer.hpp" />
+    <ClInclude Include="EquipmentOverride.hpp" />
+    <ClInclude Include="FieldOfView.hpp" />
+    <ClInclude Include="FreezeTimeOfDay.hpp" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="Kanan.hpp" />
     <ClInclude Include="KCharacter.hpp" />
@@ -180,10 +136,13 @@
     <ClInclude Include="Mabinogi.hpp" />
     <ClInclude Include="Mod.hpp" />
     <ClInclude Include="Mods.hpp" />
-    <ClInclude Include="OneClickRevive.hpp" />
-    <ClInclude Include="ShowCombatPower.hpp" />
-    <ClInclude Include="WindowsAppearFaster.hpp" />
+    <ClInclude Include="PatchMod.hpp" />
+    <ClInclude Include="RangedAttackSwap.hpp" />
+    <ClInclude Include="UseDataFolder.hpp" />
     <ClInclude Include="WindowsMessageHook.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Patches.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

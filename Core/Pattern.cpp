@@ -2,6 +2,7 @@
 
 #include <Windows.h>
 
+#include "Memory.hpp"
 #include "Pattern.hpp"
 
 using namespace std;
@@ -23,37 +24,10 @@ namespace kanan {
         return 0;
     }
 
-    Pattern::Pattern(string pattern)
+    Pattern::Pattern(const string& pattern)
         : m_pattern{}
     {
-        // Remove spaces from the pattern string.
-        pattern.erase(remove_if(begin(pattern), end(pattern), isspace), end(pattern));
-
-        auto length = pattern.length();
-
-        for (size_t i = 0; i < length;) {
-            auto p1 = pattern[i];
-
-            if (p1 != '?') {
-                // Bytes require 2 hex characters to encode, make sure we don't read
-                // past the end of the pattern string attempting to read the next char.
-                if (i + 1 >= length) {
-                    break;
-                }
-
-                auto p2 = pattern[i + 1];
-                auto value = toByte(p1) << 4 | toByte(p2);
-
-                m_pattern.emplace_back(value);
-
-                i += 2;
-            }
-            else {
-                // Wildcard's (?'s) get encoded as a -1.
-                m_pattern.emplace_back(-1);
-                i += 1;
-            }
-        }
+        m_pattern = move(buildPattern(pattern));
     }
 
     optional<uintptr_t> Pattern::find(uintptr_t start, size_t length) {
@@ -65,7 +39,8 @@ namespace kanan {
             auto failedToMatch = false;
 
             // Make sure the address is readable.
-            if (IsBadReadPtr((const void*)i, patternLength) != FALSE) {
+            //if (IsBadReadPtr((const void*)i, patternLength) != FALSE) {
+            if (!isGoodReadPtr(i, patternLength)) {
                 i += patternLength - 1;
                 continue;
             }
@@ -85,5 +60,39 @@ namespace kanan {
         }
 
         return {};
+    }
+
+    vector<int16_t> buildPattern(string patternStr) {
+        // Remove spaces from the pattern string.
+        patternStr.erase(remove_if(begin(patternStr), end(patternStr), isspace), end(patternStr));
+
+        auto length = patternStr.length();
+        vector<int16_t> pattern{};
+
+        for (size_t i = 0; i < length;) {
+            auto p1 = patternStr[i];
+
+            if (p1 != '?') {
+                // Bytes require 2 hex characters to encode, make sure we don't read
+                // past the end of the pattern string attempting to read the next char.
+                if (i + 1 >= length) {
+                    break;
+                }
+
+                auto p2 = patternStr[i + 1];
+                auto value = toByte(p1) << 4 | toByte(p2);
+
+                pattern.emplace_back(value);
+
+                i += 2;
+            }
+            else {
+                // Wildcard's (?'s) get encoded as a -1.
+                pattern.emplace_back(-1);
+                i += 1;
+            }
+        }
+
+        return pattern;
     }
 }

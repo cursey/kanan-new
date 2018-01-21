@@ -1,0 +1,764 @@
+[
+    {
+        "name": "Show Combat Power",
+        "desc": "Shows the combat power of players and enemies.\nCredits: Rydian",
+        "category": "Information",
+        "patches": [
+            {
+                "pattern": "0F 85 ? ? ? ? 8B 97 ? ? ? ? 8B 87",
+                "patch": "90 90 90 90 90 90"
+            }
+        ]
+    },
+    {
+        "name": "Use Bitmap Font",
+        "desc": "Uses a sharper and much faster to render font.\nCredits: Blade3575",
+        "category": "Text",
+        "patches": [
+            {
+                "pattern": "74 0D 8B 45 08 50 8B CB E8 ? ? ? ? EB 0B",
+                "patch": "90 90"
+            },
+            {
+                "pattern": "75 3D 83 BE ? ? ? ? ?",
+                "patch": "EB"
+            },
+            {
+                "pattern": "74 25 80 7B 73 00",
+                "patch": "EB"
+            },
+            {
+                "pattern": "0F 84 ? ? ? ? 8B 0D ? ? ? ? E8 ? ? ? ? 57",
+                "patch": "90 90 90 90 90 90 ? ? ? ? ? ? 90 90 90 B0 01 ? ? ? ? EB"
+            }
+        ]
+    },
+    {
+        "name": "Elf Lag Fix",
+        "desc": "Removes lag elves have with archery.\nCredits: Blade3575",
+        "category": "Fixes",
+        "patches": [
+            {
+                "pattern": "55 8B EC 56 57 8B F9 8B 07 8B 50 0C FF D2 8B C8",
+                "patch": "32 C0 C2 04 00"
+            }
+        ]
+    },
+    {
+        "name": "Windows Appear Faster",
+        "desc": "Various interface windows will appear faster.\nCredits: Step29",
+        "category": "Speedup",
+        "patches": [
+            {
+                "pattern": "74 ? E8 ? ? ? ? 85 C0 74 ? F6 46 14 ? 75 ? 8B 10 8B C8 8B 82 74 01 00 00 FF D0 84 C0 75 ? 83 BE A8 00 00 00 ? C6 86 A4 00 00 00 ? 75 ? B9 ? ? ? ? E8 ? ? ? ? 89 86 A8 00 00 00 8B 4D 08",
+                "patch": "EB"
+            },
+            {
+                "pattern": "8B 4D 18 6A ? 51 8B 8E A8 00 00 00",
+                "patch": "31 C9 90"
+            }
+        ]
+    },
+    {
+        "name": "One Click Revive",
+        "desc": "Lets you revive by just clicking 'Revive Here' without the confirmation dialog.\nCredits: Step29",
+        "category": "Speedup",
+        "patches": [
+            {
+                "pattern": "0F 86 ? ? ? ? 8B 4D E8 8B 11",
+                "patch": "90 E9"
+            }
+        ]
+    },
+    {
+        "name": "Disable Mount Timeout",
+        "desc": "Lets you mount/dismount your pet as fast as you want.\nCredits: Licat",
+        "category": "Speedup",
+        "patches": [
+            {
+                "pattern": "89 90 5C 02 00 00",
+                "patch": "90 90 90 90 90 90"
+            }
+        ]
+    },
+    {
+        "name": "Unlimited Zoom",
+        "desc": "Lets you zoom in and out as far as you want.",
+        "category": "Graphics",
+        "patches": [
+            {
+                "pattern": "7A 05 D9 5D 08 EB 02 DD D8 D9 45 08 D9 45 F8",
+                "patch": "EB"
+            },
+            {
+                "pattern": "7A 05 D9 5D 08 EB 02 DD D8 D9 45 08 D9 45 F8",
+                "offset": 22,
+                "patch": "EB"
+            }
+        ]
+    },
+    {
+        "name": "Logout In Conversation",
+        "desc": "Allows you to logout in the middle of a conversation with an NPC.",
+        "category": "Fixes",
+        "patches": [
+            {
+                "pattern": "84 C0 74 19 B8 ? ? ? ? 8B 4D F4 64 89 0D ? ? ? ? 59 5F 5E 5B 8B E5 5D C2 04 00",
+                "offset": 2,
+                "patch": "EB"
+            }
+        ]
+    },
+    {
+        "name": "Allow Moving To Same Channel",
+        "desc": "Allows you to move to the same channel you're currently on.",
+        "category": "Speedup",
+        "patches": [
+            {
+                "pattern": "0F 84 ? ? ? ? 68 ? ? ? ? 8D 4D DC E8 ? ? ? ? C6 45 FC ? 8D 55 DC 52 8D 45 B4",
+                "patch": "90 E9"
+            }
+        ]
+    },
+    {
+        "name": "Disable Censorship",
+        "desc": "Disables the word filter for your outgoing chat.",
+        "category": "Quality of Life",
+        "patches": [
+            {
+                "pattern": "0F 84 ? ? ? ? 80 7D F3 00 0F 84 ? ? ? ? 85 D2",
+                "patch": "90 E9"
+            }
+        ]
+    },
+    {
+        "name": "Disable Channel Move Denial",
+        "desc": "Allows you change channel while in conversation with an NPC.",
+        "category": "Speedup",
+        "patches": [
+            {
+                "pattern": "0F 84 ? ? ? ? 89 5D F0 89 5D FC 8B CF E8 ? ? ? ? 8B 10",
+                "patch": "90 E9"
+            }
+        ]
+    },
+    {
+        "name": "Disable Channel Move Description",
+        "desc": "Hides the warning when selecting which channel to change to.",
+        "category": "Speedup",
+        "patches": [
+            {
+                "pattern": "6A 01 53 53 6A 01 53 6A 01 56 8D 4D DC",
+                "patch": "90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90"
+            }
+        ]
+    },
+    {
+        "name": "Disable Logout Penalty Msg",
+        "desc": "Automatically skips the logout penalty warning message if you've recently been in combat.",
+        "category": "Speedup",
+        "patches": [
+            {
+                "pattern": "0F 84 ? ? ? ? 88 5D F2 88 5D F3",
+                "patch": "90 E9"
+            }
+        ]
+    },
+    {
+        "name": "Disable Skill Rankup Window",
+        "desc": "Skips the popup after you advance a skill.",
+        "category": "Interface",
+        "patches": [
+            {
+                "pattern": "8B F0 33 DB 3B F3 75 16 32 C0",
+                "offset": 6,
+                "patch": "90 90"
+            },
+            {
+                "pattern": "E8 ? ? ? ? 85 C0 0F 84 ? ? ? ? 8B 10 8B 35",
+                "offset": 7,
+                "patch": "90 E9"
+            }
+        ]
+    },
+    {
+        "name": "Infinite Party Ad Time",
+        "desc": "Keeps your party ad open until you choose to close it.",
+        "category": "Quality of Life",
+        "patches": [
+            {
+                "pattern": "55 8B EC 56 8B F1 8B 46 64 83 78 08 00 74 32",
+                "offset": 13,
+                "patch": "EB"
+            }
+        ]
+    },
+    {
+        "name": "Remove Dungeon Fog",
+        "desc": "Remove the fog on the map while in dungeons, automatically revealing it.",
+        "category": "Quality of Life",
+        "patches": [
+            {
+                "pattern": "0F B6 41 05 C1 E8 02 83 E0 01 C3",
+                "patch": "33 C0 C3 90 90 90 90 90 90 90 90"
+            }
+        ]
+    },
+    {
+        "name": "Disable Screen Shake",
+        "desc": "Stops the screen from shaking when using Fireball, summoning a dragon, etc.",
+        "category": "Graphics",
+        "patches": [
+            {
+                "pattern": "D9 01 8B 46 64",
+                "patch": "D9 EE"
+            },
+            {
+                "pattern": "D9 01 8B 46 64",
+                "offset": 9,
+                "patch": "D9 EE 90"
+            },
+            {
+                "pattern": "D9 01 8B 46 64",
+                "offset": 15,
+                "patch": "D9 EE 90"
+            },
+            {
+                "pattern": "D9 01 8B 46 64",
+                "offset": 21,
+                "patch": "D9 EE 90"
+            }
+        ]
+    },
+    {
+        "name": "Always Trans Collect Mode",
+        "desc": "Automatically enable Transformation Mastery's Collect Mode.",
+        "category": "Quality of Life",
+        "patches": [
+            {
+                "pattern": "38 5F 78 0F 84 CF 02 00 00 8B CE",
+                "offset": 4,
+                "patch": "85"
+            }
+        ]
+    },
+    {
+        "name": "Allow Canceling Lance Counter",
+        "desc": "Allows you to cancel lance counter once loaded.",
+        "category": "Quality of Life",
+        "patches": [
+            {
+                "pattern": "55 8B EC 6A FF 68 ? ? ? ? 64 A1 ? ? ? ? 50 83 EC 0C 53 56 57 A1 ? ? ? ? 33 C5 50 8D 45 F4 64 A3 ? ? ? ? E8 ? ? ? ? 84 C0 0F 84 ? ? ? ? E8",
+                "patch": "B0 01 C2 04 00"
+            }
+        ]
+    },
+    {
+        "name": "Allow Same Chat Messages",
+        "desc": "Bypass the error for repeating the same chat message.",
+        "category": "Quality of Life",
+        "patches": [
+            {
+                "pattern": "0F 85 ? ? ? ? 33 FF C6 45 F3 01",
+                "patch": "90 90 90 90 90 90"
+            },
+            {
+                "pattern": "0F 85 ? ? ? ? 33 FF 80 7D 10 00",
+                "patch": "90 90 90 90 90 90"
+            }
+        ]
+    },
+    {
+        "name": "Allow Rapid Chat Messages",
+        "desc": "Bypass the error message for chatting too quickly.",
+        "category": "Quality of Life",
+        "patches": [
+            {
+                "pattern": "76 B0 68 ? ? ? ? 8D 4D DC",
+                "patch": "EB"
+            }
+        ]
+    },
+    {
+        "name": "Enable Chat To Mini-gamers",
+        "desc": "Allow you to start a chat with friends who have their status set to In Mini-game.",
+        "category": "Quality of Life",
+        "patches": [
+            {
+                "pattern": "75 13 8D 4D 08 56",
+                "patch": "EB"
+            }
+        ]
+    },
+    {
+        "name": "Force Client Side DevCAT",
+        "desc": "Enables client side effects provided by the DevCAT title.\nNOTE: This mod can cause random issues, use with caution!",
+        "category": "Information",
+        "patches": [
+            {
+                "pattern": "74 21 8B 16 8B 82 94 00 00 00 8B CE",
+                "patch": "EB"
+            }
+        ]
+    },
+    {
+        "name": "Disable Screen Flash",
+        "desc": "Disables white screen flashes from occuring while loading or executing certain skills.",
+        "category": "Graphics",
+        "patches": [
+            {
+                "pattern": "55 1C 53 ? ? ? ? ? ? ? ? 56",
+                "offset": 2,
+                "patch": "50"
+            }
+        ]
+    },
+    {
+        "name": "Allow Dungeon Map Resize",
+        "desc": "Lets you resize the map while inside dungeons.",
+        "category": "Interface",
+        "patches": [
+            {
+                "pattern": "C2 8D ? ? ? ? ? ? B8 B4 00 00 00",
+                "offset": 9,
+                "patch": "FF"
+            },
+            {
+                "pattern": "BF B4 00 00 00 6A",
+                "offset": 1,
+                "patch": "19"
+            }
+        ]
+    },
+    {
+        "name": "Allow FSAA (Setting)",
+        "desc": "Enables the option to turn on FSAA in Mabi's option menu.\nNOTE: that the setting only takes effect in full screen.",
+        "category": "Graphics",
+        "patches": [
+            {
+                "pattern": "53 FF D2 8B 0D ? ? ? ? 6A 0C E8 ? ? ? ? 68 ? ? ? ? 89 45 D0",
+                "patch": "90 90 90"
+            }
+        ]
+    },
+    {
+        "name": "Allow Interface While Dead",
+        "desc": "Allows you to interact with your entire user interface while unconcious.",
+        "category": "Interface",
+        "patches": [
+            {
+                "pattern": "FF 87 ? ? ? ? EB 11",
+                "patch": "90 90 90 90 90 90"
+            }
+        ]
+    },
+    {
+        "name": "Allow Minimap Zoom",
+        "desc": "Allows zooming out on all minimaps.",
+        "category": "Interface",
+        "patches": [
+            {
+                "pattern": "89 4E 74 80 78 40 00 74 16",
+                "offset": 1,
+                "patch": "6E"
+            }
+        ]
+    },
+    {
+        "name": "Increase Alt Text Distance",
+        "desc": "Allows you to see name tags while holding down ALT from much further away.",
+        "category": "Text",
+        "patches": [
+            {
+                "pattern": "0F 85 ? ? ? ? D9 ? D9 ? ? D8 ? DF E0 F6 C4 ?",
+                "patch": "90 90 90 90 90 90"
+            }
+        ]
+    },
+    {
+        "name": "Disable Fighter Forced Interface",
+        "desc": "While in hide interface mode, using chain combo fighter skills will turn the interface back on.\nThis disables this trigger, persisting the interface to stay hidden",
+        "category": "Graphics",
+        "patches": [
+            {
+                "pattern": "83 79 44 01 75 09 6A 00 6A 00 E8",
+                "offset": 4,
+                "patch": "EB"
+            },
+            {
+                "pattern": "83 79 44 01 75 09 6A 00 6A 00 E8",
+                "offset": 4,
+                "patch": "EB"
+            }
+        ]
+    },
+    {
+        "name": "Fix Pet Note Cursor",
+        "desc": "Causes the cursor to jump to the end when editing a pet note, allowing you to erase what was previously written.",
+        "category": "Fixes",
+        "patches": [
+            {
+                "pattern": "C7 45 08 00 00 00 00 FF 86 10 01 00 00",
+                "offset": 7,
+                "patch": "01 AE"
+            }
+        ]
+    },
+    {
+        "name": "Enable Free Indoor Camera",
+        "desc": "Allows you to freely rotate the camera while indoors.",
+        "category": "Graphics",
+        "patches": [
+            {
+                "pattern": "57 8B 7D 08 0F 84 22 02 00 00",
+                "offset": 4,
+                "patch": "90 E9"
+            }
+        ]
+    },
+    {
+        "name": "Hide Main Titles",
+        "desc": "Hides all main titles for all players, pets and enemies\nNOTE: This includes ancients",
+        "category": "Text",
+        "patches": [
+            {
+                "pattern": "08 00 66 8B 41 10 C3",
+                "offset": 2,
+                "patch": "31 C0 90 90"
+            }
+        ]
+    },
+    {
+        "name": "Hide Second Titles",
+        "desc": "Hides all second titles for all players.",
+        "category": "Text",
+        "patches": [
+            {
+                "pattern": "C1 E9 14 F6 C1 01 75 ? 8B",
+                "offset": 6,
+                "patch": "EB"
+            }
+        ]
+    },
+    {
+        "name": "Hide NPC Curtains",
+        "desc": "Hides the upper and lower black curtains that show up when talking to NPCs.",
+        "category": "Graphics",
+        "patches": [
+            {
+                "pattern": "55 8B EC 8A 45 08 56 8B F1 38 06",
+                "patch": "B0 00 C2 04 00 90 90 90 90 90 90"
+            }
+        ]
+    },
+    {
+        "name": "Hide Objects",
+        "desc": "Stops all objects from loading.",
+        "category": "Graphics",
+        "patches": [
+            {
+                "pattern": "39 78 0C 0F 94 C0 84 C0 0F 84 92 00 00 00 8B 45",
+                "offset": 8,
+                "patch": "90 E9"
+            }
+        ]
+    },
+    {
+        "name": "Allow Hotkey For Any Item",
+        "desc": "Allows usable items to be hotkeyed.",
+        "category": "Quality of Life",
+        "patches": [
+            {
+                "pattern": "84 C0 74 06 B0 01 5D C2 04 00 32 C0 5D C2 04 00 CC",
+                "offset": 10,
+                "patch": "B0 01"
+            }
+        ]
+    },
+    {
+        "name": "Ignore Maintain Frame Number",
+        "desc": "Ignore the maintain frame setting during character minimization so it always minimizes.\nNOTE: This makes the setting active only if you have it turned on.",
+        "category": "Speedup",
+        "patches": [
+            {
+                "pattern": "89 4E 50 8B 57 54 89 56 54 0F B6 47 58 88 46 58 0F B6 4F 59",
+                "offset": 1,
+                "patch": "6E"
+            }
+        ]
+    },
+    {
+        "name": "Disable Translucency Changes",
+        "desc": "Stops players and objects from becoming translucent when blocking the view of your character.",
+        "category": "Graphics",
+        "patches": [
+            {
+                "pattern": "39 70 04 75 39 3B FE",
+                "offset": 3,
+                "patch": "90 90"
+            }
+        ]
+    },
+    {
+        "name": "Clean Up Title Menu",
+        "desc": "Removes all unknown titles (???) in the title selection menu.",
+        "category": "Interface",
+        "patches": [
+            {
+                "pattern": "85 C0 0F 88 ? ? ? ? 83 F8 01 7E ? 83 F8 02 0F 85 ? ? ? ? 8B 0D",
+                "offset": 3,
+                "patch": "8A"
+            },
+            {
+                "pattern": "85 C0 0F 88 ? ? ? ? 83 F8 01 7E ? 83 F8 02 0F 85 ? ? ? ? 8B 0D",
+                "offset": 11,
+                "patch": "7A"
+            },
+            {
+                "pattern": "85 C0 0F 88 ? ? ? ? 83 F8 01 7E ? 83 F8 02 0F 85 ? ? ? ? 8B 0D",
+                "offset": 17,
+                "patch": "84"
+            }
+        ]
+    },
+    {
+        "name": "Show Clock Minutes",
+        "desc": "Updates the in-game clock on a 1 minute basis as opposed to every 10 minutes.",
+        "category": "Interface",
+        "patches": [
+            {
+                "pattern": "89 45 C8 39 9F 58 01 00 00",
+                "patch": "90 90 90"
+            },
+            {
+                "pattern": "89 4D C8 39 9F 58 01 00 00",
+                "patch": "90 90 90"
+            }
+        ]
+    },
+    {
+        "name": "Show Mission Timer Seconds",
+        "desc": "Updates the timer in shadow missions every 1 second instead of every 15.",
+        "category": "Interface",
+        "patches": [
+            {
+                "pattern": "B8 ? ? ? ? F7 E6 C1 EA 03 42",
+                "patch": "90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90"
+            },
+            {
+                "pattern": "83 F8 0F 0F 97 C0",
+                "offset": 2,
+                "patch": "00"
+            },
+            {
+                "pattern": "6A 0F 83 DE 00",
+                "offset": 1,
+                "patch": "01"
+            },
+            {
+                "pattern": "C1 E6 04 68 ? ? ? ? 8D 4D EC",
+                "patch": "90 90 90"
+            },
+            {
+                "pattern": "C1 E6 04 68 ? ? ? ? 8D 4D EC",
+                "offset": 11,
+                "patch": "90 90"
+            }
+        ]
+    },
+    {
+        "name": "Mute Commerce Imp",
+        "desc": "Disables chat from the trade imp while commercing.",
+        "category": "Interface",
+        "patches": [
+            {
+                "pattern": "8B ? ? 03 ? ? 3B ? 08 0F 83",
+                "offset": 9,
+                "patch": "90 E9"
+            }
+        ]
+    },
+    {
+        "name": "Speed Up NPC Text",
+        "desc": "Speed up dialogues while chatting to NPCs, making them render their text instantly.",
+        "category": "Speedup",
+        "patches": [
+            {
+                "pattern": "8B 08 33 FF 3B CF 76 2A",
+                "offset": 6,
+                "patch": "EB"
+            }
+        ]
+    },
+    {
+        "name": "Skip Personal Shop Creation Message",
+        "desc": "Automatically confirms the shop creation message.",
+        "category": "Quality of Life",
+        "patches": [
+            {
+                "pattern": "52 53 6A ? 53 53 6A ? 53 6A ? 53 53 8D 45 E4 50 E8 ? ? ? ? C6 45 FC ? 8B 4D EC 3B CB 74 ? E8 ? ? ? ? 89 5D EC C6 45 FC ? 8B 4D E4 3B CB 74 ? E8 ? ? ? ? 89 5D E4 C6 45 FC ?",
+                "patch": "90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90"
+            }
+        ]
+    },
+    {
+        "name": "Disable Sky Rendering",
+        "desc": "Stops the sky from being rendered in the background.",
+        "category": "Graphics",
+        "patches": [
+            {
+                "pattern": "74 42 8B 4E 04 8B 11 8B 82 E4 00 00 00 6A 04 FF D0 8B C8 E8",
+                "patch": "EB"
+            },
+            {
+                "pattern": "8B 4E 30 85 C9 0F 84 91 00 00 00 E8",
+                "offset": 5,
+                "patch": "90 E9"
+            }
+        ]
+    },
+    {
+        "name": "Enable Right-Clicking Self",
+        "desc": "Allows you to right-click yourself",
+        "category": "Interface",
+        "patches": [
+            {
+                "pattern": "0F 85 ? ? ? ? 3B D7 0F 85 ? ? ? ? 8B 8E 90 00 00 00",
+                "patch": "90 E9"
+            }
+        ]
+    },
+    {
+        "name": "Show Negative HP When Deadly",
+        "desc": "Shows what your negative HP actually is when you're in DEADLY status.",
+        "category": "Information",
+        "patches": [
+            {
+                "pattern": "75 18 68 ? ? ? ? 8D 8D",
+                "patch": "EB"
+            },
+            {
+                "pattern": "75 07 68 ? ? ? ? EB 1F 6A 0A 68 ? ? ? ? 8D 8D ? ? ? ? 51 53",
+                "patch": "EB"
+            },
+            {
+                "pattern": "75 07 68 ? ? ? ? EB 1F 6A 0A 68 ? ? ? ? 8D 8D ? ? ? ? 51 50",
+                "patch": "EB"
+            },
+            {
+                "pattern": "33 DB 85 F6 75 1C",
+                "patch": "90 90"
+            },
+            {
+                "pattern": "33 DB 85 FF 75 0B",
+                "patch": "90 90"
+            },
+            {
+                "pattern": "C7 85 ? ? ? ? ? ? ? ? 8B 85 ? ? ? ? 85 F6",
+                "patch": "90 90 90 90 90 90 90 90 90 90"
+            }
+        ]
+    },
+    {
+        "name": "Show Item Class",
+        "desc": "Toggles on the dev item class ID and attribute flag view.\nNOTE: The AttrActionFlag denotes tradability of the item class.",
+        "category": "Information",
+        "patches": [
+            {
+                "pattern": "66 3B C1 0F 85 ? 02 00 00 68 ? ? ? ? B9",
+                "offset": 3,
+                "patch": "90 90 90 90 90 90"
+            }
+        ]
+    },
+    {
+        "name": "Show Item Trade Price",
+        "desc": "Shows the price of the item if you were to sell it to an NPC.",
+        "category": "Information",
+        "patches": [
+            {
+                "pattern": "0F 85 ? ? ? ? 68 ? ? ? ? 8D 4D F0 E8 ? ? ? ? 68 ? ? ? ? 8D 4D D0",
+                "patch": "90 90 90 90 90 90"
+            }
+        ]
+    },
+    {
+        "name": "Skip Graphics Card Message",
+        "desc": "Skips the message saying the graphics card installed on your system isn't good enough.",
+        "category": "Quality of Life",
+        "patches": [
+            {
+                "pattern": "83 C4 08 84 C0 75 7F 8D",
+                "offset": 5,
+                "patch": "EB"
+            }
+        ]
+    },
+    {
+        "name": "Enable Talking to Unequipped Ego",
+        "desc": "Lets you talk to your ego even when its not equipped.",
+        "category": "Quality of Life",
+        "patches": [
+            {
+                "pattern": "0F 85 90 00 00 00 68 ? ? ? ? 8D 4D DC E8",
+                "patch": "90 E9"
+            }
+        ]
+    },
+    {
+        "name": "Enable NPC Equipment View",
+        "desc": "Adds the option to view the equipment of NPCs and monsters.",
+        "category": "Information",
+        "patches": [
+            {
+                "pattern": "84 C0 0F 85 A7 ? ? ? 8B CF",
+                "patch": "38"
+            },
+            {
+                "pattern": "84 C0 0F 85 A7 ? ? ? 8B CF",
+                "offset": 3,
+                "patch": "8B"
+            }
+        ]
+    },
+    {
+        "name": "Disable Reward Window",
+        "desc": "Removes the reward window that shows up when acquiring items, stats or exp.",
+        "category": "Interface",
+        "patches": [
+            {
+                "pattern": "3B D6 0F 85 ? ? ? ? 33 DB",
+                "patch": "39 DB 0F 84"
+            }
+        ]
+    },
+    {
+        "name": "Zero Fog Distance",
+        "desc": "Stops fog from rendering in the distance.",
+        "category": "Graphics",
+        "patches": [
+            {
+                "pattern": "D9 45 14 5D C2 10",
+                "patch": "? EB 90",
+                "n": 0
+            },
+            {
+                "pattern": "D9 45 14 5D C2 10",
+                "patch": "? EB 90",
+                "n": 1
+            }
+        ]
+    },
+	    {
+        "name": "Center Giant Camera",
+        "desc": "Makes the giant camera act like other cameras and look at the center of the character.",
+        "category": "Quality of Life",
+        "patches": [
+            {
+                "pattern": "74 2C 68 ? ? ? ? 8B CF E8",
+                "patch": "EB",
+				"n": 1
+            }
+        ]
+    }
+]
