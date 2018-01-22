@@ -16,9 +16,9 @@ namespace kanan {
 
 	private:
 		Patch m_patch;
-		int m_size;
+		short m_choice;
 		unsigned char m_originalByte;
 
-		void applyPatch();
+		void apply();
 	};
 }

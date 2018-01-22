@@ -4,14 +4,13 @@
 
 #include "Log.hpp"
 #include "TTFFontSize.hpp"
-#include <stdlib.h>
 
 using namespace std;
 
 namespace kanan {
 	TTFFontSize::TTFFontSize()
 		: PatchMod{ "TTF Font Size", "" },
-		m_size{},
+		m_choice{},
 		m_patch{},
 		m_originalByte{}
 	{
@@ -34,33 +33,32 @@ namespace kanan {
 		}
 
 		ImGui::Text("TTF Original Font Size: %d", m_originalByte);
-		if (ImGui::InputInt("TTF Font Size", (int*)&m_size)) {
-			if (m_size < 0) m_size = 0;
-			else if (m_size > 255) m_size = 255;
-			applyPatch();
+		if (ImGui::InputInt("TTF Font Size", (int*)&m_choice)) {
+			if (m_choice < 0) m_choice = 0;
+			else if (m_choice > 255) m_choice = 255;
+			apply();
 		}
 	}
 
 	void TTFFontSize::onConfigLoad(const Config& cfg) {
-		m_size = cfg.get<int>("TTFFontSize.Size").value_or(0);
+		m_choice = cfg.get<int>("TTFFontSize.Choice").value_or(0);
 
-		if (m_size != 0) {
-			applyPatch();
+		if (m_choice != 0) {
+			apply();
 		}
 	}
 
 	void TTFFontSize::onConfigSave(Config& cfg) {
-		cfg.set<int>("TTFFontSize.Size", m_size);
+		cfg.set<int>("TTFFontSize.Choice", m_choice);
 	}
 
-	void TTFFontSize::applyPatch() {
+	void TTFFontSize::apply() {
 		if (m_patch.address == 0) {
 			return;
 		}
 
 		log("Applying TTFFontSize...");
-		short sizeByte = m_size;
-		m_patch.bytes = { sizeByte };
+		m_patch.bytes = { m_choice };
 
 		patch(m_patch);
 	}
