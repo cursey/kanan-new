@@ -12,7 +12,7 @@ namespace kanan {
     static EquipmentOverride* g_equipmentOverride{ nullptr };
 
     int convertInventoryIDToEquipmentSlot(int inventoryID) {
-        static auto fn = (int(__cdecl*)(int))scan("client.exe", "55 8B EC 8B 45 08 83 C0 ? 83 F8 ? 77 ? 0F B6 80 CC 18 69 01").value_or(0);
+        /*static auto fn = (int(__cdecl*)(int))scan("client.exe", "55 8B EC 8B 45 08 83 C0 ? 83 F8 ? 77 ? 0F B6 80 CC 18 69 01").value_or(0);
         static bool logged{ false };
 
         if (!logged) {
@@ -20,7 +20,75 @@ namespace kanan {
             logged = true;
         }
 
-        return (fn != nullptr) ? fn(inventoryID) : 0;
+        return (fn != nullptr) ? fn(inventoryID) : 0;*/
+
+        int a1 = inventoryID;
+
+        // Tired of the patterns breaking so here's the function strait from IDA.
+        signed int result; // eax
+
+        switch (a1)
+        {
+        case 4294967294:
+            result = 9;
+            break;
+        case 3:
+            result = 6;
+            break;
+        case 4:
+            result = 7;
+            break;
+        case 5:
+        case 43:
+            result = 1;
+            break;
+        case 6:
+        case 44:
+            result = 4;
+            break;
+        case 7:
+        case 45:
+            result = 5;
+            break;
+        case 8:
+        case 46:
+            result = 2;
+            break;
+        case 9:
+        case 47:
+            result = 8;
+            break;
+        case 10:
+            result = 10;
+            break;
+        case 11:
+            result = 11;
+            break;
+        case 12:
+        case 14:
+            result = 12;
+            break;
+        case 13:
+        case 15:
+            result = 13;
+            break;
+        case 16:
+            result = 16;
+            break;
+        case 17:
+            result = 17;
+            break;
+        case 48:
+            result = 15;
+            break;
+        case 90:
+            result = 18;
+            break;
+        default:
+            result = -1;
+            break;
+        }
+        return result;
     }
 
     EquipmentOverride::EquipmentOverride()
