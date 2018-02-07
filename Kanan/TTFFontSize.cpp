@@ -10,7 +10,7 @@ using namespace std;
 namespace kanan {
 	TTFFontSize::TTFFontSize()
 		: PatchMod{ "TTF Font Size", "" },
-		m_choice{},
+		m_choice{ 0 },
 		m_patch{},
 		m_originalByte{}
 	{
@@ -33,9 +33,13 @@ namespace kanan {
 		}
 
 		ImGui::Text("TTF Original Font Size: %d", m_originalByte);
-		if (ImGui::InputInt("TTF Font Size", (int*)&m_choice)) {
-			if (m_choice < 0) m_choice = 0;
-			else if (m_choice > 255) m_choice = 255;
+		if (ImGui::InputInt("TTF Font Size", &m_choice)) {
+			if (m_choice < 0) {
+				m_choice = 0;
+			}
+			else if (m_choice > 255) {
+				m_choice = 255;
+			}
 			apply();
 		}
 	}
@@ -45,6 +49,9 @@ namespace kanan {
 
 		if (m_choice != 0) {
 			apply();
+		}
+		else {
+			m_choice = m_originalByte;
 		}
 	}
 
@@ -58,7 +65,8 @@ namespace kanan {
 		}
 
 		log("Applying TTFFontSize...");
-		m_patch.bytes = { m_choice };
+		short choice = m_choice;
+		m_patch.bytes = { choice };
 
 		patch(m_patch);
 	}
