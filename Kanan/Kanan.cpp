@@ -236,6 +236,12 @@ namespace kanan {
             }
         }
 
+        for (auto& mod : m_mods.getMods()) {
+            if (!mod->onMessage(wnd, message, wParam, lParam)) {
+                return false;
+            }
+        }
+
         return true;
     }
 
