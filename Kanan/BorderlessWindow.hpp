@@ -21,6 +21,8 @@ namespace kanan {
         void onConfigLoad(const Config& cfg) override;
         void onConfigSave(Config& cfg) override;
 
+        bool onMessage(HWND wnd, UINT message, WPARAM wParam, LPARAM lParam) override;
+
         auto& getMonitors() {
             return m_monitors;
         }

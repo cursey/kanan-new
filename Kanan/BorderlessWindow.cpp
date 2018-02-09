@@ -134,6 +134,25 @@ namespace kanan {
         cfg.set<int>("BorderlessWindow.Monitor", m_monitorChoice);
     }
 
+    bool BorderlessWindow::onMessage(HWND wnd, UINT message, WPARAM wParam, LPARAM lParam) {
+        if (m_styleChoice == 0) {
+            return true;
+        }
+
+        switch (message) {
+        case WM_WINDOWPOSCHANGED:
+        case WM_SIZE:
+        case WM_MOVE:
+            if (m_isChoiceFulfilled) {
+                m_changeStyle = true;
+                m_changePos = true;
+                m_isChoiceFulfilled = false;
+            }
+        default:
+            return true;
+        }
+    }
+
     void BorderlessWindow::apply() {
         log("[BorderlessWindow] Applying Borderless Window settings...");
 
