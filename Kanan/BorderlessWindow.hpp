@@ -7,6 +7,12 @@
 namespace kanan {
     class BorderlessWindow : public Mod {
     public:
+        struct Monitor {
+            std::string name;
+            RECT rect;
+            RECT workRect;
+        };
+
         BorderlessWindow();
 
         void onFrame() override;
@@ -15,6 +21,10 @@ namespace kanan {
         void onConfigLoad(const Config& cfg) override;
         void onConfigSave(Config& cfg) override;
 
+        auto& getMonitors() {
+            return m_monitors;
+        }
+
     private:
         LONG m_defaultStyle;
         LONG m_style;
@@ -22,8 +32,11 @@ namespace kanan {
         bool m_changeStyle;
         bool m_changePos;
 
-        int m_choice;
+        int m_styleChoice;
         bool m_isChoiceFulfilled;
+
+        std::vector<Monitor> m_monitors;
+        int m_monitorChoice;
 
         void apply();
     };
