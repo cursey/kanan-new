@@ -749,15 +749,26 @@
             }
         ]
     },
-	    {
+        {
         "name": "Center Giant Camera",
         "desc": "Makes the giant camera act like other cameras and look at the center of the character.",
-        "category": "Quality of Life",
+        "category": "Graphics",
         "patches": [
             {
                 "pattern": "74 2C 68 ? ? ? ? 8B CF E8",
                 "patch": "EB",
-				"n": 1
+                "n": 1
+            }
+        ]
+    },
+        {
+        "name": "Disable Fullscreen Change",
+        "desc": "Prevents Alt+Enter and the Fullscreen/Windowed button from functioning.",
+        "category": "Graphics",
+        "patches": [
+            {
+                "pattern": "88 48 3C 8B 56 0C 83 C2 30 52",
+                "patch": "90 90 90"
             }
         ]
     }
