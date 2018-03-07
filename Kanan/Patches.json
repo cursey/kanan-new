@@ -771,5 +771,27 @@
                 "patch": "90 90 90"
             }
         ]
+    },
+    { 
+        "name": "Faster Networking",
+        "desc": "Reduce latency by using better networking techniques",
+        "category": "Speedup",
+        "patches": [
+            {
+                "pattern": "74 ? FF 15 ? ? ? ? 8B 53 2C",
+                "offset": 0,
+                "patch": "EB"
+            },
+            {
+                "pattern": "74 ? FF 15 ? ? ? ? 8B 4E 2C 2B 44 8E 04",
+                "offset": 0,
+                "patch": "EB"
+            },
+            {
+                "pattern": "74 ? FF 15 ? ? ? ? 8B 4E 2C 89 44 8E 04",
+                "offset": 0,
+                "patch": "EB"
+            }
+        ]
     }
 ]
