@@ -96,9 +96,16 @@ namespace kanan {
             device->SetCooperativeLevel(dinput->m_wnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE);
             device->Acquire();
 
-            dinput->m_deviceObjectData.resize(*numElements);
+            if (*numElements == -1 || data == nullptr) // detect buffer flush
+            {
+                return originalGetDeviceData(device, size, data, numElements, flags);
+            }
+            else
+            {
+                dinput->m_deviceObjectData.resize(*numElements);
 
-            originalGetDeviceData(device, size, dinput->m_deviceObjectData.data(), numElements, flags);
+                originalGetDeviceData(device, size, dinput->m_deviceObjectData.data(), numElements, flags);
+            }
 
             *numElements = 0;
 
