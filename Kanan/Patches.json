@@ -393,18 +393,6 @@
         ]
     },
     {
-        "name": "Fix Pet Note Cursor",
-        "desc": "Causes the cursor to jump to the end when editing a pet note, allowing you to erase what was previously written.",
-        "category": "Fixes",
-        "patches": [
-            {
-                "pattern": "C7 45 08 00 00 00 00 FF 86 10 01 00 00",
-                "offset": 7,
-                "patch": "01 AE"
-            }
-        ]
-    },
-    {
         "name": "Enable Free Indoor Camera",
         "desc": "Allows you to freely rotate the camera while indoors.",
         "category": "Graphics",
