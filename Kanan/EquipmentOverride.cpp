@@ -170,7 +170,7 @@ namespace kanan {
         // Filter out inventoryIDs.
         auto equipmentSlot = convertInventoryIDToEquipmentSlot(inventoryID);
 
-        if (equipmentSlot < 0 || equipmentSlot >= g_equipmentOverride->m_equipmentOverrides.size()) {
+        if (equipmentSlot < 0 || equipmentSlot >= (int)g_equipmentOverride->m_equipmentOverrides.size()) {
             return orig(equipment, EDX, inventoryID, itemID, a4, a5, color, a7, a8, a9, a10, a11);
         }
 
