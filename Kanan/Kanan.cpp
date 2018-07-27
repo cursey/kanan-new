@@ -1,5 +1,6 @@
 #include <imgui.h>
 #include <imgui_impl_dx9.h>
+#include <imgui_impl_win32.h>
 
 #include <Config.hpp>
 #include <String.hpp>
@@ -9,6 +10,8 @@
 #include "Kanan.hpp"
 
 using namespace std;
+
+IMGUI_IMPL_API LRESULT  ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 namespace kanan {
     unique_ptr<Kanan> g_kanan{ nullptr };
@@ -101,11 +104,20 @@ namespace kanan {
         //
         log("Initializing ImGui...");
 
+        IMGUI_CHECKVERSION();
+        ImGui::CreateContext();
         ImGui::GetIO().IniFilename = m_uiConfigPath.c_str();
 
-        if (!ImGui_ImplDX9_Init(m_wnd, device)) {
+        if (!ImGui_ImplWin32_Init(m_wnd)) {
             error("Failed to initialize ImGui.");
         }
+
+        if (!ImGui_ImplDX9_Init(device)) {
+            error("Failed to initialize ImGui.");
+        }
+
+        ImGui::StyleColorsDark();
+
 
         //
         // DInputHook.
@@ -149,6 +161,8 @@ namespace kanan {
         }
 
         ImGui_ImplDX9_NewFrame();
+        ImGui_ImplWin32_NewFrame();
+        ImGui::NewFrame();
 
         if (m_areModsReady) {
             // Make sure the config for all the mods gets loaded.
@@ -215,6 +229,8 @@ namespace kanan {
             }
         }
 
+        ImGui::EndFrame();
+
         // This fixes mabi's Film Style Post Shader making ImGui render as a black box.
         auto device = m_d3d9Hook->getDevice();
 
@@ -222,11 +238,12 @@ namespace kanan {
         device->SetTextureStageState(1, D3DTSS_ALPHAOP, D3DTOP_DISABLE);
 
         ImGui::Render();
+        ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
     }
 
     bool Kanan::onMessage(HWND wnd, UINT message, WPARAM wParam, LPARAM lParam) {
         if (m_isUIOpen) {
-            if (ImGui_ImplDX9_WndProcHandler(wnd, message, wParam, lParam) != 0) {
+            if (ImGui_ImplWin32_WndProcHandler(wnd, message, wParam, lParam) != 0) {
                 // If the user is interacting with the UI we block the message from going to the game.
                 auto& io = ImGui::GetIO();
 
