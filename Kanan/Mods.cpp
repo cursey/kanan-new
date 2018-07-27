@@ -19,7 +19,6 @@
 #include "UseDataFolder.hpp"
 #include "FreezeTimeOfDay.hpp"
 #include "TTFFontSize.hpp"
-#include "FriendlyNumbers.hpp"
 #include "SecondaryPassword.hpp"
 
 #include "Log.hpp"
@@ -110,7 +109,6 @@ namespace kanan {
         addMod(make_unique<EquipmentOverride>());
         addMod(make_unique<FieldOfView>());
         addMod(make_unique<FreezeTimeOfDay>());
-        addMod(make_unique<FriendlyNumbers>());
         addMod(make_unique<SecondaryPassword>());
 
         log("[Mods] Finished loading mods.");

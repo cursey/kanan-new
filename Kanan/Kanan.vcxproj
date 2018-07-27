@@ -104,7 +104,6 @@
     <ClCompile Include="EquipmentOverride.cpp" />
     <ClCompile Include="FieldOfView.cpp" />
     <ClCompile Include="FreezeTimeOfDay.cpp" />
-    <ClCompile Include="FriendlyNumbers.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Kanan.cpp" />
     <ClCompile Include="KananInit.cpp" />
@@ -132,7 +131,6 @@
     <ClInclude Include="FieldOfView.hpp" />
     <ClInclude Include="FontData.hpp" />
     <ClInclude Include="FreezeTimeOfDay.hpp" />
-    <ClInclude Include="FriendlyNumbers.hpp" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="Kanan.hpp" />
     <ClInclude Include="KCharacter.hpp" />

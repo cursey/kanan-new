@@ -105,9 +105,6 @@
     <ClCompile Include="SecondaryPassword.cpp">
       <Filter>Source Files\Mods</Filter>
     </ClCompile>
-    <ClCompile Include="FriendlyNumbers.cpp">
-      <Filter>Source Files\Mods</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D3D9Hook.hpp">
@@ -187,9 +184,6 @@
     </ClInclude>
     <ClInclude Include="FontData.hpp">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FriendlyNumbers.hpp">
-      <Filter>Header Files\Mods</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
