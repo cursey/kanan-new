@@ -1,4 +1,5 @@
 #include <imgui.h>
+#include <imgui_freetype.h>
 #include <imgui_impl_dx9.h>
 #include <imgui_impl_win32.h>
 
@@ -6,6 +7,7 @@
 #include <String.hpp>
 #include <Utility.hpp>
 
+#include "FontData.hpp"
 #include "Log.hpp"
 #include "Kanan.hpp"
 
@@ -106,7 +108,12 @@ namespace kanan {
 
         IMGUI_CHECKVERSION();
         ImGui::CreateContext();
-        ImGui::GetIO().IniFilename = m_uiConfigPath.c_str();
+
+        auto& io = ImGui::GetIO();
+
+        io.IniFilename = m_uiConfigPath.c_str();
+        io.Fonts->AddFontFromMemoryCompressedTTF(g_font_compressed_data, g_font_compressed_size, 16.0f);
+        ImGuiFreeType::BuildFontAtlas(io.Fonts, 0);
 
         if (!ImGui_ImplWin32_Init(m_wnd)) {
             error("Failed to initialize ImGui.");
@@ -117,7 +124,6 @@ namespace kanan {
         }
 
         ImGui::StyleColorsDark();
-
 
         //
         // DInputHook.

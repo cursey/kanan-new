@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{1CB31909-3D91-4F72-82EE-AA067E28EDC7}</ProjectGuid>
+    <RootNamespace>FreeType</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="freetype\config\ftconfig.h" />
+    <ClInclude Include="freetype\config\ftheader.h" />
+    <ClInclude Include="freetype\config\ftmodule.h" />
+    <ClInclude Include="freetype\config\ftoption.h" />
+    <ClInclude Include="freetype\config\ftstdlib.h" />
+    <ClInclude Include="freetype\freetype.h" />
+    <ClInclude Include="freetype\ftadvanc.h" />
+    <ClInclude Include="freetype\ftbbox.h" />
+    <ClInclude Include="freetype\ftbdf.h" />
+    <ClInclude Include="freetype\ftbitmap.h" />
+    <ClInclude Include="freetype\ftbzip2.h" />
+    <ClInclude Include="freetype\ftcache.h" />
+    <ClInclude Include="freetype\ftchapters.h" />
+    <ClInclude Include="freetype\ftcid.h" />
+    <ClInclude Include="freetype\ftdriver.h" />
+    <ClInclude Include="freetype\fterrdef.h" />
+    <ClInclude Include="freetype\fterrors.h" />
+    <ClInclude Include="freetype\ftfntfmt.h" />
+    <ClInclude Include="freetype\ftgasp.h" />
+    <ClInclude Include="freetype\ftglyph.h" />
+    <ClInclude Include="freetype\ftgxval.h" />
+    <ClInclude Include="freetype\ftgzip.h" />
+    <ClInclude Include="freetype\ftimage.h" />
+    <ClInclude Include="freetype\ftincrem.h" />
+    <ClInclude Include="freetype\ftlcdfil.h" />
+    <ClInclude Include="freetype\ftlist.h" />
+    <ClInclude Include="freetype\ftlzw.h" />
+    <ClInclude Include="freetype\ftmac.h" />
+    <ClInclude Include="freetype\ftmm.h" />
+    <ClInclude Include="freetype\ftmodapi.h" />
+    <ClInclude Include="freetype\ftmoderr.h" />
+    <ClInclude Include="freetype\ftotval.h" />
+    <ClInclude Include="freetype\ftoutln.h" />
+    <ClInclude Include="freetype\ftparams.h" />
+    <ClInclude Include="freetype\ftpfr.h" />
+    <ClInclude Include="freetype\ftrender.h" />
+    <ClInclude Include="freetype\ftsizes.h" />
+    <ClInclude Include="freetype\ftsnames.h" />
+    <ClInclude Include="freetype\ftstroke.h" />
+    <ClInclude Include="freetype\ftsynth.h" />
+    <ClInclude Include="freetype\ftsystem.h" />
+    <ClInclude Include="freetype\fttrigon.h" />
+    <ClInclude Include="freetype\fttypes.h" />
+    <ClInclude Include="freetype\ftwinfnt.h" />
+    <ClInclude Include="freetype\internal\autohint.h" />
+    <ClInclude Include="freetype\internal\cffotypes.h" />
+    <ClInclude Include="freetype\internal\cfftypes.h" />
+    <ClInclude Include="freetype\internal\ftcalc.h" />
+    <ClInclude Include="freetype\internal\ftdebug.h" />
+    <ClInclude Include="freetype\internal\ftdrv.h" />
+    <ClInclude Include="freetype\internal\ftgloadr.h" />
+    <ClInclude Include="freetype\internal\fthash.h" />
+    <ClInclude Include="freetype\internal\ftmemory.h" />
+    <ClInclude Include="freetype\internal\ftobjs.h" />
+    <ClInclude Include="freetype\internal\ftpic.h" />
+    <ClInclude Include="freetype\internal\ftpsprop.h" />
+    <ClInclude Include="freetype\internal\ftrfork.h" />
+    <ClInclude Include="freetype\internal\ftserv.h" />
+    <ClInclude Include="freetype\internal\ftstream.h" />
+    <ClInclude Include="freetype\internal\fttrace.h" />
+    <ClInclude Include="freetype\internal\ftvalid.h" />
+    <ClInclude Include="freetype\internal\internal.h" />
+    <ClInclude Include="freetype\internal\psaux.h" />
+    <ClInclude Include="freetype\internal\pshints.h" />
+    <ClInclude Include="freetype\internal\services\svbdf.h" />
+    <ClInclude Include="freetype\internal\services\svcfftl.h" />
+    <ClInclude Include="freetype\internal\services\svcid.h" />
+    <ClInclude Include="freetype\internal\services\svfntfmt.h" />
+    <ClInclude Include="freetype\internal\services\svgldict.h" />
+    <ClInclude Include="freetype\internal\services\svgxval.h" />
+    <ClInclude Include="freetype\internal\services\svkern.h" />
+    <ClInclude Include="freetype\internal\services\svmetric.h" />
+    <ClInclude Include="freetype\internal\services\svmm.h" />
+    <ClInclude Include="freetype\internal\services\svotval.h" />
+    <ClInclude Include="freetype\internal\services\svpfr.h" />
+    <ClInclude Include="freetype\internal\services\svpostnm.h" />
+    <ClInclude Include="freetype\internal\services\svprop.h" />
+    <ClInclude Include="freetype\internal\services\svpscmap.h" />
+    <ClInclude Include="freetype\internal\services\svpsinfo.h" />
+    <ClInclude Include="freetype\internal\services\svsfnt.h" />
+    <ClInclude Include="freetype\internal\services\svttcmap.h" />
+    <ClInclude Include="freetype\internal\services\svtteng.h" />
+    <ClInclude Include="freetype\internal\services\svttglyf.h" />
+    <ClInclude Include="freetype\internal\services\svwinfnt.h" />
+    <ClInclude Include="freetype\internal\sfnt.h" />
+    <ClInclude Include="freetype\internal\t1types.h" />
+    <ClInclude Include="freetype\internal\tttypes.h" />
+    <ClInclude Include="freetype\t1tables.h" />
+    <ClInclude Include="freetype\ttnameid.h" />
+    <ClInclude Include="freetype\tttables.h" />
+    <ClInclude Include="freetype\tttags.h" />
+    <ClInclude Include="ft2build.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
