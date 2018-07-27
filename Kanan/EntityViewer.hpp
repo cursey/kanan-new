@@ -4,6 +4,8 @@
 
 #include "Mod.hpp"
 
+class CEquipment;
+
 namespace kanan {
     class KCharacter;
     class KItem;
@@ -23,6 +25,7 @@ namespace kanan {
         void createItemTree();
 
         void displayCharacter(KCharacter* character);
+        void displayEquipment(CEquipment* equipment);
         void displayItem(KItem* item);
 
         double durabilityToDouble(uint32_t dura, uint32_t maxDura);
