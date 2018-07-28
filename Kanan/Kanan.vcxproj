@@ -114,6 +114,7 @@
     <ClCompile Include="PatchMod.cpp" />
     <ClCompile Include="RangedAttackSwap.cpp" />
     <ClCompile Include="SecondaryPassword.cpp" />
+    <ClCompile Include="StatusUI.cpp" />
     <ClCompile Include="TTFFontSize.cpp" />
     <ClCompile Include="UseDataFolder.cpp" />
     <ClCompile Include="WindowsMessageHook.cpp" />
@@ -142,6 +143,7 @@
     <ClInclude Include="PatchMod.hpp" />
     <ClInclude Include="RangedAttackSwap.hpp" />
     <ClInclude Include="SecondaryPassword.hpp" />
+    <ClInclude Include="StatusUI.hpp" />
     <ClInclude Include="TTFFontSize.hpp" />
     <ClInclude Include="UseDataFolder.hpp" />
     <ClInclude Include="WindowsMessageHook.hpp" />

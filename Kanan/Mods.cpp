@@ -20,6 +20,7 @@
 #include "FreezeTimeOfDay.hpp"
 #include "TTFFontSize.hpp"
 #include "SecondaryPassword.hpp"
+#include "StatusUI.hpp"
 
 #include "Log.hpp"
 
@@ -110,6 +111,7 @@ namespace kanan {
         addMod(make_unique<FieldOfView>());
         addMod(make_unique<FreezeTimeOfDay>());
         addMod(make_unique<SecondaryPassword>());
+        addMod(make_unique<StatusUI>());
 
         log("[Mods] Finished loading mods.");
     }
