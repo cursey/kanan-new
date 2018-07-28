@@ -377,9 +377,9 @@ namespace kanan {
     }
 
     void Kanan::drawAbout() {
-        ImGui::SetNextWindowSize(ImVec2{ 450.0f, 200.0f });
+        ImGui::SetNextWindowSize(ImVec2{ 475.0f, 275.0f }, ImGuiSetCond_Appearing);
 
-        if (!ImGui::Begin("About", &m_isAboutOpen, ImGuiWindowFlags_NoResize)) {
+        if (!ImGui::Begin("About", &m_isAboutOpen)) {
             ImGui::End();
             return;
         }
@@ -395,8 +395,10 @@ namespace kanan {
         ImGui::Spacing();
         ImGui::Text("Kanan uses the following third-party libraries");
         ImGui::Text("    Dear ImGui (https://github.com/ocornut/imgui)");
+        ImGui::Text("    FreeType (https://www.freetype.org/)");
         ImGui::Text("    JSON for Modern C++ (https://github.com/nlohmann/json)");
         ImGui::Text("    MinHook (https://github.com/TsudaKageyu/minhook)");
+        ImGui::Text("    Roboto Font (https://fonts.google.com/specimen/Roboto)");
 
         ImGui::End();
     }
