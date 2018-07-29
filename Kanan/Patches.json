@@ -781,5 +781,17 @@
                 "patch": "EB"
             }
         ]
+    },
+    {
+        "name":  "Disable Avon Play Curtains",
+        "desc":  "Removes the play curtains from Avon missions.\nCredits: Iceling/Koorimio",
+        "category":  "Quality of Life",
+        "patches":  [
+            {
+                "pattern": "0F 84 ? ? ? ? 8B 0E 6A ? 6A ?",
+                "offset": 0,
+                "patch": "90 E9"
+            }
+        ]
     }
 ]
