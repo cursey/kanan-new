@@ -324,6 +324,14 @@ namespace kanan {
         // Menu bar
         //
         if (ImGui::BeginMenuBar()) {
+            if (ImGui::BeginMenu("File")) {
+                if (ImGui::MenuItem("Save Config")) {
+                    saveConfig();
+                }
+
+                ImGui::EndMenu();
+            }
+
             if (ImGui::BeginMenu("View")) {
                 ImGui::MenuItem("Show Log", nullptr, &m_isLogOpen);
                 ImGui::EndMenu();
@@ -342,7 +350,9 @@ namespace kanan {
         //
         ImGui::TextWrapped(
             "Input to the game is blocked while interacting with this UI. "
-            "Press the INSERT key to toggle this UI."
+            "Press the INSERT key to toggle this UI. "
+            "Configuration is saved every time the INSERT key is used to close the UI. "
+            "You can also save the configuration by using File->Save Config. "
         );
         ImGui::Spacing();
 
