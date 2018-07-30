@@ -1,4 +1,6 @@
+#define IMGUI_DEFINE_MATH_OPERATORS
 #include <imgui.h>
+#include <imgui_internal.h>
 
 #include "Kanan.hpp"
 #include "StatusUI.hpp"
@@ -22,9 +24,19 @@ namespace kanan {
 
         ImGui::SetNextWindowSize(ImVec2{ 400.0f, 200.0f }, ImGuiSetCond_FirstUseEver);
 
-        if (!ImGui::Begin("Status", &m_isShowing)) {
-            ImGui::End();
-            return;
+        // Give the window a different style when the UI is closed indicating that
+        // the status window can't be interacted with.
+        if (g_kanan->isUIOpen()) {
+            if (!ImGui::Begin("Status", &m_isShowing, ImGuiWindowFlags_NoCollapse)) {
+                ImGui::End();
+                return;
+            }
+        }
+        else {
+            if (!ImGui::Begin("Status", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar)) {
+                ImGui::End();
+                return;
+            }
         }
 
         auto game = g_kanan->getGame();
@@ -61,9 +73,10 @@ namespace kanan {
         sprintf_s(m_mp.data(), m_mp.capacity(), "MP: %.02f/%.02f", mp, maxMP);
         sprintf_s(m_sp.data(), m_sp.capacity(), "SP: %.02f/%.02f", sp, maxSP);
 
-        ImGui::ProgressBar(hpRatio, ImVec2{ -1.0f, 0.0f }, m_hp.c_str());
-        ImGui::ProgressBar(mpRatio, ImVec2{ -1.0f, 0.0f }, m_mp.c_str());
-        ImGui::ProgressBar(spRatio, ImVec2{ -1.0f, 0.0f }, m_sp.c_str());
+        // Colors taken from Mabi's default UI in ABGR format.
+        progressBar(hpRatio, ImVec2{ -1.0f, 0.0f }, 0xFF9140CF, m_hp.c_str());
+        progressBar(mpRatio, ImVec2{ -1.0f, 0.0f }, 0xFFB66C5B, m_mp.c_str());
+        progressBar(spRatio, ImVec2{ -1.0f, 0.0f }, 0xFF20B9E9, m_sp.c_str());
 
         ImGui::End();
     }
@@ -81,5 +94,43 @@ namespace kanan {
     
     void StatusUI::onConfigSave(Config& cfg) {
         cfg.set<bool>("StatusUI.Showing", m_isShowing);
+    }
+
+    // Note: this is copied from ImGui::ProgressBar altered just to let the caller
+    // specify a color for the progress bar.
+    void StatusUI::progressBar(float fraction, const ImVec2& sizeArg, ImU32 color, const char* overlay) {
+        using namespace ImGui;
+
+        ImGuiWindow* window = GetCurrentWindow();
+        if (window->SkipItems)
+            return;
+
+        ImGuiContext& g = *GImGui;
+        const ImGuiStyle& style = g.Style;
+
+        ImVec2 pos = window->DC.CursorPos;
+        ImRect bb(pos, pos + CalcItemSize(sizeArg, CalcItemWidth(), g.FontSize + style.FramePadding.y*2.0f));
+        ItemSize(bb, style.FramePadding.y);
+        if (!ItemAdd(bb, 0))
+            return;
+
+        // Render
+        fraction = ImSaturate(fraction);
+        RenderFrame(bb.Min, bb.Max, GetColorU32(ImGuiCol_FrameBg), true, style.FrameRounding);
+        bb.Expand(ImVec2(-style.FrameBorderSize, -style.FrameBorderSize));
+        const ImVec2 fill_br = ImVec2(ImLerp(bb.Min.x, bb.Max.x, fraction), bb.Max.y);
+        RenderRectFilledRangeH(window->DrawList, bb, GetColorU32(color), 0.0f, fraction, style.FrameRounding);
+
+        // Default displaying the fraction as percentage string, but user can override it
+        char overlay_buf[32];
+        if (!overlay)
+        {
+            ImFormatString(overlay_buf, IM_ARRAYSIZE(overlay_buf), "%.0f%%", fraction * 100 + 0.01f);
+            overlay = overlay_buf;
+        }
+
+        ImVec2 overlay_size = CalcTextSize(overlay, NULL);
+        if (overlay_size.x > 0.0f)
+            RenderTextClipped(ImVec2(ImClamp(fill_br.x + style.ItemSpacing.x, bb.Min.x, bb.Max.x - overlay_size.x - style.ItemInnerSpacing.x), bb.Min.y), bb.Max, overlay, NULL, &overlay_size, ImVec2(0.0f, 0.5f), &bb);
     }
 }

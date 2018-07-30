@@ -30,6 +30,10 @@ namespace kanan {
             return m_wnd;
         }
 
+        auto isUIOpen() {
+            return m_isUIOpen;
+        }
+
     private:
         std::string m_path;
         std::string m_uiConfigPath;

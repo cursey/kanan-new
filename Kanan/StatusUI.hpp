@@ -2,6 +2,8 @@
 
 #include <string>
 
+#include <imgui.h>
+
 #include "Mod.hpp"
 
 namespace kanan {
@@ -20,5 +22,7 @@ namespace kanan {
         std::string m_hp;
         std::string m_mp;
         std::string m_sp;
+
+        void progressBar(float fraction, const ImVec2& sizeArg, ImU32 color, const char* overlay);
     };
 }
