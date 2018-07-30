@@ -93,7 +93,8 @@ namespace kanan {
 
     EquipmentOverride::EquipmentOverride()
         : m_equipmentOverrides{},
-        m_setEquipmentInfoHook{}
+        m_setEquipmentInfoHook{},
+        m_isNoFlashyEquipmentEnabled{}
     {
         log("[EquipmentOverride] Entering constructor");
 
@@ -154,10 +155,33 @@ namespace kanan {
                 }
             }
         }
+
+        if (ImGui::CollapsingHeader("No Flashy Equipment")) {
+            ImGui::TextWrapped("Disables flashy equipment dyes for all players. "
+                "After enabling or disabling this option you should change channels to see the effects on everyone.");
+            ImGui::Checkbox("Enable No Flashy Equipment", &m_isNoFlashyEquipmentEnabled);
+        }
+    }
+
+    void EquipmentOverride::onConfigLoad(const Config& cfg) {
+        m_isNoFlashyEquipmentEnabled = cfg.get<bool>("NoFlashyEquipment.Enabled").value_or(false);
+    }
+
+    void EquipmentOverride::onConfigSave(Config& cfg) {
+        cfg.set<bool>("NoFlashyEquipment.Enabled", m_isNoFlashyEquipmentEnabled);
     }
 
     void EquipmentOverride::hookedSetEquipmentInfo(CEquipment* equipment, uint32_t EDX, int inventoryID, int itemID, int a4, int a5, uint32_t* color, int a7, int * a8, int a9, int a10, int * a11) {
         auto orig = (decltype(hookedSetEquipmentInfo)*)g_equipmentOverride->m_setEquipmentInfoHook->getOriginal();
+        auto equipmentSlot = convertInventoryIDToEquipmentSlot(inventoryID);
+
+        // Remove the flashy byte if No Flashy Equipment is enabled. We skip the 
+        // hair slot.
+        if (g_equipmentOverride->m_isNoFlashyEquipmentEnabled && equipmentSlot != 7) {
+            color[0] &= 0x00FFFFFF;
+            color[1] &= 0x00FFFFFF;
+            color[2] &= 0x00FFFFFF;
+        }
 
         // Filter out other characters.
         auto game = g_kanan->getGame();
@@ -168,8 +192,6 @@ namespace kanan {
         }
 
         // Filter out inventoryIDs.
-        auto equipmentSlot = convertInventoryIDToEquipmentSlot(inventoryID);
-
         if (equipmentSlot < 0 || equipmentSlot >= (int)g_equipmentOverride->m_equipmentOverrides.size()) {
             return orig(equipment, EDX, inventoryID, itemID, a4, a5, color, a7, a8, a9, a10, a11);
         }
