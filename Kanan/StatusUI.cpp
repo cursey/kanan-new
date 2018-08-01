@@ -8,13 +8,18 @@
 namespace kanan {
     StatusUI::StatusUI()
         : m_isShowing{},
+        m_showChainBladeStuff{},
         m_hp{},
         m_mp{},
-        m_sp{}
+        m_sp{},
+        m_dorcha{},
+        m_tuairim{}
     {
         m_hp.reserve(100);
         m_mp.reserve(100);
         m_sp.reserve(100);
+        m_dorcha.reserve(100);
+        m_tuairim.reserve(100);
     }
 
     void StatusUI::onFrame() {
@@ -68,7 +73,6 @@ namespace kanan {
         auto maxSP = param->staminaMaxBase.value + param->staminaMaxMod.value;
         auto spRatio = sp / maxSP;
 
-
         sprintf_s(m_hp.data(), m_hp.capacity(), "HP: %.02f/%.02f", hp, maxHP);
         sprintf_s(m_mp.data(), m_mp.capacity(), "MP: %.02f/%.02f", mp, maxMP);
         sprintf_s(m_sp.data(), m_sp.capacity(), "SP: %.02f/%.02f", sp, maxSP);
@@ -78,6 +82,22 @@ namespace kanan {
         progressBar(mpRatio, ImVec2{ -1.0f, 0.0f }, 0xFFB66C5B, m_mp.c_str());
         progressBar(spRatio, ImVec2{ -1.0f, 0.0f }, 0xFF20B9E9, m_sp.c_str());
 
+        if (m_showChainBladeStuff) {
+            auto dorcha = param->dorcha.value;
+            auto maxDorcha = param->dorchaMaxBase.value;
+            auto dorchaRatio = dorcha / maxDorcha;
+
+            auto tuairim = param->tuairim.value;
+            auto maxTuairim = param->tuairimMaxBase.value;
+            auto tuairimRatio = tuairim / maxTuairim;
+
+            sprintf_s(m_dorcha.data(), m_dorcha.capacity(), "Dorcha: %.02f/%.02f", dorcha, maxDorcha);
+            sprintf_s(m_tuairim.data(), m_tuairim.capacity(), "Bachram Boost: %.02f%", tuairimRatio * 100.0f);
+
+            progressBar(dorchaRatio, ImVec2{ -1.0f, 0.0f }, 0xFF6F00A4, m_dorcha.c_str());
+            progressBar(tuairimRatio, ImVec2{ -1.0f, 0.0f }, 0xFFCFABA1, m_tuairim.c_str());
+        }
+
         ImGui::End();
     }
 
@@ -85,15 +105,18 @@ namespace kanan {
         if (ImGui::CollapsingHeader("Status UI")) {
             ImGui::TextWrapped("Creates a window with larger progress bars displaying your characters status (HP/MP/Stam)");
             ImGui::Checkbox("Show Status UI", &m_isShowing);
+            ImGui::Checkbox("Show Chain Blade Status", &m_showChainBladeStuff);
         }
     }
 
     void StatusUI::onConfigLoad(const Config& cfg) {
         m_isShowing = cfg.get<bool>("StatusUI.Showing").value_or(false);
+        m_showChainBladeStuff = cfg.get<bool>("StatusUI.ShowChainBlade").value_or(false);
     }
     
     void StatusUI::onConfigSave(Config& cfg) {
         cfg.set<bool>("StatusUI.Showing", m_isShowing);
+        cfg.set<bool>("StatusUI.ShowChainBlade", m_showChainBladeStuff);
     }
 
     // Note: this is copied from ImGui::ProgressBar altered just to let the caller

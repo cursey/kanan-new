@@ -261,8 +261,13 @@ public:
     char pad_02BC[4]; //0x02BC
     CMemberUInt64 experienceInt; //0x02C0
     CMemberUShort age; //0x02D8
-    char pad_02E4[1152]; //0x02E4
-}; //Size: 0x0764
+    char pad_02E4[1848]; //0x02E4
+    CMemberFloat dorcha; //0x0A1C
+    CMemberFloat dorchaMaxBase; //0x0A2C
+    CMemberFloat tuairim; //0x0A3C For Bachram Boost
+    CMemberFloat tuairimMaxBase; //0x0A4C For Bachram Boost
+    char pad_0A5C[56]; //0x0A5C
+}; //Size: 0x0A94
 
 class CFramework
 {

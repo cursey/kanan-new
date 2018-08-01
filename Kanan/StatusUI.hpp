@@ -19,9 +19,12 @@ namespace kanan {
 
     private:
         bool m_isShowing;
+        bool m_showChainBladeStuff;
         std::string m_hp;
         std::string m_mp;
         std::string m_sp;
+        std::string m_dorcha;
+        std::string m_tuairim;
 
         void progressBar(float fraction, const ImVec2& sizeArg, ImU32 color, const char* overlay);
     };
