@@ -63,15 +63,15 @@ namespace kanan {
 
         auto hp = param->life.value;
         auto maxHP = param->lifeMaxBase.value + param->lifeMaxMod.value;
-        auto hpRatio = hp / maxHP;
+        auto hpRatio = fdiv(hp, maxHP);
 
         auto mp = param->mana.value;
         auto maxMP = param->manaMaxBase.value + param->manaMaxMod.value;
-        auto mpRatio = mp / maxMP;
+        auto mpRatio = fdiv(mp, maxMP);
 
         auto sp = param->stamina.value;
         auto maxSP = param->staminaMaxBase.value + param->staminaMaxMod.value;
-        auto spRatio = sp / maxSP;
+        auto spRatio = fdiv(sp, maxSP);
 
         sprintf_s(m_hp.data(), m_hp.capacity(), "HP: %.02f/%.02f", hp, maxHP);
         sprintf_s(m_mp.data(), m_mp.capacity(), "MP: %.02f/%.02f", mp, maxMP);
@@ -85,14 +85,14 @@ namespace kanan {
         if (m_showChainBladeStuff) {
             auto dorcha = param->dorcha.value;
             auto maxDorcha = param->dorchaMaxBase.value;
-            auto dorchaRatio = dorcha / maxDorcha;
+            auto dorchaRatio = fdiv(dorcha, maxDorcha);
 
             auto tuairim = param->tuairim.value;
             auto maxTuairim = param->tuairimMaxBase.value;
-            auto tuairimRatio = tuairim / maxTuairim;
+            auto tuairimRatio = fdiv(tuairim, maxTuairim);
 
             sprintf_s(m_dorcha.data(), m_dorcha.capacity(), "Dorcha: %.02f/%.02f", dorcha, maxDorcha);
-            sprintf_s(m_tuairim.data(), m_tuairim.capacity(), "Bachram Boost: %.02f%", tuairimRatio * 100.0f);
+            sprintf_s(m_tuairim.data(), m_tuairim.capacity(), "Bachram Boost: %.02f%%", tuairimRatio * 100.0f);
 
             progressBar(dorchaRatio, ImVec2{ -1.0f, 0.0f }, 0xFF6F00A4, m_dorcha.c_str());
             progressBar(tuairimRatio, ImVec2{ -1.0f, 0.0f }, 0xFFCFABA1, m_tuairim.c_str());
@@ -155,5 +155,13 @@ namespace kanan {
         ImVec2 overlay_size = CalcTextSize(overlay, NULL);
         if (overlay_size.x > 0.0f)
             RenderTextClipped(ImVec2(ImClamp(fill_br.x + style.ItemSpacing.x, bb.Min.x, bb.Max.x - overlay_size.x - style.ItemInnerSpacing.x), bb.Min.y), bb.Max, overlay, NULL, &overlay_size, ImVec2(0.0f, 0.5f), &bb);
+    }
+
+    float StatusUI::fdiv(float x, float y) {
+        if (y == 0.0f) {
+            return 0.0f;
+        }
+
+        return x / y;
     }
 }

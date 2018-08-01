@@ -27,5 +27,6 @@ namespace kanan {
         std::string m_tuairim;
 
         void progressBar(float fraction, const ImVec2& sizeArg, ImU32 color, const char* overlay);
+        float fdiv(float x, float y);
     };
 }
