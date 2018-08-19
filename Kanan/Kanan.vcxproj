@@ -64,11 +64,14 @@
       <AdditionalDependencies>ws2_32.lib;MinHook.lib;ImGui.lib;FreeType.lib;Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(ProjectDir)Patches.json" "$(OutDir)Patches.json"</Command>
+      <Command>copy "$(ProjectDir)Patches.json" "$(OutDir)kanan\Patches.json"</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Copying Patches.json to output directory</Message>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>if not exist "$(OutDir)kanan" mkdir "$(OutDir)kanan"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
