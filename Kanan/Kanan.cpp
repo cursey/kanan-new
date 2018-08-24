@@ -248,24 +248,26 @@ namespace kanan {
     }
 
     bool Kanan::onMessage(HWND wnd, UINT message, WPARAM wParam, LPARAM lParam) {
+        auto sendToGame = true;
+
         if (m_isUIOpen) {
             if (ImGui_ImplWin32_WndProcHandler(wnd, message, wParam, lParam) != 0) {
                 // If the user is interacting with the UI we block the message from going to the game.
                 auto& io = ImGui::GetIO();
 
                 if (io.WantCaptureMouse || io.WantCaptureKeyboard || io.WantTextInput) {
-                    return false;
+                    sendToGame = false;
                 }
             }
         }
 
         for (auto& mod : m_mods.getMods()) {
             if (!mod->onMessage(wnd, message, wParam, lParam)) {
-                return false;
+                sendToGame = false;
             }
         }
 
-        return true;
+        return sendToGame;
     }
 
     void Kanan::loadConfig() {

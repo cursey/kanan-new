@@ -21,6 +21,7 @@
 #include "TTFFontSize.hpp"
 #include "SecondaryPassword.hpp"
 #include "StatusUI.hpp"
+#include "AlissaListener.hpp"
 
 #include "Log.hpp"
 
@@ -112,6 +113,7 @@ namespace kanan {
         addMod(make_unique<FreezeTimeOfDay>());
         addMod(make_unique<SecondaryPassword>());
         addMod(make_unique<StatusUI>());
+        addMod(make_unique<AlissaListener>());
 
         log("[Mods] Finished loading mods.");
     }
