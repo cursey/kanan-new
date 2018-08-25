@@ -151,7 +151,7 @@ namespace kanan {
             case MessageElementType::LONG: ss << "LONG: " << *msg.get<uint64_t>() << "\n"; break;
             case MessageElementType::FLOAT: ss << "FLOAT: " << *msg.get<float>() << "\n"; break;
             case MessageElementType::STRING: ss << "STRING: " << *msg.get<string>() << "\n"; break;
-            case MessageElementType::BIN: ss << "BINARY BLOB: ...\n"; break;
+            case MessageElementType::BIN: ss << "BINARY BLOB: ...\n"; msg.skip(); break;
             }
         }
 
