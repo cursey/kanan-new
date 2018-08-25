@@ -1,4 +1,7 @@
 #include <array>
+#include <algorithm>
+#include <sstream>
+#include <iomanip>
 
 #include <imgui.h>
 
@@ -6,11 +9,10 @@
 
 #include "Kanan.hpp"
 #include "Log.hpp"
+#include "MessageView.hpp"
 #include "AlissaListener.hpp"
 
-using std::array;
-using std::string;
-using std::move;
+using namespace std;
 
 namespace kanan {
     BOOL CALLBACK enumWindow(HWND wnd, LPARAM param) {
@@ -40,7 +42,8 @@ namespace kanan {
         m_isConnected{ false },
         m_isConnectUIOpen{ false },
         m_alissaProviders{},
-        m_alissaProvider{}
+        m_alissaProvider{},
+        m_dumpToLog{ false }
     {
     }
 
@@ -49,6 +52,8 @@ namespace kanan {
             ImGui::Checkbox("Enable Alissa Listener", &m_isEnabled);
 
             if (m_isEnabled) {
+                ImGui::Checkbox("Dump To Log", &m_dumpToLog);
+
                 if (m_isConnected) {
                     if (ImGui::Button("Disconnect")) {
                         disconnect();
@@ -91,20 +96,66 @@ namespace kanan {
 
         auto cds = (COPYDATASTRUCT*)lParam;
 
+        // Call our send/recv callbacks.
         switch ((Sign)cds->dwData) {
-        case Sign::SEND: 
-            log("[AlissaListener] Sent %d byte packet", cds->cbData);
-            break;
+        case Sign::SEND: {
+            m_packet.clear();
+            copy_n((uint8_t*)cds->lpData, cds->cbData, back_inserter(m_packet));
 
-        case Sign::RECV: 
-            log("[AlissaListener] Recieved %d byte packet", cds->cbData);
+            MessageView msg{ m_packet };
+
+            for (auto& mod : g_kanan->getMods().getMods()) {
+                mod->onSend(msg);
+                msg.rewind();
+            }
+
             break;
+        }
+
+        case Sign::RECV: {
+            m_packet.clear();
+            copy_n((uint8_t*)cds->lpData, cds->cbData, back_inserter(m_packet));
+
+            MessageView msg{ m_packet };
+
+            for (auto& mod : g_kanan->getMods().getMods()) {
+                mod->onRecv(msg);
+                msg.rewind();
+            }
+
+            break;
+        }
 
         default:
             break;
         }
 
         return true;
+    }
+
+    void AlissaListener::onSend(MessageView& msg) {
+        if (!m_dumpToLog) {
+            return;
+        }
+
+        ostringstream ss{};
+
+        ss << "OP: " << hex << msg.op() << "\n";
+        ss << "ID: " << hex << msg.id() << "\n";
+
+        while (msg.peek() != MessageElementType::NONE) {
+            switch (msg.peek()) {
+            case MessageElementType::BYTE: ss << "BYTE: " << (int)*msg.get<uint8_t>() << "\n"; break;
+            case MessageElementType::SHORT: ss << "SHORT: " << *msg.get<uint16_t>() << "\n"; break;
+            case MessageElementType::INT: ss << "INT: " << *msg.get<int32_t>() << "\n"; break;
+            case MessageElementType::LONG: ss << "LONG: " << *msg.get<uint64_t>() << "\n"; break;
+            case MessageElementType::FLOAT: ss << "FLOAT: " << *msg.get<float>() << "\n"; break;
+            case MessageElementType::STRING: ss << "STRING: " << *msg.get<string>() << "\n"; break;
+            case MessageElementType::BIN: ss << "BINARY BLOB: ...\n"; break;
+            }
+        }
+
+        log("%s", ss.str().c_str());
     }
 
     void AlissaListener::addAlissaProvider(HWND wnd, const string& name) {

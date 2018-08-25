@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstdint>
 #include <vector>
 #include <string>
 
@@ -18,6 +19,9 @@ namespace kanan {
         void onConfigSave(Config& cfg) override;
 
         bool onMessage(HWND wnd, UINT message, WPARAM wParam, LPARAM lParam) override;
+
+        void onSend(MessageView& msg) override;
+        //void onRecv(MessageView& msg) override;
 
         void addAlissaProvider(HWND wnd, const std::string& name);
 
@@ -39,6 +43,8 @@ namespace kanan {
         bool m_isConnectUIOpen;
         std::vector<AlissaProvider> m_alissaProviders;
         AlissaProvider m_alissaProvider; // The selected provider.
+        std::vector<uint8_t> m_packet; // Currently handled packet.
+        bool m_dumpToLog;
 
         void connectUI();
         void findAlissaProviders();
