@@ -58,6 +58,12 @@
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
     </Link>
     <Manifest />
+    <PostBuildEvent>
+      <Command>copy "$(ProjectDir)loader.txt" "$(OutDir)loader.txt"</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Copying loader.txt to output directory</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -79,9 +85,18 @@
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
     </Link>
     <Manifest />
+    <PostBuildEvent>
+      <Command>copy "$(ProjectDir)loader.txt" "$(OutDir)loader.txt"</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Copying loader.txt to output directory</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="loader.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -21,36 +21,45 @@ using namespace kanan;
 unordered_set<DWORD> g_injectedIDs{};
 
 bool inject(DWORD clientID) {
-	cout << "Opening process..." << endl;
+    cout << "Opening process..." << endl;
 
-	RemoteProcess client{ clientID };
+    RemoteProcess client{ clientID };
 
-	if (!client.isValid()) {
-		cerr << "Failed to open process." << endl;
-		return false;
-	}
+    if (!client.isValid()) {
+        cerr << "Failed to open process." << endl;
+        return false;
+    }
 
-	// Enable loading of other DLLs into Mabinogi alongside Kanan.
-	ifstream dllConfig("loader.txt"); // Chose this name to make it obvious.
-	vector<string> dllNames;
-	std::string dllConfigLine;
-	while (getline(dllConfig, dllConfigLine)) dllNames.push_back(move(dllConfigLine));
+    // Enable loading of other DLLs into Mabinogi alongside Kanan.
+    ifstream dllConfig{ "loader.txt" }; // Chose this name to make it obvious.
+    vector<string> dllNames{};
+    string dllConfigLine{};
 
-	for (auto& dll : dllNames) {
-		auto dllPath = current_path() / dll;
+    while (getline(dllConfig, dllConfigLine)) {
+        dllNames.push_back(move(dllConfigLine));
+    }
 
-		cout << "Injecting " << dllPath << "..." << endl;
+    for (auto& dll : dllNames) {
+        auto dllPath = current_path() / dll;
+        
+        if (!exists(dllPath)) {
+            cerr << "Couldn't find " << dllPath << " to inject. Skipping..." << endl;
+            continue;
+        }
 
-		auto loader = client.loadLibrary(dllPath.string());
+        cout << "Injecting " << dllPath << "..." << endl;
 
-		if (!loader) {
-			cerr << "Failed to inject." << endl;
-			return false;
-		}
+        auto dll = client.loadLibrary(dllPath.string());
 
-		cout << "Success!" << endl;
-	}
-	return true;
+        if (!dll) {
+            cerr << "Failed to inject." << endl;
+            return false;
+        }
+
+        cout << "Success!" << endl;
+    }
+
+    return true;
 }
 
 BOOL CALLBACK enumWindow(HWND wnd, LPARAM param) {
