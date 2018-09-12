@@ -41,9 +41,9 @@ bool inject(DWORD clientID) {
 
 		cout << "Injecting " << dllPath << "..." << endl;
 
-		auto kanan = client.loadLibrary(dllPath.string());
+		auto loader = client.loadLibrary(dllPath.string());
 
-		if (!kanan) {
+		if (!loader) {
 			cerr << "Failed to inject." << endl;
 			return false;
 		}
