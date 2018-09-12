@@ -62,7 +62,7 @@
       <Command>copy "$(ProjectDir)Loader.txt" "$(OutDir)Loader.txt"</Command>
     </PostBuildEvent>
     <PostBuildEvent>
-      <Message>Copying loader.txt to output directory</Message>
+      <Message>Copying Loader.txt to output directory</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -89,7 +89,7 @@
       <Command>copy "$(ProjectDir)Loader.txt" "$(OutDir)Loader.txt"</Command>
     </PostBuildEvent>
     <PostBuildEvent>
-      <Message>Copying loader.txt to output directory</Message>
+      <Message>Copying Loader.txt to output directory</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
