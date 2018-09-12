@@ -89,7 +89,7 @@ namespace kanan {
             return;
         }
 
-        log("Begginging intialization... ");
+        log("Beginning intialization... ");
 
         // Grab the HWND from the device's creation parameters.
         log("Getting window from D3D9 device...");

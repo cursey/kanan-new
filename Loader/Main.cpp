@@ -21,29 +21,36 @@ using namespace kanan;
 unordered_set<DWORD> g_injectedIDs{};
 
 bool inject(DWORD clientID) {
-    cout << "Opening process..." << endl;
+	cout << "Opening process..." << endl;
 
-    RemoteProcess client{ clientID };
+	RemoteProcess client{ clientID };
 
-    if (!client.isValid()) {
-        cerr << "Failed to open process." << endl;
-        return false;
-    }
+	if (!client.isValid()) {
+		cerr << "Failed to open process." << endl;
+		return false;
+	}
 
-    auto dllPath = current_path() / "Kanan.dll";
+	// Enable loading of other DLLs into Mabinogi alongside Kanan.
+	ifstream dllConfig("loader.txt"); // Chose this name to make it obvious.
+	vector<string> dllNames;
+	std::string dllConfigLine;
+	while (getline(dllConfig, dllConfigLine)) dllNames.push_back(move(dllConfigLine));
 
-    cout << "Injecting " << dllPath << "..." << endl;
+	for (auto& dll : dllNames) {
+		auto dllPath = current_path() / dll;
 
-    auto kanan = client.loadLibrary(dllPath.string());
+		cout << "Injecting " << dllPath << "..." << endl;
 
-    if (!kanan) {
-        cerr << "Failed to inject." << endl;
-        return false;
-    }
+		auto kanan = client.loadLibrary(dllPath.string());
 
-    cout << "Success!" << endl;
+		if (!kanan) {
+			cerr << "Failed to inject." << endl;
+			return false;
+		}
 
-    return true;
+		cout << "Success!" << endl;
+	}
+	return true;
 }
 
 BOOL CALLBACK enumWindow(HWND wnd, LPARAM param) {
