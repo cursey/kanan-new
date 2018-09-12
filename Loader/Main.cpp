@@ -31,7 +31,7 @@ bool inject(DWORD clientID) {
     }
 
     // Enable loading of other DLLs into Mabinogi alongside Kanan.
-    ifstream dllConfig{ "loader.txt" }; // Chose this name to make it obvious.
+    ifstream dllConfig{ "Loader.txt" }; // Chose this name to make it obvious.
     vector<string> dllNames{};
     string dllConfigLine{};
 

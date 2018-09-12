@@ -59,7 +59,7 @@
     </Link>
     <Manifest />
     <PostBuildEvent>
-      <Command>copy "$(ProjectDir)loader.txt" "$(OutDir)loader.txt"</Command>
+      <Command>copy "$(ProjectDir)Loader.txt" "$(OutDir)Loader.txt"</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Copying loader.txt to output directory</Message>
@@ -86,7 +86,7 @@
     </Link>
     <Manifest />
     <PostBuildEvent>
-      <Command>copy "$(ProjectDir)loader.txt" "$(OutDir)loader.txt"</Command>
+      <Command>copy "$(ProjectDir)Loader.txt" "$(OutDir)Loader.txt"</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Copying loader.txt to output directory</Message>
@@ -96,7 +96,7 @@
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="loader.txt" />
+    <Text Include="Loader.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

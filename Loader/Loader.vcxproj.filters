@@ -20,6 +20,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="loader.txt" />
+    <Text Include="Loader.txt" />
   </ItemGroup>
 </Project>
