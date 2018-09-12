@@ -39,8 +39,8 @@ bool inject(DWORD clientID) {
         dllNames.push_back(move(dllConfigLine));
     }
 
-    for (auto& dll : dllNames) {
-        auto dllPath = current_path() / dll;
+    for (auto& dllName : dllNames) {
+        auto dllPath = current_path() / dllName;
         
         if (!exists(dllPath)) {
             cerr << "Couldn't find " << dllPath << " to inject. Skipping..." << endl;
