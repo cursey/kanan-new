@@ -793,5 +793,17 @@
                 "patch": "90 E9"
             }
         ]
+    },
+    {
+        "name": "Sorting no Cooldown",
+        "desc": "Removes the cooldown from Item Magnet.",
+        "category": "Quality of Life",
+        "patches": [
+            {
+                "pattern": "50 52 C7 45 E8 98 3A",
+                "offset": 6,
+                "patch": "00 00"
+            }
+        ]
     }
 ]
