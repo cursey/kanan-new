@@ -892,5 +892,17 @@
                 "n": 2
             }
         ]
+    },
+    {
+        "name": "Remove Pet Summon Window.",
+        "desc": "Removes the pet summoning window",
+        "category": "Quality of Life",
+        "patches": [
+            {
+                "pattern": "8D 4D EC 38  5D 08 74 5A",
+                "offset": -19,
+                "patch": "EB"
+            }
+        ]
     }
 ]
