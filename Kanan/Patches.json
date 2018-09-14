@@ -931,7 +931,7 @@
     },
     {
         "name": "Show Unknown Quest Objectives",
-        "desc": "Display quest objectives that would normally be displaed as '?????????'",
+        "desc": "Display quest objectives that would normally be displayed as '?????????'",
         "category": "Information",
         "patches": [
             {
@@ -965,7 +965,7 @@
             }
         ]
     },
-        {
+    {
         "name": "Simplify Character and Pet Previews",
         "desc": "Stops rendering character previees to improve performance in the character screen and pet window.",
         "category": "Speedup",
@@ -974,6 +974,18 @@
                 "pattern": "8B 4E 1C 33 DB 3B CB 0F 84 CC 00 00 00",
                 "offset": 7,
                 "patch": "90 E9"
+            }
+        ]
+    },
+    {
+        "name": "Show Unknown Skill Requirements",
+        "desc": "Display skill requirements that would normally be displayed as '?????????'.",
+        "category": "Information",
+        "patches": [
+            {
+                "pattern": "84 C0 74 7D 57",
+                "offset": 2,
+                "patch": "90 90"
             }
         ]
     }
