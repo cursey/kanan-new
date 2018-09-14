@@ -846,5 +846,17 @@
                 "patch": "90 90 90 90 90 90"
             }
         ]
+    },
+    {
+        "name": "Show Dorcha Specifics",
+        "desc": "Displays Dorcha and Bachram gauge info, when the gauge is not minimized.",
+        "category": "Quality of Life",
+        "patches": [
+            {
+                "pattern": "E8 C6 D5 52 FF",
+                "offset": 7,
+                "patch": "90 90 90 90 90 90"
+            }
+        ]
     }
 ]
