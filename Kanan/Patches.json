@@ -988,5 +988,17 @@
                 "patch": "90 90"
             }
         ]
+    },
+    {
+        "name": "Show Unknown Upgrades",
+        "desc": "Display upgrades that would normally be displayed as '?????????'.",
+        "category": "Information",
+        "patches": [
+            {
+                "pattern": "3A 85 AB FE FF FF 0F 83",
+                "offset": 7,
+                "patch": "81"
+            }
+        ]
     }
 ]
