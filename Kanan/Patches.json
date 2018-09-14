@@ -783,9 +783,9 @@
         ]
     },
     {
-        "name":  "Disable Avon Play Curtains",
-        "desc":  "Removes the play curtains from Avon missions.\nCredits: Iceling/Koorimio",
-        "category":  "Quality of Life",
+        "name":  "Disable Avon Curtains",
+        "desc":  "Removes the curtains from Avon missions.\nCredits: Iceling/Koorimio",
+        "category":  "Graphics",
         "patches":  [
             {
                 "pattern": "0F 84 ? ? ? ? 8B 0E 6A ? 6A ?",
@@ -795,9 +795,9 @@
         ]
     },
     {
-        "name": "Sorting no Cooldown",
-        "desc": "Removes the cooldown from Item Magnet.",
-        "category": "Quality of Life",
+        "name": "Disable Item Magnet Cooldown",
+        "desc": "Removes the cooldown timer from the Magnet button so item sorting can be done repeatedly.",
+        "category": "Speedup",
         "patches": [
             {
                 "pattern": "50 52 C7 45 E8 98 3A",
@@ -807,9 +807,9 @@
         ]
     },
     {
-        "name": "Simplify Character and Pet Image",
-        "desc": "Improves performance in character screen and pet window.",
-        "category": "Quality of Life",
+        "name": "Simplify Character and Pet Icons",
+        "desc": "Defaults to basic icons to improve performance in the character screen and pet window.",
+        "category": "Speedup",
         "patches": [
             {
                 "pattern": "8B 4E 0C 33 DB 3B CB 0F 84 CC 00 00 00",
@@ -836,8 +836,8 @@
         ]
     },
     {
-        "name": "Block end survey",
-        "desc": "Remove Nexon survey window when closing the game. \nCredits: Rotar",
+        "name": "Disable Game End Survey",
+        "desc": "Remove the Nexon survey window after closing the game. \nCredits: Rotar",
         "category": "Quality of Life",
         "patches": [
             {
@@ -848,9 +848,9 @@
         ]
     },
     {
-        "name": "Show Dorcha Specifics",
-        "desc": "Displays Dorcha and Bachram gauge info, when the gauge is not minimized.",
-        "category": "Quality of Life",
+        "name": "Show Dorcha Numbers",
+        "desc": "Display Dorcha and Bachram gauge info when the gauge is not minimized.",
+        "category": "Information",
         "patches": [
             {
                 "pattern": "E8 C6 D5 52 FF",
@@ -860,9 +860,9 @@
         ]
     },
     {
-        "name": "Show DevCAT Title HP",
-        "desc": "Creep and Character will show HP under HP bar",
-        "category": "Quality of Life",
+        "name": "Show entity HP",
+        "desc": "Entities will show their HP balues under the HP bar.",
+        "category": "Information",
         "patches": [
             {
                 "pattern": "68 F8 03 00 00 89 5D",
@@ -872,9 +872,9 @@
         ]
     },
     {
-        "name": "Skip Cutscenes.",
-        "desc": "",
-        "category": "Quality of Life",
+        "name": "Skip Cutscenes",
+        "desc": "Exactly what it says on the tin.",
+        "category": "Speedup",
         "patches": [
             {
                 "pattern": "74 19 8B 45 0C 8B 75 08 50 56 E8",
@@ -894,9 +894,9 @@
         ]
     },
     {
-        "name": "Remove Pet Summon Window.",
-        "desc": "Removes the pet summoning window",
-        "category": "Quality of Life",
+        "name": "Disable Summoning Status Windows",
+        "desc": "Removes the temporary 'Summoning...' popup while summoning a pet.",
+        "category": "Interface",
         "patches": [
             {
                 "pattern": "8D 4D EC 38  5D 08 74 5A",
@@ -906,8 +906,8 @@
         ]
     },
     {
-        "name": "Alpaca Fix",
-        "desc": "Alpaca riding is set to default \nCredits: Rydian",
+        "name": "Disable Alpaca Carrying",
+        "desc": "Change mounting logic to always ride an Alpaca and never carry it. \nCredits: Rydian",
         "category": "Quality of Life",
         "patches": [
             {
@@ -919,8 +919,8 @@
     },
     {
         "name": "Golem Range Fix",
-        "desc": "When controling Golem, diable changeing to charater when out of range",
-        "category": "Quality of Life",
+        "desc": "When controling a Golem, disable changing control to the charater when out of range.",
+        "category": "Fixes",
         "patches": [
             {
                 "pattern": "84 C0 0F 84 1F 05 00 00 8B 4E 28",
@@ -930,9 +930,9 @@
         ]
     },
     {
-        "name": "Show Quest Objectives",
-        "desc": "Show unknown Quest objectives",
-        "category": "Quality of Life",
+        "name": "Show Unknown Quest Objectives",
+        "desc": "Display quest objectives that would normally be displaed as '?????????'",
+        "category": "Information",
         "patches": [
             {
                 "pattern": "38 5E 0D 75 17",
@@ -942,9 +942,9 @@
         ]
     },
     {
-        "name": "Remove Bingo Button",
-        "desc": "",
-        "category": "Quality of Life",
+        "name": "Hide Bingo Button",
+        "desc": "Remove an event button generally used for bingo events.",
+        "category": "Interface",
         "patches": [
             {
                 "pattern": "3B FB 0F 84 E7 01 00 00  8B CF E8",
@@ -954,9 +954,9 @@
         ]
     },
     {
-        "name": "Keep Pet Window",
-        "desc": "After summoning pet, do not close pet window",
-        "category": "Quality of Life",
+        "name": "Keep Pet Window Open",
+        "desc": "After summoning a pet, prevent the pet window from closing.",
+        "category": "Interface",
         "patches": [
             {
                 "pattern": "84 C0 0F 84 33 19 00 00 8B 0D",
@@ -966,9 +966,9 @@
         ]
     },
         {
-        "name": "Simplify Pet and Character Preview",
-        "desc": "Improves performance when selecting pet in pet window, or character in character screen",
-        "category": "Quality of Life",
+        "name": "Simplify Character and Pet Previews",
+        "desc": "Stops rendering character previees to improve performance in the character screen and pet window.",
+        "category": "Speedup",
         "patches": [
             {
                 "pattern": "8B 4E 1C 33 DB 3B CB 0F 84 CC 00 00 00",
