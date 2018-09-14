@@ -904,5 +904,17 @@
                 "patch": "EB"
             }
         ]
+    },
+    {
+        "name": "Alpaca Fix",
+        "desc": "Alpaca riding is set to default \nCredits: Rydian",
+        "category": "Quality of Life",
+        "patches": [
+            {
+                "pattern": "83 F8 19 72 0F 8B CE",
+                "offset": 3,
+                "patch": "90 90"
+            }
+        ]
     }
 ]
