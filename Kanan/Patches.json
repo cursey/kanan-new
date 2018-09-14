@@ -928,5 +928,17 @@
                 "patch": "81"
             }
         ]
+    },
+    {
+        "name": "Show Quest Objectives",
+        "desc": "Show unknown Quest objectives",
+        "category": "Quality of Life",
+        "patches": [
+            {
+                "pattern": "38 5E 0D 75 17",
+                "offset": 3,
+                "patch": "EB"
+            }
+        ]
     }
 ]
