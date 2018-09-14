@@ -858,5 +858,17 @@
                 "patch": "90 90 90 90 90 90"
             }
         ]
+    },
+    {
+        "name": "Show DevCAT Title HP",
+        "desc": "Creep and Character will show HP under HP bar",
+        "category": "Quality of Life",
+        "patches": [
+            {
+                "pattern": "68 F8 03 00 00 89 5D",
+                "offset": -12,
+                "patch": "90 90 90 90 90 90"
+            }
+        ]
     }
 ]
