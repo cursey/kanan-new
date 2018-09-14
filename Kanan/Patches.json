@@ -940,5 +940,17 @@
                 "patch": "EB"
             }
         ]
+    },
+    {
+        "name": "Remove Bingo Button",
+        "desc": "",
+        "category": "Quality of Life",
+        "patches": [
+            {
+                "pattern": "3B FB 0F 84 E7 01 00 00  8B CF E8",
+                "offset": 3,
+                "patch": "81"
+            }
+        ]
     }
 ]
