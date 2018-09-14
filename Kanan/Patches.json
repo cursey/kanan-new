@@ -952,5 +952,17 @@
                 "patch": "81"
             }
         ]
+    },
+    {
+        "name": "Keep Pet Window",
+        "desc": "After summoning pet, do not close pet window",
+        "category": "Quality of Life",
+        "patches": [
+            {
+                "pattern": "84 C0 0F 84 33 19 00 00 8B 0D",
+                "offset": 3,
+                "patch": "81"
+            }
+        ]
     }
 ]
