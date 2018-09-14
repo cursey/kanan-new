@@ -916,5 +916,17 @@
                 "patch": "90 90"
             }
         ]
+    },
+    {
+        "name": "Golem Range Fix",
+        "desc": "When controling Golem, diable changeing to charater when out of range",
+        "category": "Quality of Life",
+        "patches": [
+            {
+                "pattern": "84 C0 0F 84 1F 05 00 00 8B 4E 28",
+                "offset": 3,
+                "patch": "81"
+            }
+        ]
     }
 ]
