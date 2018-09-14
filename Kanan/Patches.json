@@ -805,5 +805,22 @@
                 "patch": "00 00"
             }
         ]
+    },
+    {
+        "name": "Pet Window Delag",
+        "desc": "Stops pets from rendering on the pet window, causing huge performance increase.",
+        "category": "Quality of Life",
+        "patches": [
+            {
+                "pattern": "8B 4E 0C 33 DB 3B CB 0F 84 CC 00 00 00",
+                "offset": 7,
+                "patch": "90 E9"
+            },
+            {
+                "pattern": "85 F6 0F 84 CD 0F 00 00 8B CE E8",
+                "offset": 2,
+                "patch": "90 E9"
+            }
+        ]
     }
 ]
