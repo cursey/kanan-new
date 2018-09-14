@@ -831,7 +831,7 @@
             {
                 "pattern": "8B 55 10 52 FF D0 84 DB 74",
                 "offset": 6,
-                "patch": "75"
+                "patch": "32"
             }
         ]
     },
