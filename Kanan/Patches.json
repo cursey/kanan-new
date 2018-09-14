@@ -834,5 +834,17 @@
                 "patch": "75"
             }
         ]
+    },
+    {
+        "name": "Block end survey",
+        "desc": "Remove Nexon survey window when closing the game. \nCredits: Rotar",
+        "category": "Quality of Life",
+        "patches": [
+            {
+                "pattern": "50 8B 45 D0 50 51 56 FF 15",
+                "offset": 7,
+                "patch": "90 90 90 90 90 90"
+            }
+        ]
     }
 ]
