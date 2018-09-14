@@ -807,8 +807,8 @@
         ]
     },
     {
-        "name": "Pet Window Delag",
-        "desc": "Stops pets from rendering on the pet window, causing huge performance increase.",
+        "name": "Simplify Character and Pet Image",
+        "desc": "Improves performance in character screen and pet window.",
         "category": "Quality of Life",
         "patches": [
             {
