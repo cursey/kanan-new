@@ -964,5 +964,17 @@
                 "patch": "81"
             }
         ]
+    },
+        {
+        "name": "Simplify Pet and Character Preview",
+        "desc": "Improves performance when selecting pet in pet window, or character in character screen",
+        "category": "Quality of Life",
+        "patches": [
+            {
+                "pattern": "8B 4E 1C 33 DB 3B CB 0F 84 CC 00 00 00",
+                "offset": 7,
+                "patch": "90 E9"
+            }
+        ]
     }
 ]
