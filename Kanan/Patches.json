@@ -822,5 +822,17 @@
                 "patch": "90 E9"
             }
         ]
+    },
+    {
+        "name": "Avoid Bank Trade",
+        "desc": "When selling items to NPC, avoid bank trade when item sale value is greater than 50k.",
+        "category": "Quality of Life",
+        "patches": [
+            {
+                "pattern": "8B 55 10 52 FF D0 84 DB 74",
+                "offset": 6,
+                "patch": "75"
+            }
+        ]
     }
 ]
