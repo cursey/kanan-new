@@ -793,5 +793,140 @@
                 "patch": "90 E9"
             }
         ]
+    },
+    {
+    "name": "Render Wireframe",
+    "desc": "Set camera render to wireframe mode",
+    "category": "Graphics",
+    "patches": [
+      {
+        "pattern": "8B 10 8B C8 8B 42 04 FF D0 84 C0 0F 84 EE 09 00 00 8B 0E",
+        "offset": 11,
+        "patch": "90 90 90 90 90 90"
+      },
+      {
+        "pattern": "FF D0 3A C3 0F 85",
+        "offset": 4,
+        "patch": "90 E9"
+      }
+    ]
+    },
+    {
+    "name": "Render FPS info",
+    "desc": "Shows FPS and other game performance infos",
+    "category": "Graphics",
+    "patches": [
+      {
+        "pattern": "8B 10 8B C8 8B 42 04 FF D0 84 C0 0F 84 EE 09 00 00 8B 0E",
+        "offset": 11,
+        "patch": "90 90 90 90 90 90"
+      },
+      {
+        "pattern": "FF D0 84 C0 0F 84 AD 08 00 00 2B 3D",
+        "patch": "90 90"
+      }
+    ]
+    },
+    {
+    "name": "Render Prop Bounds",
+    "desc": "",
+    "category": "Graphics",
+    "patches": [
+      {
+        "pattern": "8B 10 8B C8 8B 42 04 FF D0 84 C0 0F 84 EE 09 00 00 8B 0E",
+        "offset": 11,
+        "patch": "90 90 90 90 90 90"
+      },
+      {
+        "pattern": "8B 42 04 FF D0 84 C0 74 1F 8B 4E 30 8B 11 83 BA 7C 05 00 00 00 74 11 8B 8A",
+        "offset": 3,
+        "patch": "90 90"
+      }
+    ]
+    },
+    {
+    "name": "Render Light Radius",
+    "desc": "",
+    "category": "Graphics",
+    "patches": [
+      {
+        "pattern": "8B 10 8B C8 8B 42 04 FF D0 84 C0 0F 84 EE 09 00 00 8B 0E",
+        "offset": 11,
+        "patch": "90 90 90 90 90 90"
+      },
+      {
+        "pattern": "8B 42 04 FF D0 84 C0 74 40 8B 0E",
+        "offset": 3,
+        "patch": "90 90"
+      }
+    ]
+    },
+    {
+    "name": "Render Light Information",
+    "desc": "",
+    "category": "Graphics",
+    "patches": [
+      {
+        "pattern": "8B 10 8B C8 8B 42 04 FF D0 84 C0 0F 84 EE 09 00 00 8B 0E",
+        "offset": 11,
+        "patch": "90 90 90 90 90 90"
+      },
+      {
+        "pattern": "8B 42 04 FF D0 84 C0 74 C2",
+        "offset": 3,
+        "patch": "90 90"
+      }
+    ]
+    },
+    {
+    "name": "Render Collision Boxes",
+    "desc": "",
+    "category": "Graphics",
+    "patches": [
+      {
+        "pattern": "8B 10 8B C8 8B 42 04 FF D0 84 C0 0F 84 EE 09 00 00 8B 0E",
+        "offset": 11,
+        "patch": "90 90 90 90 90 90"
+      },
+      {
+        "pattern": "8B 42 04 FF D0 84 C0 74 0C 8B 17 8B 82 CC 00 00 00",
+        "offset": 3,
+        "patch": "90 90"
+      }
+    ]
+    },
+    {
+    "name": "Render Axis",
+    "desc": "",
+    "category": "Graphics",
+    "patches": [
+      {
+        "pattern": "8B 10 8B C8 8B 42 04 FF D0 84 C0 0F 84 EE 09 00 00 8B 0E",
+        "offset": 11,
+        "patch": "90 90 90 90 90 90"
+      },
+      {
+        "pattern": "8B 42 04 FF D0 84 C0 74 0C 8B 17 8B 82 D0 00 00 00",
+        "offset": 3,
+        "patch": "90 90"
+      }
+    ]
+    },
+    {
+    "name": "Render Bones Hitboxes",
+    "desc": "",
+    "category": "Graphics",
+    "patches": [
+      {
+        "pattern": "8B 10 8B C8 8B 42 04 FF D0 84 C0 0F 84 EE 09 00 00 8B 0E",
+        "offset": 11,
+        "patch": "90 90 90 90 90 90"
+      },
+      {
+        "pattern": "8B 42 04 FF D0 84 C0 74 0C 8B 17 8B 82 C8 00 00 00",
+        "offset": 3,
+        "patch": "90 90"
+      }
+    ]
     }
-]
+  ]
