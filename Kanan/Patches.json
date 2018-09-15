@@ -901,7 +901,7 @@
             {
                 "pattern": "8D 4D EC 38  5D 08 74 5A",
                 "offset": -19,
-                "patch": "EB"
+                "patch": "90 E9"
             }
         ]
     },
