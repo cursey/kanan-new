@@ -96,6 +96,7 @@
     <ClCompile Include="AutoSetMTU.cpp" />
     <ClCompile Include="BorderlessWindow.cpp" />
     <ClCompile Include="ColorAltText.cpp" />
+    <ClCompile Include="CursorUnhide.cpp" />
     <ClCompile Include="D3D9Hook.cpp" />
     <ClCompile Include="DInputHook.cpp" />
     <ClCompile Include="DisableNagle.cpp" />
@@ -123,6 +124,7 @@
     <ClInclude Include="AutoSetMTU.hpp" />
     <ClInclude Include="BorderlessWindow.hpp" />
     <ClInclude Include="ColorAltText.hpp" />
+    <ClInclude Include="CursorUnhide.hpp" />
     <ClInclude Include="D3D9Hook.hpp" />
     <ClInclude Include="DInputHook.hpp" />
     <ClInclude Include="DisableNagle.hpp" />
