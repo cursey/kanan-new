@@ -46,7 +46,7 @@ namespace kanan {
         log("[Mods] Loading time critical mods...");
 
         addMod(make_unique<UseDataFolder>());
-		addMod(make_unique<CursorUnhide>());
+        addMod(make_unique<CursorUnhide>());
 
         // Time critical mods need to have their settings loaded from the config
         // right away.

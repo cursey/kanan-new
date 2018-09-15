@@ -6,19 +6,19 @@
 #include "Patch.hpp"
 
 namespace kanan {
-	class CursorUnhide : public Mod {
-	public:
-		CursorUnhide();
+    class CursorUnhide : public Mod {
+    public:
+        CursorUnhide();
 
-		void onUI() override;
+        void onUI() override;
 
-		void onConfigLoad(const Config& cfg) override;
-		void onConfigSave(Config& cfg) override;
+        void onConfigLoad(const Config& cfg) override;
+        void onConfigSave(Config& cfg) override;
 
-	private:
-		bool m_isEnabled;
-		Patch m_patch;
+    private:
+        bool m_isEnabled;
+        Patch m_patch;
 
-		void apply();
-	};
+        void apply();
+    };
 }
