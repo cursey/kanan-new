@@ -10,6 +10,23 @@ using namespace std;
 
 namespace kanan {
     static EquipmentOverride* g_equipmentOverride{ nullptr };
+	static bool g_equipmentOverrideOnLoad;
+
+	static auto convertFloatColorToInt = [](array<float, 4>& color) {
+		auto r = (uint8_t)(255 * color[0]);
+		auto g = (uint8_t)(255 * color[1]);
+		auto b = (uint8_t)(255 * color[2]);
+		auto a = (uint8_t)(255 * color[3]);
+		return (a << 24) + (r << 16) + (g << 8) + b;
+	};
+	static array<float, 4> convertIntColorToFloat (int color) {
+		return {
+			(float)(color / (256 ^ 2)),
+			(float)((color / 256) % 256),
+			(float)(color / 256), 
+			0.0 
+		};
+	};
 
     int convertInventoryIDToEquipmentSlot(int inventoryID) {
         /*static auto fn = (int(__cdecl*)(int))scan("client.exe", "55 8B EC 8B 45 08 83 C0 ? 83 F8 ? 77 ? 0F B6 80 CC 18 69 01").value_or(0);
@@ -137,7 +154,8 @@ namespace kanan {
                 "NOTE: For the Hair slot, you need to change your hair in the dressing room to see the changes.");
             ImGui::Spacing();
             ImGui::Text("Special thanks to Rydian!");
-            ImGui::Spacing();
+			ImGui::Checkbox("Enable override on game load", &g_equipmentOverrideOnLoad);
+			ImGui::Spacing();
 
             for (auto& overrideInfo : m_equipmentOverrides) {
                 if (overrideInfo.name.empty()) {
@@ -164,11 +182,38 @@ namespace kanan {
     }
 
     void EquipmentOverride::onConfigLoad(const Config& cfg) {
-        m_isNoFlashyEquipmentEnabled = cfg.get<bool>("NoFlashyEquipment.Enabled").value_or(false);
+		m_isNoFlashyEquipmentEnabled = cfg.get<bool>("NoFlashyEquipment.Enabled").value_or(false);
+		g_equipmentOverrideOnLoad = cfg.get<bool>("EquipmentOverrideOnLoad.Enabled").value_or(false);
+
+		int j = 0;
+		for (auto& overrideInfo : m_equipmentOverrides) {
+			overrideInfo.isOverridingColor = cfg.get<bool>("EquipmentOverride." + to_string(j) + ".isOverridingColor").value_or(false);
+			overrideInfo.itemID = cfg.get<int>("EquipmentOverride." + to_string(j) + ".itemID").value_or(NULL);
+			overrideInfo.color1 = convertIntColorToFloat(cfg.get<int>("EquipmentOverride." + to_string(j) + ".color1").value_or(NULL));
+			overrideInfo.color2 = convertIntColorToFloat(cfg.get<int>("EquipmentOverride." + to_string(j) + ".color2").value_or(NULL));
+			overrideInfo.color3 = convertIntColorToFloat(cfg.get<int>("EquipmentOverride." + to_string(j) + ".color3").value_or(NULL));
+			if (g_equipmentOverrideOnLoad)
+				overrideInfo.isOverridingItem = cfg.get<bool>("EquipmentOverride." + to_string(j) + ".isOverridingItem").value_or(false);
+			else
+				overrideInfo.isOverridingItem = false;
+			j++;
+		}
     }
 
     void EquipmentOverride::onConfigSave(Config& cfg) {
-        cfg.set<bool>("NoFlashyEquipment.Enabled", m_isNoFlashyEquipmentEnabled);
+		cfg.set<bool>("NoFlashyEquipment.Enabled", m_isNoFlashyEquipmentEnabled);
+		cfg.set<bool>("EquipmentOverrideOnLoad.Enabled", g_equipmentOverrideOnLoad);
+
+		int j = 0;
+		for (auto& overrideInfo : m_equipmentOverrides) {
+			cfg.set<bool>("EquipmentOverride." + to_string(j) + ".isOverridingColor", overrideInfo.isOverridingColor);
+			cfg.set<int>("EquipmentOverride." + to_string(j) + ".itemID", overrideInfo.itemID);
+			cfg.set<int>("EquipmentOverride." + to_string(j) + ".color1", convertFloatColorToInt(overrideInfo.color1));
+			cfg.set<int>("EquipmentOverride." + to_string(j) + ".color2", convertFloatColorToInt(overrideInfo.color2));
+			cfg.set<int>("EquipmentOverride." + to_string(j) + ".color3", convertFloatColorToInt(overrideInfo.color3));
+			cfg.set<bool>("EquipmentOverride." + to_string(j) + ".isOverridingItem", g_equipmentOverrideOnLoad ? overrideInfo.isOverridingItem : false);
+			j++;
+		}
     }
 
     void EquipmentOverride::hookedSetEquipmentInfo(CEquipment* equipment, uint32_t EDX, int inventoryID, int itemID, int a4, int a5, uint32_t* color, int a7, int * a8, int a9, int a10, int * a11) {
@@ -199,14 +244,6 @@ namespace kanan {
         auto& overrideInfo = g_equipmentOverride->m_equipmentOverrides[equipmentSlot];
 
         if (overrideInfo.isOverridingColor) {
-            // Convert float color to int.
-            auto convertFloatColorToInt = [](array<float, 4>& color) {
-                auto r = (uint8_t)(255 * color[0]);
-                auto g = (uint8_t)(255 * color[1]);
-                auto b = (uint8_t)(255 * color[2]);
-                auto a = (uint8_t)(255 * color[3]);
-                return (a << 24) + (r << 16) + (g << 8) + b;
-            };
 
             color[0] = convertFloatColorToInt(overrideInfo.color1);
             color[1] = convertFloatColorToInt(overrideInfo.color2);
