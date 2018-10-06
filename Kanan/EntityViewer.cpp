@@ -148,7 +148,7 @@ namespace kanan {
         ImGui::BulletText("Combat Power: %f", parameter->combatPower.value);
         ImGui::BulletText("Age: %d", parameter->age.value);
         ImGui::BulletText("Health: %f/%f", parameter->life.value, parameter->lifeMaxBase.value + parameter->lifeMaxMod.value);
-        ImGui::BulletText("Race: %s", raceToString(parameter->type.value));
+        ImGui::BulletText("Race: %s (%d)", raceToString(parameter->type.value), parameter->type.value);
         ImGui::BulletText("Target: %s", (!target) ? "No Target" : target->getName()->c_str());
 
         if (equipment != nullptr && ImGui::TreeNode(equipment, "Equipment")) {
