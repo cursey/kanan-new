@@ -1,3 +1,5 @@
+#include <algorithm>
+
 #include <imgui.h>
 
 #include <Scan.hpp>
@@ -12,19 +14,25 @@ namespace kanan {
     static EquipmentOverride* g_equipmentOverride{ nullptr };
 	static bool g_equipmentOverrideOnLoad;
 
-	static auto convertFloatColorToInt = [](array<float, 4>& color) {
+	static int convertFloatColorToInt(const array<float, 4>& color) {
 		auto r = (uint8_t)(255 * color[0]);
 		auto g = (uint8_t)(255 * color[1]);
 		auto b = (uint8_t)(255 * color[2]);
 		auto a = (uint8_t)(255 * color[3]);
 		return (a << 24) + (r << 16) + (g << 8) + b;
 	};
-	static array<float, 4> convertIntColorToFloat (int color) {
+
+	static array<float, 4> convertIntColorToFloat(int color) {
+        auto r = color & 0x00FF0000;
+        auto g = color & 0x0000FF00;
+        auto b = color & 0x000000FF;
+        auto a = color & 0xFF000000;
+
 		return {
-			(float)(color / (256 ^ 2)),
-			(float)((color / 256) % 256),
-			(float)(color / 256), 
-			0.0 
+			clamp((float)r / 255.0f, 0.0f, 1.0f),
+			clamp((float)g / 255.0f, 0.0f, 1.0f),
+			clamp((float)b / 255.0f, 0.0f, 1.0f),
+			clamp((float)a / 255.0f, 0.0f, 1.0f)
 		};
 	};
 
@@ -185,18 +193,23 @@ namespace kanan {
 		m_isNoFlashyEquipmentEnabled = cfg.get<bool>("NoFlashyEquipment.Enabled").value_or(false);
 		g_equipmentOverrideOnLoad = cfg.get<bool>("EquipmentOverrideOnLoad.Enabled").value_or(false);
 
-		int j = 0;
+		auto j = 0;
+
 		for (auto& overrideInfo : m_equipmentOverrides) {
-			overrideInfo.isOverridingColor = cfg.get<bool>("EquipmentOverride." + to_string(j) + ".isOverridingColor").value_or(false);
-			overrideInfo.itemID = cfg.get<int>("EquipmentOverride." + to_string(j) + ".itemID").value_or(NULL);
-			overrideInfo.color1 = convertIntColorToFloat(cfg.get<int>("EquipmentOverride." + to_string(j) + ".color1").value_or(NULL));
-			overrideInfo.color2 = convertIntColorToFloat(cfg.get<int>("EquipmentOverride." + to_string(j) + ".color2").value_or(NULL));
-			overrideInfo.color3 = convertIntColorToFloat(cfg.get<int>("EquipmentOverride." + to_string(j) + ".color3").value_or(NULL));
-			if (g_equipmentOverrideOnLoad)
-				overrideInfo.isOverridingItem = cfg.get<bool>("EquipmentOverride." + to_string(j) + ".isOverridingItem").value_or(false);
-			else
-				overrideInfo.isOverridingItem = false;
-			j++;
+			overrideInfo.isOverridingColor = cfg.get<bool>("EquipmentOverride." + to_string(j) + ".IsOverridingColor").value_or(false);
+			overrideInfo.itemID = cfg.get<int>("EquipmentOverride." + to_string(j) + ".ItemID").value_or(0);
+			overrideInfo.color1 = convertIntColorToFloat(cfg.get<int>("EquipmentOverride." + to_string(j) + ".Color1").value_or(0));
+			overrideInfo.color2 = convertIntColorToFloat(cfg.get<int>("EquipmentOverride." + to_string(j) + ".Color2").value_or(0));
+			overrideInfo.color3 = convertIntColorToFloat(cfg.get<int>("EquipmentOverride." + to_string(j) + ".Color3").value_or(0));
+
+            if (g_equipmentOverrideOnLoad) {
+                overrideInfo.isOverridingItem = cfg.get<bool>("EquipmentOverride." + to_string(j) + ".IsOverridingItem").value_or(false);
+            }
+            else {
+                overrideInfo.isOverridingItem = false;
+            }
+
+			++j;
 		}
     }
 
@@ -204,15 +217,17 @@ namespace kanan {
 		cfg.set<bool>("NoFlashyEquipment.Enabled", m_isNoFlashyEquipmentEnabled);
 		cfg.set<bool>("EquipmentOverrideOnLoad.Enabled", g_equipmentOverrideOnLoad);
 
-		int j = 0;
+		auto j = 0;
+
 		for (auto& overrideInfo : m_equipmentOverrides) {
-			cfg.set<bool>("EquipmentOverride." + to_string(j) + ".isOverridingColor", overrideInfo.isOverridingColor);
-			cfg.set<int>("EquipmentOverride." + to_string(j) + ".itemID", overrideInfo.itemID);
-			cfg.set<int>("EquipmentOverride." + to_string(j) + ".color1", convertFloatColorToInt(overrideInfo.color1));
-			cfg.set<int>("EquipmentOverride." + to_string(j) + ".color2", convertFloatColorToInt(overrideInfo.color2));
-			cfg.set<int>("EquipmentOverride." + to_string(j) + ".color3", convertFloatColorToInt(overrideInfo.color3));
-			cfg.set<bool>("EquipmentOverride." + to_string(j) + ".isOverridingItem", g_equipmentOverrideOnLoad ? overrideInfo.isOverridingItem : false);
-			j++;
+			cfg.set<bool>("EquipmentOverride." + to_string(j) + ".IsOverridingColor", overrideInfo.isOverridingColor);
+			cfg.set<int>("EquipmentOverride." + to_string(j) + ".ItemID", overrideInfo.itemID);
+			cfg.set<int>("EquipmentOverride." + to_string(j) + ".Color1", convertFloatColorToInt(overrideInfo.color1));
+			cfg.set<int>("EquipmentOverride." + to_string(j) + ".Color2", convertFloatColorToInt(overrideInfo.color2));
+			cfg.set<int>("EquipmentOverride." + to_string(j) + ".Color3", convertFloatColorToInt(overrideInfo.color3));
+			cfg.set<bool>("EquipmentOverride." + to_string(j) + ".IsOverridingItem", g_equipmentOverrideOnLoad ? overrideInfo.isOverridingItem : false);
+
+			++j;
 		}
     }
 
