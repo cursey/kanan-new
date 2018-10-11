@@ -836,8 +836,8 @@
         "category": "Information",
         "patches": [
             {
-                "pattern": "E8 C6 D5 52 FF",
-                "offset": 7,
+                "pattern": "52 FF 84 C0 0F 84 0F 01 00 00",
+                "offset": 4,
                 "patch": "90 90 90 90 90 90"
             }
         ]
