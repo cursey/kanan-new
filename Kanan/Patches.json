@@ -1106,5 +1106,17 @@
                 "patch": "90 90"
             }
         ]
+    },
+    {
+        "name": "Remove Item Drop animation",
+        "desc": "",
+        "category": "Speedup",
+        "patches": [
+            {
+                "pattern": "0F 84 17 02 00 00 39 9E",
+                "offset": 8,
+                "patch": "90 E9"
+            }
+        ]
     }
 ]
