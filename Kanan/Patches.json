@@ -807,23 +807,6 @@
         ]
     },
     {
-        "name": "Simplify Character and Pet Icons",
-        "desc": "Defaults to basic icons to improve performance in the character screen and pet window.",
-        "category": "Speedup",
-        "patches": [
-            {
-                "pattern": "8B 4E 0C 33 DB 3B CB 0F 84 CC 00 00 00",
-                "offset": 7,
-                "patch": "90 E9"
-            },
-            {
-                "pattern": "85 F6 0F 84 CD 0F 00 00 8B CE E8",
-                "offset": 2,
-                "patch": "90 E9"
-            }
-        ]
-    },
-    {
         "name": "Avoid Bank Trade",
         "desc": "When selling items to NPC, avoid bank trade when item sale value is greater than 50k.",
         "category": "Quality of Life",
@@ -962,18 +945,6 @@
                 "pattern": "84 C0 0F 84 33 19 00 00 8B 0D",
                 "offset": 3,
                 "patch": "81"
-            }
-        ]
-    },
-    {
-        "name": "Simplify Character and Pet Previews",
-        "desc": "Stops rendering character previees to improve performance in the character screen and pet window.",
-        "category": "Speedup",
-        "patches": [
-            {
-                "pattern": "8B 4E 1C 33 DB 3B CB 0F 84 CC 00 00 00",
-                "offset": 7,
-                "patch": "90 E9"
             }
         ]
     },
