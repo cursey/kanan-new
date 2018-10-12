@@ -110,25 +110,29 @@ public:
     uint32_t color1; //0x0010
     uint32_t color2; //0x0014
     uint32_t color3; //0x0018
-    uint32_t stackCount; //0x001C
-    char pad_0020[4]; //0x0020
-    uint32_t positionX; //0x0024
-    uint32_t positionY; //0x0028
-    char pad_002C[28]; //0x002C
-    uint32_t price; //0x0048
-    uint32_t sellPrice; //0x004C
-    char pad_0050[4]; //0x0050
-    uint32_t durability; //0x0054
-    uint32_t maxDurability; //0x0058
-    uint32_t originalDurability; //0x005C
-    char pad_0060[92]; //0x0060
-    class SItemDBDesc* dbDesc; //0x00BC
-    char pad_00C0[32]; //0x00C0
-    uint64_t ownerID; //0x00E0
-    char pad_00E8[36]; //0x00E8
-    class CString* name; //0x010C
-    char pad_0110[56]; //0x0110
-}; //Size: 0x0148
+    uint32_t color4; //0x001C
+    uint32_t color5; //0x0020
+    uint32_t color6; //0x0024
+    char pad_0028[4]; //0x0028
+    uint32_t stackCount; //0x002C
+    char pad_0030[4]; //0x0030
+    uint32_t positionX; //0x0034
+    uint32_t positionY; //0x0038
+    char pad_003C[28]; //0x003C
+    uint32_t price; //0x0058
+    uint32_t sellPrice; //0x005C
+    char pad_0060[4]; //0x0060
+    uint32_t durability; //0x0064
+    uint32_t maxDurability; //0x0068
+    uint32_t originalDurability; //0x006C
+    char pad_0070[92]; //0x0070
+    class SItemDBDesc* dbDesc; //0x00CC
+    char pad_00D0[32]; //0x00D0
+    uint64_t ownerID; //0x00F0
+    char pad_00F8[36]; //0x00F8
+    class CString* name; //0x011C
+    char pad_0120[56]; //0x0120
+}; //Size: 0x0158
 
 class CItemListNodeEntry
 {
@@ -303,30 +307,33 @@ public:
     uint32_t color1; //0x001C
     uint32_t color2; //0x0020
     uint32_t color3; //0x0024
-    char pad_0028[12]; //0x0028
-}; //Size: 0x0034
+    uint32_t color4; //0x0028
+    uint32_t color5; //0x002C
+    uint32_t color6; //0x0030
+    char pad_0034[16]; //0x0034
+}; //Size: 0x0044
 
 class CEquipment
 {
 public:
     CEquipmentItemInfo itemInfo[19]; //0x0000
-    char pad_03DC[384]; //0x03DC
-}; //Size: 0x055C
+    char pad_050C[384]; //0x050C
+}; //Size: 0x068C
 
 class CCharacter
 {
 public:
     char pad_0000[4]; //0x0000
     class CEntityID* entityID; //0x0004
-    char pad_0008[136]; //0x0008
-    class CParameter* parameter; //0x0090
-    class CAction* action; //0x0094
-    char pad_0098[408]; //0x0098
-    class CEquipment* equipment; //0x0230
-    char pad_0234[92]; //0x0234
-    uint64_t targetID; //0x0290
-    char pad_0298[700]; //0x0298
-}; //Size: 0x0554
+    char pad_0008[128]; //0x0008
+    class CParameter* parameter; //0x0088
+    class CAction* action; //0x008C
+    char pad_0090[408]; //0x0090
+    class CEquipment* equipment; //0x0228
+    char pad_022C[92]; //0x022C
+    uint64_t targetID; //0x0288
+    char pad_0290[700]; //0x0290
+}; //Size: 0x054C
 
 class CCharacterListNodeEntry
 {
