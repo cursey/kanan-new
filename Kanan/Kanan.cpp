@@ -329,7 +329,7 @@ namespace kanan {
                     saveConfig();
                 }
 				if (ImGui::MenuItem("Force close Game")) {
-					exit(0);
+					ExitProcess(0);
 				}
                 ImGui::EndMenu();
             }
