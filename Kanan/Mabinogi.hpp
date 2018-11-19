@@ -378,10 +378,10 @@ public:
 class CWorld
 {
 public:
-    char pad_0000[160]; //0x0000
-    uint64_t localPlayerID; //0x00A0
-    char pad_00A8[944]; //0x00A8
-}; //Size: 0x0458
+    char pad_0000[168]; //0x0000
+    uint64_t localPlayerID; //0x00A8
+    char pad_00B0[944]; //0x00B0
+}; //Size: 0x0460
 
 class CWorldPtr
 {
