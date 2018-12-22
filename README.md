@@ -16,6 +16,8 @@ You need the Microsoft Visual C++ Redistributable for Visual Studio 2017 availab
 * Includes a reusable DirectInput 8 hook.
 * Intercepts windows messages sent to the game window.
 * Reverse engineered game structures to allow for unique features such as entity viewing.
+* A simple and secure Launcher for easy multi-client (WIP)
+	* This project makes use of WinHTTP, Cryptography Next Generation (CNG), and WMI APIs
 * Probably other things!
 
 ## Build requirements
@@ -33,7 +35,7 @@ Once this project reaches (or approaches) feature parity with the original Kanan
 ![Preview](preview.png)
 
 ## Original patch authors
-kanan comes with more mods than are listed here. This is the list of patch authors who haven't directly contributed via GitHub's pull requests.
+Kanan comes with more mods than are listed here. This is the list of patch authors who haven't directly contributed via GitHub's pull requests.
 * Blade3575
     * Bitmap font
     * Elf lag
