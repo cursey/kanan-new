@@ -133,7 +133,6 @@
     <ClCompile Include="HttpClient.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="LauncherApp.cpp" />
-    <ClCompile Include="Main.cpp" />
     <ClCompile Include="RegQuery.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="WinMain.cpp" />
