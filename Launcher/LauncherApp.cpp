@@ -395,7 +395,6 @@ void LauncherApp::mainUI() {
                         "logport:11000 " << 
                         "chatip:208.85.109.37 " <<
                         "chatport:8002 " <<
-                        "-NXAL " <<
                         "/P:" << jsonResponse.at("passport").get<string>() << " " <<
                         "-bgloader").str();
                     auto workDir = fs::path{ m_clientPath }.remove_filename().native();
