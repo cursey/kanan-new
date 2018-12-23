@@ -100,7 +100,7 @@ vector<uint8_t> encryptData(string_view password, const uint8_t* data, size_t le
         throw runtime_error{ "Failed to set the algorithm chaining mode" };
     }
 
-    // Get the size required for the key object and cipher block.
+    // Get the size required for the key object and auth tag.
     ULONG numBytes{};
     ULONG objectLength{};
     BCRYPT_AUTH_TAG_LENGTHS_STRUCT authTagLengths{};
@@ -138,6 +138,8 @@ vector<uint8_t> encryptData(string_view password, const uint8_t* data, size_t le
 
     authInfo.pbNonce = nonce.data();
     authInfo.cbNonce = nonce.size();
+    authInfo.pbAuthData = nonce.data();
+    authInfo.cbAuthData = nonce.size();
     authInfo.pbTag = tag.data();
     authInfo.cbTag = tag.size();
 
@@ -189,7 +191,7 @@ vector<uint8_t> decryptData(string_view password, const uint8_t* data, size_t le
         throw runtime_error{ "Failed to set the algorithm chaining mode" };
     }
 
-    // Get the size required for the key object and cipher block.
+    // Get the size required for the key object and auth tag.
     ULONG numBytes{};
     ULONG objectLength{};
     BCRYPT_AUTH_TAG_LENGTHS_STRUCT authTagLengths{};
@@ -241,6 +243,8 @@ vector<uint8_t> decryptData(string_view password, const uint8_t* data, size_t le
 
     authInfo.pbNonce = nonce.data();
     authInfo.cbNonce = nonce.size();
+    authInfo.pbAuthData = nonce.data();
+    authInfo.cbAuthData = nonce.size();
     authInfo.pbTag = tag.data();
     authInfo.cbTag = tag.size();
     authInfo.pbMacContext = mac.data();
