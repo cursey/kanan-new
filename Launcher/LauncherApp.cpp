@@ -187,11 +187,18 @@ bool LauncherApp::loadProfiles() {
             Profile p{};
             string username{};
             string password{};
+            string cmdLine{};
 
             profile.at("username").get_to(username);
             profile.at("password").get_to(password);
-            strcpy_s(p.username.data(), p.username.size(), username.data());
-            strcpy_s(p.password.data(), p.password.size(), password.data());
+
+            if (profile.find("cmdLine") != profile.end()) {
+                profile.at("cmdLine").get_to(cmdLine);
+            }
+
+            strcpy_s(p.username.data(), p.username.size(), username.c_str());
+            strcpy_s(p.password.data(), p.password.size(), password.c_str());
+            strcpy_s(p.cmdLine.data(), p.cmdLine.size(), cmdLine.c_str());
 
             m_profiles.emplace_back(p);
         }
@@ -223,7 +230,8 @@ void LauncherApp::saveProfiles() {
 
         profiles.emplace_back(json{
             { "username", string{ profile.username.data() } },
-            { "password", string{ profile.password.data() } }
+            { "password", string{ profile.password.data() } },
+            { "cmdLine", string{ profile.cmdLine.data() } }
          });
     }
 
@@ -300,6 +308,7 @@ void LauncherApp::drawUI() {
 void LauncherApp::mainUI() {
     auto openAbout = false;
     auto openLaunchingPrompt = false;
+    auto openCustomizeCommandLine = false;
 
     //
     // Menu bar.
@@ -353,6 +362,10 @@ void LauncherApp::mainUI() {
         ImGui::InputText("Username/E-mail", username.data(), username.size());
         ImGui::InputText("Password", password.data(), password.size(), ImGuiInputTextFlags_Password);
 
+        if (ImGui::Button("Customize Command Line")) {
+            openCustomizeCommandLine = true;
+        }
+
         if (ImGui::Button("Launch Client")) {
             saveProfiles();
             m_launchResult = async(launch::async, [=] {
@@ -380,23 +393,34 @@ void LauncherApp::mainUI() {
                     jsonResponse = json::parse(response);
 
                     // Startup the client.
-                    // TODO: Allow custom launch parameters.
                     STARTUPINFO si{};
                     PROCESS_INFORMATION pi{};
-                    auto cmdLine = (ostringstream{} <<
-                        "\"" << m_clientPath << "\" " <<
-                        "code:1622 " <<
-                        "verstr:248 " <<
-                        "ver:248 " <<
-                        "locale:USA " <<
-                        "env:Regular " << 
-                        "setting:file://data/features.xml " <<
-                        "logip:208.85.109.35 " <<
-                        "logport:11000 " << 
-                        "chatip:208.85.109.37 " <<
-                        "chatport:8002 " <<
-                        "/P:" << jsonResponse.at("passport").get<string>() << " " <<
-                        "-bgloader").str();
+                    auto cmdLine = string{ profile.cmdLine.data() };
+                    
+                    if (cmdLine.empty()) {
+                        cmdLine = (ostringstream{} <<
+                            "\"" << m_clientPath << "\" " <<
+                            "code:1622 " <<
+                            "verstr:248 " <<
+                            "ver:248 " <<
+                            "locale:USA " <<
+                            "env:Regular " <<
+                            "setting:file://data/features.xml " <<
+                            "logip:208.85.109.35 " <<
+                            "logport:11000 " <<
+                            "chatip:208.85.109.37 " <<
+                            "chatport:8002 " <<
+                            "/P:" << jsonResponse.at("passport").get<string>() << " " <<
+                            "-bgloader").str();
+                    }
+                    else {
+                        // The user is allowed to use newlines when specifying their
+                        // custom command line. We need to strip newlines when we 
+                        // actually luanch the program.
+                        replace(cmdLine.begin(), cmdLine.end(), '\n', ' ');
+
+                    }
+
                     auto workDir = fs::path{ m_clientPath }.remove_filename().native();
 
                     si.cb = sizeof(si);
@@ -413,7 +437,7 @@ void LauncherApp::mainUI() {
                         &si,
                         &pi
                     ) == FALSE) {
-                        throw runtime_error{ "Failed to start Client.exe" };
+                        throw runtime_error{ "Failed to create the process" };
                     }
 
                     CloseHandle(pi.hThread);
@@ -474,6 +498,38 @@ void LauncherApp::mainUI() {
                     MB_ICONEXCLAMATION | MB_OK
                 );
             }
+        }
+
+        ImGui::EndPopup();
+    }
+
+    //
+    // Customize command line.
+    //
+    if (openCustomizeCommandLine) {
+        ImGui::OpenPopup("Customize Command Line");
+        openCustomizeCommandLine = false;
+    }
+
+    //ImGui::SetNextWindowPosCenter(ImGuiCond_Always);
+    ImGui::SetNextWindowSize(ImVec2{ 450.0f, -1.0f }, ImGuiCond_Once);
+
+    if (ImGui::BeginPopupModal("Customize Command Line")) {
+        ImGui::TextWrapped(
+            "Here you can completely control the command line used by Kanan Launcher "
+            "to launch Mabinogi. You will need to include the executable you wish to "
+            " launch as the first peice of the command line. Leave this empty if you "
+            "want to use the default command line. You can also use multiple lines "
+            "to organize the options if you want (they are stripped when actually "
+            "launching). Your login passport will also automatically be appended. "
+        );
+
+        auto& profile = m_profiles[m_currentProfile];
+
+        ImGui::InputTextMultiline("##Command Line", profile.cmdLine.data(), profile.cmdLine.size());// , ImVec2{ 400, 200 });
+
+        if (ImGui::Button("Finish")) {
+            ImGui::CloseCurrentPopup();
         }
 
         ImGui::EndPopup();
