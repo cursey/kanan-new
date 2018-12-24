@@ -419,6 +419,8 @@ void LauncherApp::mainUI() {
                         // actually luanch the program.
                         replace(cmdLine.begin(), cmdLine.end(), '\n', ' ');
 
+                        // Passport also needs to be added.
+                        cmdLine += " /P:" + jsonResponse.at("passport").get<string>();
                     }
 
                     auto workDir = fs::path{ m_clientPath }.remove_filename().native();
