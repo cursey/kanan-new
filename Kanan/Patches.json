@@ -515,11 +515,11 @@
         "category": "Interface",
         "patches": [
             {
-                "pattern": "89 45 C8 39 9F 58 01 00 00",
+                "pattern": "89 45 C4 39 9F 58 01 00 00",
                 "patch": "90 90 90"
             },
             {
-                "pattern": "89 4D C8 39 9F 58 01 00 00",
+                "pattern": "89 4D C4 39 9F 58 01 00 00",
                 "patch": "90 90 90"
             }
         ]
