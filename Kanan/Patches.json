@@ -285,7 +285,7 @@
         "category": "Quality of Life",
         "patches": [
             {
-                "pattern": "75 13 8D 4D 08 56",
+                "pattern": "75 ? 50 8D 55 08 52 E8 ? ? ? ?",
                 "patch": "EB"
             }
         ]
