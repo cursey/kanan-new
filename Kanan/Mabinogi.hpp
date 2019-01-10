@@ -216,62 +216,62 @@ public:
 class CParameter
 {
 public:
-    char pad_0000[28]; //0x0000
-    CMemberString name; //0x001C
-    CMemberString title; //0x002C
-    CMemberString engTitle; //0x003C
-    CMemberULong type; //0x004C
-    CMemberUChar skinColor; //0x005C
-    CMemberUShort eyeType; //0x0068
-    CMemberUChar eyeColor; //0x0074
-    CMemberUChar mouthType; //0x0080
-    CMemberULong status; //0x008C
-    CMemberULong statusEx; //0x009C
-    CMemberULong statusEx2; //0x00AC
-    CMemberFloat scaleHeight; //0x00BC
-    CMemberFloat scaleFatness; //0x00CC
-    CMemberFloat scaleUpper; //0x00DC
-    CMemberFloat scaleLower; //0x00EC
-    CMemberULong regionID; //0x00FC
-    CMemberULong positionX; //0x010C
-    CMemberULong positionY; //0x011C
-    CMmemberChar direction; //0x012C
-    CMemberULong battleState; //0x0138
-    CMemberUChar weaponSet; //0x0148
-    CMemberULong extra1; //0x0154
-    CMemberULong extra2; //0x0164
-    CMemberULong extra3; //0x0174
-    CMemberFloat combatPower; //0x0184
-    CMemberString motionType; //0x0194
-    CMemberUChar oddEyeLeftColor; //0x01A4
-    CMemberUChar oddEyeRightColor; //0x01B0
-    CMemberFloat life; //0x01BC
-    CMemberFloat lifeMaxBase; //0x01CC
-    CMemberFloat lifeDamaged; //0x01DC
-    CMemberFloat lifeMaxMod; //0x01EC
-    CMemberFloat mana; //0x01FC
-    CMemberFloat manaMaxBase; //0x020C
-    CMemberFloat manaMaxMod; //0x021C
-    CMemberFloat stamina; //0x022C
-    CMemberFloat staminaMaxBase; //0x023C
-    CMemberFloat staminaMaxMod; //0x024C
-    CMemberFloat food; //0x025C
-    CMemberFloat foodMinRatio; //0x026C
-    CMemberUShort level; //0x027C
-    CMemberULong cumulatedLevel; //0x0288
-    CMemberUShort maxLevel; //0x0298
-    CMemberUShort rebirthCount; //0x02A4
-    CMemberUShort lifeTimeSkill; //0x02B0
-    char pad_02BC[4]; //0x02BC
-    CMemberUInt64 experienceInt; //0x02C0
-    CMemberUShort age; //0x02D8
-    char pad_02E4[1848]; //0x02E4
-    CMemberFloat dorcha; //0x0A1C
-    CMemberFloat dorchaMaxBase; //0x0A2C
-    CMemberFloat tuairim; //0x0A3C For Bachram Boost
-    CMemberFloat tuairimMaxBase; //0x0A4C For Bachram Boost
-    char pad_0A5C[56]; //0x0A5C
-}; //Size: 0x0A94
+    char pad_0000[36]; //0x0000
+    CMemberString name; //0x0024
+    CMemberString title; //0x0034
+    CMemberString engTitle; //0x0044
+    CMemberULong type; //0x0054
+    CMemberUChar skinColor; //0x0064
+    CMemberUShort eyeType; //0x0070
+    CMemberUChar eyeColor; //0x007C
+    CMemberUChar mouthType; //0x0088
+    CMemberULong status; //0x0094
+    CMemberULong statusEx; //0x00A4
+    CMemberULong statusEx2; //0x00B4
+    CMemberFloat scaleHeight; //0x00C4
+    CMemberFloat scaleFatness; //0x00D4
+    CMemberFloat scaleUpper; //0x00E4
+    CMemberFloat scaleLower; //0x00F4
+    CMemberULong regionID; //0x0104
+    CMemberULong positionX; //0x0114
+    CMemberULong positionY; //0x0124
+    CMmemberChar direction; //0x0134
+    CMemberULong battleState; //0x0140
+    CMemberUChar weaponSet; //0x0150
+    CMemberULong extra1; //0x015C
+    CMemberULong extra2; //0x016C
+    CMemberULong extra3; //0x017C
+    CMemberFloat combatPower; //0x018C
+    CMemberString motionType; //0x019C
+    CMemberUChar oddEyeLeftColor; //0x01AC
+    CMemberUChar oddEyeRightColor; //0x01B8
+    CMemberFloat life; //0x01C4
+    CMemberFloat lifeMaxBase; //0x01D4
+    CMemberFloat lifeDamaged; //0x01E4
+    CMemberFloat lifeMaxMod; //0x01F4
+    CMemberFloat mana; //0x0204
+    CMemberFloat manaMaxBase; //0x0214
+    CMemberFloat manaMaxMod; //0x0224
+    CMemberFloat stamina; //0x0234
+    CMemberFloat staminaMaxBase; //0x0244
+    CMemberFloat staminaMaxMod; //0x0254
+    CMemberFloat food; //0x0264
+    CMemberFloat foodMinRatio; //0x0274
+    CMemberUShort level; //0x0284
+    CMemberULong cumulatedLevel; //0x0290
+    CMemberUShort maxLevel; //0x02A0
+    CMemberUShort rebirthCount; //0x02AC
+    CMemberUShort lifeTimeSkill; //0x02B8
+    char pad_02C4[4]; //0x02C4
+    CMemberUInt64 experienceInt; //0x02C8
+    CMemberUShort age; //0x02E0
+    char pad_02EC[1848]; //0x02EC
+    CMemberFloat dorcha; //0x0A24
+    CMemberFloat dorchaMaxBase; //0x0A34
+    CMemberFloat tuairim; //0x0A44 For Bachram Boost
+    CMemberFloat tuairimMaxBase; //0x0A54 For Bachram Boost
+    char pad_0A64[56]; //0x0A64
+}; //Size: 0x0A9C
 
 class CFramework
 {
@@ -310,15 +310,15 @@ public:
     uint32_t color4; //0x0028
     uint32_t color5; //0x002C
     uint32_t color6; //0x0030
-    char pad_0034[16]; //0x0034
-}; //Size: 0x0044
+    char pad_0034[20]; //0x0034
+}; //Size: 0x0048
 
 class CEquipment
 {
 public:
     CEquipmentItemInfo itemInfo[19]; //0x0000
-    char pad_050C[384]; //0x050C
-}; //Size: 0x068C
+    char pad_0558[384]; //0x0558
+}; //Size: 0x06D8
 
 class CCharacter
 {
@@ -328,12 +328,12 @@ public:
     char pad_0008[128]; //0x0008
     class CParameter* parameter; //0x0088
     class CAction* action; //0x008C
-    char pad_0090[408]; //0x0090
-    class CEquipment* equipment; //0x0228
-    char pad_022C[92]; //0x022C
-    uint64_t targetID; //0x0288
-    char pad_0290[700]; //0x0290
-}; //Size: 0x054C
+    char pad_0090[412]; //0x0090
+    class CEquipment* equipment; //0x022C
+    char pad_0230[96]; //0x0230
+    uint64_t targetID; //0x0290
+    char pad_0298[700]; //0x0298
+}; //Size: 0x0554
 
 class CCharacterListNodeEntry
 {
