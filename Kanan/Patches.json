@@ -572,8 +572,8 @@
         "category": "Speedup",
         "patches": [
             {
-                "pattern": "8B 08 33 FF 3B CF 76 2A",
-                "offset": 6,
+                "pattern": "76 ? 8B 40 04 89 45 0C"
+                "offset": 0,
                 "patch": "EB"
             }
         ]
