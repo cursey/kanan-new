@@ -105,6 +105,7 @@ namespace kanan {
         virtual void OnEnabled(bool a2) {}
         virtual bool CanGetIMEFocus() { return true; }
         virtual void GetExtent(unsigned __int16 *a2, unsigned __int16 *a3) {}
+        virtual void *Unknown_v293(int *a1) { return nullptr; }
         virtual CString *GetTitle(CString *a2) { return nullptr; }
         virtual char ApplyAttributes(const int *a3, int *a4) { return 0; }
         virtual bool CreateFromLayout(const int *a3, int *a4) { return true; }
