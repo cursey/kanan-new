@@ -265,13 +265,13 @@ public:
     char pad_02C4[4]; //0x02C4
     CMemberUInt64 experienceInt; //0x02C8
     CMemberUShort age; //0x02E0
-    char pad_02EC[1848]; //0x02EC
-    CMemberFloat dorcha; //0x0A24
-    CMemberFloat dorchaMaxBase; //0x0A34
-    CMemberFloat tuairim; //0x0A44 For Bachram Boost
-    CMemberFloat tuairimMaxBase; //0x0A54 For Bachram Boost
-    char pad_0A64[56]; //0x0A64
-}; //Size: 0x0A9C
+    char pad_02EC[1880]; //0x02EC
+    CMemberFloat dorcha; //0x0A44
+    CMemberFloat dorchaMaxBase; //0x0A54
+    CMemberFloat tuairim; //0x0A64 For Bachram Boost
+    CMemberFloat tuairimMaxBase; //0x0A74 For Bachram Boost
+    char pad_0A84[56]; //0x0A84
+}; //Size: 0x0ABC
 
 class CFramework
 {
