@@ -140,7 +140,7 @@ namespace kanan {
         m_equipmentOverrides[16].name = "Accessory 1";
         m_equipmentOverrides[17].name = "Accessory 2";
 
-        auto address = scan("client.exe", "55 8B EC 6A ? 68 ? ? ? ? 64 A1 ? ? ? ? 50 83 EC ? 53 56 57 A1 ? ? ? ? 33 C5 50 8D 45 F4 64 A3 ? ? ? ? 8B F9 8B 4F 04 33 F6");
+        auto address = scan("client.exe", "55 8B EC 6A ? 68 ? ? ? ? 64 A1 ? ? ? ? 50 83 EC ? 53 56 57 A1 ? ? ? ? 33 C5 50 8D 45 F4 64 A3 ? ? ? ? 8B F9 8B 45 0C 8B 0D ? ? ? ?");
 
         if (address) {
             log("[EquipmentOverride] Found address of setEquipmentInfo %p", *address);
