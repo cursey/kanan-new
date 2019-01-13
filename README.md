@@ -2,7 +2,8 @@
 A reimagining of Kanan for Mabinogi written in C++ with many improvements.
 
 ## Download
-Downloads for the latest _official_ releases are located [here](https://github.com/cursey/kanan-new/releases).
+~~Downloads for the latest _official_ releases are located [here](https://github.com/cursey/kanan-new/releases).~~
+Just get the latest build from [AppVeyor](https://ci.appveyor.com/project/cursey/kanan-new/build/artifacts).
 
 ## Requirements
 You need the Microsoft Visual C++ Redistributable for Visual Studio 2017 available at the bottom of [this page](https://www.visualstudio.com/downloads/). Make sure to choose the x86 version of the download!
