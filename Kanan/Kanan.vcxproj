@@ -110,6 +110,7 @@
     <ClCompile Include="KCharacter.cpp" />
     <ClCompile Include="KItem.cpp" />
     <ClCompile Include="Log.cpp" />
+    <ClCompile Include="LoginScreen.cpp" />
     <ClCompile Include="Mods.cpp" />
     <ClCompile Include="PatchMod.cpp" />
     <ClCompile Include="RangedAttackSwap.cpp" />
@@ -137,6 +138,7 @@
     <ClInclude Include="KCharacter.hpp" />
     <ClInclude Include="KItem.hpp" />
     <ClInclude Include="Log.hpp" />
+    <ClInclude Include="LoginScreen.hpp" />
     <ClInclude Include="Mabinogi.hpp" />
     <ClInclude Include="Mod.hpp" />
     <ClInclude Include="Mods.hpp" />
