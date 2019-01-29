@@ -844,7 +844,7 @@
     },
     {
         "name": "Show entity HP",
-        "desc": "Entities will show their HP balues under the HP bar.",
+        "desc": "Entities will show their HP values under the HP bar.",
         "category": "Information",
         "patches": [
             {
