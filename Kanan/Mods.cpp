@@ -21,6 +21,7 @@
 #include "TTFFontSize.hpp"
 #include "SecondaryPassword.hpp"
 #include "StatusUI.hpp"
+#include "LoginScreen.hpp"
 
 #include "Log.hpp"
 
@@ -45,6 +46,7 @@ namespace kanan {
         log("[Mods] Loading time critical mods...");
 
         addMod(make_unique<UseDataFolder>());
+        addMod(make_unique<LoginScreen>());
 
         // Time critical mods need to have their settings loaded from the config
         // right away.
