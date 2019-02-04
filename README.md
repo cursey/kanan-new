@@ -33,6 +33,7 @@ Once this project reaches (or approaches) feature parity with the original Kanan
 ## Todo
 * Add more patches and mods that were previously available in the original Kanan.
 
+## Preview from the very first public version
 ![Preview](preview.png)
 
 ## Original patch authors
@@ -68,4 +69,5 @@ Many original patches/ideas came from the following projects:
 * MNG
 * Noginogi-Party
 
-And to all the patchers that came before, and all that will come after.
+## Projects that use or were inspired by Kanan
+* [RE2 Mod Framework](https://github.com/praydog/RE2-Mod-Framework) - Mods for the Resident Evil 2 Remake
