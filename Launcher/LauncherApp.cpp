@@ -406,9 +406,9 @@ void LauncherApp::mainUI() {
                             "locale:USA " <<
                             "env:Regular " <<
                             "setting:file://data/features.xml " <<
-                            "logip:208.85.109.35 " <<
+                            "logip:35.162.171.43 " <<
                             "logport:11000 " <<
-                            "chatip:208.85.109.37 " <<
+                            "chatip:54.214.176.167 " <<
                             "chatport:8002 " <<
                             "/P:" << jsonResponse.at("passport").get<string>() << " " <<
                             "-bgloader").str();
