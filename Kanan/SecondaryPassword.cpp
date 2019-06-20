@@ -13,8 +13,8 @@ using namespace std;
 
 namespace kanan {
     static SecondaryPassword* g_secondaryPassword{ nullptr };
-	static bool g_secondaryPasswordAutoLogin;
-	static int g_secondaryPasswordAutoConfirm_tries { 0 };
+    static bool g_secondaryPasswordAutoLogin;
+    static int g_secondaryPasswordAutoConfirm_tries { 0 };
 
     SecondaryPassword::SecondaryPassword()
         : m_isEnabled{ false },
@@ -114,7 +114,7 @@ namespace kanan {
             return;
         }
         // Looking for pleione::CVisualKeyboardView vtable
-        auto cVisualKeyboardViewVtableTmp = scan(*constructorTmpAddr - 300, 1000, "C7 06 ? ? ? ? 89");
+        auto cVisualKeyboardViewVtableTmp = scan(*constructorTmpAddr - 350, 1000, "C7 03 ? ? ? ? C7");
         uintptr_t *cVisualKeyboardViewVtable;
         if (cVisualKeyboardViewVtableTmp)
         {
@@ -150,13 +150,13 @@ namespace kanan {
         {
             view->inputBox->SetTitle(&g_secondaryPassword->password);
             view->okButton->SetEnable(true);
-			if(g_secondaryPasswordAutoLogin 
-				&& g_secondaryPasswordAutoConfirm_tries == 0)//avoid wrong password message loop
-			{ 
-				view->okButton->OnMouseLButtonDown(0, 0, true);
-				view->okButton->OnMouseLButtonUp(0, 0, true);
-				g_secondaryPasswordAutoConfirm_tries++;
-			}
+            if(g_secondaryPasswordAutoLogin 
+                && g_secondaryPasswordAutoConfirm_tries == 0)//avoid wrong password message loop
+            { 
+                view->okButton->OnMouseLButtonDown(0, 0, true);
+                view->okButton->OnMouseLButtonUp(0, 0, true);
+                g_secondaryPasswordAutoConfirm_tries++;
+            }
         }
         else
         {
@@ -171,14 +171,14 @@ namespace kanan {
                 "NOTE: You must restart the game after enabling or disabling this mod for it take effect."
             );
             ImGui::Spacing();
-			ImGui::Checkbox("Enable Secondary Password", &m_isEnabled);
-			ImGui::Checkbox("Enable Secondary Password Auto Login", &g_secondaryPasswordAutoLogin);
+            ImGui::Checkbox("Enable Secondary Password", &m_isEnabled);
+            ImGui::Checkbox("Enable Secondary Password Auto Login", &g_secondaryPasswordAutoLogin);
             ImGui::InputText("Password:", savedPassword, 60, ImGuiInputTextFlags_Password);
         }
     }
 
     void SecondaryPassword::onConfigLoad(const Config& cfg) {
-		m_isEnabled = cfg.get<bool>("SecondaryPassword.Enabled").value_or(false);
+        m_isEnabled = cfg.get<bool>("SecondaryPassword.Enabled").value_or(false);
 
         auto pass = cfg.get("SecondaryPassword.Password").value_or("");
         auto len = pass.length();
@@ -188,12 +188,12 @@ namespace kanan {
  
         if (m_isEnabled) setup();
 
-		g_secondaryPasswordAutoLogin = cfg.get<bool>("SecondaryPassword.AutoLogin.Enabled").value_or(false);
+        g_secondaryPasswordAutoLogin = cfg.get<bool>("SecondaryPassword.AutoLogin.Enabled").value_or(false);
     }
 
     void SecondaryPassword::onConfigSave(Config& cfg) {
         cfg.set<bool>("SecondaryPassword.Enabled", m_isEnabled);
         cfg.set("SecondaryPassword.Password", savedPassword);
-		cfg.set<bool>("SecondaryPassword.AutoLogin.Enabled", g_secondaryPasswordAutoLogin);
+        cfg.set<bool>("SecondaryPassword.AutoLogin.Enabled", g_secondaryPasswordAutoLogin);
     }
 }
