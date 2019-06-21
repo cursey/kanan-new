@@ -5,7 +5,7 @@
         "category": "Information",
         "patches": [
             {
-                "pattern": "0F 85 ? ? ? ? 8B 97 ? ? ? ? 8B 87",
+                "pattern": "0F 85 ? ? ? ? FF B3 F4 00 00 00",
                 "patch": "90 90 90 90 90 90"
             }
         ]
