@@ -1,5 +1,4 @@
 #include <algorithm>
-#include <memory>
 
 #include <Windows.h>
 
@@ -34,17 +33,24 @@ namespace kanan {
     optional<uintptr_t> Pattern::find(uintptr_t start, size_t length) {
         auto patternLength = m_pattern.size();
         auto end = start + length - patternLength;
+        auto i = start;
 
-        for (auto i = start; i <= end; ++i) {
-            auto j = i;
-            auto failedToMatch = false;
+        // Do we start at a readable address? If not, align to the next page.
+        if (!isGoodCodePtr(i, patternLength)) {
+            i = ((i + 0x1000 - 1) / 0x1000) * 0x1000;
+        }
 
+        while (i <= end) {
             // If we're at the start of a new page, check to see if its a readable 
             // address. If not, skip an entire page.
-            if ((i % 0x1000) == 0 && !isGoodReadPtr(i, patternLength)) {
+            if ((i % 0x1000) == 0 && !isGoodCodePtr(i, patternLength)) {
                 i += 0x1000;
                 continue;
             }
+
+            // Test the pattern at this address.
+            auto j = i;
+            auto failedToMatch = false;
 
             for (auto& k : m_pattern) {
                 if (k != -1 && k != *(uint8_t*)j) {
@@ -55,12 +61,17 @@ namespace kanan {
                 ++j;
             }
 
+            // If we didn't fail to match, then we found a match so return it.
             if (!failedToMatch) {
                 return i;
             }
+
+            // Otherwise, advance a byte.
+            ++i;
         }
 
-        return {};
+        // No match found.
+        return nullopt;
     }
 
     vector<int16_t> buildPattern(string patternStr) {
