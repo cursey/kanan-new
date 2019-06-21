@@ -15,7 +15,7 @@ namespace kanan {
         log("Entering Game constructor.");
 
         // Find the games global renderer pointer.
-        auto rendererAddress = scan("client.exe", "8B 0D ? ? ? ? 8D 55 C8 52 8D 45 DC");
+        auto rendererAddress = scan("client.exe", "8B 0D ? ? ? ? 8D 45 DC 6A ? 6A ? 50");
 
         if (rendererAddress) {
             m_rendererPtr = *(CRendererPtr**)(*rendererAddress + 2);
@@ -27,7 +27,7 @@ namespace kanan {
         }
 
         // Find the games global entity list pointer.
-        auto entityListAddress = scan("client.exe", "8B 0D ? ? ? ? 57 50 E8 ? ? ? ? 3B C3");
+        auto entityListAddress = scan("client.exe", "8B 0D ? ? ? ? 56 FF 75 08 E8 ? ? ? ? 85 C0 0F 84 ? ? ? ?");
 
         if (entityListAddress) {
             m_entityListPtr = *(CEntityListPtr**)(*entityListAddress + 2);
@@ -39,10 +39,10 @@ namespace kanan {
         }
 
         // Find the games global world pointer.
-        auto worldAddress = scan("client.exe", "8B 15 ? ? ? ? 8B 4A 1C E8 ? ? ? ? 0F B6 C0");
+        auto worldAddress = scan("client.exe", "A1 ? ? ? ? 8B 48 1C E8 ? ? ? ? 0F B6 C0");
 
         if (worldAddress) {
-            m_worldPtr = *(CWorldPtr**)(*worldAddress + 2);
+            m_worldPtr = *(CWorldPtr**)(*worldAddress + 1);
 
             log("Got CWorldPtr %p", m_worldPtr);
         }
@@ -51,7 +51,7 @@ namespace kanan {
         }
 
         // find the games global account pointer.
-        auto accountAddress = scan("client.exe", "8B 0D ? ? ? ? 6A 00 53 E8 ? ? ? ? 8B 06");
+        auto accountAddress = scan("client.exe", "8B 0D ? ? ? ? 84 C0 74 ? E8 ? ? ? ? 8B 0D ? ? ? ? E8 ? ? ? ?");
 
         if (accountAddress) {
             m_accountPtr = *(CAccountPtr**)(*accountAddress + 2);
