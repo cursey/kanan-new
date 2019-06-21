@@ -89,8 +89,14 @@ namespace kanan {
         return result;
     }
 
-    void SecondaryPassword::setup()
+    void SecondaryPassword::setup() 
     {
+        if (m_isSetup) {
+            return;
+        }
+
+        m_isSetup = true;
+
         log("[SecondaryPassword] Entering setup...");
         if (!InitCStrings()) return;
 

@@ -296,6 +296,7 @@ namespace kanan {
 
     private:
         bool m_isEnabled;
+        bool m_isSetup{};
         CString *password;
         char savedPassword[60];
         std::unique_ptr<FunctionHook> m_setCVisualKeyboardViewOnPostCreateHook;
