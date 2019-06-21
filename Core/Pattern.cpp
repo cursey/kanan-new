@@ -39,9 +39,9 @@ namespace kanan {
             auto j = i;
             auto failedToMatch = false;
 
-            // Make sure the address is readable.
-            //if (IsBadReadPtr((const void*)i, patternLength) != FALSE) {
-            if (i % 0x1000 == 0&& !isGoodCodePtr(i, patternLength)) {
+            // If we're at the start of a new page, check to see if its a readable 
+            // address. If not, skip an entire page.
+            if ((i % 0x1000) == 0 && !isGoodReadPtr(i, patternLength)) {
                 i += 0x1000;
                 continue;
             }
