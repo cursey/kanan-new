@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <memory>
 
 #include <Windows.h>
 
@@ -40,8 +41,8 @@ namespace kanan {
 
             // Make sure the address is readable.
             //if (IsBadReadPtr((const void*)i, patternLength) != FALSE) {
-            if (!isGoodReadPtr(i, patternLength)) {
-                i += patternLength - 1;
+            if (i % 0x1000 == 0&& !isGoodCodePtr(i, patternLength)) {
+                i += 0x1000;
                 continue;
             }
 
