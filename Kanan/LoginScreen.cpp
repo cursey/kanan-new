@@ -25,7 +25,7 @@ namespace kanan {
         HMODULE mod = GetModuleHandle(widen("client.exe").c_str());
         auto size = getModuleSize(mod).value_or(0);
         char *pat1 = ".?AVCLoginScene@pleione";
-        auto loginSceneRTIIBase = scan((uintptr_t)mod + 0x2C00000, size - 0x2C00000, hexify((const uint8_t*)pat1, strnlen_s(pat1, 100)));
+        auto loginSceneRTIIBase = scan((uintptr_t)mod + 0x2600000, size - 0x2600000, hexify((const uint8_t*)pat1, strnlen_s(pat1, 100)));
         if (loginSceneRTIIBase)
         {
             if (m_isDebug) log("[LoginScreen] Found address of .?AVCLoginScene@pleione %p", loginSceneRTIIBase);
@@ -35,8 +35,8 @@ namespace kanan {
             goto fail;
         }
         auto rttiStrAddr = *loginSceneRTIIBase + 1;
-        auto RTTICompleteObjectLocator = (uintptr_t)mod + 0x2C00000;
-        auto VFTableAddr = (uintptr_t)mod + 0x2C00000;
+        auto RTTICompleteObjectLocator = (uintptr_t)mod + 0x2600000;
+        auto VFTableAddr = (uintptr_t)mod + 0x2600000;
         auto constructorRefAddr = (uintptr_t)mod;
         while (1)
         {
@@ -158,7 +158,7 @@ namespace kanan {
         kanan::patch(loginPatch);
 
         // Patch jumps to call first login scene constructor
-        auto loginScreenPatch2 = scan("client.exe", "68 ? ? ? ? 8B F8 8B F2 E8 ? ? ? ? 84 C0 74 2B 68");
+        auto loginScreenPatch2 = scan("client.exe", "68 7D 04 00 00 8B DA E8 ? ? ? ? 84 C0 74 2B 68 80 00 00 00 E8 ? ? ? ? 83 C4 04 89 45 F0 C7 45 ? ? ? ? ? 85 C0 0F 84 ? ? ? ? 8B C8 E8");
         if (loginScreenPatch2)
         {
             if (m_isDebug) log("[LoginScreen] loginScreenPatch2: %p", loginScreenPatch2);
@@ -168,27 +168,14 @@ namespace kanan {
             log("[LoginScreen] loginScreenPatch2: fail");
             return;
         }
-        loginPatch.address = *loginScreenPatch2 + 16;
-        loginPatch.bytes = { 0xEB };
-        kanan::patch(loginPatch);
-
-        auto loginScreenPatch3 = scan("client.exe", "68 78 04 00 00 E8 ? ? ? ? 84 C0 74 2B 68 80 00 00 00 E8 ? ? ? ? 83 C4 04 89 45 F0 C7 45 ? ? ? ? ? 85 C0 0F 84 ? ? ? ? 8B C8 E8");
-        if (loginScreenPatch3)
-        {
-            if (m_isDebug) log("[LoginScreen] loginScreenPatch3: %p", loginScreenPatch3);
-        }
-        else
-        {
-            log("[LoginScreen] loginScreenPatch3: fail");
-            return;
-        }
-        loginPatch.address = *loginScreenPatch3 + 12;
+        loginPatch.address = *loginScreenPatch2 + 14;
         loginPatch.bytes = { 0x90, 0x90 };
-        loginPatch.address = *loginScreenPatch3 + 16; // increase new() size
+        kanan::patch(loginPatch);
+        loginPatch.address = *loginScreenPatch2 + 18; // increase new() size
         loginPatch.bytes = { 0x10 };
         kanan::patch(loginPatch);
         // patch login scene constructor call
-        auto callInstructionAddr = *loginScreenPatch3 + 47;
+        auto callInstructionAddr = *loginScreenPatch2 + 49;
         *(uintptr_t*)(callInstructionAddr + 1) = (constructorAddr - 5) - callInstructionAddr;
     }
 
