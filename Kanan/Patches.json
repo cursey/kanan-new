@@ -180,7 +180,7 @@
         "category": "Quality of Life",
         "patches": [
             {
-                "pattern": "55 8B EC 56 8B F1 8B 46 64 83 78 08 00 74 32",
+                "pattern": "55 8B EC 56 8B F1 8B 46 64 83 78 04 ?",
                 "offset": 13,
                 "patch": "EB"
             }
