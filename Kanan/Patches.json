@@ -203,23 +203,23 @@
         "category": "Graphics",
         "patches": [
             {
-                "pattern": "D9 01 8B 46 64",
-                "patch": "D9 EE"
+                "pattern": "8B 01 5E 89 42 48",
+                "patch": "33 C0"
             },
             {
-                "pattern": "D9 01 8B 46 64",
-                "offset": 9,
-                "patch": "D9 EE 90"
+                "pattern": "8B 01 5E 89 42 48",
+                "offset": 6,
+                "patch": "90 90 90"
             },
             {
-                "pattern": "D9 01 8B 46 64",
-                "offset": 15,
-                "patch": "D9 EE 90"
+                "pattern": "8B 01 5E 89 42 48",
+                "offset": 12,
+                "patch": "90 90 90"
             },
             {
-                "pattern": "D9 01 8B 46 64",
-                "offset": 21,
-                "patch": "D9 EE 90"
+                "pattern": "8B 01 5E 89 42 48",
+                "offset": 18,
+                "patch": "90 90 90"
             }
         ]
     },
