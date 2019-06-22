@@ -132,7 +132,7 @@
         "category": "Speedup",
         "patches": [
             {
-                "pattern": "0F 84 ? ? ? ? 89 5D F0 89 5D FC 8B CF E8 ? ? ? ? 8B 10",
+                "pattern": "0F 84 ? ? ? ? C7 45 F0 ? ? ? ? C7 45 FC ? ? ? ? 8B CB E8 ? ? ? ? 8D 4D E4",
                 "patch": "90 E9"
             }
         ]
