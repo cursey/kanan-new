@@ -154,7 +154,7 @@
         "category": "Speedup",
         "patches": [
             {
-                "pattern": "0F 84 ? ? ? ? 88 5D F2 88 5D F3",
+                "pattern": "0F 84 ? ? ? ? 33 F6 C6 45 F3 ?",
                 "patch": "90 E9"
             }
         ]
