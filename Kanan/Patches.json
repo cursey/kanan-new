@@ -87,13 +87,8 @@
         "category": "Graphics",
         "patches": [
             {
-                "pattern": "7A 05 D9 5D 08 EB 02 DD D8 D9 45 08 D9 45 F8",
-                "patch": "EB"
-            },
-            {
-                "pattern": "7A 05 D9 5D 08 EB 02 DD D8 D9 45 08 D9 45 F8",
-                "offset": 22,
-                "patch": "EB"
+                "pattern": "F3 0F 10 46 14 F3 0F 5D C1",
+                "patch": "90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90"
             }
         ]
     },
