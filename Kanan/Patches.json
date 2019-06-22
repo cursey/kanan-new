@@ -39,7 +39,7 @@
         "category": "Fixes",
         "patches": [
             {
-                "pattern": "55 8B EC 56 8B F1 8B 06 8B 50 0C 57 FF D2 8B C8",
+                "pattern": "55 8B EC 56 57 8B F9 8B 07 FF 50 0C 8B C8",
                 "patch": "32 C0 C2 04 00"
             }
         ]
