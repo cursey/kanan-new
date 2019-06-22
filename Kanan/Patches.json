@@ -98,7 +98,7 @@
         "category": "Fixes",
         "patches": [
             {
-                "pattern": "84 C0 74 19 B8 ? ? ? ? 8B 4D F4 64 89 0D ? ? ? ? 59 5F 5E 5B 8B E5 5D C2 04 00",
+                "pattern": "84 C0 74 ? B8 ? ? ? ? 8B 4D F4 64 89 0D ? ? ? ? 59 5F 5E 5B 8B E5 5D C2 ? ? 8B 0D ? ? ? ?",
                 "offset": 2,
                 "patch": "EB"
             }
