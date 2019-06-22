@@ -192,7 +192,7 @@
         "category": "Quality of Life",
         "patches": [
             {
-                "pattern": "0F B6 41 05 C1 E8 02 83 E0 01 C3",
+                "pattern": "0F B6 41 05 C1 E8 ?",
                 "patch": "33 C0 C3 90 90 90 90 90 90 90 90"
             }
         ]
