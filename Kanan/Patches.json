@@ -300,9 +300,8 @@
         "category": "Graphics",
         "patches": [
             {
-                "pattern": "55 1C 53 ? ? ? ? ? ? ? ? 56",
-                "offset": 2,
-                "patch": "50"
+                "pattern": "6A ? FF 75 08 89 46 1C 8A 45 1C",
+                "patch": "90 50"
             }
         ]
     },
