@@ -362,14 +362,16 @@
         "category": "Graphics",
         "patches": [
             {
-                "pattern": "83 79 44 01 75 09 6A 00 6A 00 E8",
+                "pattern": "83 79 44 ? 75 ? 6A ? 6A ? E8 ? ? ? ?",
                 "offset": 4,
-                "patch": "EB"
+                "patch": "EB",
+                "n": 0
             },
             {
-                "pattern": "83 79 44 01 75 09 6A 00 6A 00 E8",
+                "pattern": "83 79 44 ? 75 ? 6A ? 6A ? E8 ? ? ? ?",
                 "offset": 4,
-                "patch": "EB"
+                "patch": "EB",
+                "n": 1
             }
         ]
     },
