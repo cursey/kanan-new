@@ -323,17 +323,6 @@
         ]
     },
     {
-        "name": "Allow FSAA (Setting)",
-        "desc": "Enables the option to turn on FSAA in Mabi's option menu.\nNOTE: that the setting only takes effect in full screen.",
-        "category": "Graphics",
-        "patches": [
-            {
-                "pattern": "53 FF D2 8B 0D ? ? ? ? 6A 0C E8 ? ? ? ? 68 ? ? ? ? 89 45 D0",
-                "patch": "90 90 90"
-            }
-        ]
-    },
-    {
         "name": "Allow Interface While Dead",
         "desc": "Allows you to interact with your entire user interface while unconcious.",
         "category": "Interface",
