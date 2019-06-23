@@ -311,12 +311,12 @@
         "category": "Interface",
         "patches": [
             {
-                "pattern": "C2 8D ? ? ? ? ? ? B8 B4 00 00 00",
-                "offset": 9,
+                "pattern": "B8 ? ? ? ? 66 39 07 73 ? 66 89 07",
+                "offset": 1,
                 "patch": "FF"
             },
             {
-                "pattern": "BF B4 00 00 00 6A",
+                "pattern": "BF ? ? ? ? 6A ? 89 75 C8",
                 "offset": 1,
                 "patch": "19"
             }
