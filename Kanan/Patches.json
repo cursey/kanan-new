@@ -351,7 +351,7 @@
         "category": "Text",
         "patches": [
             {
-                "pattern": "0F 85 ? ? ? ? D9 ? D9 ? ? D8 ? DF E0 F6 C4 ?",
+                "pattern": "0F 86 ? ? ? ? 0F 57 C0 0F 2F F8",
                 "patch": "90 90 90 90 90 90"
             }
         ]
