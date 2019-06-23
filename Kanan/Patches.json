@@ -339,7 +339,7 @@
         "category": "Interface",
         "patches": [
             {
-                "pattern": "89 4E 74 38 58 40",
+                "pattern": "89 46 70 80 79 40 ?",
                 "offset": 1,
                 "patch": "6E"
             }
