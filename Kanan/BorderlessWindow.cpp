@@ -100,7 +100,12 @@ namespace kanan {
 
     void BorderlessWindow::onUI() {
         if (ImGui::CollapsingHeader("Borderless Window")) {
-            ImGui::Combo("Style", &m_styleChoice, "Disabled\0Borderless Window\0Borderless Fullscreen\0\0");
+            ImGui::Combo("Style", &m_styleChoice, "Disabled\0Borderless Window\0Borderless Fullscreen\0Custom\0\0");
+
+            if (m_styleChoice == 3) {
+                ImGui::InputInt2("Position", &m_x);
+                ImGui::InputInt2("Size", &m_w);
+            }
 
             string monitorChoices{};
 
@@ -123,6 +128,10 @@ namespace kanan {
     void BorderlessWindow::onConfigLoad(const Config& cfg) {
         m_styleChoice = cfg.get<int>("BorderlessWindow.Choice").value_or(0);
         m_monitorChoice = cfg.get<int>("BorderlessWindow.Monitor").value_or(0);
+        m_x = cfg.get<int>("BorderlessWindow.X").value_or(0);
+        m_y = cfg.get<int>("BorderlessWindow.Y").value_or(0);
+        m_w = cfg.get<int>("BorderlessWindow.W").value_or(1920);
+        m_h = cfg.get<int>("BorderlessWindow.H").value_or(1080);
 
         if (m_styleChoice != 0) {
             apply();
@@ -132,6 +141,10 @@ namespace kanan {
     void BorderlessWindow::onConfigSave(Config& cfg) {
         cfg.set<int>("BorderlessWindow.Choice", m_styleChoice);
         cfg.set<int>("BorderlessWindow.Monitor", m_monitorChoice);
+        cfg.set<int>("BorderlessWindow.X", m_x);
+        cfg.set<int>("BorderlessWindow.Y", m_y);
+        cfg.set<int>("BorderlessWindow.W", m_w);
+        cfg.set<int>("BorderlessWindow.H", m_h);
     }
 
     bool BorderlessWindow::onMessage(HWND wnd, UINT message, WPARAM wParam, LPARAM lParam) {
@@ -218,6 +231,12 @@ namespace kanan {
 
             break;
         }
+
+        case 3: 
+            m_style &= ~(WS_BORDER | WS_CAPTION | WS_THICKFRAME);
+            m_changeStyle = true;
+            m_changePos = true;
+            break;
 
         default:
             break;
