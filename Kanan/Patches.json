@@ -252,11 +252,11 @@
         "category": "Quality of Life",
         "patches": [
             {
-                "pattern": "0F 85 ? ? ? ? 33 FF C6 45 F3 01",
-                "patch": "90 90 90 90 90 90"
+                "pattern": "75 ? C6 45 F3 ? 33 D2",
+                "patch": "90 90"
             },
             {
-                "pattern": "0F 85 ? ? ? ? 33 FF 80 7D 10 00",
+                "pattern": "0F 83 ? ? ? ? 80 7D 10 ?",
                 "patch": "90 90 90 90 90 90"
             }
         ]
