@@ -510,26 +510,26 @@
         "category": "Interface",
         "patches": [
             {
-                "pattern": "B8 ? ? ? ? F7 E6 C1 EA 03 42",
-                "patch": "90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90"
+                "pattern": "B8 ? ? ? ? C1 E1 ? 2B F1",
+                "patch": "90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90"
             },
             {
-                "pattern": "83 F8 0F 0F 97 C0",
+                "pattern": "83 F8 ? 0F 97 C0 84 C0",
                 "offset": 2,
                 "patch": "00"
             },
             {
-                "pattern": "6A 0F 83 DE 00",
+                "pattern": "6A ? 83 DF ?",
                 "offset": 1,
                 "patch": "01"
             },
             {
-                "pattern": "C1 E6 04 68 ? ? ? ? 8D 4D EC",
+                "pattern": "C1 E7 ? 68 ? ? ? ? 2B F8",
                 "patch": "90 90 90"
             },
             {
-                "pattern": "C1 E6 04 68 ? ? ? ? 8D 4D EC",
-                "offset": 11,
+                "pattern": "C1 E7 ? 68 ? ? ? ? 2B F8",
+                "offset": 8,
                 "patch": "90 90"
             }
         ]
