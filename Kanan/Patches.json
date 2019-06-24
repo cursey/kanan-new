@@ -404,8 +404,7 @@
         "category": "Text",
         "patches": [
             {
-                "pattern": "C1 E9 14 F6 C1 01 75 ? 8B",
-                "offset": 6,
+                "pattern": "75 ? 8B 4F 74 56",
                 "patch": "EB"
             }
         ]
