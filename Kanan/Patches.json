@@ -495,11 +495,11 @@
         "category": "Interface",
         "patches": [
             {
-                "pattern": "89 45 C4 39 9F 58 01 00 00",
+                "pattern": "89 45 C0 0F 84 ? ? ? ? B9 ? ? ? ?",
                 "patch": "90 90 90"
             },
             {
-                "pattern": "89 4D C4 39 9F 58 01 00 00",
+                "pattern": "89 45 C0 0F 84 ? ? ? ? 68 ? ? ? ?",
                 "patch": "90 90 90"
             }
         ]
