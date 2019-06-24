@@ -437,8 +437,8 @@
         "category": "Quality of Life",
         "patches": [
             {
-                "pattern": "84 C0 74 06 B0 01 5D C2 04 00 32 C0 5D C2 04 00 CC",
-                "offset": 10,
+                "pattern": "55 8B EC 8B 4D 08 85 C9 74 ? 68 ? ? ? ? E8 ? ? ? ? 84 C0 74 ? B0 ? 5D C2 ? ?",
+                "offset": 30,
                 "patch": "B0 01"
             }
         ]
