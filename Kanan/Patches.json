@@ -461,8 +461,8 @@
         "category": "Graphics",
         "patches": [
             {
-                "pattern": "39 70 04 75 39 3B FE",
-                "offset": 3,
+                "pattern": "83 78 04 ? 75 ? 85 F6 74 ? 8B C6",
+                "offset": 4,
                 "patch": "90 90"
             }
         ]
