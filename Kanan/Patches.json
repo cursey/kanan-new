@@ -904,8 +904,8 @@
         "category": "Interface",
         "patches": [
             {
-                "pattern": "3B FB 0F 84 E7 01 00 00  8B CF E8",
-                "offset": 3,
+                "pattern": "0F 84 ? ? ? ? 8B CE E8 ? ? ? ? 68 ? ? ? ? 8D 4D D8",
+                "offset": 1,
                 "patch": "81"
             }
         ]
