@@ -798,9 +798,9 @@
         "category": "Quality of Life",
         "patches": [
             {
-                "pattern": "50 8B 45 D0 50 51 56 FF 15",
-                "offset": 7,
-                "patch": "90 90 90 90 90 90"
+                "pattern": "51 52 50 FF 75 E0",
+                "offset": 11,
+                "patch": "90 90 90 90 90"
             }
         ]
     },
