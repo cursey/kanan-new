@@ -30,22 +30,33 @@ namespace kanan {
         m_pattern = move(buildPattern(pattern));
     }
 
-    optional<uintptr_t> Pattern::find(uintptr_t start, size_t length) {
+    optional<uintptr_t> Pattern::find(uintptr_t start, size_t length, bool scanCodeOnly) {
         auto patternLength = m_pattern.size();
         auto end = start + length - patternLength;
         auto i = start;
 
         // Do we start at a readable address? If not, align to the next page.
-        if (!isGoodCodePtr(i, patternLength)) {
+        if (!isGoodPtr(i, patternLength, scanCodeOnly)) {
             i = ((i + 0x1000 - 1) / 0x1000) * 0x1000;
         }
 
         while (i <= end) {
             // If we're at the start of a new page, check to see if its a readable 
             // address. If not, skip an entire page.
-            if ((i % 0x1000) == 0 && !isGoodCodePtr(i, patternLength)) {
+            if ((i % 0x1000) == 0 && !isGoodPtr(i, patternLength, scanCodeOnly)) {
                 i += 0x1000;
                 continue;
+            }
+
+            // If we're at the end of a page, check the next page to see if its 
+            // a readable one. If not, skip it.
+            if (((i + patternLength - 1) % 0x1000) == 0) {
+                auto pageToTest = ((i + 0x1000 - 1) / 0x1000) * 0x1000;
+
+                if (!isGoodPtr(pageToTest, patternLength, scanCodeOnly)) {
+                    i = pageToTest + 0x1000;
+                    continue;
+                }
             }
 
             // Test the pattern at this address.
@@ -72,6 +83,10 @@ namespace kanan {
 
         // No match found.
         return nullopt;
+    }
+
+    bool Pattern::isGoodPtr(uintptr_t ptr, size_t len, bool codeOnly) {
+        return codeOnly ? isGoodCodePtr(ptr, len) : isGoodReadPtr(ptr, len);
     }
 
     vector<int16_t> buildPattern(string patternStr) {
