@@ -601,28 +601,29 @@
         "category": "Information",
         "patches": [
             {
-                "pattern": "75 18 68 ? ? ? ? 8D 8D",
+                "pattern": "75 ? 68 ? ? ? ? EB 1F 6A 0A",
+                "n": 0,
                 "patch": "EB"
             },
             {
-                "pattern": "75 07 68 ? ? ? ? EB 1F 6A 0A 68 ? ? ? ? 8D 8D ? ? ? ? 51 53",
+                "pattern": "75 ? 68 ? ? ? ? EB 1F 6A 0A",
+                "n": 1,
                 "patch": "EB"
             },
             {
-                "pattern": "75 07 68 ? ? ? ? EB 1F 6A 0A 68 ? ? ? ? 8D 8D ? ? ? ? 51 50",
+                "pattern": "75 ? 68 ? ? ? ? EB 1F 6A 0A",
+                "n": 2,
                 "patch": "EB"
             },
             {
-                "pattern": "33 DB 85 F6 75 1C",
-                "patch": "90 90"
+                "pattern": "33 C0 85 C9 0F 49 C1 85 F6",
+                "n": 0,
+                "patch": "90 90 90 90 90 8B C1"
             },
             {
-                "pattern": "33 DB 85 FF 75 0B",
-                "patch": "90 90"
-            },
-            {
-                "pattern": "C7 85 ? ? ? ? ? ? ? ? 8B 85 ? ? ? ? 85 F6",
-                "patch": "90 90 90 90 90 90 90 90 90 90"
+                "pattern": "33 C0 85 C9 0F 49 C1 85 F6",
+                "n": 1,
+                "patch": "90 90 90 90 90 8B C1"
             }
         ]
     },
