@@ -19,7 +19,7 @@ namespace kanan {
 
         g_freezeTimeOfDay = this;
 
-        auto address = scan("client.exe", "55 8B EC 8B 01 D9 45 08 D9 58 0C");
+        auto address = scan("client.exe", "55 8B EC 8B 01 F3 0F 10 45 08 F3 0F 11 40 0C");
 
         if (address) {
             log("[FreezeTimeOfDay] Found address for setTimeOfDay %p", *address);
