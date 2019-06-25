@@ -678,13 +678,8 @@
         "category": "Information",
         "patches": [
             {
-                "pattern": "84 C0 0F 85 A7 ? ? ? 8B CF",
-                "patch": "38"
-            },
-            {
-                "pattern": "84 C0 0F 85 A7 ? ? ? 8B CF",
-                "offset": 3,
-                "patch": "8B"
+                "pattern": "84 C0 75 ? 8B CF E8 ? ? ? ? 84 C0 75 ? 83 7D DC ?",
+                "patch": "38 ? 7B"
             }
         ]
     },
