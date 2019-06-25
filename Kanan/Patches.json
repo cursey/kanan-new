@@ -667,7 +667,7 @@
         "category": "Quality of Life",
         "patches": [
             {
-                "pattern": "0F 85 90 00 00 00 68 ? ? ? ? 8D 4D DC E8",
+                "pattern": "0F 85 A0 00 00 00 68 ? ? ? ? 8D 4D DC E8 ? ? ? ? C7 45 FC 00 00 00 00 8D 45 DC",
                 "patch": "90 E9"
             }
         ]
