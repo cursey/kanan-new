@@ -632,7 +632,7 @@
         "category": "Information",
         "patches": [
             {
-                "pattern": "66 3B C1 0F 85 ? 02 00 00 68 ? ? ? ? B9",
+                "pattern": "66 3B C1 0F 85 ? ? ? ? 68 ? ? ? ? B9 ? ? ? ?",
                 "offset": 3,
                 "patch": "90 90 90 90 90 90"
             }
