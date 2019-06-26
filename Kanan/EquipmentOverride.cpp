@@ -178,6 +178,9 @@ namespace kanan {
                     ImGui::ColorEdit4("Color 1", overrideInfo.color1.data(), ImGuiColorEditFlags_HEX);
                     ImGui::ColorEdit4("Color 2", overrideInfo.color2.data(), ImGuiColorEditFlags_HEX);
                     ImGui::ColorEdit4("Color 3", overrideInfo.color3.data(), ImGuiColorEditFlags_HEX);
+					ImGui::ColorEdit4("Color 4", overrideInfo.color4.data(), ImGuiColorEditFlags_HEX);
+					ImGui::ColorEdit4("Color 5", overrideInfo.color5.data(), ImGuiColorEditFlags_HEX);
+					ImGui::ColorEdit4("Color 6", overrideInfo.color6.data(), ImGuiColorEditFlags_HEX);
                     ImGui::Checkbox("Enable item override", &overrideInfo.isOverridingItem);
                     ImGui::InputInt("Item ID", (int*)&overrideInfo.itemID);
                     ImGui::TreePop();
@@ -204,6 +207,9 @@ namespace kanan {
 			overrideInfo.color1 = convertIntColorToFloat(cfg.get<int>("EquipmentOverride." + to_string(j) + ".Color1").value_or(0));
 			overrideInfo.color2 = convertIntColorToFloat(cfg.get<int>("EquipmentOverride." + to_string(j) + ".Color2").value_or(0));
 			overrideInfo.color3 = convertIntColorToFloat(cfg.get<int>("EquipmentOverride." + to_string(j) + ".Color3").value_or(0));
+			overrideInfo.color4 = convertIntColorToFloat(cfg.get<int>("EquipmentOverride." + to_string(j) + ".Color4").value_or(0));
+			overrideInfo.color5 = convertIntColorToFloat(cfg.get<int>("EquipmentOverride." + to_string(j) + ".Color5").value_or(0));
+			overrideInfo.color6 = convertIntColorToFloat(cfg.get<int>("EquipmentOverride." + to_string(j) + ".Color6").value_or(0));
 
             if (g_equipmentOverrideOnLoad) {
                 overrideInfo.isOverridingItem = cfg.get<bool>("EquipmentOverride." + to_string(j) + ".IsOverridingItem").value_or(false);
@@ -228,6 +234,9 @@ namespace kanan {
 			cfg.set<int>("EquipmentOverride." + to_string(j) + ".Color1", convertFloatColorToInt(overrideInfo.color1));
 			cfg.set<int>("EquipmentOverride." + to_string(j) + ".Color2", convertFloatColorToInt(overrideInfo.color2));
 			cfg.set<int>("EquipmentOverride." + to_string(j) + ".Color3", convertFloatColorToInt(overrideInfo.color3));
+			cfg.set<int>("EquipmentOverride." + to_string(j) + ".Color4", convertFloatColorToInt(overrideInfo.color4));
+			cfg.set<int>("EquipmentOverride." + to_string(j) + ".Color5", convertFloatColorToInt(overrideInfo.color5));
+			cfg.set<int>("EquipmentOverride." + to_string(j) + ".Color6", convertFloatColorToInt(overrideInfo.color6));
 			cfg.set<bool>("EquipmentOverride." + to_string(j) + ".IsOverridingItem", g_equipmentOverrideOnLoad ? overrideInfo.isOverridingItem : false);
 
 			++j;
@@ -244,6 +253,9 @@ namespace kanan {
             color[0] &= 0x00FFFFFF;
             color[1] &= 0x00FFFFFF;
             color[2] &= 0x00FFFFFF;
+			color[3] &= 0x00FFFFFF;
+			color[4] &= 0x00FFFFFF;
+			color[5] &= 0x00FFFFFF;
         }
 
         // Filter out other characters.
@@ -266,6 +278,9 @@ namespace kanan {
             color[0] = convertFloatColorToInt(overrideInfo.color1);
             color[1] = convertFloatColorToInt(overrideInfo.color2);
             color[2] = convertFloatColorToInt(overrideInfo.color3);
+			color[3] = convertFloatColorToInt(overrideInfo.color4);
+			color[4] = convertFloatColorToInt(overrideInfo.color5);
+			color[5] = convertFloatColorToInt(overrideInfo.color6);
 
             log("[EquipmentOverride] Color overwritten!");
         }

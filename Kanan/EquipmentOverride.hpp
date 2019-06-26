@@ -28,6 +28,9 @@ namespace kanan {
             std::array<float, 4> color1;
             std::array<float, 4> color2;
             std::array<float, 4> color3;
+			std::array<float, 4> color4;
+			std::array<float, 4> color5;
+			std::array<float, 4> color6;
 
             bool isOverridingItem;
             uint32_t itemID;
