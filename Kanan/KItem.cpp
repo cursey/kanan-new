@@ -20,4 +20,12 @@ namespace kanan {
 
         return narrow(name->buffer);
     }
+
+    optional<uint16_t> KItem::getMaxStackCount() const {
+        if (dbDesc == nullptr) {
+            return {};
+        }
+
+        return dbDesc->maxStackCount;
+	}
 }

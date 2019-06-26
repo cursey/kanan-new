@@ -189,6 +189,7 @@ namespace kanan {
     void EntityViewer::displayItem(KItem* item) {
         auto id = item->getID();
         auto name = item->getName();
+        auto maxStackCount = item->getMaxStackCount();
 
         if (!id || !name) {
             ImGui::Text("This item has no data.");
@@ -205,6 +206,7 @@ namespace kanan {
         ImGui::BulletText("Price: %d", item->price);
         ImGui::BulletText("Sell price: %d", item->sellPrice);
         ImGui::BulletText("Durability: %0.4f/%0.4f", durabilityToDouble(item->durability, item->maxDurability), durabilityToDouble(item->maxDurability));
+        ImGui::BulletText("Stack count: %d/%d", item->stackCount, *maxStackCount);
     }
 
     double EntityViewer::durabilityToDouble(uint32_t dura, uint32_t maxDura) {
