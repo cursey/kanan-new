@@ -364,9 +364,9 @@ public:
 	char pad_0038[4]; //0x0038
 	class CString *name; //0x003C
 	class CString *description; //0x0040
-	char pad_0041[136]; //0x0041
+	char pad_0044[136]; //0x0044
 	uint16_t maxStackCount; //0x00CC
-	char pad_00D0[104]; //0x00D0
+	char pad_00CE[106]; //0x00CE
 }; //Size: 0x0138
 
 class CAccountPtr
@@ -417,4 +417,3 @@ class N00000B19
 public:
 	char pad_0000[68]; //0x0000
 }; //Size: 0x0044
-

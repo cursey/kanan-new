@@ -27,5 +27,5 @@ namespace kanan {
         }
 
         return dbDesc->maxStackCount;
-	}
+    }
 }
