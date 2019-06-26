@@ -1,14 +1,19 @@
 #include <imgui.h>
+#include <imgui_freetype.h>
 #include <imgui_impl_dx9.h>
+#include <imgui_impl_win32.h>
 
 #include <Config.hpp>
 #include <String.hpp>
 #include <Utility.hpp>
 
+#include "FontData.hpp"
 #include "Log.hpp"
 #include "Kanan.hpp"
 
 using namespace std;
+
+IMGUI_IMPL_API LRESULT  ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 namespace kanan {
     unique_ptr<Kanan> g_kanan{ nullptr };
@@ -84,7 +89,7 @@ namespace kanan {
             return;
         }
 
-        log("Begginging intialization... ");
+        log("Beginning intialization... ");
 
         // Grab the HWND from the device's creation parameters.
         log("Getting window from D3D9 device...");
@@ -101,11 +106,24 @@ namespace kanan {
         //
         log("Initializing ImGui...");
 
-        ImGui::GetIO().IniFilename = m_uiConfigPath.c_str();
+        IMGUI_CHECKVERSION();
+        ImGui::CreateContext();
 
-        if (!ImGui_ImplDX9_Init(m_wnd, device)) {
+        auto& io = ImGui::GetIO();
+
+        io.IniFilename = m_uiConfigPath.c_str();
+        io.Fonts->AddFontFromMemoryCompressedTTF(g_font_compressed_data, g_font_compressed_size, 16.0f);
+        ImGuiFreeType::BuildFontAtlas(io.Fonts, 0);
+
+        if (!ImGui_ImplWin32_Init(m_wnd)) {
             error("Failed to initialize ImGui.");
         }
+
+        if (!ImGui_ImplDX9_Init(device)) {
+            error("Failed to initialize ImGui.");
+        }
+
+        ImGui::StyleColorsDark();
 
         //
         // DInputHook.
@@ -149,6 +167,8 @@ namespace kanan {
         }
 
         ImGui_ImplDX9_NewFrame();
+        ImGui_ImplWin32_NewFrame();
+        ImGui::NewFrame();
 
         if (m_areModsReady) {
             // Make sure the config for all the mods gets loaded.
@@ -215,6 +235,8 @@ namespace kanan {
             }
         }
 
+        ImGui::EndFrame();
+
         // This fixes mabi's Film Style Post Shader making ImGui render as a black box.
         auto device = m_d3d9Hook->getDevice();
 
@@ -222,17 +244,24 @@ namespace kanan {
         device->SetTextureStageState(1, D3DTSS_ALPHAOP, D3DTOP_DISABLE);
 
         ImGui::Render();
+        ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
     }
 
     bool Kanan::onMessage(HWND wnd, UINT message, WPARAM wParam, LPARAM lParam) {
         if (m_isUIOpen) {
-            if (ImGui_ImplDX9_WndProcHandler(wnd, message, wParam, lParam) != 0) {
+            if (ImGui_ImplWin32_WndProcHandler(wnd, message, wParam, lParam) != 0) {
                 // If the user is interacting with the UI we block the message from going to the game.
                 auto& io = ImGui::GetIO();
 
                 if (io.WantCaptureMouse || io.WantCaptureKeyboard || io.WantTextInput) {
                     return false;
                 }
+            }
+        }
+
+        for (auto& mod : m_mods.getMods()) {
+            if (!mod->onMessage(wnd, message, wParam, lParam)) {
+                return false;
             }
         }
 
@@ -295,6 +324,16 @@ namespace kanan {
         // Menu bar
         //
         if (ImGui::BeginMenuBar()) {
+            if (ImGui::BeginMenu("File")) {
+                if (ImGui::MenuItem("Save Config")) {
+                    saveConfig();
+                }
+				if (ImGui::MenuItem("Force close Game")) {
+					ExitProcess(0);
+				}
+                ImGui::EndMenu();
+            }
+
             if (ImGui::BeginMenu("View")) {
                 ImGui::MenuItem("Show Log", nullptr, &m_isLogOpen);
                 ImGui::EndMenu();
@@ -313,7 +352,9 @@ namespace kanan {
         //
         ImGui::TextWrapped(
             "Input to the game is blocked while interacting with this UI. "
-            "Press the INSERT key to toggle this UI."
+            "Press the INSERT key to toggle this UI. "
+            "Configuration is saved every time the INSERT key is used to close the UI. "
+            "You can also save the configuration by using File->Save Config. "
         );
         ImGui::Spacing();
 
@@ -348,9 +389,9 @@ namespace kanan {
     }
 
     void Kanan::drawAbout() {
-        ImGui::SetNextWindowSize(ImVec2{ 450.0f, 200.0f });
+        ImGui::SetNextWindowSize(ImVec2{ 475.0f, 275.0f }, ImGuiSetCond_Appearing);
 
-        if (!ImGui::Begin("About", &m_isAboutOpen, ImGuiWindowFlags_NoResize)) {
+        if (!ImGui::Begin("About", &m_isAboutOpen)) {
             ImGui::End();
             return;
         }
@@ -366,8 +407,10 @@ namespace kanan {
         ImGui::Spacing();
         ImGui::Text("Kanan uses the following third-party libraries");
         ImGui::Text("    Dear ImGui (https://github.com/ocornut/imgui)");
+        ImGui::Text("    FreeType (https://www.freetype.org/)");
         ImGui::Text("    JSON for Modern C++ (https://github.com/nlohmann/json)");
         ImGui::Text("    MinHook (https://github.com/TsudaKageyu/minhook)");
+        ImGui::Text("    Roboto Font (https://fonts.google.com/specimen/Roboto)");
 
         ImGui::End();
     }

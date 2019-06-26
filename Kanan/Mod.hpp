@@ -2,6 +2,8 @@
 
 #include <string>
 
+#include <Windows.h>
+
 #include <Config.hpp>
 
 namespace kanan {
@@ -14,5 +16,7 @@ namespace kanan {
 
         virtual void onConfigLoad(const Config& cfg) {}
         virtual void onConfigSave(Config& cfg) {}
+
+        virtual bool onMessage(HWND wnd, UINT message, WPARAM wParam, LPARAM lParam) { return true; }
     };
 }

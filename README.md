@@ -2,7 +2,8 @@
 A reimagining of Kanan for Mabinogi written in C++ with many improvements.
 
 ## Download
-Downloads for the latest _official_ releases are located [here](https://github.com/cursey/kanan-new/releases).
+~~Downloads for the latest _official_ releases are located [here](https://github.com/cursey/kanan-new/releases).~~
+Just get the latest build from [AppVeyor](https://ci.appveyor.com/project/cursey/kanan-new/build/artifacts).
 
 ## Requirements
 You need the Microsoft Visual C++ Redistributable for Visual Studio 2017 available at the bottom of [this page](https://www.visualstudio.com/downloads/). Make sure to choose the x86 version of the download!
@@ -16,6 +17,8 @@ You need the Microsoft Visual C++ Redistributable for Visual Studio 2017 availab
 * Includes a reusable DirectInput 8 hook.
 * Intercepts windows messages sent to the game window.
 * Reverse engineered game structures to allow for unique features such as entity viewing.
+* A simple and secure Launcher for easy multi-client (WIP)
+	* This project makes use of WinHTTP, Cryptography Next Generation (CNG), and WMI APIs
 * Probably other things!
 
 ## Build requirements
@@ -30,10 +33,11 @@ Once this project reaches (or approaches) feature parity with the original Kanan
 ## Todo
 * Add more patches and mods that were previously available in the original Kanan.
 
+## Preview from the very first public version
 ![Preview](preview.png)
 
 ## Original patch authors
-kanan comes with more mods than are listed here. This is the list of patch authors who haven't directly contributed via GitHub's pull requests.
+Kanan comes with more mods than are listed here. This is the list of patch authors who haven't directly contributed via GitHub's pull requests.
 * Blade3575
     * Bitmap font
     * Elf lag
@@ -65,4 +69,5 @@ Many original patches/ideas came from the following projects:
 * MNG
 * Noginogi-Party
 
-And to all the patchers that came before, and all that will come after.
+## Projects that use or were inspired by Kanan
+* [RE2 Mod Framework](https://github.com/praydog/RE2-Mod-Framework) - Mods for the Resident Evil 2 Remake

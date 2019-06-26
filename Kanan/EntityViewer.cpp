@@ -1,5 +1,6 @@
 #include <imgui.h>
 
+#include "Mabinogi.hpp"
 #include "KCharacter.hpp"
 #include "KItem.hpp"
 #include "Kanan.hpp"
@@ -138,6 +139,7 @@ namespace kanan {
         }
 
         auto target = g_kanan->getGame()->getCharacterByID(character->targetID);
+        auto equipment = character->equipment;
 
         ImGui::BulletText("Address: %p", character);
         ImGui::BulletText("Name: %s", name->c_str());
@@ -146,8 +148,42 @@ namespace kanan {
         ImGui::BulletText("Combat Power: %f", parameter->combatPower.value);
         ImGui::BulletText("Age: %d", parameter->age.value);
         ImGui::BulletText("Health: %f/%f", parameter->life.value, parameter->lifeMaxBase.value + parameter->lifeMaxMod.value);
-        ImGui::BulletText("Race: %s", raceToString(parameter->type.value));
+        ImGui::BulletText("Race: %s (%d)", raceToString(parameter->type.value), parameter->type.value);
         ImGui::BulletText("Target: %s", (!target) ? "No Target" : target->getName()->c_str());
+
+        if (equipment != nullptr && ImGui::TreeNode(equipment, "Equipment")) {
+            displayEquipment(equipment);
+            ImGui::TreePop();
+        }
+    }
+
+    void EntityViewer::displayEquipment(CEquipment* equipment) {
+        static const map<int, string> equipmentNames{
+        { 1, "Torso\\Armor\\Shirt" },
+        { 2, "Head\\Helmet\\Hat" },
+        { 4, "Hands\\Gauntlets\\Gloves" },
+        { 5, "Feet\\Boots\\Shoes" },
+        { 7, "Hair" },
+        { 8, "Back\\Wings\\Robe" },
+        { 10, "Weapon 1" },
+        { 11, "Weapon 2" },
+        { 12, "Arrow\\Shield 1" },
+        { 13, "Arrow\\Shield 2" },
+        { 15, "Tail" },
+        { 16, "Accessory 1" },
+        { 17, "Accessory 2" }
+        };
+
+        for (auto[id, name] : equipmentNames) {
+            auto& itemInfo = equipment->itemInfo[id];
+
+            // Skip empty slots.
+            if (itemInfo.classID == 0) {
+                continue;
+            }
+
+            ImGui::BulletText("[%s] ID: %d Colors: #%08X #%08X #%08X", name.c_str(), itemInfo.classID, itemInfo.color1, itemInfo.color2, itemInfo.color3);
+        }
     }
 
     void EntityViewer::displayItem(KItem* item) {

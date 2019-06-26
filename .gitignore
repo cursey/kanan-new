@@ -3,3 +3,4 @@ Release/
 Debug/
 
 *.orig
+*.user

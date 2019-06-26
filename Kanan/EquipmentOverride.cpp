@@ -1,3 +1,5 @@
+#include <algorithm>
+
 #include <imgui.h>
 
 #include <Scan.hpp>
@@ -10,6 +12,29 @@ using namespace std;
 
 namespace kanan {
     static EquipmentOverride* g_equipmentOverride{ nullptr };
+	static bool g_equipmentOverrideOnLoad;
+
+	static int convertFloatColorToInt(const array<float, 4>& color) {
+		auto r = (uint8_t)(255 * color[0]);
+		auto g = (uint8_t)(255 * color[1]);
+		auto b = (uint8_t)(255 * color[2]);
+		auto a = (uint8_t)(255 * color[3]);
+		return (a << 24) + (r << 16) + (g << 8) + b;
+	};
+
+	static array<float, 4> convertIntColorToFloat(int color) {
+        auto r = color & 0x00FF0000;
+        auto g = color & 0x0000FF00;
+        auto b = color & 0x000000FF;
+        auto a = color & 0xFF000000;
+
+		return {
+			clamp((float)r / 255.0f, 0.0f, 1.0f),
+			clamp((float)g / 255.0f, 0.0f, 1.0f),
+			clamp((float)b / 255.0f, 0.0f, 1.0f),
+			clamp((float)a / 255.0f, 0.0f, 1.0f)
+		};
+	};
 
     int convertInventoryIDToEquipmentSlot(int inventoryID) {
         /*static auto fn = (int(__cdecl*)(int))scan("client.exe", "55 8B EC 8B 45 08 83 C0 ? 83 F8 ? 77 ? 0F B6 80 CC 18 69 01").value_or(0);
@@ -93,7 +118,8 @@ namespace kanan {
 
     EquipmentOverride::EquipmentOverride()
         : m_equipmentOverrides{},
-        m_setEquipmentInfoHook{}
+        m_setEquipmentInfoHook{},
+        m_isNoFlashyEquipmentEnabled{}
     {
         log("[EquipmentOverride] Entering constructor");
 
@@ -114,12 +140,15 @@ namespace kanan {
         m_equipmentOverrides[16].name = "Accessory 1";
         m_equipmentOverrides[17].name = "Accessory 2";
 
-        auto address = scan("client.exe", "55 8B EC 6A ? 68 ? ? ? ? 64 A1 ? ? ? ? 50 83 EC ? 53 56 57 A1 ? ? ? ? 33 C5 50 8D 45 F4 64 A3 ? ? ? ? 8B F1 8B 4E 04 33 FF");
+        auto address = scan("client.exe", "55 8B EC 6A ? 68 ? ? ? ? 64 A1 ? ? ? ? 50 83 EC ? 53 56 57 A1 ? ? ? ? 33 C5 50 8D 45 F4 64 A3 ? ? ? ? 8B D9 8B 75 0C 8B 0D ? ? ? ?");
 
         if (address) {
             log("[EquipmentOverride] Found address of setEquipmentInfo %p", *address);
 
             m_setEquipmentInfoHook = make_unique<FunctionHook>(*address, (uintptr_t)&EquipmentOverride::hookedSetEquipmentInfo);
+        }
+        else {
+            log("[EquipmentOverride] Failed to find address of setEquipmentInfo!");
         }
 
         log("[EquipmentOverride] Leaving constructor");
@@ -136,7 +165,8 @@ namespace kanan {
                 "NOTE: For the Hair slot, you need to change your hair in the dressing room to see the changes.");
             ImGui::Spacing();
             ImGui::Text("Special thanks to Rydian!");
-            ImGui::Spacing();
+			ImGui::Checkbox("Enable override on game load", &g_equipmentOverrideOnLoad);
+			ImGui::Spacing();
 
             for (auto& overrideInfo : m_equipmentOverrides) {
                 if (overrideInfo.name.empty()) {
@@ -154,10 +184,67 @@ namespace kanan {
                 }
             }
         }
+
+        if (ImGui::CollapsingHeader("No Flashy Equipment")) {
+            ImGui::TextWrapped("Disables flashy equipment dyes for all players. "
+                "After enabling or disabling this option you should change channels to see the effects on everyone.");
+            ImGui::Checkbox("Enable No Flashy Equipment", &m_isNoFlashyEquipmentEnabled);
+        }
+    }
+
+    void EquipmentOverride::onConfigLoad(const Config& cfg) {
+		m_isNoFlashyEquipmentEnabled = cfg.get<bool>("NoFlashyEquipment.Enabled").value_or(false);
+		g_equipmentOverrideOnLoad = cfg.get<bool>("EquipmentOverrideOnLoad.Enabled").value_or(false);
+
+		auto j = 0;
+
+		for (auto& overrideInfo : m_equipmentOverrides) {
+			overrideInfo.isOverridingColor = cfg.get<bool>("EquipmentOverride." + to_string(j) + ".IsOverridingColor").value_or(false);
+			overrideInfo.itemID = cfg.get<int>("EquipmentOverride." + to_string(j) + ".ItemID").value_or(0);
+			overrideInfo.color1 = convertIntColorToFloat(cfg.get<int>("EquipmentOverride." + to_string(j) + ".Color1").value_or(0));
+			overrideInfo.color2 = convertIntColorToFloat(cfg.get<int>("EquipmentOverride." + to_string(j) + ".Color2").value_or(0));
+			overrideInfo.color3 = convertIntColorToFloat(cfg.get<int>("EquipmentOverride." + to_string(j) + ".Color3").value_or(0));
+
+            if (g_equipmentOverrideOnLoad) {
+                overrideInfo.isOverridingItem = cfg.get<bool>("EquipmentOverride." + to_string(j) + ".IsOverridingItem").value_or(false);
+            }
+            else {
+                overrideInfo.isOverridingItem = false;
+            }
+
+			++j;
+		}
+    }
+
+    void EquipmentOverride::onConfigSave(Config& cfg) {
+		cfg.set<bool>("NoFlashyEquipment.Enabled", m_isNoFlashyEquipmentEnabled);
+		cfg.set<bool>("EquipmentOverrideOnLoad.Enabled", g_equipmentOverrideOnLoad);
+
+		auto j = 0;
+
+		for (auto& overrideInfo : m_equipmentOverrides) {
+			cfg.set<bool>("EquipmentOverride." + to_string(j) + ".IsOverridingColor", overrideInfo.isOverridingColor);
+			cfg.set<int>("EquipmentOverride." + to_string(j) + ".ItemID", overrideInfo.itemID);
+			cfg.set<int>("EquipmentOverride." + to_string(j) + ".Color1", convertFloatColorToInt(overrideInfo.color1));
+			cfg.set<int>("EquipmentOverride." + to_string(j) + ".Color2", convertFloatColorToInt(overrideInfo.color2));
+			cfg.set<int>("EquipmentOverride." + to_string(j) + ".Color3", convertFloatColorToInt(overrideInfo.color3));
+			cfg.set<bool>("EquipmentOverride." + to_string(j) + ".IsOverridingItem", g_equipmentOverrideOnLoad ? overrideInfo.isOverridingItem : false);
+
+			++j;
+		}
     }
 
     void EquipmentOverride::hookedSetEquipmentInfo(CEquipment* equipment, uint32_t EDX, int inventoryID, int itemID, int a4, int a5, uint32_t* color, int a7, int * a8, int a9, int a10, int * a11) {
         auto orig = (decltype(hookedSetEquipmentInfo)*)g_equipmentOverride->m_setEquipmentInfoHook->getOriginal();
+        auto equipmentSlot = convertInventoryIDToEquipmentSlot(inventoryID);
+
+        // Remove the flashy byte if No Flashy Equipment is enabled. We skip the 
+        // hair slot.
+        if (g_equipmentOverride->m_isNoFlashyEquipmentEnabled && equipmentSlot != 7) {
+            color[0] &= 0x00FFFFFF;
+            color[1] &= 0x00FFFFFF;
+            color[2] &= 0x00FFFFFF;
+        }
 
         // Filter out other characters.
         auto game = g_kanan->getGame();
@@ -168,23 +255,13 @@ namespace kanan {
         }
 
         // Filter out inventoryIDs.
-        auto equipmentSlot = convertInventoryIDToEquipmentSlot(inventoryID);
-
-        if (equipmentSlot < 0 || equipmentSlot >= g_equipmentOverride->m_equipmentOverrides.size()) {
+        if (equipmentSlot < 0 || equipmentSlot >= (int)g_equipmentOverride->m_equipmentOverrides.size()) {
             return orig(equipment, EDX, inventoryID, itemID, a4, a5, color, a7, a8, a9, a10, a11);
         }
 
         auto& overrideInfo = g_equipmentOverride->m_equipmentOverrides[equipmentSlot];
 
         if (overrideInfo.isOverridingColor) {
-            // Convert float color to int.
-            auto convertFloatColorToInt = [](array<float, 4>& color) {
-                auto r = (uint8_t)(255 * color[0]);
-                auto g = (uint8_t)(255 * color[1]);
-                auto b = (uint8_t)(255 * color[2]);
-                auto a = (uint8_t)(255 * color[3]);
-                return (a << 24) + (r << 16) + (g << 8) + b;
-            };
 
             color[0] = convertFloatColorToInt(overrideInfo.color1);
             color[1] = convertFloatColorToInt(overrideInfo.color2);

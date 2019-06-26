@@ -17,6 +17,8 @@ namespace kanan {
         virtual ~EquipmentOverride();
 
         void onUI() override;
+        void onConfigLoad(const Config& cfg);
+        void onConfigSave(Config& cfg);
 
     private:
         struct OverrideInfo {
@@ -33,6 +35,7 @@ namespace kanan {
 
         std::array<OverrideInfo, 19> m_equipmentOverrides;
         std::unique_ptr<FunctionHook> m_setEquipmentInfoHook;
+        bool m_isNoFlashyEquipmentEnabled;
 
         static void __fastcall hookedSetEquipmentInfo(CEquipment* equipment, uint32_t EDX, int inventoryID, int itemID, int a4, int a5, uint32_t* color, int a7, int* a8, int a9, int a10, int* a11);
     };

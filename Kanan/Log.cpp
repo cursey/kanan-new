@@ -37,7 +37,7 @@ namespace kanan {
         void addLog(const string& msg)  {
             auto oldSize = m_buf.size();
 
-            m_buf.append("%s\n", msg.c_str());
+            m_buf.appendf("%s\n", msg.c_str());
 
             for (auto newSize = m_buf.size(); oldSize < newSize; ++oldSize) {
                 if (m_buf[oldSize] == '\n') {

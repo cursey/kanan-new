@@ -30,20 +30,38 @@ namespace kanan {
         m_pattern = move(buildPattern(pattern));
     }
 
-    optional<uintptr_t> Pattern::find(uintptr_t start, size_t length) {
+    optional<uintptr_t> Pattern::find(uintptr_t start, size_t length, bool scanCodeOnly) {
         auto patternLength = m_pattern.size();
         auto end = start + length - patternLength;
+        auto i = start;
 
-        for (auto i = start; i <= end; ++i) {
-            auto j = i;
-            auto failedToMatch = false;
+        // Do we start at a readable address? If not, align to the next page.
+        if (!isGoodPtr(i, patternLength, scanCodeOnly)) {
+            i = ((i + 0x1000 - 1) / 0x1000) * 0x1000;
+        }
 
-            // Make sure the address is readable.
-            //if (IsBadReadPtr((const void*)i, patternLength) != FALSE) {
-            if (!isGoodReadPtr(i, patternLength)) {
-                i += patternLength - 1;
+        while (i <= end) {
+            // If we're at the start of a new page, check to see if its a readable 
+            // address. If not, skip an entire page.
+            if ((i % 0x1000) == 0 && !isGoodPtr(i, patternLength, scanCodeOnly)) {
+                i += 0x1000;
                 continue;
             }
+
+            // If we're at the end of a page, check the next page to see if its 
+            // a readable one. If not, skip it.
+            if (((i + patternLength - 1) % 0x1000) == 0) {
+                auto pageToTest = ((i + 0x1000 - 1) / 0x1000) * 0x1000;
+
+                if (!isGoodPtr(pageToTest, patternLength, scanCodeOnly)) {
+                    i = pageToTest + 0x1000;
+                    continue;
+                }
+            }
+
+            // Test the pattern at this address.
+            auto j = i;
+            auto failedToMatch = false;
 
             for (auto& k : m_pattern) {
                 if (k != -1 && k != *(uint8_t*)j) {
@@ -54,12 +72,21 @@ namespace kanan {
                 ++j;
             }
 
+            // If we didn't fail to match, then we found a match so return it.
             if (!failedToMatch) {
                 return i;
             }
+
+            // Otherwise, advance a byte.
+            ++i;
         }
 
-        return {};
+        // No match found.
+        return nullopt;
+    }
+
+    bool Pattern::isGoodPtr(uintptr_t ptr, size_t len, bool codeOnly) {
+        return codeOnly ? isGoodCodePtr(ptr, len) : isGoodReadPtr(ptr, len);
     }
 
     vector<int16_t> buildPattern(string patternStr) {

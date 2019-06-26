@@ -5,7 +5,7 @@
         "category": "Information",
         "patches": [
             {
-                "pattern": "0F 85 ? ? ? ? 8B 97 ? ? ? ? 8B 87",
+                "pattern": "0F 85 ? ? ? ? FF B3 F4 00 00 00",
                 "patch": "90 90 90 90 90 90"
             }
         ]
@@ -16,22 +16,22 @@
         "category": "Text",
         "patches": [
             {
-                "pattern": "74 0D 8B 45 08 50 8B CB E8 ? ? ? ? EB 0B",
+                "pattern": "74 ? E8 ? ? ? ? EB ? E8 ? ? ? ? 8B CE E8 ? ? ? ? C7 47 0C ? ? ? ?",
                 "patch": "90 90"
             },
             {
-                "pattern": "75 3D 83 BE ? ? ? ? ?",
+                "pattern": "75 ? 83 BE 90 00 00 00 ?",
                 "patch": "EB"
             },
             {
-                "pattern": "74 25 80 7B 73 00",
+                "pattern": "74 ? 80 7B 73 ?",
                 "patch": "EB"
             },
             {
-                "pattern": "0F 84 ? ? ? ? 8B 0D ? ? ? ? E8 ? ? ? ? 57",
+                "pattern": "0F 84 ? ? ? ? 8B 0D ? ? ? ? E8 ? ? ? ? 57 56",
                 "patch": "90 90 90 90 90 90 ? ? ? ? ? ? 90 90 90 B0 01 ? ? ? ? EB"
             }
-        ]
+        ] 
     },
     {
         "name": "Elf Lag Fix",
@@ -39,7 +39,7 @@
         "category": "Fixes",
         "patches": [
             {
-                "pattern": "55 8B EC 56 57 8B F9 8B 07 8B 50 0C FF D2 8B C8",
+                "pattern": "55 8B EC 56 57 8B F9 8B 07 FF 50 0C 8B C8",
                 "patch": "32 C0 C2 04 00"
             }
         ]
@@ -50,12 +50,12 @@
         "category": "Speedup",
         "patches": [
             {
-                "pattern": "74 ? E8 ? ? ? ? 85 C0 74 ? F6 46 14 ? 75 ? 8B 10 8B C8 8B 82 74 01 00 00 FF D0 84 C0 75 ? 83 BE A8 00 00 00 ? C6 86 A4 00 00 00 ? 75 ? B9 ? ? ? ? E8 ? ? ? ? 89 86 A8 00 00 00 8B 4D 08",
+                "pattern": "74 ? E8 ? ? ? ? 8B C8 85 C9 74 ? F6 46 14 ? 75 ? 8B 01 8B 80 78 01 00 00 FF D0 84 C0 75 ? 83 BE A8 00 00 00 ? C6 86 A4 00 00 00 ? 75 ? B9 ? ? ? ? E8 ? ? ? ? 89 86 A8 00 00 00 8B 8E A8 00 00 00",
                 "patch": "EB"
             },
             {
-                "pattern": "8B 4D 18 6A ? 51 8B 8E A8 00 00 00",
-                "patch": "31 C9 90"
+                "pattern": "FF 75 18 E8 ? ? ? ? 8B 8E A8 00 00 00",
+                "patch": "6A 00 90"
             }
         ]
     },
@@ -65,7 +65,7 @@
         "category": "Speedup",
         "patches": [
             {
-                "pattern": "0F 86 ? ? ? ? 8B 4D E8 8B 11",
+                "pattern": "0F 86 ? ? ? ? 8B 07 8B CF FF 50 04",
                 "patch": "90 E9"
             }
         ]
@@ -76,7 +76,7 @@
         "category": "Speedup",
         "patches": [
             {
-                "pattern": "89 90 5C 02 00 00",
+                "pattern": "89 88 58 02 00 00 B0 ?",
                 "patch": "90 90 90 90 90 90"
             }
         ]
@@ -87,13 +87,8 @@
         "category": "Graphics",
         "patches": [
             {
-                "pattern": "7A 05 D9 5D 08 EB 02 DD D8 D9 45 08 D9 45 F8",
-                "patch": "EB"
-            },
-            {
-                "pattern": "7A 05 D9 5D 08 EB 02 DD D8 D9 45 08 D9 45 F8",
-                "offset": 22,
-                "patch": "EB"
+                "pattern": "F3 0F 10 46 14 F3 0F 5D C1",
+                "patch": "90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90"
             }
         ]
     },
@@ -103,7 +98,7 @@
         "category": "Fixes",
         "patches": [
             {
-                "pattern": "84 C0 74 19 B8 ? ? ? ? 8B 4D F4 64 89 0D ? ? ? ? 59 5F 5E 5B 8B E5 5D C2 04 00",
+                "pattern": "84 C0 74 ? B8 ? ? ? ? 8B 4D F4 64 89 0D ? ? ? ? 59 5F 5E 5B 8B E5 5D C2 ? ? 8B 0D ? ? ? ?",
                 "offset": 2,
                 "patch": "EB"
             }
@@ -115,7 +110,7 @@
         "category": "Speedup",
         "patches": [
             {
-                "pattern": "0F 84 ? ? ? ? 68 ? ? ? ? 8D 4D DC E8 ? ? ? ? C6 45 FC ? 8D 55 DC 52 8D 45 B4",
+                "pattern": "0F 84 ? ? ? ? 68 ? ? ? ? 8D 4D E8 E8 ? ? ? ? C6 45 FC ? 8D 45 E8 50 8D 45 D8 50 E8 ? ? ? ? 8B C8 E8 ? ? ? ? C6 45 FC ? 8D 4D EC",
                 "patch": "90 E9"
             }
         ]
@@ -126,7 +121,7 @@
         "category": "Quality of Life",
         "patches": [
             {
-                "pattern": "0F 84 ? ? ? ? 80 7D F3 00 0F 84 ? ? ? ? 85 D2",
+                "pattern": "0F 84 ? ? ? ? 84 D2 0F 84 ? ? ? ? 85 FF",
                 "patch": "90 E9"
             }
         ]
@@ -137,7 +132,7 @@
         "category": "Speedup",
         "patches": [
             {
-                "pattern": "0F 84 ? ? ? ? 89 5D F0 89 5D FC 8B CF E8 ? ? ? ? 8B 10",
+                "pattern": "0F 84 ? ? ? ? C7 45 F0 ? ? ? ? C7 45 FC ? ? ? ? 8B CB E8 ? ? ? ? 8D 4D E4",
                 "patch": "90 E9"
             }
         ]
@@ -148,8 +143,8 @@
         "category": "Speedup",
         "patches": [
             {
-                "pattern": "51 8B 0D ? ? ? ? 53 6A ? 53 53 6A ? 53 6A ? 56 8D 55 DC",
-                "patch": "90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90"
+                "pattern": "50 8B 0D ? ? ? ? 8D 45 DC 6A ? 6A ? 6A ? 6A ? 6A ? 6A ? 6A ? 53 50 8D 45 E8",
+                "patch": "90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90"
             }
         ]
     },
@@ -159,7 +154,7 @@
         "category": "Speedup",
         "patches": [
             {
-                "pattern": "0F 84 ? ? ? ? 88 5D F2 88 5D F3",
+                "pattern": "0F 84 ? ? ? ? 33 F6 C6 45 F3 ?",
                 "patch": "90 E9"
             }
         ]
@@ -170,13 +165,11 @@
         "category": "Interface",
         "patches": [
             {
-                "pattern": "8B F0 33 DB 3B F3 75 16 32 C0",
-                "offset": 6,
+                "pattern": "75 ? 32 C0 8B 4D F4 64 89 0D ? ? ? ? 59 5F 5E 5B 8B E5 5D C2 ? ? 8B 46 0C",
                 "patch": "90 90"
             },
             {
-                "pattern": "E8 ? ? ? ? 85 C0 0F 84 ? ? ? ? 8B 10 8B 35",
-                "offset": 7,
+                "pattern": "0F 84 ? ? ? ? 8B 01 8B 35 ? ? ? ? FF 50 58 8B C8 E8 ? ? ? ? 50",
                 "patch": "90 E9"
             }
         ]
@@ -187,7 +180,7 @@
         "category": "Quality of Life",
         "patches": [
             {
-                "pattern": "55 8B EC 56 8B F1 8B 46 64 83 78 08 00 74 32",
+                "pattern": "55 8B EC 56 8B F1 8B 46 64 83 78 04 ?",
                 "offset": 13,
                 "patch": "EB"
             }
@@ -199,7 +192,7 @@
         "category": "Quality of Life",
         "patches": [
             {
-                "pattern": "0F B6 41 05 C1 E8 02 83 E0 01 C3",
+                "pattern": "0F B6 41 05 C1 E8 ?",
                 "patch": "33 C0 C3 90 90 90 90 90 90 90 90"
             }
         ]
@@ -210,23 +203,23 @@
         "category": "Graphics",
         "patches": [
             {
-                "pattern": "D9 01 8B 46 64",
-                "patch": "D9 EE"
+                "pattern": "8B 01 5E 89 42 48",
+                "patch": "33 C0"
             },
             {
-                "pattern": "D9 01 8B 46 64",
-                "offset": 9,
-                "patch": "D9 EE 90"
+                "pattern": "8B 01 5E 89 42 48",
+                "offset": 6,
+                "patch": "90 90 90"
             },
             {
-                "pattern": "D9 01 8B 46 64",
-                "offset": 15,
-                "patch": "D9 EE 90"
+                "pattern": "8B 01 5E 89 42 48",
+                "offset": 12,
+                "patch": "90 90 90"
             },
             {
-                "pattern": "D9 01 8B 46 64",
-                "offset": 21,
-                "patch": "D9 EE 90"
+                "pattern": "8B 01 5E 89 42 48",
+                "offset": 18,
+                "patch": "90 90 90"
             }
         ]
     },
@@ -236,8 +229,8 @@
         "category": "Quality of Life",
         "patches": [
             {
-                "pattern": "38 5F 78 0F 84 CF 02 00 00 8B CE",
-                "offset": 4,
+                "pattern": "8A 43 78 84 C0 0F 84 ? ? ? ? 8B CF",
+                "offset": 6,
                 "patch": "85"
             }
         ]
@@ -248,7 +241,7 @@
         "category": "Quality of Life",
         "patches": [
             {
-                "pattern": "55 8B EC 6A FF 68 ? ? ? ? 64 A1 ? ? ? ? 50 83 EC 0C 53 56 57 A1 ? ? ? ? 33 C5 50 8D 45 F4 64 A3 ? ? ? ? E8 ? ? ? ? 84 C0 0F 84 ? ? ? ? E8",
+                "pattern": "55 8B EC 6A ? 68 ? ? ? ? 64 A1 ? ? ? ? 50 83 EC ? 53 56 57 A1 ? ? ? ? 33 C5 50 8D 45 F4 64 A3 ? ? ? ? E8 ? ? ? ? 84 C0 0F 84 ? ? ? ? E8 ? ? ? ?",
                 "patch": "B0 01 C2 04 00"
             }
         ]
@@ -259,11 +252,11 @@
         "category": "Quality of Life",
         "patches": [
             {
-                "pattern": "0F 85 ? ? ? ? 33 FF C6 45 F3 01",
-                "patch": "90 90 90 90 90 90"
+                "pattern": "75 ? C6 45 F3 ? 33 D2",
+                "patch": "90 90"
             },
             {
-                "pattern": "0F 85 ? ? ? ? 33 FF 80 7D 10 00",
+                "pattern": "0F 83 ? ? ? ? 80 7D 10 ?",
                 "patch": "90 90 90 90 90 90"
             }
         ]
@@ -274,7 +267,7 @@
         "category": "Quality of Life",
         "patches": [
             {
-                "pattern": "76 B0 68 ? ? ? ? 8D 4D DC",
+                "pattern": "76 ? 68 ? ? ? ? 8D 4D E8 E8 ? ? ? ? C6 45 FC ? 8D 45 E8",
                 "patch": "EB"
             }
         ]
@@ -285,7 +278,7 @@
         "category": "Quality of Life",
         "patches": [
             {
-                "pattern": "75 13 8D 4D 08 56",
+                "pattern": "75 ? 50 8D 45 08 50 E8 ? ? ? ? 83 C4 ? C6 45 FC ? EB ?",
                 "patch": "EB"
             }
         ]
@@ -296,7 +289,7 @@
         "category": "Information",
         "patches": [
             {
-                "pattern": "74 21 8B 16 8B 82 94 00 00 00 8B CE",
+                "pattern": "74 ? 8B 06 8B CE FF 90 94 00 00 00 8B C8 E8 ? ? ? ? B9 ? ? ? ? 66 3B C1 74 ? 32 C0",
                 "patch": "EB"
             }
         ]
@@ -307,9 +300,8 @@
         "category": "Graphics",
         "patches": [
             {
-                "pattern": "55 1C 53 ? ? ? ? ? ? ? ? 56",
-                "offset": 2,
-                "patch": "50"
+                "pattern": "6A ? FF 75 08 89 46 1C 8A 45 1C",
+                "patch": "90 50"
             }
         ]
     },
@@ -319,25 +311,14 @@
         "category": "Interface",
         "patches": [
             {
-                "pattern": "C2 8D ? ? ? ? ? ? B8 B4 00 00 00",
-                "offset": 9,
+                "pattern": "B8 ? ? ? ? 66 39 07 73 ? 66 89 07",
+                "offset": 1,
                 "patch": "FF"
             },
             {
-                "pattern": "BF B4 00 00 00 6A",
+                "pattern": "BF ? ? ? ? 6A ? 89 75 C8",
                 "offset": 1,
                 "patch": "19"
-            }
-        ]
-    },
-    {
-        "name": "Allow FSAA (Setting)",
-        "desc": "Enables the option to turn on FSAA in Mabi's option menu.\nNOTE: that the setting only takes effect in full screen.",
-        "category": "Graphics",
-        "patches": [
-            {
-                "pattern": "53 FF D2 8B 0D ? ? ? ? 6A 0C E8 ? ? ? ? 68 ? ? ? ? 89 45 D0",
-                "patch": "90 90 90"
             }
         ]
     },
@@ -358,7 +339,7 @@
         "category": "Interface",
         "patches": [
             {
-                "pattern": "89 4E 74 80 78 40 00 74 16",
+                "pattern": "89 46 70 80 79 40 ?",
                 "offset": 1,
                 "patch": "6E"
             }
@@ -370,7 +351,7 @@
         "category": "Text",
         "patches": [
             {
-                "pattern": "0F 85 ? ? ? ? D9 ? D9 ? ? D8 ? DF E0 F6 C4 ?",
+                "pattern": "0F 86 ? ? ? ? 0F 57 C0 0F 2F F8",
                 "patch": "90 90 90 90 90 90"
             }
         ]
@@ -381,26 +362,16 @@
         "category": "Graphics",
         "patches": [
             {
-                "pattern": "83 79 44 01 75 09 6A 00 6A 00 E8",
+                "pattern": "83 79 44 ? 75 ? 6A ? 6A ? E8 ? ? ? ?",
                 "offset": 4,
-                "patch": "EB"
+                "patch": "EB",
+                "n": 0
             },
             {
-                "pattern": "83 79 44 01 75 09 6A 00 6A 00 E8",
+                "pattern": "83 79 44 ? 75 ? 6A ? 6A ? E8 ? ? ? ?",
                 "offset": 4,
-                "patch": "EB"
-            }
-        ]
-    },
-    {
-        "name": "Fix Pet Note Cursor",
-        "desc": "Causes the cursor to jump to the end when editing a pet note, allowing you to erase what was previously written.",
-        "category": "Fixes",
-        "patches": [
-            {
-                "pattern": "C7 45 08 00 00 00 00 FF 86 10 01 00 00",
-                "offset": 7,
-                "patch": "01 AE"
+                "patch": "EB",
+                "n": 1
             }
         ]
     },
@@ -410,8 +381,7 @@
         "category": "Graphics",
         "patches": [
             {
-                "pattern": "57 8B 7D 08 0F 84 22 02 00 00",
-                "offset": 4,
+                "pattern": "0F 84 ? ? ? ? 8B 8E 7C 01 00 00 85 C9 0F 84 ? ? ? ? 85 C0",
                 "patch": "90 E9"
             }
         ]
@@ -434,8 +404,7 @@
         "category": "Text",
         "patches": [
             {
-                "pattern": "C1 E9 14 F6 C1 01 75 ? 8B",
-                "offset": 6,
+                "pattern": "75 ? 8B 4F 74 56",
                 "patch": "EB"
             }
         ]
@@ -457,9 +426,8 @@
         "category": "Graphics",
         "patches": [
             {
-                "pattern": "39 78 0C 0F 94 C0 84 C0 0F 84 92 00 00 00 8B 45",
-                "offset": 8,
-                "patch": "90 E9"
+                "pattern": "75 ? 8B 06 51 8B CE FF 90 38 01 00 00",
+                "patch": "90 90"
             }
         ]
     },
@@ -469,8 +437,8 @@
         "category": "Quality of Life",
         "patches": [
             {
-                "pattern": "84 C0 74 06 B0 01 5D C2 04 00 32 C0 5D C2 04 00 CC",
-                "offset": 10,
+                "pattern": "55 8B EC 8B 4D 08 85 C9 74 ? 68 ? ? ? ? E8 ? ? ? ? 84 C0 74 ? B0 ? 5D C2 ? ?",
+                "offset": 30,
                 "patch": "B0 01"
             }
         ]
@@ -493,8 +461,8 @@
         "category": "Graphics",
         "patches": [
             {
-                "pattern": "39 70 04 75 39 3B FE",
-                "offset": 3,
+                "pattern": "83 78 04 ? 75 ? 85 F6 74 ? 8B C6",
+                "offset": 4,
                 "patch": "90 90"
             }
         ]
@@ -527,11 +495,11 @@
         "category": "Interface",
         "patches": [
             {
-                "pattern": "89 45 C8 39 9F 58 01 00 00",
+                "pattern": "89 45 C0 0F 84 ? ? ? ? B9 ? ? ? ?",
                 "patch": "90 90 90"
             },
             {
-                "pattern": "89 4D C8 39 9F 58 01 00 00",
+                "pattern": "89 45 C0 0F 84 ? ? ? ? 68 ? ? ? ?",
                 "patch": "90 90 90"
             }
         ]
@@ -542,26 +510,26 @@
         "category": "Interface",
         "patches": [
             {
-                "pattern": "B8 ? ? ? ? F7 E6 C1 EA 03 42",
-                "patch": "90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90"
+                "pattern": "B8 ? ? ? ? C1 E1 ? 2B F1",
+                "patch": "90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90"
             },
             {
-                "pattern": "83 F8 0F 0F 97 C0",
+                "pattern": "83 F8 ? 0F 97 C0 84 C0",
                 "offset": 2,
                 "patch": "00"
             },
             {
-                "pattern": "6A 0F 83 DE 00",
+                "pattern": "6A ? 83 DF ?",
                 "offset": 1,
                 "patch": "01"
             },
             {
-                "pattern": "C1 E6 04 68 ? ? ? ? 8D 4D EC",
+                "pattern": "C1 E7 ? 68 ? ? ? ? 2B F8",
                 "patch": "90 90 90"
             },
             {
-                "pattern": "C1 E6 04 68 ? ? ? ? 8D 4D EC",
-                "offset": 11,
+                "pattern": "C1 E7 ? 68 ? ? ? ? 2B F8",
+                "offset": 8,
                 "patch": "90 90"
             }
         ]
@@ -572,7 +540,7 @@
         "category": "Interface",
         "patches": [
             {
-                "pattern": "8B ? ? 03 ? ? 3B ? 08 0F 83",
+                "pattern": "8B 48 10 03 48 08",
                 "offset": 9,
                 "patch": "90 E9"
             }
@@ -584,8 +552,7 @@
         "category": "Speedup",
         "patches": [
             {
-                "pattern": "8B 08 33 FF 3B CF 76 2A",
-                "offset": 6,
+                "pattern": "74 ? 8B 40 04 66 0F 6E C0 F3 0F E6 C0 C1 E8 ? F2 0F 58 04 C5 ? ? ? ? 66 0F 5A C8 66 0F 6E C1 F3 0F E6 C0 C1 E9 ? F2 0F 58 04 CD ? ? ? ? 66 0F 5A C0 F3 0F 5E C8 F3 0F 11 4D 08",
                 "patch": "EB"
             }
         ]
@@ -634,28 +601,33 @@
         "category": "Information",
         "patches": [
             {
-                "pattern": "75 18 68 ? ? ? ? 8D 8D",
+                "pattern": "75 ? 68 ? ? ? ? EB 1F 6A 0A",
+                "n": 0,
                 "patch": "EB"
             },
             {
-                "pattern": "75 07 68 ? ? ? ? EB 1F 6A 0A 68 ? ? ? ? 8D 8D ? ? ? ? 51 53",
+                "pattern": "75 ? 68 ? ? ? ? EB 1F 6A 0A",
+                "n": 1,
                 "patch": "EB"
             },
             {
-                "pattern": "75 07 68 ? ? ? ? EB 1F 6A 0A 68 ? ? ? ? 8D 8D ? ? ? ? 51 50",
+                "pattern": "75 ? 68 ? ? ? ? EB 1F 6A 0A",
+                "n": 2,
                 "patch": "EB"
             },
             {
-                "pattern": "33 DB 85 F6 75 1C",
-                "patch": "90 90"
+                "pattern": "33 C0 85 C9 0F 49 C1 85 F6",
+                "n": 0,
+                "patch": "90 90 90 90 90 8B C1"
             },
             {
-                "pattern": "33 DB 85 FF 75 0B",
-                "patch": "90 90"
+                "pattern": "33 C0 85 C9 0F 49 C1 85 F6",
+                "n": 1,
+                "patch": "90 90 90 90 90 8B C1"
             },
             {
-                "pattern": "C7 85 ? ? ? ? ? ? ? ? 8B 85 ? ? ? ? 85 F6",
-                "patch": "90 90 90 90 90 90 90 90 90 90"
+                "pattern": "33 C0 85 DB 0F 49 C3 85 F6",
+                "patch": "90 90 90 90 90 8B C3"
             }
         ]
     },
@@ -665,7 +637,7 @@
         "category": "Information",
         "patches": [
             {
-                "pattern": "66 3B C1 0F 85 ? 02 00 00 68 ? ? ? ? B9",
+                "pattern": "66 3B C1 0F 85 ? ? ? ? 68 ? ? ? ? B9 ? ? ? ?",
                 "offset": 3,
                 "patch": "90 90 90 90 90 90"
             }
@@ -700,7 +672,7 @@
         "category": "Quality of Life",
         "patches": [
             {
-                "pattern": "0F 85 90 00 00 00 68 ? ? ? ? 8D 4D DC E8",
+                "pattern": "0F 85 A0 00 00 00 68 ? ? ? ? 8D 4D DC E8 ? ? ? ? C7 45 FC 00 00 00 00 8D 45 DC",
                 "patch": "90 E9"
             }
         ]
@@ -711,13 +683,8 @@
         "category": "Information",
         "patches": [
             {
-                "pattern": "84 C0 0F 85 A7 ? ? ? 8B CF",
-                "patch": "38"
-            },
-            {
-                "pattern": "84 C0 0F 85 A7 ? ? ? 8B CF",
-                "offset": 3,
-                "patch": "8B"
+                "pattern": "84 C0 75 ? 8B CF E8 ? ? ? ? 84 C0 75 ? 83 7D DC ?",
+                "patch": "38 ? 7B"
             }
         ]
     },
@@ -749,15 +716,384 @@
             }
         ]
     },
-	    {
+    {
         "name": "Center Giant Camera",
         "desc": "Makes the giant camera act like other cameras and look at the center of the character.",
-        "category": "Quality of Life",
+        "category": "Graphics",
         "patches": [
             {
                 "pattern": "74 2C 68 ? ? ? ? 8B CF E8",
                 "patch": "EB",
-				"n": 1
+                "n": 1
+            }
+        ]
+    },
+    {
+        "name": "Disable Fullscreen Change",
+        "desc": "Prevents Alt+Enter and the Fullscreen/Windowed button from functioning.",
+        "category": "Graphics",
+        "patches": [
+            {
+                "pattern": "88 48 3C 8B 56 0C 83 C2 30 52",
+                "patch": "90 90 90"
+            }
+        ]
+    },
+    {
+        "name": "Faster Networking",
+        "desc": "Reduce latency by using better networking techniques",
+        "category": "Speedup",
+        "patches": [
+            {
+                "pattern": "8B 5F 7C 80 3B ?",
+                "offset": 6,
+                "patch": "EB"
+            },
+            {
+                "pattern": "74 ? 90 E8 ? ? ? ? 8B 96 80 00 00 00 2B 44 96 08",
+                "offset": 0,
+                "patch": "EB"
+            },
+            {
+                "pattern": "74 ? 90 E8 ? ? ? ? 8B 96 80 00 00 00 89 44 96 08",
+                "offset": 0,
+                "patch": "EB"
+            }
+        ]
+    },
+    {
+        "name": "Disable Avon Curtains",
+        "desc": "Removes the curtains from Avon missions.\nCredits: Iceling/Koorimio",
+        "category": "Graphics",
+        "patches": [
+            {
+                "pattern": "0F 84 ? ? ? ? 8B 0E 6A ? 6A ?",
+                "offset": 0,
+                "patch": "90 E9"
+            }
+        ]
+    },
+    {
+        "name": "Disable Item Magnet Cooldown",
+        "desc": "Removes the cooldown timer from the Magnet button so item sorting can be done repeatedly.",
+        "category": "Speedup",
+        "patches": [
+            {
+                "pattern": "50 52 C7 45 E8 98 3A",
+                "offset": 6,
+                "patch": "00 00"
+            }
+        ]
+    },
+    {
+        "name": "Avoid Bank Trade",
+        "desc": "When selling items to NPC, avoid bank trade when item sale value is greater than 50k.",
+        "category": "Quality of Life",
+        "patches": [
+            {
+                "pattern": "8B 55 10 52 FF D0 84 DB 74",
+                "offset": 6,
+                "patch": "32"
+            }
+        ]
+    },
+    {
+        "name": "Disable Game End Survey",
+        "desc": "Remove the Nexon survey window after closing the game. \nCredits: Rotar",
+        "category": "Quality of Life",
+        "patches": [
+            {
+                "pattern": "51 52 50 FF 75 E0",
+                "offset": 11,
+                "patch": "90 90 90 90 90"
+            }
+        ]
+    },
+    {
+        "name": "Show Dorcha Numbers",
+        "desc": "Display Dorcha and Bachram gauge info when the gauge is not minimized.",
+        "category": "Information",
+        "patches": [
+            {
+                "pattern": "52 FF 84 C0 0F 84 0F 01 00 00",
+                "offset": 4,
+                "patch": "90 90 90 90 90 90"
+            }
+        ]
+    },
+    {
+        "name": "Show entity HP",
+        "desc": "Entities will show their HP values under the HP bar.",
+        "category": "Information",
+        "patches": [
+            {
+                "pattern": "68 F8 03 00 00 89 5D",
+                "offset": -12,
+                "patch": "90 90 90 90 90 90"
+            }
+        ]
+    },
+    {
+        "name": "Skip Cutscenes",
+        "desc": "Exactly what it says on the tin.",
+        "category": "Speedup",
+        "patches": [
+            {
+                "pattern": "74 19 8B 45 0C 8B 75 08 50 56 E8",
+                "patch": "EB",
+                "n": 0
+            },
+            {
+                "pattern": "74 19 8B 45 0C 8B 75 08 50 56 E8",
+                "patch": "EB",
+                "n": 1
+            },
+            {
+                "pattern": "74 19 8B 45 0C 8B 75 08 50 56 E8",
+                "patch": "EB",
+                "n": 2
+            }
+        ]
+    },
+    {
+        "name": "Disable Summoning Status Windows",
+        "desc": "Removes the temporary 'Summoning...' popup while summoning a pet.",
+        "category": "Interface",
+        "patches": [
+            {
+                "pattern": "8D 4D EC 38  5D 08 74 5A",
+                "offset": -19,
+                "patch": "90 E9"
+            }
+        ]
+    },
+    {
+        "name": "Disable Alpaca Carrying",
+        "desc": "Change mounting logic to always ride an Alpaca and never carry it. \nCredits: Rydian",
+        "category": "Quality of Life",
+        "patches": [
+            {
+                "pattern": "83 F8 19 72 0F 8B CE",
+                "offset": 3,
+                "patch": "90 90"
+            }
+        ]
+    },
+    {
+        "name": "Golem Range Fix",
+        "desc": "When controling a Golem, disable changing control to the charater when out of range.",
+        "category": "Fixes",
+        "patches": [
+            {
+                "pattern": "84 C0 0F 84 1F 05 00 00 8B 4E 28",
+                "offset": 3,
+                "patch": "81"
+            }
+        ]
+    },
+    {
+        "name": "Show Unknown Quest Objectives",
+        "desc": "Display quest objectives that would normally be displayed as '?????????'",
+        "category": "Information",
+        "patches": [
+            {
+                "pattern": "38 5E 0D 75 17",
+                "offset": 3,
+                "patch": "EB"
+            }
+        ]
+    },
+    {
+        "name": "Hide Bingo Button",
+        "desc": "Remove an event button generally used for bingo events.",
+        "category": "Interface",
+        "patches": [
+            {
+                "pattern": "0F 84 ? ? ? ? 8B CE E8 ? ? ? ? 68 ? ? ? ? 8D 4D D8",
+                "offset": 1,
+                "patch": "81"
+            }
+        ]
+    },
+    {
+        "name": "Keep Pet Window Open",
+        "desc": "After summoning a pet, prevent the pet window from closing.",
+        "category": "Interface",
+        "patches": [
+            {
+                "pattern": "84 C0 0F 84 33 19 00 00 8B 0D",
+                "offset": 3,
+                "patch": "81"
+            }
+        ]
+    },
+    {
+        "name": "Show Unknown Skill Requirements",
+        "desc": "Display skill requirements that would normally be displayed as '?????????'.",
+        "category": "Information",
+        "patches": [
+            {
+                "pattern": "84 C0 74 7D 57",
+                "offset": 2,
+                "patch": "90 90"
+            }
+        ]
+    },
+    {
+        "name": "Show Unknown Upgrades",
+        "desc": "Display upgrades that would normally be displayed as '?????????'.",
+        "category": "Information",
+        "patches": [
+            {
+                "pattern": "3A 85 AB FE FF FF 0F 83",
+                "offset": 7,
+                "patch": "81"
+            }
+        ]
+    },
+    {
+        "name": "Render Wireframe",
+        "desc": "Set camera render to wireframe mode",
+        "category": "Graphics",
+        "patches": [
+            {
+                "pattern": "8B 10 8B C8 8B 42 04 FF D0 84 C0 0F 84 EE 09 00 00 8B 0E",
+                "offset": 11,
+                "patch": "90 90 90 90 90 90"
+            },
+            {
+                "pattern": "FF D0 3A C3 0F 85",
+                "offset": 4,
+                "patch": "90 E9"
+            }
+        ]
+    },
+    {
+        "name": "Render FPS info",
+        "desc": "Shows FPS and other game performance infos",
+        "category": "Graphics",
+        "patches": [
+            {
+                "pattern": "8B 10 8B C8 8B 42 04 FF D0 84 C0 0F 84 EE 09 00 00 8B 0E",
+                "offset": 11,
+                "patch": "90 90 90 90 90 90"
+            },
+            {
+                "pattern": "FF D0 84 C0 0F 84 AD 08 00 00 2B 3D",
+                "patch": "90 90"
+            }
+        ]
+    },
+    {
+        "name": "Render Prop Bounds",
+        "desc": "",
+        "category": "Graphics",
+        "patches": [
+            {
+                "pattern": "8B 10 8B C8 8B 42 04 FF D0 84 C0 0F 84 EE 09 00 00 8B 0E",
+                "offset": 11,
+                "patch": "90 90 90 90 90 90"
+            },
+            {
+                "pattern": "8B 42 04 FF D0 84 C0 74 1F 8B 4E 30 8B 11 83 BA 7C 05 00 00 00 74 11 8B 8A",
+                "offset": 3,
+                "patch": "90 90"
+            }
+        ]
+    },
+    {
+        "name": "Render Light Radius",
+        "desc": "",
+        "category": "Graphics",
+        "patches": [
+            {
+                "pattern": "8B 10 8B C8 8B 42 04 FF D0 84 C0 0F 84 EE 09 00 00 8B 0E",
+                "offset": 11,
+                "patch": "90 90 90 90 90 90"
+            },
+            {
+                "pattern": "8B 42 04 FF D0 84 C0 74 40 8B 0E",
+                "offset": 3,
+                "patch": "90 90"
+            }
+        ]
+    },
+    {
+        "name": "Render Light Information",
+        "desc": "",
+        "category": "Graphics",
+        "patches": [
+            {
+                "pattern": "8B 10 8B C8 8B 42 04 FF D0 84 C0 0F 84 EE 09 00 00 8B 0E",
+                "offset": 11,
+                "patch": "90 90 90 90 90 90"
+            },
+            {
+                "pattern": "8B 42 04 FF D0 84 C0 74 C2",
+                "offset": 3,
+                "patch": "90 90"
+            }
+        ]
+    },
+    {
+        "name": "Render Collision Boxes",
+        "desc": "",
+        "category": "Graphics",
+        "patches": [
+            {
+                "pattern": "8B 10 8B C8 8B 42 04 FF D0 84 C0 0F 84 EE 09 00 00 8B 0E",
+                "offset": 11,
+                "patch": "90 90 90 90 90 90"
+            },
+            {
+                "pattern": "8B 42 04 FF D0 84 C0 74 0C 8B 17 8B 82 CC 00 00 00",
+                "offset": 3,
+                "patch": "90 90"
+            }
+        ]
+    },
+    {
+        "name": "Render Axis",
+        "desc": "",
+        "category": "Graphics",
+        "patches": [
+            {
+                "pattern": "8B 10 8B C8 8B 42 04 FF D0 84 C0 0F 84 EE 09 00 00 8B 0E",
+                "offset": 11,
+                "patch": "90 90 90 90 90 90"
+            },
+            {
+                "pattern": "8B 42 04 FF D0 84 C0 74 0C 8B 17 8B 82 D0 00 00 00",
+                "offset": 3,
+                "patch": "90 90"
+            }
+        ]
+    },
+    {
+        "name": "Render Bones Hitboxes",
+        "desc": "",
+        "category": "Graphics",
+        "patches": [
+            {
+                "pattern": "8B 10 8B C8 8B 42 04 FF D0 84 C0 0F 84 EE 09 00 00 8B 0E",
+                "offset": 11,
+                "patch": "90 90 90 90 90 90"
+            },
+            {
+                "pattern": "8B 42 04 FF D0 84 C0 74 0C 8B 17 8B 82 C8 00 00 00",
+                "offset": 3,
+                "patch": "90 90"
+            }
+        ]
+    },
+    {
+        "name": "Remove Item Drop animation",
+        "desc": "",
+        "category": "Speedup",
+        "patches": [
+            {
+                "pattern": "0F 84 17 02 00 00 39 9E",
+                "patch": "90 E9"
             }
         ]
     }

@@ -30,18 +30,34 @@ bool inject(DWORD clientID) {
         return false;
     }
 
-    auto dllPath = current_path() / "Kanan.dll";
+    // Enable loading of other DLLs into Mabinogi alongside Kanan.
+    ifstream dllConfig{ "Loader.txt" }; // Chose this name to make it obvious.
+    vector<string> dllNames{};
+    string dllConfigLine{};
 
-    cout << "Injecting " << dllPath << "..." << endl;
-
-    auto kanan = client.loadLibrary(dllPath.string());
-
-    if (!kanan) {
-        cerr << "Failed to inject." << endl;
-        return false;
+    while (getline(dllConfig, dllConfigLine)) {
+        dllNames.push_back(move(dllConfigLine));
     }
 
-    cout << "Success!" << endl;
+    for (auto& dllName : dllNames) {
+        auto dllPath = current_path() / dllName;
+        
+        if (!exists(dllPath)) {
+            cerr << "Couldn't find " << dllPath << " to inject. Skipping..." << endl;
+            continue;
+        }
+
+        cout << "Injecting " << dllPath << "..." << endl;
+
+        auto dll = client.loadLibrary(dllPath.string());
+
+        if (!dll) {
+            cerr << "Failed to inject." << endl;
+            return false;
+        }
+
+        cout << "Success!" << endl;
+    }
 
     return true;
 }

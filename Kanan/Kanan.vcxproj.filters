@@ -102,7 +102,13 @@
     <ClCompile Include="TTFFontSize.cpp">
       <Filter>Source Files\Mods</Filter>
     </ClCompile>
-    <ClCompile Include="FriendlyNumbers.cpp">
+    <ClCompile Include="SecondaryPassword.cpp">
+      <Filter>Source Files\Mods</Filter>
+    </ClCompile>
+    <ClCompile Include="StatusUI.cpp">
+      <Filter>Source Files\Mods</Filter>
+    </ClCompile>
+    <ClCompile Include="LoginScreen.cpp">
       <Filter>Source Files\Mods</Filter>
     </ClCompile>
   </ItemGroup>
@@ -179,7 +185,16 @@
     <ClInclude Include="TTFFontSize.hpp">
       <Filter>Header Files\Mods</Filter>
     </ClInclude>
-    <ClInclude Include="FriendlyNumbers.hpp">
+    <ClInclude Include="SecondaryPassword.hpp">
+      <Filter>Header Files\Mods</Filter>
+    </ClInclude>
+    <ClInclude Include="FontData.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StatusUI.hpp">
+      <Filter>Header Files\Mods</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginScreen.hpp">
       <Filter>Header Files\Mods</Filter>
     </ClInclude>
   </ItemGroup>
