@@ -178,9 +178,9 @@ namespace kanan {
                     ImGui::ColorEdit4("Color 1", overrideInfo.color1.data(), ImGuiColorEditFlags_HEX);
                     ImGui::ColorEdit4("Color 2", overrideInfo.color2.data(), ImGuiColorEditFlags_HEX);
                     ImGui::ColorEdit4("Color 3", overrideInfo.color3.data(), ImGuiColorEditFlags_HEX);
-					ImGui::ColorEdit4("Color 4", overrideInfo.color4.data(), ImGuiColorEditFlags_HEX);
-					ImGui::ColorEdit4("Color 5", overrideInfo.color5.data(), ImGuiColorEditFlags_HEX);
-					ImGui::ColorEdit4("Color 6", overrideInfo.color6.data(), ImGuiColorEditFlags_HEX);
+                    ImGui::ColorEdit4("Color 4", overrideInfo.color4.data(), ImGuiColorEditFlags_HEX);
+                    ImGui::ColorEdit4("Color 5", overrideInfo.color5.data(), ImGuiColorEditFlags_HEX);
+                    ImGui::ColorEdit4("Color 6", overrideInfo.color6.data(), ImGuiColorEditFlags_HEX);
                     ImGui::Checkbox("Enable item override", &overrideInfo.isOverridingItem);
                     ImGui::InputInt("Item ID", (int*)&overrideInfo.itemID);
                     ImGui::TreePop();
@@ -253,9 +253,9 @@ namespace kanan {
             color[0] &= 0x00FFFFFF;
             color[1] &= 0x00FFFFFF;
             color[2] &= 0x00FFFFFF;
-			color[3] &= 0x00FFFFFF;
-			color[4] &= 0x00FFFFFF;
-			color[5] &= 0x00FFFFFF;
+            color[3] &= 0x00FFFFFF;
+            color[4] &= 0x00FFFFFF;
+            color[5] &= 0x00FFFFFF;
         }
 
         // Filter out other characters.
@@ -278,9 +278,9 @@ namespace kanan {
             color[0] = convertFloatColorToInt(overrideInfo.color1);
             color[1] = convertFloatColorToInt(overrideInfo.color2);
             color[2] = convertFloatColorToInt(overrideInfo.color3);
-			color[3] = convertFloatColorToInt(overrideInfo.color4);
-			color[4] = convertFloatColorToInt(overrideInfo.color5);
-			color[5] = convertFloatColorToInt(overrideInfo.color6);
+            color[3] = convertFloatColorToInt(overrideInfo.color4);
+            color[4] = convertFloatColorToInt(overrideInfo.color5);
+            color[5] = convertFloatColorToInt(overrideInfo.color6);
 
             log("[EquipmentOverride] Color overwritten!");
         }
