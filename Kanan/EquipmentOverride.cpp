@@ -278,9 +278,9 @@ namespace kanan {
             color[0] = convertFloatColorToInt(overrideInfo.color1);
             color[1] = convertFloatColorToInt(overrideInfo.color2);
             color[2] = convertFloatColorToInt(overrideInfo.color3);
-            color[3] = convertFloatColorToInt(overrideInfo.color4);
-            color[4] = convertFloatColorToInt(overrideInfo.color5);
-            color[5] = convertFloatColorToInt(overrideInfo.color6);
+            color[4] = convertFloatColorToInt(overrideInfo.color4);
+            color[5] = convertFloatColorToInt(overrideInfo.color5);
+            color[6] = convertFloatColorToInt(overrideInfo.color6);
 
             log("[EquipmentOverride] Color overwritten!");
         }
