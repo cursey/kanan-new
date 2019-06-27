@@ -202,7 +202,7 @@ namespace kanan {
         ImGui::BulletText("Item ID: %d", item->itemID);
         ImGui::BulletText("Inventory ID: %d", item->inventoryID);
         ImGui::BulletText("Pos: %d, %d", item->positionX, item->positionY);
-        ImGui::BulletText("Color: %X %X %X", item->color1, item->color2, item->color3);
+        ImGui::BulletText("Color: %X %X %X %X %X %X", item->color1, item->color2, item->color3, item->color4, item->color5, item->color6);
         ImGui::BulletText("Price: %d", item->price);
         ImGui::BulletText("Sell price: %d", item->sellPrice);
         ImGui::BulletText("Durability: %0.4f/%0.4f", durabilityToDouble(item->durability, item->maxDurability), durabilityToDouble(item->maxDurability));
