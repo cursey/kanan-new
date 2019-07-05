@@ -448,11 +448,11 @@
         "desc": "Ignore the maintain frame setting during character minimization so it always minimizes.\nNOTE: This makes the setting active only if you have it turned on.",
         "category": "Speedup",
         "patches": [
-            {
-                "pattern": "89 4E 50 8B 57 54 89 56 54 0F B6 47 58 88 46 58 0F B6 4F 59",
-                "offset": 1,
-                "patch": "6E"
-            }
+          {
+            "pattern": "8B 31 89 46 14",
+            "offset": 3,
+            "patch": "76"
+          }
         ]
     },
     {
