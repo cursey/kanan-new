@@ -1096,5 +1096,17 @@
                 "patch": "90 E9"
             }
         ]
+    },
+    {
+        "name": "Remove Sunglare",
+        "desc": "Removes the annoying and ugly sunglare effect",
+        "category": "Graphics",
+        "patches": [
+            {
+                "pattern": "FF D2 84 C0 0F 84 ? ? ? ? 6A ? 68 ? ? ? ?",
+                "offset": 4,
+                "patch": "90 E9"
+            }
+        ]
     }
 ]
