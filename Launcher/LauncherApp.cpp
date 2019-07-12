@@ -378,7 +378,8 @@ void LauncherApp::mainUI() {
                         { "password", hashedPassword },
                         { "client_id", "7853644408" },
                         { "scope", "us.launcher.all" },
-                        { "device_id", getDeviceID() }
+                        { "device_id", getDeviceID() },
+                        { "captcha_token", "0xDEADBEEF" }
                     }.dump() };
                     auto response = httpPost("https://www.nexon.com/account-webapi/login/launcher", header, body);
                     auto jsonResponse = json::parse(response);
