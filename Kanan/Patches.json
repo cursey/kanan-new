@@ -1,5 +1,24 @@
 [
     {
+        "name": "Uncap Production",
+        "desc": "Read.  It uncaps production.",
+        "category": "Fixes",
+        "patches": [
+            {
+                "pattern": "66 39 86 ? ? ? ? 76 07 66",
+                "offset": 7,
+                "patch": "EB",
+                "n": 0
+            },
+            {
+                "pattern": "66 39 86 ? ? ? ? 76 07 66",
+                "offset": 7,
+                "patch": "EB",
+                "n": 1
+            }
+        ]
+    },
+    {
         "name": "Show Combat Power",
         "desc": "Shows the combat power of players and enemies.\nCredits: Rydian",
         "category": "Information",
