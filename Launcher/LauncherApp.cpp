@@ -371,27 +371,42 @@ void LauncherApp::mainUI() {
             m_launchResult = async(launch::async, [=] {
                 try {
                     // Get the API access token.
-                    auto hashedPassword = stringEncode(CRYPT_STRING_HEXRAW, hashString("SHA512", password.data()));
+                    auto sha512_password = stringEncode(CRYPT_STRING_HEXRAW, hashString("SHA512", password.data()));
+                    auto device_id = getDeviceID();
                     string header{ "Content-Type: application/json" };
-                    string body{ json{
+                    auto body = json{
                         { "id", string_view{ username.data() } },
-                        { "password", hashedPassword },
+                        { "password", sha512_password },
                         { "client_id", "7853644408" },
                         { "scope", "us.launcher.all" },
-                        { "device_id", getDeviceID() },
+                        { "device_id", device_id },
                         { "captcha_token", "0xDEADBEEF" }
-                    }.dump() };
+                    }.dump();
                     auto response = httpPost("https://www.nexon.com/account-webapi/login/launcher", header, body);
-                    auto jsonResponse = json::parse(response);
-                    auto token = jsonResponse.at("access_token").get<string>();
-                    auto b64Token = stringEncode(CRYPT_STRING_BASE64, (const uint8_t*)token.data(), token.length());
+                    auto json_response = json::parse(response);
+                    auto id_token = json_response.at("id_token").get<string>();
+                    auto access_token = json_response.at("access_token").get<string>();
+
+                    // Get the product ID.
+                    body = json{
+                        { "product_id", "10200" },
+                        { "id_token", id_token },
+                        { "device_id", device_id }
+                    }.dump();
+                    response = httpPost("https://api.nexon.io/game-auth/v2/check-playable", header, body);
+                    json_response = json::parse(response);
+
+                    auto product_id = json_response.at("product_id").get<string>();
 
                     // Get the passport.
                     header = (ostringstream{} <<
-                        "Cookie: nxtk=" << token << ";domain=.nexon.net;path=/;\r\n" <<
-                        "Authorization: bearer " << b64Token).str();
-                    response = httpGet("https://api.nexon.io/users/me/passport", header, "");
-                    jsonResponse = json::parse(response);
+                        "Content-Type: application/json\r\n" <<
+                        "Authorization: Bearer " << access_token).str();
+                    body = json{
+                        { "product_id", product_id }
+                    }.dump();
+                    response = httpPost("https://api.nexon.io/passport/v1/passport", header, body);
+                    json_response = json::parse(response);
 
                     // Startup the client.
                     STARTUPINFO si{};
@@ -411,7 +426,7 @@ void LauncherApp::mainUI() {
                             "logport:11000 " <<
                             "chatip:54.214.176.167 " <<
                             "chatport:8002 " <<
-                            "/P:" << jsonResponse.at("passport").get<string>() << " " <<
+                            "/P:" << json_response.at("passport").get<string>() << " " <<
                             "-bgloader").str();
                     }
                     else {
@@ -421,7 +436,7 @@ void LauncherApp::mainUI() {
                         replace(cmdLine.begin(), cmdLine.end(), '\n', ' ');
 
                         // Passport also needs to be added.
-                        cmdLine += " /P:" + jsonResponse.at("passport").get<string>();
+                        cmdLine += " /P:" + json_response.at("passport").get<string>();
                     }
 
                     auto workDir = fs::path{ m_clientPath }.remove_filename().native();
