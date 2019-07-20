@@ -169,6 +169,7 @@ namespace kanan {
         { 11, "Weapon 2" },
         { 12, "Arrow\\Shield 1" },
         { 13, "Arrow\\Shield 2" },
+        { 15, "Face Accessory" },
         { 16, "Accessory 1" },
         { 17, "Accessory 2" },
         { 18, "Tail" }
