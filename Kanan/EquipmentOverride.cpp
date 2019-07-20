@@ -253,9 +253,6 @@ namespace kanan {
             color[0] &= 0x00FFFFFF;
             color[1] &= 0x00FFFFFF;
             color[2] &= 0x00FFFFFF;
-            color[4] &= 0x00FFFFFF;
-            color[5] &= 0x00FFFFFF;
-            color[6] &= 0x00FFFFFF;
         }
 
         // Filter out other characters.
