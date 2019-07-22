@@ -136,9 +136,10 @@ namespace kanan {
         m_equipmentOverrides[11].name = "Weapon 2";
         m_equipmentOverrides[12].name = "Arrow\\Shield 1";
         m_equipmentOverrides[13].name = "Arrow\\Shield 2";
-        m_equipmentOverrides[15].name = "Tail";
+        m_equipmentOverrides[15].name = "Face Accessory";
         m_equipmentOverrides[16].name = "Accessory 1";
         m_equipmentOverrides[17].name = "Accessory 2";
+        m_equipmentOverrides[18].name = "Tail";
 
         auto address = scan("client.exe", "55 8B EC 6A ? 68 ? ? ? ? 64 A1 ? ? ? ? 50 83 EC ? 53 56 57 A1 ? ? ? ? 33 C5 50 8D 45 F4 64 A3 ? ? ? ? 8B D9 8B 75 0C 8B 0D ? ? ? ?");
 
