@@ -22,6 +22,7 @@
 #include "SecondaryPassword.hpp"
 #include "StatusUI.hpp"
 #include "LoginScreen.hpp"
+#include "DontMoveToSquadChat.hpp"
 
 #include "Log.hpp"
 
@@ -93,6 +94,7 @@ namespace kanan {
         }
 
         addPatchMod("Quality of Life", make_unique<RangedAttackSwap>());
+        addPatchMod("Speedup", make_unique<DontMoveToSquadChat>());
 		addPatchMod("Text", make_unique<TTFFontSize>());
         addPatchMod("Text", make_unique<ColorAltText>());
 

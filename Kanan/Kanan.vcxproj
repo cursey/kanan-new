@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -99,6 +99,7 @@
     <ClCompile Include="D3D9Hook.cpp" />
     <ClCompile Include="DInputHook.cpp" />
     <ClCompile Include="DisableNagle.cpp" />
+    <ClCompile Include="DontMoveToSquadChat.cpp" />
     <ClCompile Include="EnableMultiClient.cpp" />
     <ClCompile Include="EntityViewer.cpp" />
     <ClCompile Include="EquipmentOverride.cpp" />
@@ -127,6 +128,7 @@
     <ClInclude Include="D3D9Hook.hpp" />
     <ClInclude Include="DInputHook.hpp" />
     <ClInclude Include="DisableNagle.hpp" />
+    <ClInclude Include="DontMoveToSquadChat.hpp" />
     <ClInclude Include="EnableMultiClient.hpp" />
     <ClInclude Include="EntityViewer.hpp" />
     <ClInclude Include="EquipmentOverride.hpp" />
