@@ -138,12 +138,12 @@ public:
 	char pad_0008[128]; //0x0008
 	class CParameter *parameter; //0x0088
 	class CAction *action; //0x008C
-	char pad_0090[416]; //0x0090
-	class CEquipment *equipment; //0x0230
-	char pad_0234[84]; //0x0234
-	uint64_t targetID; //0x0288
-	char pad_0290[700]; //0x0290
-}; //Size: 0x054C
+	char pad_0090[420]; //0x0090
+	class CEquipment *equipment; //0x0234
+	char pad_0238[88]; //0x0238
+	uint64_t targetID; //0x0290
+	char pad_0298[700]; //0x0298
+}; //Size: 0x0554
 
 class CItem
 {
