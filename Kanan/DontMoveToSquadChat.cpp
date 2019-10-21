@@ -20,7 +20,7 @@ namespace kanan {
             log("Got DontMoveToSquadChat %p", *address);
 
             code = vector<uint8_t>{
-                0x83, 0xFF, 0x07,						//cmp edi,07
+                0x83, 0xFF, 0x09,						//cmp edi,09
                 0x0F, 0x85, 0x02, 0x00, 0x00, 0x00,		//jne nochange
                 0x31, 0xFF,								//xor edi,edi
                                                         //nochange:
