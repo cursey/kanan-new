@@ -20,7 +20,7 @@ using Matrix3x3f = Matrix3x3;
 using Matrix3x4f = Matrix3x4;
 using Matrix4x4f = Matrix4x4;
 
-// Created with ReClass.NET 1.2 by KN4CK3R
+// Created with NetClass.RE 1.2 by KN4CK3R
 
 class CRendererPtr
 {
@@ -138,12 +138,12 @@ public:
 	char pad_0008[128]; //0x0008
 	class CParameter *parameter; //0x0088
 	class CAction *action; //0x008C
-	char pad_0090[420]; //0x0090
-	class CEquipment *equipment; //0x0234
-	char pad_0238[88]; //0x0238
-	uint64_t targetID; //0x0290
-	char pad_0298[700]; //0x0298
-}; //Size: 0x0554
+	char pad_0090[428]; //0x0090
+	class CEquipment *equipment; //0x023C
+	char pad_0240[88]; //0x0240
+	uint64_t targetID; //0x0298
+	char pad_02A0[700]; //0x02A0
+}; //Size: 0x055C
 
 class CItem
 {

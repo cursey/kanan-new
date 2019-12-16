@@ -29,7 +29,7 @@
 #include "Mods.hpp"
 
 using namespace std;
-using namespace std::experimental::filesystem;
+using namespace std::filesystem;
 using nlohmann::json;
 
 namespace kanan {
