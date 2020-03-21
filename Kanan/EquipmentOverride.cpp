@@ -23,10 +23,10 @@ namespace kanan {
 	};
 
 	static array<float, 4> convertIntColorToFloat(int color) {
-        auto r = color & 0x00FF0000;
-        auto g = color & 0x0000FF00;
+        auto a = (color & 0xFF000000) >> 24;
+        auto r = (color & 0x00FF0000) >> 16;
+        auto g = (color & 0x0000FF00) >> 8;
         auto b = color & 0x000000FF;
-        auto a = color & 0xFF000000;
 
 		return {
 			clamp((float)r / 255.0f, 0.0f, 1.0f),
