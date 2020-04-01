@@ -24,7 +24,7 @@
         "category": "Information",
         "patches": [
             {
-                "pattern": "0F 85 ? ? ? ? FF B3 F4 00 00 00",
+                "pattern": "0F 85 ? ? ? ? FF B3 14 01 00 00",
                 "patch": "90 90 90 90 90 90"
             }
         ]
