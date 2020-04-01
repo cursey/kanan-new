@@ -205,6 +205,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Patches.json" />
+    <CopyFileToFolders Include="Patches.json" />
   </ItemGroup>
 </Project>
