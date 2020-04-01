@@ -47,7 +47,7 @@ namespace kanan {
         auto someToken_addr = scan("client.exe", wstringToHex(L"&#xD;"));
         if (someToken_addr)
         {
-            if (0) log("[SecondaryPassword] Found address of &#xD; %p", someToken_addr);
+            log("[SecondaryPassword] Found address of &#xD; %p", someToken_addr);
         }
         else {
             log("[SecondaryPassword] Failed to get address of address of &#xD;");
@@ -65,10 +65,10 @@ namespace kanan {
         if (someXmlFunc_addr)
         {
             auto cStringAllocator_offset = *reinterpret_cast<intptr_t*>(*someXmlFunc_addr + 1);
-            if (0) log("[SecondaryPassword] cStringAllocator_offset %d", cStringAllocator_offset);
+            log("[SecondaryPassword] cStringAllocator_offset %d", cStringAllocator_offset);
             m_CStringAllocate = reinterpret_cast<CString *(*)(int)>(reinterpret_cast<uintptr_t*>(*someXmlFunc_addr + 5 + cStringAllocator_offset));
             // todo: add sanity check
-            if (0) log("[SecondaryPassword] Found address of CString allocator %p", m_CStringAllocate);
+            log("[SecondaryPassword] Found address of CString allocator %p", m_CStringAllocate);
         }
         else {
             log("[SecondaryPassword] Failed to get address of CString allocator");
@@ -104,7 +104,7 @@ namespace kanan {
         auto PLI_WindowVisualKeyboard_7_addr = scan("client.exe", wstringToHex(L"code.interface.PLI_WindowVisualKeyboard.7"));
         if (PLI_WindowVisualKeyboard_7_addr)
         {
-            if (0) log("[SecondaryPassword] Found code.interface.PLI_WindowVisualKeyboard.7: %p", PLI_WindowVisualKeyboard_7_addr);
+            log("[SecondaryPassword] Found code.interface.PLI_WindowVisualKeyboard.7: %p", PLI_WindowVisualKeyboard_7_addr);
         }
         else {
             log("[SecondaryPassword] Failed to get address of \"code.interface.PLI_WindowVisualKeyboard.7\"");
@@ -113,7 +113,7 @@ namespace kanan {
         auto constructorTmpAddr = scan("client.exe", "68" + memoryToHex(&*PLI_WindowVisualKeyboard_7_addr, 4));
         if (constructorTmpAddr)
         {
-            if (0) log("[SecondaryPassword] Found pleione::CVisualKeyboardView constructor: %p", constructorTmpAddr);
+            log("[SecondaryPassword] Found pleione::CVisualKeyboardView constructor: %p", constructorTmpAddr);
         }
         else {
             log("[SecondaryPassword] Failed to get address of pleione::CVisualKeyboardView constructor");
@@ -125,7 +125,7 @@ namespace kanan {
         if (cVisualKeyboardViewVtableTmp)
         {
             cVisualKeyboardViewVtable = reinterpret_cast<uint32_t*>(*reinterpret_cast<uint32_t*>(*cVisualKeyboardViewVtableTmp + 2));
-            if (0) log("[SecondaryPassword] Found pleione::CVisualKeyboardView vtable: %p", cVisualKeyboardViewVtable);
+            log("[SecondaryPassword] Found pleione::CVisualKeyboardView vtable: %p", cVisualKeyboardViewVtable);
         }
         else {
             log("[SecondaryPassword] Failed to get address of pleione::CVisualKeyboardView vtable");
@@ -134,13 +134,15 @@ namespace kanan {
 
         // RIP: 'type cast': cannot convert from 'void (__thiscall kanan::CWindow::* )(int *)' to 'void *'
         // log("[SecondaryPassword] pleione::CVisualKeyboardView::OnPostCreate addr: %p", (void*)(tempViewPtr->OnPostCreate));
-        if (0) log("[SecondaryPassword] pleione::CVisualKeyboardView::OnPostCreate addr: %p", cVisualKeyboardViewVtable[88]);
+        log("[SecondaryPassword] pleione::CVisualKeyboardView::OnPostCreate addr: %p", cVisualKeyboardViewVtable[88]);
         m_setCVisualKeyboardViewOnPostCreateHook = make_unique<FunctionHook>(cVisualKeyboardViewVtable[88], (uintptr_t)&SecondaryPassword::hookedCVisualKeyboardViewOnPostCreate);
         // todo: sanity check
         log("[SecondaryPassword] Leaving setup...");
     }
 
     void SecondaryPassword::hookedCVisualKeyboardViewOnPostCreate(CVisualKeyboardView* view, uint32_t EDX, int metaData) {
+        log("[SecondaryPassword] OnPostCreate hook called %p", view);
+
         auto orig = (decltype(hookedCVisualKeyboardViewOnPostCreate)*)g_secondaryPassword->m_setCVisualKeyboardViewOnPostCreateHook->getOriginal();
         orig(view, EDX, metaData);
 
