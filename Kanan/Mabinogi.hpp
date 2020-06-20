@@ -138,9 +138,9 @@ public:
 	char pad_0008[128]; //0x0008
 	class CParameter *parameter; //0x0088
 	class CAction *action; //0x008C
-	char pad_0090[428]; //0x0090
-	class CEquipment *equipment; //0x023C
-	char pad_0240[88]; //0x0240
+	char pad_0090[432]; //0x0090
+	class CEquipment *equipment; //0x0240
+	char pad_0244[84]; //0x0244
 	uint64_t targetID; //0x0298
 	char pad_02A0[700]; //0x02A0
 }; //Size: 0x055C
@@ -414,6 +414,12 @@ public:
 }; //Size: 0x0434
 
 class N00000B19
+{
+public:
+	char pad_0000[68]; //0x0000
+}; //Size: 0x0044
+
+class N00000A4D
 {
 public:
 	char pad_0000[68]; //0x0000
