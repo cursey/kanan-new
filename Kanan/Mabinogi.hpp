@@ -63,7 +63,7 @@ public:
 	char pad_0058[28]; //0x0058
 	float aspectRatio; //0x0074
 	char pad_0078[212]; //0x0078
-	Matrix4x4 viewMatrix; //0x014C
+	Matrix4x4 transformMatrix; //0x014C
 	char pad_018C[84]; //0x018C
 }; //Size: 0x01E0
 
