@@ -1,10 +1,13 @@
+#include <imgui.h>
+#include <imgui_internal.h>
+
 #include "Kanan.hpp"
 #include "Mabinogi.hpp"
 #include "KCamera.hpp"
 
 namespace kanan {
 	std::optional<Matrix4x4> KCamera::getViewMatrix() const {
-		Matrix4x4 m = state->transformMatrix;
+		Matrix4x4 m = state->transformMatrix;		
 		Matrix4x4 inv;
 		float det;
 		int i;
@@ -146,20 +149,20 @@ namespace kanan {
 		b = -t;
 		Matrix4x4 m{};
 		//Calculate projection matrix
-		m[0] = 2 * n / (r - l);
+		m[0] = (2 * n) / (r - l);
 		m[1] = 0;
-		m[2] = (r + l) / (r - l);
+		m[2] = (r + l) / (r - l); // 0
 		m[3] = 0;
 
 		m[4] = 0;
-		m[5] = 2 * n / (t - b);
-		m[6] = (t + b) / (t - b);
+		m[5] = (2 * n) / (t - b);
+		m[6] = (t + b) / (t - b); //0
 		m[7] = 0;
 
 		m[8] = 0;
 		m[9] = 0;
 		m[10] = -(f + n) / (f - n);
-		m[11] = -2 * f * n / (f - n);
+		m[11] = (2 * f * n) / (f - n); //had to change this from the standard opengl projection matrix
 
 		m[12] = 0;
 		m[13] = 0;
@@ -172,19 +175,22 @@ namespace kanan {
 		float x = pos[0];
 		float y = pos[1];
 		float z = pos[2];
+		bool a = true;
 
 		Matrix4x4 vm = getViewMatrix().value();
 		Matrix4x4 pm = getProjectionMatrix().value();
 
+		//convert world space point to eye space point
 		float vv1 = double(vm[0]) * x + double(vm[1]) * y + double(vm[2]) * z + vm[3]; //x
 		float vv2 = double(vm[4]) * x + double(vm[5]) * y + double(vm[6]) * z + vm[7]; //y
 		float vv3 = double(vm[8]) * x + double(vm[9]) * y + double(vm[10]) * z + vm[11]; //z
-		float vv4 = double(vm[12]) * x + double(vm[13]) * y + double(vm[14]) * z + vm[15]; //w
-		//convert view to clip plane
-		float pv1 = double(pm[0]) * vv1 + double(pm[1]) * vv2 + double(pm[2]) * vv3 + double(pm[3]) * vv4;
-		float pv2 = double(pm[4]) * vv1 + double(pm[5]) * vv2 + double(pm[6]) * vv3 + double(pm[7]) * vv4;
-		float pv3 = double(pm[8]) * vv1 + double(pm[9]) * vv2 + double(pm[10]) * vv3 + double(pm[11]) * vv4;
-		float pv4 = double(pm[12]) * vv1 + double(pm[13]) * vv2 + double(pm[14]) * vv3 + double(pm[15]) * vv4; //w
-		return Vector3{ pv1 / -pv4 * state->screenWidth, pv2 / -pv4 * state->screenHeight, pv3 };
+		//w = 1
+		//convert eye space point to clip space point
+		float pv1 = double(pm[0]) * vv1 + double(pm[1]) * vv2 + double(pm[2]) * vv3 + double(pm[3]); //x
+		float pv2 = double(pm[4]) * vv1 + double(pm[5]) * vv2 + double(pm[6]) * vv3 + double(pm[7]); //y
+		float pv3 = double(pm[8]) * vv1 + double(pm[9]) * vv2 + double(pm[10]) * vv3 + double(pm[11]); //z
+		float pv4 = -vv3; //w' = -z
+		//normalize and convert to raster space
+		return Vector3{ pv1 / pv4 * state->screenWidth, pv2 / pv4 * state->screenHeight, pv3 / pv4};
 	}
 }
