@@ -1,6 +1,3 @@
-#include <imgui.h>
-#include <imgui_internal.h>
-
 #include "Kanan.hpp"
 #include "Mabinogi.hpp"
 #include "KCamera.hpp"
