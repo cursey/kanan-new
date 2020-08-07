@@ -293,13 +293,13 @@ public:
 	class CMemberUShort lifeTimeSkill; //0x02B4
 	class CMemberUInt64 experienceInt; //0x02C0
 	class CMemberUShort age; //0x02D8
-	char pad_02E4[1912]; //0x02E4
-	class CMemberFloat dorcha; //0x0A5C
-	class CMemberFloat dorchaMaxBase; //0x0A6C
-	class CMemberFloat tuairim; //0x0A7C For Bachram Boost
-	class CMemberFloat tuairimMaxBase; //0x0A8C For Bachram Boost
-	char pad_0A9C[56]; //0x0A9C
-}; //Size: 0x0AD4
+	char pad_02E4[1944]; //0x02E4
+	class CMemberFloat dorcha; //0x0A7C
+	class CMemberFloat dorchaMaxBase; //0x0A8C
+	class CMemberFloat tuairim; //0x0A9C For Bachram Boost
+	class CMemberFloat tuairimMaxBase; //0x0AAC For Bachram Boost
+	char pad_0ABC[56]; //0x0ABC
+}; //Size: 0x0AF4
 
 class CString
 {
@@ -412,4 +412,3 @@ public:
 	uint32_t chatTab; //0x0158
 	char pad_015C[728]; //0x015C
 }; //Size: 0x0434
-
