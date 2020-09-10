@@ -14,7 +14,7 @@ namespace kanan {
     {
         log("Entering EnableMultiClient.");
 
-        auto address = scan("client.exe", "B9 ? ? ? ? E8 ? ? ? ? 84 C0 74 ? 8B 0D ? ? ? ? 8D 45 CC");
+        auto address = scan("client.exe", "B9 ? ? ? ? E8 ? ? ? ? 84 C0 74 ? 8B 0D ? ? ? ? 8D 45 C0");
 
         if (address) {
             log("Got EnableMultiClient %p", *address);
