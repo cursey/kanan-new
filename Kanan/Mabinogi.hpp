@@ -349,10 +349,10 @@ public:
 class CWorld
 {
 public:
-	char pad_0000[168]; //0x0000
-	uint64_t localPlayerID; //0x00A8
-	char pad_00B0[944]; //0x00B0
-}; //Size: 0x0460
+	char pad_0000[176]; //0x0000
+	uint64_t localPlayerID; //0x00B0
+	char pad_00B8[944]; //0x00B8
+}; //Size: 0x0468
 
 class SItemDBDesc
 {
