@@ -138,12 +138,12 @@ public:
 	char pad_0008[128]; //0x0008
 	class CParameter *parameter; //0x0088
 	class CAction *action; //0x008C
-	char pad_0090[432]; //0x0090
-	class CEquipment *equipment; //0x0240
-	char pad_0244[84]; //0x0244
-	uint64_t targetID; //0x0298
-	char pad_02A0[700]; //0x02A0
-}; //Size: 0x055C
+	char pad_0090[436]; //0x0090
+	class CEquipment *equipment; //0x0244
+	char pad_0248[88]; //0x0248
+	uint64_t targetID; //0x02A0
+	char pad_02A8[700]; //0x02A8
+}; //Size: 0x0564
 
 class CItem
 {
@@ -293,13 +293,13 @@ public:
 	class CMemberUShort lifeTimeSkill; //0x02B4
 	class CMemberUInt64 experienceInt; //0x02C0
 	class CMemberUShort age; //0x02D8
-	char pad_02E4[1912]; //0x02E4
-	class CMemberFloat dorcha; //0x0A5C
-	class CMemberFloat dorchaMaxBase; //0x0A6C
-	class CMemberFloat tuairim; //0x0A7C For Bachram Boost
-	class CMemberFloat tuairimMaxBase; //0x0A8C For Bachram Boost
-	char pad_0A9C[56]; //0x0A9C
-}; //Size: 0x0AD4
+	char pad_02E4[1944]; //0x02E4
+	class CMemberFloat dorcha; //0x0A7C
+	class CMemberFloat dorchaMaxBase; //0x0A8C
+	class CMemberFloat tuairim; //0x0A9C For Bachram Boost
+	class CMemberFloat tuairimMaxBase; //0x0AAC For Bachram Boost
+	char pad_0ABC[56]; //0x0ABC
+}; //Size: 0x0AF4
 
 class CString
 {
@@ -412,15 +412,3 @@ public:
 	uint32_t chatTab; //0x0158
 	char pad_015C[728]; //0x015C
 }; //Size: 0x0434
-
-class N00000B19
-{
-public:
-	char pad_0000[68]; //0x0000
-}; //Size: 0x0044
-
-class N00000A4D
-{
-public:
-	char pad_0000[68]; //0x0000
-}; //Size: 0x0044

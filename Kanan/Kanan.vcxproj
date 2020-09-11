@@ -118,6 +118,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Kanan.cpp" />
     <ClCompile Include="KananInit.cpp" />
+    <ClCompile Include="KCamera.cpp" />
     <ClCompile Include="KCharacter.cpp" />
     <ClCompile Include="KItem.cpp" />
     <ClCompile Include="Log.cpp" />
@@ -147,6 +148,7 @@
     <ClInclude Include="FreezeTimeOfDay.hpp" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="Kanan.hpp" />
+    <ClInclude Include="KCamera.hpp" />
     <ClInclude Include="KCharacter.hpp" />
     <ClInclude Include="KItem.hpp" />
     <ClInclude Include="Log.hpp" />

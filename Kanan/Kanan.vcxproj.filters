@@ -114,6 +114,9 @@
     <ClCompile Include="DontMoveToSquadChat.cpp">
       <Filter>Source Files\Mods</Filter>
     </ClCompile>
+    <ClCompile Include="KCamera.cpp">
+      <Filter>Source Files\Mabinogi</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D3D9Hook.hpp">
@@ -202,6 +205,9 @@
     </ClInclude>
     <ClInclude Include="DontMoveToSquadChat.hpp">
       <Filter>Header Files\Mods</Filter>
+    </ClInclude>
+    <ClInclude Include="KCamera.hpp">
+      <Filter>Header Files\Mabinogi</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
