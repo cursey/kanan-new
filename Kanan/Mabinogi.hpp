@@ -334,10 +334,10 @@ public:
 class CFramework
 {
 public:
-	char pad_0000[152]; //0x0000
-	Vector3 position; //0x0098
-	char pad_00A4[168]; //0x00A4
-}; //Size: 0x014C
+	char pad_0000[160]; //0x0000
+	Vector3 position; //0x00A0
+	char pad_00AC[168]; //0x00A4
+}; //Size: 0x0154
 
 class CWorldPtr
 {
