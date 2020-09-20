@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <ctime>
 #include <filesystem>
 #include <fstream>
 #include <sstream>
@@ -380,9 +381,12 @@ void LauncherApp::mainUI() {
                         { "client_id", "7853644408" },
                         { "scope", "us.launcher.all" },
                         { "device_id", device_id },
-                        { "captcha_token", "0xDEADBEEF" }
+                        { "captcha_token", "0xDEADBEEF" },
+                        { "captcha_version", "v3"},
+                        { "local_time", std::time(nullptr) },
+                        { "time_offset", 420 },
                     }.dump();
-                    auto response = httpPost("https://www.nexon.com/account-webapi/login/launcher", header, body);
+                    auto response = httpPost("https://www.nexon.com/account-webapi/v4/login/launcher", header, body);
                     auto json_response = json::parse(response);
                     auto id_token = json_response.at("id_token").get<string>();
                     auto access_token = json_response.at("access_token").get<string>();
