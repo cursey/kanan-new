@@ -85,7 +85,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>wbemuuid.lib;bcrypt.lib;Crypt32.lib;Winhttp.lib;Core.lib;ImGui.lib;FreeType.lib;d3d9.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Rpcrt4.lib;wbemuuid.lib;bcrypt.lib;Crypt32.lib;Winhttp.lib;Core.lib;ImGui.lib;FreeType.lib;d3d9.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(OutDir);$(SolutionDir)Dependencies\FreeType;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SubSystem>Windows</SubSystem>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
@@ -101,7 +101,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)/Kanan;$(SolutionDir)/Core;$(SolutionDir)Dependencies/ImGui;$(SolutionDir)Dependencies/Json;$(SolutionDir)Dependencies/stb</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>wbemuuid.lib;bcrypt.lib;Crypt32.lib;Winhttp.lib;Core.lib;ImGui.lib;FreeType.lib;d3d9.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Rpcrt4.lib;wbemuuid.lib;bcrypt.lib;Crypt32.lib;Winhttp.lib;Core.lib;ImGui.lib;FreeType.lib;d3d9.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(OutDir);$(SolutionDir)Dependencies\FreeType;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SubSystem>Windows</SubSystem>
     </Link>

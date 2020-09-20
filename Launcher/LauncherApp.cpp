@@ -5,6 +5,8 @@
 #include <sstream>
 #include <stdexcept>
 
+#include <rpc.h>
+
 #include <imgui.h>
 #include <imgui_freetype.h>
 #include <imgui_impl_dx9.h>
@@ -21,6 +23,7 @@
 #include "HttpClient.hpp"
 #include "WmiQuery.hpp"
 #include "RegQuery.hpp"
+#include "ScopeExit.hpp"
 #include "LauncherApp.hpp"
 
 using namespace std;
@@ -40,6 +43,31 @@ string getDeviceID() {
     auto uuidHash = hashString("SHA256", uuid);
 
     return stringEncode(CRYPT_STRING_HEXRAW, uuidHash);
+}
+
+string getAmznTraceID() {
+    UUID uuid{};
+
+    if (UuidCreate(&uuid) != RPC_S_OK) {
+        throw std::runtime_error("Failed to create a UUID for X-Amzn-Trace-Id header");
+    }
+
+    RPC_WSTR uuid_str{};
+
+    if (UuidToString(&uuid, &uuid_str) != RPC_S_OK) {
+        throw std::runtime_error("Failed to create a UUID string for X-Amzn-Trace-Id header");
+    }
+
+    ScopeExit on_exit{[&] { RpcStringFree(&uuid_str); }};
+    auto trace_id = narrow((wchar_t*)uuid_str);
+
+    // Make it all lowercase.
+    std::transform(trace_id.begin(), trace_id.end(), trace_id.begin(), [](auto c) { return std::tolower(c); });
+
+    // Remove dashes.
+    trace_id.erase(std::remove_if(trace_id.begin(), trace_id.end(), [](auto c) { return c == '-'; }));
+
+    return trace_id;
 }
 
 LauncherApp::LauncherApp()
@@ -374,6 +402,7 @@ void LauncherApp::mainUI() {
                     // Get the API access token.
                     auto sha512_password = stringEncode(CRYPT_STRING_HEXRAW, hashString("SHA512", password.data()));
                     auto device_id = getDeviceID();
+                    auto trace_id = getAmznTraceID();
                     string header{ "Content-Type: application/json" };
                     auto body = json{
                         { "id", string_view{ username.data() } },
@@ -397,6 +426,11 @@ void LauncherApp::mainUI() {
                         { "id_token", id_token },
                         { "device_id", device_id }
                     }.dump();
+                    header = (ostringstream{} <<
+                        "Content-Type: application/json\r\n" <<
+                        "Referer: https://nxl.nxfs.nexon.com/nxl/main/games/10200\r\n" <<
+                        "X-Amzn-Trace-Id: NxL=" << trace_id <<".1"
+                        ).str();
                     response = httpPost("https://api.nexon.io/game-auth/v2/check-playable", header, body);
                     json_response = json::parse(response);
 
@@ -405,6 +439,8 @@ void LauncherApp::mainUI() {
                     // Get the passport.
                     header = (ostringstream{} <<
                         "Content-Type: application/json\r\n" <<
+                        "Referer: https://nxl.nxfs.nexon.com/nxl/main/games/10200\r\n" <<
+                        "X-Amzn-Trace-Id: NxL=" << trace_id << ".2\r\n" <<
                         "Authorization: Bearer " << access_token).str();
                     body = json{
                         { "product_id", product_id }
