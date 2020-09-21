@@ -1,5 +1,6 @@
 #include <array>
 #include <cstdint>
+#include <charconv>
 #include <iostream>
 #include <filesystem>
 #include <fstream>
@@ -101,16 +102,32 @@ BOOL CALLBACK enumWindow(HWND wnd, LPARAM param) {
 int main(int argc, char* argv[]) {
     cout << "Kanan for Mabinogi" << endl;
     cout << endl;
-    cout << "Waiting for Mabinogi window(s)..." << endl;
 
-    // All we do is enumerate the top-level windows using EnumWindows. Then if we
-    // find a window belonging to Mabinogi, we get its process ID. If we haven't
-    // injected into that process, we inject then repeat the process constantly
-    // looking for new instances of Mabinogi to inject into.
-    do {
-        EnumWindows(&enumWindow, 0);
-        this_thread::sleep_for(1s);
-    } while (true);
+    if (argc == 2) {
+        DWORD pid{};
 
-    return 0;
+        if (auto [p, ec] = std::from_chars(argv[1], argv[1] + strlen(argv[1]), pid); ec == std::errc()) {
+            cout << "Injecting into process " << pid << endl;
+            inject(pid);
+            return 0;
+        }
+        else {
+            cerr << "Second argument must be a process ID!" << endl;
+            return 1;
+        }
+    }
+    else {
+        cout << "Waiting for Mabinogi window(s)..." << endl;
+
+        // All we do is enumerate the top-level windows using EnumWindows. Then if we
+        // find a window belonging to Mabinogi, we get its process ID. If we haven't
+        // injected into that process, we inject then repeat the process constantly
+        // looking for new instances of Mabinogi to inject into.
+        do {
+            EnumWindows(&enumWindow, 0);
+            this_thread::sleep_for(1s);
+        } while (true);
+
+        return 0;
+    }
 }

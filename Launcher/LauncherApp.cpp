@@ -221,8 +221,12 @@ bool LauncherApp::loadProfiles() {
             profile.at("username").get_to(username);
             profile.at("password").get_to(password);
 
-            if (profile.find("cmdLine") != profile.end()) {
-                profile.at("cmdLine").get_to(cmdLine);
+            if (auto search = profile.find("cmdLine"); search != profile.end()) {
+                search->get_to(cmdLine);
+            }
+
+            if (auto search = profile.find("launchWithKanan"); search != profile.end()) {
+                search->get_to(p.launch_with_kanan);
             }
 
             strcpy_s(p.username.data(), p.username.size(), username.c_str());
@@ -260,7 +264,8 @@ void LauncherApp::saveProfiles() {
         profiles.emplace_back(json{
             { "username", string{ profile.username.data() } },
             { "password", string{ profile.password.data() } },
-            { "cmdLine", string{ profile.cmdLine.data() } }
+            { "cmdLine", string{ profile.cmdLine.data() } },
+            { "launchWithKanan", profile.launch_with_kanan },
          });
     }
 
@@ -395,6 +400,8 @@ void LauncherApp::mainUI() {
             openCustomizeCommandLine = true;
         }
 
+        ImGui::Checkbox("Launch with Kanan", &profile.launch_with_kanan);
+
         if (ImGui::Button("Launch Client")) {
             saveProfiles();
             m_launchResult = async(launch::async, [=] {
@@ -500,6 +507,33 @@ void LauncherApp::mainUI() {
 
                     CloseHandle(pi.hThread);
                     CloseHandle(pi.hProcess);
+
+                    // Create the launcher process if the profile wants to launch w/ kanan.
+                    if (profile.launch_with_kanan) {
+                        STARTUPINFO loader_si{};
+                        PROCESS_INFORMATION loader_pi{};
+                        auto loader_path = fs::current_path() / "loader.exe";
+                        auto loader_cmdline = (ostringstream{} <<
+                            "\"" << loader_path.string() << "\" " << pi.dwProcessId).str();
+
+                        if (CreateProcess(
+                            nullptr, 
+                            (LPWSTR)widen(loader_cmdline).c_str(), 
+                            nullptr, 
+                            nullptr, 
+                            FALSE, 
+                            0, 
+                            nullptr, 
+                            fs::current_path().wstring().c_str(), 
+                            &loader_si, 
+                            &loader_pi
+                        ) == FALSE) {
+                            throw runtime_error{ "Failed to create the loader process" };
+                        }
+
+                        CloseHandle(loader_pi.hThread);
+                        CloseHandle(loader_pi.hProcess);
+                    }
                 }
                 catch (const exception& e) {
                     MessageBox(m_window, widen(e.what()).c_str(), L"Error", MB_ICONERROR | MB_OK);

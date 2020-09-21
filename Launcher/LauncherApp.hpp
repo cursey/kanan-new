@@ -25,9 +25,10 @@ private:
     bool m_isAboutOpen{};
 
     struct Profile {
-        std::array<char, 64> username;
-        std::array<char, 64> password;
-        std::array<char, 1024> cmdLine;
+        std::array<char, 64> username{};
+        std::array<char, 64> password{};
+        std::array<char, 1024> cmdLine{};
+        bool launch_with_kanan{};
     };
 
     std::vector<Profile> m_profiles{};
