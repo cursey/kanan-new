@@ -45,8 +45,7 @@ namespace kanan {
         m_styleChoice{ 0 },
         m_isChoiceFulfilled{ false },
         m_monitors{},
-        m_monitorChoice{ 0 },
-        m_dontSetStyle{ false }
+        m_monitorChoice{ 0 }
     {
         EnumDisplayMonitors(nullptr, nullptr, onMonitor, (LPARAM)this);
     }
@@ -62,7 +61,7 @@ namespace kanan {
         auto wnd = g_kanan->getWindow();
 
         // Set the style.
-        if (m_changeStyle && !m_dontSetStyle) {
+        if (m_changeStyle) {
             log("[BorderlessWindow] Trying to set style: %ld", m_style);
 
             const auto isStyleSet = SetWindowLong(wnd, GWL_STYLE, m_style) == m_style;
@@ -120,12 +119,6 @@ namespace kanan {
                 ImGui::Combo("Monitor", &m_monitorChoice, monitorChoices.c_str());
             }
 
-            ImGui::Checkbox("Don't Set Window Style", &m_dontSetStyle);
-            
-            if (ImGui::IsItemHovered()) {
-                ImGui::SetTooltip("Will cause Kanan to not change the window style.\nEnable this if you experience crashes with normal borderless window.");
-            }
-
             if (ImGui::Button("Apply")) {
                 apply();
             }
@@ -139,7 +132,6 @@ namespace kanan {
         m_y = cfg.get<int>("BorderlessWindow.Y").value_or(0);
         m_w = cfg.get<int>("BorderlessWindow.W").value_or(1920);
         m_h = cfg.get<int>("BorderlessWindow.H").value_or(1080);
-        m_dontSetStyle = cfg.get<bool>("BorderlessWindow.DontSetStyle").value_or(0);
 
         if (m_styleChoice != 0) {
             apply();
@@ -153,7 +145,6 @@ namespace kanan {
         cfg.set<int>("BorderlessWindow.Y", m_y);
         cfg.set<int>("BorderlessWindow.W", m_w);
         cfg.set<int>("BorderlessWindow.H", m_h);
-        cfg.set<bool>("BorderlessWindow.DontSetStyle", m_dontSetStyle);
     }
 
     bool BorderlessWindow::onMessage(HWND wnd, UINT message, WPARAM wParam, LPARAM lParam) {

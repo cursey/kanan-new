@@ -40,8 +40,6 @@ namespace kanan {
         std::vector<Monitor> m_monitors;
         int m_monitorChoice;
 
-        bool m_dontSetStyle;
-
         void apply();
     };
 }
