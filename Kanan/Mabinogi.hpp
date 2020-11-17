@@ -138,12 +138,12 @@ public:
 	char pad_0008[128]; //0x0008
 	class CParameter *parameter; //0x0088
 	class CAction *action; //0x008C
-	char pad_0090[436]; //0x0090
-	class CEquipment *equipment; //0x0244
-	char pad_0248[88]; //0x0248
-	uint64_t targetID; //0x02A0
-	char pad_02A8[700]; //0x02A8
-}; //Size: 0x0564
+	char pad_0090[440]; //0x0090
+	class CEquipment *equipment; //0x0248
+	char pad_024C[100]; //0x024C
+	uint64_t targetID; //0x02B0
+	char pad_02B8[700]; //0x02B8
+}; //Size: 0x0574
 
 class CItem
 {
@@ -334,10 +334,10 @@ public:
 class CFramework
 {
 public:
-	char pad_0000[160]; //0x0000
-	Vector3 position; //0x00A0
-	char pad_00AC[168]; //0x00A4
-}; //Size: 0x0154
+	char pad_0000[152]; //0x0000
+	Vector3 position; //0x0098
+	char pad_00A4[168]; //0x00A4
+}; //Size: 0x014C
 
 class CWorldPtr
 {
