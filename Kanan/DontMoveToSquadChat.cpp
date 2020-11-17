@@ -14,17 +14,17 @@ namespace kanan {
         m_patch{},
         m_originalByte{}
     {
-        auto address = scan("client.exe", "89 BE 58 01 00 00 8B 8C");
+        auto address = scan("client.exe", "89 BB 10 01 00 00 FF 90");
 
         if (address) {
             log("Got DontMoveToSquadChat %p", *address);
 
             code = vector<uint8_t>{
-                0x83, 0xFF, 0x09,						//cmp edi,09
+                0x83, 0xFF, 0x08,						//cmp edi,08
                 0x0F, 0x85, 0x02, 0x00, 0x00, 0x00,		//jne nochange
                 0x31, 0xFF,								//xor edi,edi
                                                         //nochange:
-                0x89, 0xBE, 0x58, 0x01, 0x00, 0x00,		//mov [esi+00000158],edi
+                0x89, 0xBB, 0x10, 0x01, 0x00, 0x00,		//mov [ebx+00000110],edi
                 0xE9, 0x00, 0x00, 0x00, 0x00            //jmp back to code
             };
 
