@@ -134,8 +134,8 @@ namespace kanan {
 
         // RIP: 'type cast': cannot convert from 'void (__thiscall kanan::CWindow::* )(int *)' to 'void *'
         // log("[SecondaryPassword] pleione::CVisualKeyboardView::OnPostCreate addr: %p", (void*)(tempViewPtr->OnPostCreate));
-        log("[SecondaryPassword] pleione::CVisualKeyboardView::OnPostCreate addr: %p", cVisualKeyboardViewVtable[88]);
-        m_setCVisualKeyboardViewOnPostCreateHook = make_unique<FunctionHook>(cVisualKeyboardViewVtable[88], (uintptr_t)&SecondaryPassword::hookedCVisualKeyboardViewOnPostCreate);
+        log("[SecondaryPassword] pleione::CVisualKeyboardView::OnPostCreate addr: %p", cVisualKeyboardViewVtable[89]);
+        m_setCVisualKeyboardViewOnPostCreateHook = make_unique<FunctionHook>(cVisualKeyboardViewVtable[89], (uintptr_t)&SecondaryPassword::hookedCVisualKeyboardViewOnPostCreate);
         // todo: sanity check
         log("[SecondaryPassword] Leaving setup...");
     }
