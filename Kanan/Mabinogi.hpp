@@ -135,15 +135,15 @@ class CCharacter
 public:
 	char pad_0000[4]; //0x0000
 	class CEntityID *entityID; //0x0004
-	char pad_0008[128]; //0x0008
-	class CParameter *parameter; //0x0088
-	class CAction *action; //0x008C
-	char pad_0090[440]; //0x0090
-	class CEquipment *equipment; //0x0248
-	char pad_024C[100]; //0x024C
-	uint64_t targetID; //0x02B0
-	char pad_02B8[700]; //0x02B8
-}; //Size: 0x0574
+	char pad_0008[160]; //0x0008
+	class CParameter *parameter; //0x00A8
+	class CAction *action; //0x00AC
+	char pad_00B0[448]; //0x00B0
+	class CEquipment *equipment; //0x0270
+	char pad_0274[100]; //0x0274
+	uint64_t targetID; //0x02D8
+	char pad_02E0[700]; //0x02E0
+}; //Size: 0x059C
 
 class CItem
 {
@@ -412,3 +412,4 @@ public:
 	uint32_t chatTab; //0x0158
 	char pad_015C[728]; //0x015C
 }; //Size: 0x0434
+
