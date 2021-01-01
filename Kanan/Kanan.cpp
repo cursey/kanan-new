@@ -32,7 +32,8 @@ namespace kanan {
         m_isInitialized{ false },
         m_areModsReady{ false },
         m_areModsLoaded{ false },
-        m_wnd{ nullptr }
+        m_wnd{ nullptr },
+        m_isUIOpenByDefault{ true }
     {
         log("Entering Kanan constructor.");
 
@@ -273,6 +274,9 @@ namespace kanan {
 
         Config cfg{ m_path + "/config.txt" };
 
+        m_isUIOpenByDefault = cfg.get<bool>("UI.OpenByDefault").value_or(true);
+        m_isUIOpen = m_isUIOpenByDefault;
+
         for (auto& mod : m_mods.getMods()) {
             mod->onConfigLoad(cfg);
         }
@@ -293,6 +297,8 @@ namespace kanan {
         log("Saving config %s/config.txt", m_path.c_str());
 
         Config cfg{};
+
+        cfg.set<bool>("UI.OpenByDefault", m_isUIOpenByDefault);
 
         for (auto& mod : m_mods.getMods()) {
             mod->onConfigSave(cfg);
@@ -336,6 +342,11 @@ namespace kanan {
 
             if (ImGui::BeginMenu("View")) {
                 ImGui::MenuItem("Show Log", nullptr, &m_isLogOpen);
+                ImGui::EndMenu();
+            }
+
+            if (ImGui::BeginMenu("Settings")) {
+                ImGui::MenuItem("UI Open By Default", nullptr, &m_isUIOpenByDefault);
                 ImGui::EndMenu();
             }
 

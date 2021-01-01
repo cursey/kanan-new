@@ -52,6 +52,8 @@ namespace kanan {
         bool m_areModsLoaded;
         HWND m_wnd;
 
+        bool m_isUIOpenByDefault{};
+
         void initializeMods();
 
         // These are callbacks that get called from the hooks that get created.
