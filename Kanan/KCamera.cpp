@@ -188,6 +188,6 @@ namespace kanan {
 		float pv3 = double(pm[8]) * vv1 + double(pm[9]) * vv2 + double(pm[10]) * vv3 + double(pm[11]); //z
 		float pv4 = -vv3; //w' = -z
 		//normalize and convert to raster space
-		return Vector3{ pv1 / pv4 * state->screenWidth, pv2 / pv4 * state->screenHeight, pv3 / pv4};
+		return Vector3{ -(pv1 / pv4 * state->screenWidth) + state->screenWidth/2, (pv2 / pv4 * state->screenHeight) + state->screenHeight/2, pv3 / pv4};
 	}
 }
