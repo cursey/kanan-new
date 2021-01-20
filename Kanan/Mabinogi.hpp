@@ -140,9 +140,11 @@ public:
 	class CAction *action; //0x00AC
 	char pad_00B0[448]; //0x00B0
 	class CEquipment *equipment; //0x0270
-	char pad_0274[100]; //0x0274
-	uint64_t targetID; //0x02D8
-	char pad_02E0[700]; //0x02E0
+	char pad_0274[84]; //0x0274
+	uint64_t targetID; //0x02C8
+	char pad_02D0[8]; //0x02D0
+	uint64_t mouseTarget; //0x02D8 (player character only)
+	char pad_02E0[684]; //0x02E0
 }; //Size: 0x059C
 
 class CItem
