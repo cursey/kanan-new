@@ -8,16 +8,43 @@
 #include "ScopeExit.hpp"
 #include "HttpClient.hpp"
 
-using std::runtime_error;
-using std::string;
-using std::string_view;
-using std::wstring;
-using kanan::widen;
+HttpClient::HttpClient() {
+   m_session = WinHttpOpen(nullptr, WINHTTP_ACCESS_TYPE_DEFAULT_PROXY, WINHTTP_NO_PROXY_NAME, WINHTTP_NO_PROXY_BYPASS, 0);
 
-string httpRequest(string_view method, string_view url, string_view header, string_view body) {
-    // Parse the url into its components.
-    wstring hostname{};
-    wstring path{};
+    if (m_session == nullptr) {
+        throw std::runtime_error{"Failed to start WinHTTP session"};
+    }
+}
+
+HttpClient::~HttpClient() {
+    if (m_request != nullptr) {
+        WinHttpCloseHandle(m_request);
+    }
+
+    if (m_connection != nullptr) {
+        WinHttpCloseHandle(m_connection);
+    }
+
+    if (m_session != nullptr) {
+        WinHttpCloseHandle(m_session);
+    }
+}
+
+void HttpClient::request(std::string_view method, std::string_view url, std::string_view header, std::string_view body) {
+    // Reset our client so we can make a new request.
+    if (m_request != nullptr) {
+        WinHttpCloseHandle(m_request);
+        m_request = nullptr;
+    }
+
+    if (m_connection != nullptr) {
+        WinHttpCloseHandle(m_connection);
+        m_connection = nullptr;
+    }
+
+     // Parse the url into its components.
+    std::wstring hostname{};
+    std::wstring path{};
 
     hostname.resize(1024);
     path.resize(1024);
@@ -30,35 +57,24 @@ string httpRequest(string_view method, string_view url, string_view header, stri
     components.lpszUrlPath = path.data();
     components.dwUrlPathLength = path.size();
 
-    if (WinHttpCrackUrl(widen(url).c_str(), url.length(), 0, &components) == FALSE) {
-        throw runtime_error{ "Failed to parse URL" };
+    if (WinHttpCrackUrl(kanan::widen(url).c_str(), url.length(), 0, &components) == FALSE) {
+        throw std::runtime_error{ "Failed to parse URL" };
     }
 
     hostname.resize(components.dwHostNameLength);
     path.resize(components.dwUrlPathLength);
 
-    // Start a WinHTTP session.
-    auto session = WinHttpOpen(nullptr, WINHTTP_ACCESS_TYPE_DEFAULT_PROXY, WINHTTP_NO_PROXY_NAME, WINHTTP_NO_PROXY_BYPASS, 0);
-
-    if (session == nullptr) {
-        throw runtime_error{ "Failed to start WinHTTP session" };
-    }
-
-    SCOPE_EXIT([=] { WinHttpCloseHandle(session); });
-
     // Start a conection.
-    auto connection = WinHttpConnect(session, hostname.c_str(), components.nPort, 0);
+    m_connection = WinHttpConnect(m_session, hostname.c_str(), components.nPort, 0);
 
-    if (connection == nullptr) {
-        throw runtime_error{ "Failed to start WinHTTP connection" };
+    if (m_connection == nullptr) {
+        throw std::runtime_error{ "Failed to start WinHTTP connection" };
     }
-
-    SCOPE_EXIT([=] { WinHttpCloseHandle(connection); });
 
     // Start a request.
-    auto request = WinHttpOpenRequest(
-        connection, 
-        widen(method).c_str(), 
+    m_request = WinHttpOpenRequest(
+        m_connection, 
+        kanan::widen(method).c_str(), 
         path.c_str(), 
         nullptr, 
         WINHTTP_NO_REFERER, 
@@ -66,64 +82,82 @@ string httpRequest(string_view method, string_view url, string_view header, stri
         (components.nScheme == INTERNET_SCHEME_HTTPS) ? WINHTTP_FLAG_SECURE : 0
     );
 
-    if (request == nullptr) {
-        throw runtime_error{ "Failed to start WinHTTP request" };
+    if (m_request == nullptr) {
+        throw std::runtime_error{ "Failed to start WinHTTP request" };
     }
-
-    SCOPE_EXIT([=] { WinHttpCloseHandle(request);  });
 
     // Send the request.
     if (WinHttpSendRequest(
-        request,
-        widen(header).c_str(),
+        m_request,
+        kanan::widen(header).c_str(),
         header.length(),
         (LPVOID)body.data(),
         body.length(),
         body.length(),
         0
     ) == FALSE) {
-        throw runtime_error{ "Failed to send request" };
+        throw std::runtime_error{ "Failed to send request" };
     }
 
-    // Read the response.
-    string response{};
+    if (WinHttpReceiveResponse(m_request, 0) == FALSE) {
+        throw std::runtime_error{ "Failed to read response" };
+    }
+}
+
+void HttpClient::get(std::string_view url, std::string_view header, std::string_view body) {
+    request("GET", url, header, body);
+}
+
+void HttpClient::post(std::string_view url, std::string_view header, std::string_view body) {
+    request("POST", url, header, body);
+}
+
+std::string HttpClient::response() {
+    std::string response{};
     auto offset = 0;
 
-    if (WinHttpReceiveResponse(request, 0) == FALSE) {
-        throw runtime_error{ "Failed to read response" };
-    }
-
-    DWORD bytesAvailable{};
+    DWORD bytes_avail{};
 
     do {
         // Get the number of bytes available to read and make space in the response
         // for them.
-        bytesAvailable = 0;
+        bytes_avail = 0;
 
-        if (WinHttpQueryDataAvailable(request, &bytesAvailable) == FALSE) {
-            throw runtime_error{ "Failed to query bytes available" };
+        if (WinHttpQueryDataAvailable(m_request, &bytes_avail) == FALSE) {
+            throw std::runtime_error{ "Failed to query bytes available" };
         }
 
-        response.resize(response.size() + bytesAvailable);
+        response.resize(response.size() + bytes_avail);
 
         // Attempt to read the available bytes.
-        DWORD bytesRead{};
+        DWORD bytes_read{};
 
-        if (WinHttpReadData(request, (LPVOID)(response.data() + offset), bytesAvailable, &bytesRead) == FALSE) {
-            throw runtime_error{ "Failed to read data" };
+        if (WinHttpReadData(m_request, (LPVOID)(response.data() + offset), bytes_avail, &bytes_read) == FALSE) {
+            throw std::runtime_error{ "Failed to read data" };
         }
 
-        offset += bytesRead;
-        response.resize(response.size() - (bytesAvailable - bytesRead));
-    } while (bytesAvailable > 0);
+        offset += bytes_read;
+        response.resize(response.size() - (bytes_avail - bytes_read));
+    } while (bytes_avail > 0);
 
     return response;
 }
 
-string httpGet(string_view url, string_view header, string_view body) {
-    return httpRequest("GET", url, header, body);
-}
+std::string HttpClient::header(std::string_view name, DWORD index) {
+    std::wstring header{};
+    DWORD header_length{};
 
-std::string httpPost(string_view url, string_view header, string_view body) {
-    return httpRequest("POST", url, header, body);
+    WinHttpQueryHeaders(m_request, WINHTTP_QUERY_CUSTOM, kanan::widen(name).c_str(), WINHTTP_NO_OUTPUT_BUFFER, &header_length, &index);
+
+    if (GetLastError() != ERROR_INSUFFICIENT_BUFFER) {
+        throw std::runtime_error{"Failed to query header size"};
+    }
+
+    header.resize(header_length / sizeof(wchar_t));
+
+    if (WinHttpQueryHeaders(m_request, WINHTTP_QUERY_CUSTOM, kanan::widen(name).c_str(), header.data(), &header_length, &index) == FALSE) {
+        throw std::runtime_error{"Failed to query header"};
+    }
+
+    return kanan::narrow(header);
 }

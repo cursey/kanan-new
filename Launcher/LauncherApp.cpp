@@ -406,6 +406,8 @@ void LauncherApp::mainUI() {
             saveProfiles();
             m_launchResult = async(launch::async, [=] {
                 try {
+                    HttpClient http{};
+
                     // Get the API access token.
                     auto sha512_password = stringEncode(CRYPT_STRING_HEXRAW, hashString("SHA512", password.data()));
                     auto device_id = getDeviceID();
@@ -414,46 +416,47 @@ void LauncherApp::mainUI() {
                     auto body = json{
                         { "id", string_view{ username.data() } },
                         { "password", sha512_password },
-                        { "client_id", "7853644408" },
+                        { "clientId", "7853644408" },
                         { "scope", "us.launcher.all" },
-                        { "device_id", device_id },
-                        { "captcha_token", "0xDEADBEEF" },
-                        { "captcha_version", "v3"},
-                        { "local_time", std::time(nullptr) },
-                        { "time_offset", 420 },
+                        { "deviceId", device_id },
+                        { "captchaToken", "0xDEADBEEF" },
+                        { "captchaVersion", "v3"},
+                        { "localTime", std::time(nullptr) },
+                        { "timeOffset", 420 },
                     }.dump();
-                    auto response = httpPost("https://www.nexon.com/account-webapi/v4/login/launcher", header, body);
-                    auto json_response = json::parse(response);
-                    auto id_token = json_response.at("id_token").get<string>();
-                    auto access_token = json_response.at("access_token").get<string>();
+                    http.post("https://www.nexon.com/api/account/v1/no-auth/login/launcher", header, body);
+                    auto cookie0 = kanan::split(http.header("set-cookie", 0), "; ");
+                    auto cookie1 = kanan::split(http.header("set-cookie", 1), "; ");
+                    std::vector<std::string> cookie_pieces{};
 
-                    // Get the product ID.
-                    body = json{
-                        { "product_id", "10200" },
-                        { "id_token", id_token },
-                        { "device_id", device_id }
-                    }.dump();
+                    std::sort(cookie0.begin(), cookie0.end());
+                    std::sort(cookie1.begin(), cookie1.end());
+                    std::set_union(cookie0.begin(), cookie0.end(), cookie1.begin(), cookie1.end(), std::back_inserter(cookie_pieces));
+
+                    auto cookie = std::accumulate(cookie_pieces.begin(), cookie_pieces.end(), std::string{}, [](const auto& a, const auto& b) { return a + "; " + b; }).substr(2);
+
+                    // Must check that it's playable otherwise getting the passport will fail.
                     header = (ostringstream{} <<
                         "Content-Type: application/json\r\n" <<
-                        "Referer: https://nxl.nxfs.nexon.com/nxl/main/games/10200\r\n" <<
-                        "X-Amzn-Trace-Id: NxL=" << trace_id <<".1"
+                        "Cookie: " << cookie 
                         ).str();
-                    response = httpPost("https://api.nexon.io/game-auth/v2/check-playable", header, body);
-                    json_response = json::parse(response);
-
-                    auto product_id = json_response.at("product_id").get<string>();
+                    body = json{
+                        { "productId", "10200" },
+                    }.dump();
+                    http.post("https://www.nexon.com/api/game-auth2/v1/playable", header, body);
 
                     // Get the passport.
                     header = (ostringstream{} <<
                         "Content-Type: application/json\r\n" <<
-                        "Referer: https://nxl.nxfs.nexon.com/nxl/main/games/10200\r\n" <<
-                        "X-Amzn-Trace-Id: NxL=" << trace_id << ".2\r\n" <<
-                        "Authorization: Bearer " << access_token).str();
-                    body = json{
-                        { "product_id", product_id }
+                        "Cookie: " << cookie
+                        ).str();
+                     body = json{
+                        { "productId", "10200" },
                     }.dump();
-                    response = httpPost("https://api.nexon.io/passport/v1/passport", header, body);
-                    json_response = json::parse(response);
+                    http.post("https://www.nexon.com/api/passport/v2/passport", header, body);
+                    auto response = http.response();
+                    auto json_response = json::parse(response);
+                    auto passport = json_response.at("passport").get<string>();
 
                     // Startup the client.
                     STARTUPINFO si{};
@@ -473,7 +476,7 @@ void LauncherApp::mainUI() {
                             "logport:11000 " <<
                             "chatip:54.214.176.167 " <<
                             "chatport:8002 " <<
-                            "/P:" << json_response.at("passport").get<string>() << " " <<
+                            "/P:" << passport << " " <<
                             "-bgloader").str();
                     }
                     else {
