@@ -6,6 +6,8 @@
 
 #include "Kanan.hpp"
 #include "Log.hpp"
+#include "Utility.hpp"
+
 #include "EquipmentOverride.hpp"
 
 using namespace std;
@@ -141,14 +143,15 @@ namespace kanan {
         m_equipmentOverrides[17].name = "Accessory 2";
         m_equipmentOverrides[18].name = "Tail";
 
-        auto address = scan("client.exe", "55 8B EC 6A ? 68 ? ? ? ? 64 A1 ? ? ? ? 50 83 EC ? 53 56 57 A1 ? ? ? ? 33 C5 50 8D 45 F4 64 A3 ? ? ? ? 8B D9 8B 75 0C 8B 0D ? ? ? ?");
+        if (auto call_address = scan("client.exe", "E8 ? ? ? ? C7 45 FC ? ? ? ? 8D 4D C0 E8 ? ? ? ? 8B 45 B8")) {
+            log("[EquipmentOverride] Found address of call setEquipmentInfo %p", *call_address);
 
-        if (address) {
-            log("[EquipmentOverride] Found address of setEquipmentInfo %p", *address);
+            auto set_equip_info = rel_to_abs(*call_address + 1);
 
-            m_setEquipmentInfoHook = make_unique<FunctionHook>(*address, (uintptr_t)&EquipmentOverride::hookedSetEquipmentInfo);
-        }
-        else {
+            log("[EquipmentOverride] Found address of setEquipmentInfo %p", set_equip_info);
+
+            m_setEquipmentInfoHook = make_unique<FunctionHook>(set_equip_info, (uintptr_t)&EquipmentOverride::hookedSetEquipmentInfo);
+        } else {
             log("[EquipmentOverride] Failed to find address of setEquipmentInfo!");
         }
 
