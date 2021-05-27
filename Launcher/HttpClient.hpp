@@ -19,7 +19,10 @@ public:
     std::string header(std::string_view name, DWORD index = 0);
 
 private:
+    friend class HttpError;
+
     HINTERNET m_session{};
     HINTERNET m_connection{};
     HINTERNET m_request{};
+    std::string m_last_url{};
 };

@@ -10,14 +10,14 @@
 
 class HttpError : public std::exception {
 public:
-    HttpError(DWORD error_code, const std::string& message) {
+    HttpError(HttpClient* http, DWORD error_code, const std::string& message) {
         LPTSTR buffer{};
 
         FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_HMODULE | FORMAT_MESSAGE_IGNORE_INSERTS,
             GetModuleHandle(L"winhttp"), error_code, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPTSTR)&buffer, 0,
             nullptr);
 
-        m_message = message + ": " + kanan::narrow(buffer);
+        m_message = "[" + http->m_last_url + "]\n\n" + message + ": " + kanan::narrow(buffer);
 
         LocalFree(buffer);
     }
@@ -35,7 +35,7 @@ HttpClient::HttpClient() {
         WinHttpOpen(nullptr, WINHTTP_ACCESS_TYPE_DEFAULT_PROXY, WINHTTP_NO_PROXY_NAME, WINHTTP_NO_PROXY_BYPASS, 0);
 
     if (m_session == nullptr) {
-        throw HttpError{GetLastError(), "Failed to start WinHTTP session"};
+        throw HttpError{this, GetLastError(), "Failed to start WinHTTP session"};
     }
 }
 
@@ -55,6 +55,8 @@ HttpClient::~HttpClient() {
 
 void HttpClient::request(
     std::string_view method, std::string_view url, std::string_view header, std::string_view body) {
+    m_last_url = url;
+
     // Reset our client so we can make a new request.
     if (m_request != nullptr) {
         WinHttpCloseHandle(m_request);
@@ -82,7 +84,7 @@ void HttpClient::request(
     components.dwUrlPathLength = path.size();
 
     if (WinHttpCrackUrl(kanan::widen(url).c_str(), url.length(), 0, &components) == FALSE) {
-        throw HttpError{GetLastError(), "Failed to parse URL"};
+        throw HttpError{this, GetLastError(), "Failed to parse URL"};
     }
 
     hostname.resize(components.dwHostNameLength);
@@ -92,7 +94,7 @@ void HttpClient::request(
     m_connection = WinHttpConnect(m_session, hostname.c_str(), components.nPort, 0);
 
     if (m_connection == nullptr) {
-        throw HttpError{GetLastError(), "Failed to start WinHTTP connection"};
+        throw HttpError{this, GetLastError(), "Failed to start WinHTTP connection"};
     }
 
     // Start a request.
@@ -101,17 +103,17 @@ void HttpClient::request(
             WINHTTP_DEFAULT_ACCEPT_TYPES, (components.nScheme == INTERNET_SCHEME_HTTPS) ? WINHTTP_FLAG_SECURE : 0);
 
     if (m_request == nullptr) {
-        throw HttpError{GetLastError(), "Failed to start WinHTTP request"};
+        throw HttpError{this, GetLastError(), "Failed to start WinHTTP request"};
     }
 
     // Send the request.
     if (WinHttpSendRequest(m_request, kanan::widen(header).c_str(), header.length(), (LPVOID)body.data(), body.length(),
             body.length(), 0) == FALSE) {
-        throw HttpError{GetLastError(), "Failed to send request"};
+        throw HttpError{this, GetLastError(), "Failed to send request"};
     }
 
     if (WinHttpReceiveResponse(m_request, 0) == FALSE) {
-        throw HttpError{GetLastError(), "Failed to read response"};
+        throw HttpError{this, GetLastError(), "Failed to read response"};
     }
 }
 
@@ -135,7 +137,7 @@ std::string HttpClient::response() {
         bytes_avail = 0;
 
         if (WinHttpQueryDataAvailable(m_request, &bytes_avail) == FALSE) {
-            throw HttpError{GetLastError(), "Failed to query bytes available"};
+            throw HttpError{this, GetLastError(), "Failed to query bytes available"};
         }
 
         response.resize(response.size() + bytes_avail);
@@ -144,7 +146,7 @@ std::string HttpClient::response() {
         DWORD bytes_read{};
 
         if (WinHttpReadData(m_request, (LPVOID)(response.data() + offset), bytes_avail, &bytes_read) == FALSE) {
-            throw HttpError{GetLastError(), "Failed to read data"};
+            throw HttpError{this, GetLastError(), "Failed to read data"};
         }
 
         offset += bytes_read;
@@ -162,14 +164,14 @@ std::string HttpClient::header(std::string_view name, DWORD index) {
         m_request, WINHTTP_QUERY_CUSTOM, kanan::widen(name).c_str(), WINHTTP_NO_OUTPUT_BUFFER, &header_length, &index);
 
     if (GetLastError() != ERROR_INSUFFICIENT_BUFFER) {
-        throw HttpError{GetLastError(), "Failed to query header size"};
+        throw HttpError{this, GetLastError(), "Failed to query header size"};
     }
 
     header.resize(header_length / sizeof(wchar_t));
 
     if (WinHttpQueryHeaders(m_request, WINHTTP_QUERY_CUSTOM, kanan::widen(name).c_str(), header.data(), &header_length,
             &index) == FALSE) {
-        throw HttpError{GetLastError(), "Failed to query header"};
+        throw HttpError{this, GetLastError(), "Failed to query header"};
     }
 
     return kanan::narrow(header);
