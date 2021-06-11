@@ -37,6 +37,12 @@ HttpClient::HttpClient() {
     if (m_session == nullptr) {
         throw HttpError{this, GetLastError(), "Failed to start WinHTTP session"};
     }
+
+    DWORD protocols = WINHTTP_FLAG_SECURE_PROTOCOL_TLS1_1 | WINHTTP_FLAG_SECURE_PROTOCOL_TLS1_2;
+
+    if (WinHttpSetOption(m_session, WINHTTP_OPTION_SECURE_PROTOCOLS, &protocols, sizeof(protocols)) == FALSE) {
+        throw HttpError{this, GetLastError(), "Failed to set the WinHTTP session secure protocols"};
+    }
 }
 
 HttpClient::~HttpClient() {
