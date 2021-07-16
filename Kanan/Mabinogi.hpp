@@ -138,14 +138,14 @@ public:
 	char pad_0008[160]; //0x0008
 	class CParameter *parameter; //0x00A8
 	class CAction *action; //0x00AC
-	char pad_00B0[448]; //0x00B0
-	class CEquipment *equipment; //0x0270
-	char pad_0274[84]; //0x0274
-	uint64_t targetID; //0x02C8
-	char pad_02D0[8]; //0x02D0
-	uint64_t mouseTarget; //0x02D8 (player character only)
-	char pad_02E0[684]; //0x02E0
-}; //Size: 0x059C
+	char pad_00B0[452]; //0x00B0
+	class CEquipment *equipment; //0x0274
+	char pad_0278[88]; //0x0278
+	uint64_t targetID; //0x02D0
+	char pad_02D8[8]; //0x02D8
+	uint64_t mouseTarget; //0x02E0 (player character only)
+	char pad_02E8[684]; //0x02E8
+}; //Size: 0x05A4
 
 class CItem
 {
@@ -403,9 +403,9 @@ public:
 class CEquipment
 {
 public:
-	class CEquipmentItemInfo itemInfo[19]; //0x0000
-	char pad_05F0[384]; //0x05F0
-}; //Size: 0x0770
+	class CEquipmentItemInfo itemInfo[20]; //0x0000
+	char pad_0640[384]; //0x0640
+}; //Size: 0x07C0
 
 class CUI
 {
