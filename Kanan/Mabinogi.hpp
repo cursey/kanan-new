@@ -20,7 +20,7 @@ using Matrix3x3f = Matrix3x3;
 using Matrix3x4f = Matrix3x4;
 using Matrix4x4f = Matrix4x4;
 
-// Created with NetClass.RE 1.2 by KN4CK3R
+// Created with ReClass.NET 1.2 by KN4CK3R
 
 class CRendererPtr
 {
@@ -138,14 +138,17 @@ public:
 	char pad_0008[160]; //0x0008
 	class CParameter *parameter; //0x00A8
 	class CAction *action; //0x00AC
-	char pad_00B0[452]; //0x00B0
+	class CSkillMgr *skill; //0x00B0
+	char pad_00B4[16]; //0x00B4
+	class CConditionMgr *condition; //0x00C4
+	char pad_00C8[428]; //0x00C8
 	class CEquipment *equipment; //0x0274
 	char pad_0278[88]; //0x0278
 	uint64_t targetID; //0x02D0
 	char pad_02D8[8]; //0x02D8
-	uint64_t mouseTarget; //0x02E0 (player character only)
-	char pad_02E8[684]; //0x02E8
-}; //Size: 0x05A4
+	uint64_t mouseTarget; //0x02E0
+	char pad_02E8[688]; //0x02E8
+}; //Size: 0x0598
 
 class CItem
 {
@@ -338,7 +341,7 @@ class CFramework
 public:
 	char pad_0000[160]; //0x0000
 	Vector3 position; //0x00A0
-	char pad_00A4[160]; //0x00AC
+	char pad_00AC[160]; //0x00AC
 }; //Size: 0x014C
 
 class CWorldPtr
@@ -415,3 +418,36 @@ public:
 	char pad_015C[728]; //0x015C
 }; //Size: 0x0434
 
+class CSkillMgr
+{
+public:
+	char pad_0000[4]; //0x0000
+	class CActiveSkill *skillInfo; //0x0004
+	char pad_0008[176]; //0x0008
+}; //Size: 0x00B8
+
+class CActiveSkill
+{
+public:
+	char pad_0000[16]; //0x0000
+	uint16_t skillID; //0x0010
+	uint8_t charges; //0x0012
+	char pad_0013[9]; //0x0013
+	uint8_t state; //0x001C
+	char pad_001D[3]; //0x001D
+}; //Size: 0x0020
+
+class CConditionMgr
+{
+public:
+	char pad_0000[8]; //0x0000
+	class CCondition *condition; //0x0008
+}; //Size: 0x000C
+
+class CCondition
+{
+public:
+	char pad_0000[4]; //0x0000
+	int32_t statusCount; //0x0004
+	char pad_0008[196]; //0x0008
+}; //Size: 0x00CC
