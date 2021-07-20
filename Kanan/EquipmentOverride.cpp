@@ -247,7 +247,7 @@ namespace kanan {
 		}
     }
 
-    void EquipmentOverride::hookedSetEquipmentInfo(CEquipment* equipment, uint32_t EDX, int inventoryID, int itemID, int a4, int a5, uint32_t* color, int a7, int * a8, int a9, int a10, int * a11) {
+    void EquipmentOverride::hookedSetEquipmentInfo(CCharacter::CEquipment* equipment, uint32_t EDX, int inventoryID, int itemID, int a4, int a5, uint32_t* color, int a7, int * a8, int a9, int a10, int * a11) {
         auto orig = (decltype(hookedSetEquipmentInfo)*)g_equipmentOverride->m_setEquipmentInfoHook->getOriginal();
         auto equipmentSlot = convertInventoryIDToEquipmentSlot(inventoryID);
 

@@ -3,6 +3,7 @@
 #include <forward_list>
 
 #include "Mod.hpp"
+#include "Mabinogi.hpp"
 
 class CEquipment;
 
@@ -25,7 +26,7 @@ namespace kanan {
         void createItemTree();
 
         void displayCharacter(KCharacter* character);
-        void displayEquipment(CEquipment* equipment);
+        void displayEquipment(CCharacter::CEquipment* equipment);
         void displayItem(KItem* item);
 
         double durabilityToDouble(uint32_t dura, uint32_t maxDura);

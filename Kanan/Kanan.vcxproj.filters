@@ -31,6 +31,9 @@
     <Filter Include="Source Files\Mabinogi">
       <UniqueIdentifier>{8e4d3478-9c71-480c-b343-4048dac23a43}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Mabinogi\Generated">
+      <UniqueIdentifier>{5ae2dad6-406e-4ccf-bf92-c17ae54fb7a9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KananInit.cpp">
@@ -208,6 +211,42 @@
     </ClInclude>
     <ClInclude Include="KCamera.hpp">
       <Filter>Header Files\Mabinogi</Filter>
+    </ClInclude>
+    <ClInclude Include="Mabinogi\CCharacter.hpp">
+      <Filter>Header Files\Mabinogi\Generated</Filter>
+    </ClInclude>
+    <ClInclude Include="Mabinogi\CEntityList.hpp">
+      <Filter>Header Files\Mabinogi\Generated</Filter>
+    </ClInclude>
+    <ClInclude Include="Mabinogi\CEntityListPtr.hpp">
+      <Filter>Header Files\Mabinogi\Generated</Filter>
+    </ClInclude>
+    <ClInclude Include="Mabinogi\CItem.hpp">
+      <Filter>Header Files\Mabinogi\Generated</Filter>
+    </ClInclude>
+    <ClInclude Include="Mabinogi\CRenderer.hpp">
+      <Filter>Header Files\Mabinogi\Generated</Filter>
+    </ClInclude>
+    <ClInclude Include="Mabinogi\CRendererPtr.hpp">
+      <Filter>Header Files\Mabinogi\Generated</Filter>
+    </ClInclude>
+    <ClInclude Include="Mabinogi\CString.hpp">
+      <Filter>Header Files\Mabinogi\Generated</Filter>
+    </ClInclude>
+    <ClInclude Include="Mabinogi\CWorld.hpp">
+      <Filter>Header Files\Mabinogi\Generated</Filter>
+    </ClInclude>
+    <ClInclude Include="Mabinogi\CWorldPtr.hpp">
+      <Filter>Header Files\Mabinogi\Generated</Filter>
+    </ClInclude>
+    <ClInclude Include="Mabinogi\Matrix4x4.hpp">
+      <Filter>Header Files\Mabinogi\Generated</Filter>
+    </ClInclude>
+    <ClInclude Include="Mabinogi\Vector3.hpp">
+      <Filter>Header Files\Mabinogi\Generated</Filter>
+    </ClInclude>
+    <ClInclude Include="Mabinogi\Vector4.hpp">
+      <Filter>Header Files\Mabinogi\Generated</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

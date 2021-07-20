@@ -83,7 +83,7 @@ namespace kanan {
         CString* result = m_CStringAllocate(len + 1);
         if(result)
         {
-            wcsncpy_s(result->buffer, str, len + 1);
+            wcsncpy_s((wchar_t*)&result->buffer[0], len + 1, str, len + 1);
             result->length = len;
         }
         return result;

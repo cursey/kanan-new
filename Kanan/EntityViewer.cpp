@@ -144,7 +144,7 @@ namespace kanan {
         ImGui::BulletText("Address: %p", character);
         ImGui::BulletText("Name: %s", name->c_str());
         ImGui::BulletText("ID: %llX", *id);
-        ImGui::BulletText("Pos: %f, %f, %f", pos->at(0), pos->at(1), pos->at(2));
+        ImGui::BulletText("Pos: %f, %f, %f", pos->x, pos->y, pos->z);
         ImGui::BulletText("Combat Power: %f", parameter->combatPower.value);
         ImGui::BulletText("Age: %d", parameter->age.value);
         ImGui::BulletText("Health: %f/%f", parameter->life.value, parameter->lifeMaxBase.value + parameter->lifeMaxMod.value);
@@ -157,7 +157,7 @@ namespace kanan {
         }
     }
 
-    void EntityViewer::displayEquipment(CEquipment* equipment) {
+    void EntityViewer::displayEquipment(CCharacter::CEquipment* equipment) {
         static const map<int, string> equipmentNames{
         { 1, "Torso\\Armor\\Shirt" },
         { 2, "Head\\Helmet\\Hat" },

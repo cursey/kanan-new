@@ -5,7 +5,7 @@
 #include "Mabinogi.hpp"
 
 namespace kanan {
-	class KCamera : public CCamera {
+	class KCamera : public CRenderer::CCamera {
 	public:
 		std::optional<Matrix4x4> getViewMatrix() const; //returns the view matrix
 		std::optional<Matrix4x4> getProjectionMatrix() const; //calculates and returns the projection matrix

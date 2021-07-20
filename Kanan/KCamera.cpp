@@ -4,8 +4,9 @@
 
 namespace kanan {
 	std::optional<Matrix4x4> KCamera::getViewMatrix() const {
-		Matrix4x4 m = state->transformMatrix;		
-		Matrix4x4 inv;
+		const auto& m = state->transformMatrix.m;		
+		Matrix4x4 inv_m;
+        auto& inv = inv_m.m;
 		float det;
 		int i;
 
@@ -131,7 +132,7 @@ namespace kanan {
 		Matrix4x4 invOut{};
 
 		for (i = 0; i < 16; i++)
-			invOut[i] = inv[i] * det;
+			invOut.m[i] = inv[i] * det;
 
 		return invOut;
 	}
@@ -144,7 +145,8 @@ namespace kanan {
 		l = -r;
 		t = scale;
 		b = -t;
-		Matrix4x4 m{};
+		Matrix4x4 mat{};
+        auto& m = mat.m;
 		//Calculate projection matrix
 		m[0] = (2 * n) / (r - l);
 		m[1] = 0;
@@ -166,16 +168,16 @@ namespace kanan {
 		m[14] = -1;
 		m[15] = 0;
 
-		return m;
+		return mat;
 	}
 	std::optional<Vector3> KCamera::worldToScreen(Vector3 pos) const {
-		float x = pos[0];
-		float y = pos[1];
-		float z = pos[2];
+		float x = pos.x;
+		float y = pos.y;
+		float z = pos.z;
 		bool a = true;
 
-		Matrix4x4 vm = getViewMatrix().value();
-		Matrix4x4 pm = getProjectionMatrix().value();
+		const auto& vm = getViewMatrix().value().m;
+		const auto& pm = getProjectionMatrix().value().m;
 
 		//convert world space point to eye space point
 		float vv1 = double(vm[0]) * x + double(vm[1]) * y + double(vm[2]) * z + vm[3]; //x
