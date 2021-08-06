@@ -798,7 +798,7 @@
         "category": "Speedup",
         "patches": [
             {
-                "pattern": "50 52 C7 45 E8 98 3A",
+                "pattern": "8B C8 C7 45 E8 98 3A",
                 "offset": 6,
                 "patch": "00 00"
             }
@@ -1116,16 +1116,61 @@
             }
         ]
     },
+  {
+    "name": "Remove Sunglare",
+    "desc": "Removes the annoying and ugly sunglare effect",
+    "category": "Graphics",
+    "patches": [
+      {
+        "pattern": "FF D2 84 C0 0F 84 ? ? ? ? 6A ? 68 ? ? ? ?",
+        "offset": 4,
+        "patch": "90 E9"
+      }
+    ]
+  },
+      {
+      "name": "Remove Pet Summon Notification",
+      "desc": "Removes the Summoning... notification that pops up when summoning pets",
+      "category": "Speedup",
+      "patches": [
+        {
+          "pattern": "0F 84 14 02 00 00 8B 01 8B 80 ? ? ? ? FF D0 84 C0 0F 84 02 02 00 00 8B CB E8",
+          "patch": "90 E9"
+        }
+      ]
+    },
     {
-        "name": "Remove Sunglare",
-        "desc": "Removes the annoying and ugly sunglare effect",
-        "category": "Graphics",
-        "patches": [
-            {
-                "pattern": "FF D2 84 C0 0F 84 ? ? ? ? 6A ? 68 ? ? ? ?",
-                "offset": 4,
-                "patch": "90 E9"
-            }
-        ]
+      "name": "Disable CatSidhe Talent Bonus Training Select Popup",
+      "desc": "Disables the CatSidhe talent training selection pupup that appears when you summon a CatSidhe and haven't selected a talent yet. \nDisable this patch to show the popup once more when you have decided on a talent for the bonus and would like to select it to recieve that bonus.",
+      "category": "Interface",
+      "patches": [
+        {
+          "pattern": "? ? AD 00 00 0F 87 ? ? ? ? 0F 84 ? ? ? ? 2D A4 A8 00 00",
+          "offset": 5,
+          "patch": "90 E9"
+        }
+      ]
+    },
+    {
+      "name": "Disable Hotkey Removal",
+      "desc": "Disables the ability to right click a hotkey to remove it from the hotkey bars",
+      "category": "Interface",
+      "patches": [
+        {
+          "pattern": "e8 ? ? ? ? 84 c0 74 0b ff 75 10 8b cf",
+          "patch": "90 90 90 90 90"
+        }
+      ]
+    },
+    {
+      "name": "Disable WaitProcess Skill Locks",
+      "desc": "Allows the use of changing skills without needing to first cancel the skill for cetain skills (Windmill, Deathmark, Anchor Rush, etc) \nMay interact with some skills in strange ways.",
+      "category": "Speedup",
+      "patches": [
+        {
+          "pattern": "OF85 ? ? ? ? 8B B3 C0000000 85 F6",
+          "patch": "90 90 90 90 90 90"
+        }
+      ]
     }
 ]
