@@ -308,7 +308,7 @@
         "category": "Information",
         "patches": [
             {
-                "pattern": "74 ? 8B 06 8B CE FF 90 94 00 00 00 8B C8 E8 ? ? ? ? B9 ? ? ? ? 66 3B C1 74 ? 32 C0",
+                "pattern": "74 ? 8B 06 8B CE FF 90 94 00 00 00 8B C8 E8 ? ? ? ? 3D ? ? ? ? 74 04",
                 "patch": "EB"
             }
         ]
@@ -459,6 +459,11 @@
                 "pattern": "55 8B EC 8B 4D 08 85 C9 74 ? 68 ? ? ? ? E8 ? ? ? ? 84 C0 74 ? B0 ? 5D C2 ? ?",
                 "offset": 30,
                 "patch": "B0 01"
+            },
+            {
+                "pattern": "8D 4D E0 E8 ? ? ? ? 32 C0 8B 4D F4 64 89 0D 00000000 59 5F 5E 8B E5 5D C2 0400",
+                "offset": 8,
+                "patch": "EB 05"
             }
         ]
     },
