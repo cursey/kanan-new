@@ -151,11 +151,13 @@ public:
         public:
             char pad_0[0x4];
             int32_t statusCount; // 0x4
-        }; // Size: 0x8
+            char pad_8[0x1d];
+        }; // Size: 0x25
 
         char pad_0[0x8];
         CCondition* condition; // 0x8
-    }; // Size: 0xc
+        char pad_c[0x44];
+    }; // Size: 0x50
 
     class CEquipmentItemInfo {
     public:

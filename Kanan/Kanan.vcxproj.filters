@@ -120,6 +120,9 @@
     <ClCompile Include="KCamera.cpp">
       <Filter>Source Files\Mabinogi</Filter>
     </ClCompile>
+    <ClCompile Include="AutoChangeChannels.cpp">
+      <Filter>Source Files\Mods</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D3D9Hook.hpp">
@@ -246,6 +249,15 @@
       <Filter>Header Files\Mabinogi\Generated</Filter>
     </ClInclude>
     <ClInclude Include="Mabinogi\Vector4.hpp">
+      <Filter>Header Files\Mabinogi\Generated</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoChangeChannels.hpp">
+      <Filter>Header Files\Mods</Filter>
+    </ClInclude>
+    <ClInclude Include="Mabinogi\CAccount.hpp">
+      <Filter>Header Files\Mabinogi\Generated</Filter>
+    </ClInclude>
+    <ClInclude Include="Mabinogi\CAccountPtr.hpp">
       <Filter>Header Files\Mabinogi\Generated</Filter>
     </ClInclude>
   </ItemGroup>

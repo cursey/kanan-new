@@ -103,6 +103,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AutoChangeChannels.cpp" />
     <ClCompile Include="AutoSetMTU.cpp" />
     <ClCompile Include="BorderlessWindow.cpp" />
     <ClCompile Include="ColorAltText.cpp" />
@@ -133,6 +134,7 @@
     <ClCompile Include="WindowsMessageHook.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AutoChangeChannels.hpp" />
     <ClInclude Include="AutoSetMTU.hpp" />
     <ClInclude Include="BorderlessWindow.hpp" />
     <ClInclude Include="ColorAltText.hpp" />
@@ -154,6 +156,8 @@
     <ClInclude Include="Log.hpp" />
     <ClInclude Include="LoginScreen.hpp" />
     <ClInclude Include="Mabinogi.hpp" />
+    <ClInclude Include="Mabinogi\CAccount.hpp" />
+    <ClInclude Include="Mabinogi\CAccountPtr.hpp" />
     <ClInclude Include="Mabinogi\CCharacter.hpp" />
     <ClInclude Include="Mabinogi\CEntityList.hpp" />
     <ClInclude Include="Mabinogi\CEntityListPtr.hpp" />

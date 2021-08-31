@@ -23,6 +23,7 @@
 #include "StatusUI.hpp"
 #include "LoginScreen.hpp"
 #include "DontMoveToSquadChat.hpp"
+#include "AutoChangeChannels.hpp"
 
 #include "Log.hpp"
 
@@ -116,6 +117,7 @@ namespace kanan {
         addMod(make_unique<FreezeTimeOfDay>());
         addMod(make_unique<SecondaryPassword>());
         addMod(make_unique<StatusUI>());
+        addMod(make_unique<AutoChangeChannels>());
 
         log("[Mods] Finished loading mods.");
     }

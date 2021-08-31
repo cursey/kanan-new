@@ -1,6 +1,6 @@
 #pragma once
-class CCharacter;
 class CItem;
+class CCharacter;
 #pragma pack(push, 1)
 class CEntityList {
 public:

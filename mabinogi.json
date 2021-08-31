@@ -5,10 +5,27 @@
     },
     "process": {
         "filter": "client",
-        "id": 33692,
+        "id": 15664,
         "name": "Client.exe"
     },
     "props": {
+        "CAccountPtr": {
+            "__collapsed": false,
+            "root": {
+                "__collapsed": false,
+                "account": {
+                    "__collapsed": false,
+                    "account": {
+                        "__collapsed": false,
+                        "s": {
+                            "s": {
+                                "__collapsed": false
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "CCharacter": {
             "__collapsed": false,
             "root": {
@@ -77,6 +94,106 @@
             "__collapsed": false,
             "root": {
                 "__collapsed": false
+            }
+        },
+        "CEntityListPtr": {
+            "__collapsed": false,
+            "root": {
+                "__collapsed": false,
+                "entityList": {
+                    "__collapsed": false,
+                    "entityList": {
+                        "__collapsed": false,
+                        "characters": {
+                            "__collapsed": false,
+                            "root": {
+                                "__collapsed": false,
+                                "root": {
+                                    "__collapsed": false,
+                                    "entry": {
+                                        "__collapsed": false,
+                                        "entry": {
+                                            "__collapsed": false,
+                                            "character": {
+                                                "__collapsed": false,
+                                                "character": {
+                                                    "__collapsed": false,
+                                                    "condition": {
+                                                        "condition": {
+                                                            "__collapsed": false
+                                                        }
+                                                    },
+                                                    "parameter": {
+                                                        "parameter": {
+                                                            "__collapsed": false,
+                                                            "age": {},
+                                                            "battleState": {},
+                                                            "combatPower": {},
+                                                            "cumulatedLevel": {},
+                                                            "direction": {},
+                                                            "dorcha": {},
+                                                            "dorchaMaxBase": {},
+                                                            "engTitle": {},
+                                                            "experienceInt": {},
+                                                            "extra1": {},
+                                                            "extra2": {},
+                                                            "extra3": {},
+                                                            "eyeColor": {},
+                                                            "eyeType": {},
+                                                            "food": {},
+                                                            "foodMinRatio": {},
+                                                            "level": {},
+                                                            "life": {},
+                                                            "lifeDamaged": {},
+                                                            "lifeMaxBase": {},
+                                                            "lifeMaxMod": {},
+                                                            "lifeTimeSkill": {},
+                                                            "mana": {},
+                                                            "manaMaxBase": {},
+                                                            "manaMaxMod": {},
+                                                            "maxLevel": {},
+                                                            "motionType": {},
+                                                            "mouthType": {},
+                                                            "name": {},
+                                                            "oddEyeLeftColor": {},
+                                                            "oddEyeRightColor": {},
+                                                            "positionX": {},
+                                                            "positionY": {},
+                                                            "rebirthCount": {},
+                                                            "regionID": {},
+                                                            "scaleFatness": {},
+                                                            "scaleHeight": {},
+                                                            "scaleLower": {},
+                                                            "scaleUpper": {},
+                                                            "skinColor": {},
+                                                            "stamina": {},
+                                                            "staminaMaxBase": {},
+                                                            "staminaMaxMod": {},
+                                                            "status": {},
+                                                            "statusEx": {},
+                                                            "statusEx2": {},
+                                                            "title": {},
+                                                            "tuairim": {},
+                                                            "tuairimMaxBase": {},
+                                                            "type": {},
+                                                            "weaponSet": {}
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "next": {
+                                        "next": {
+                                            "__collapsed": false
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "items": {}
+                    }
+                }
             }
         },
         "CItem": {
@@ -162,12 +279,14 @@
     },
     "type": {
         "addresses": {
-            "CCharacter": "0x84e7e3b8",
+            "CAccountPtr": "0x3a4ef3c",
+            "CCharacter": "0x9e252708",
             "CEntityList": "0x4a04410",
+            "CEntityListPtr": "0x3ceef74",
             "CItem": "0x7cb223c8",
             "CRenderer": "0xa9d0998",
-            "CWorldPtr": "0x3bf29b8"
+            "CWorldPtr": "0x3bf59c8"
         },
-        "chosen": "CCharacter"
+        "chosen": "CEntityListPtr"
     }
 }

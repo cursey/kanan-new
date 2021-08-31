@@ -141,8 +141,8 @@ class CCharacter {
         CActiveSkill* skillInfo @ 0x4
     }
 
-    class CConditionMgr {
-        class CCondition {
+    class CConditionMgr 0x50 {
+        class CCondition 0x25 {
             int32_t statusCount @ 0x4
         }
 
@@ -276,4 +276,11 @@ class CWorld {
 
 class CWorldPtr {
     CWorld* world
+}
+
+class CAccount 0x50 {
+}
+
+class CAccountPtr {
+    CAccount* account
 }

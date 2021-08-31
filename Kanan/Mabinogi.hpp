@@ -12,4 +12,6 @@
 #include "Mabinogi/CItem.hpp"
 #include "Mabinogi/CWorld.hpp"
 #include "Mabinogi/CWorldPtr.hpp"
+#include "Mabinogi/CAccount.hpp"
+#include "Mabinogi/CAccountPtr.hpp"
 
