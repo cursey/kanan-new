@@ -1,6 +1,6 @@
-#include <imgui.h>
 #include <Scan.hpp>
 #include <Utility.hpp>
+#include <imgui.h>
 
 #include "Kanan.hpp"
 #include "Log.hpp"
@@ -39,14 +39,13 @@ AutoChangeChannels::AutoChangeChannels() {
 
     log("[AutoChangeChannels] Hooked add_condition");
 
-	g_auto_cc = this;
+    g_auto_cc = this;
 
-	log("[AutoChangeChannels] Leaving constructor");
-
+    log("[AutoChangeChannels] Leaving constructor");
 }
 
 void AutoChangeChannels::onFrame() {
-    if (!m_is_enabled) {
+    if (!m_is_enabled || !m_cc_when_targeted) {
         return;
     }
 
@@ -85,7 +84,7 @@ void AutoChangeChannels::onFrame() {
 
         if (!id || *id < 0x10'F000'0000'0000) {
             continue;
-        } 
+        }
 
         // If this NPC is targetting us, change channel.
         if (character->targetID == *me_id) {
@@ -97,33 +96,37 @@ void AutoChangeChannels::onFrame() {
 
 void AutoChangeChannels::onUI() {
     if (ImGui::CollapsingHeader("Auto-Change Channel")) {
-		ImGui::Text("Enabling this makes you change channels whenever you get spiked, fairied, smash bled, or a monster targets you.");
-		ImGui::Checkbox("Enable Auto-Change Channels", &m_is_enabled);
-		ImGui::SliderInt("Channel", &m_channel, 1, 10);
+        ImGui::TextWrapped("Enabling this makes you change channels whenever you get spiked, fairied, smash bled, or "
+                    "(optionally) a monster targets you.");
+        ImGui::Checkbox("Enable Auto-Change Channels", &m_is_enabled);
+        ImGui::Checkbox("Change Channels When Targeted by Monsters", &m_cc_when_targeted);
+        ImGui::SliderInt("Channel", &m_channel, 1, 10);
 
-		if (ImGui::Button("Change Channel Immediately")) {
-			auto game = g_kanan->getGame();
-			auto localCharacter = game->getLocalCharacter();
+        if (ImGui::Button("Change Channel Immediately")) {
+            auto game = g_kanan->getGame();
+            auto localCharacter = game->getLocalCharacter();
 
-			if (localCharacter != nullptr) {
-				game->changeChannel(m_channel);
-			}
-		}
-	}
+            if (localCharacter != nullptr) {
+                game->changeChannel(m_channel);
+            }
+        }
+    }
 }
 
 void AutoChangeChannels::onConfigLoad(const Config& cfg) {
     m_is_enabled = cfg.get<bool>("AutoChangeChannels.Enabled").value_or(false);
+    m_cc_when_targeted = cfg.get<bool>("AutoChangeChannels.WhenTargeted").value_or(false);
 }
 
 void AutoChangeChannels::onConfigSave(Config& cfg) {
     cfg.set<bool>("AutoChangeChannels.Enabled", m_is_enabled);
+    cfg.set<bool>("AutoChangeChannels.WhenTargetted", m_cc_when_targeted);
 }
 
 int __fastcall AutoChangeChannels::hooked_add_condition(CCharacter::CConditionMgr::CCondition* condition, uint32_t EDX,
     int a2, char a3, int a4, int a5, ConditionInfo* info) {
 
-	if (g_auto_cc->m_is_enabled && info != nullptr) {
+    if (g_auto_cc->m_is_enabled && info != nullptr) {
         // Note: you can find the IDs in data/db/characondition.xml if they ever change or more need
         // to be added.
         switch (info->id) {
@@ -147,7 +150,5 @@ int __fastcall AutoChangeChannels::hooked_add_condition(CCharacter::CConditionMg
 
     auto orig = (decltype(hooked_add_condition)*)g_auto_cc->m_add_condition_hook->getOriginal();
     return orig(condition, EDX, a2, a3, a4, a5, info);
-
 }
 } // namespace kanan
-

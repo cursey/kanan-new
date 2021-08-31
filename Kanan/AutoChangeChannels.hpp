@@ -17,6 +17,7 @@ public:
 
 private:
     bool m_is_enabled{};
+    bool m_cc_when_targeted{};
     int m_channel{1};
     std::unique_ptr<FunctionHook> m_add_condition_hook{};
 
