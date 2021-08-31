@@ -97,7 +97,7 @@ void AutoChangeChannels::onFrame() {
 
 void AutoChangeChannels::onUI() {
     if (ImGui::CollapsingHeader("Auto-Change Channel")) {
-		ImGui::Text("Enabling this makes you change channels whenever you get spiked or fairied.");
+		ImGui::Text("Enabling this makes you change channels whenever you get spiked, fairied, smash bled, or a monster targets you.");
 		ImGui::Checkbox("Enable Auto-Change Channels", &m_is_enabled);
 		ImGui::SliderInt("Channel", &m_channel, 1, 10);
 
