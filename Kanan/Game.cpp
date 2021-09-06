@@ -9,9 +9,9 @@ using namespace std;
 namespace kanan {
     Game::Game()
         : m_rendererPtr{ nullptr },
-        m_entityListPtr{ nullptr }, 
-        m_worldPtr{nullptr}, 
-        m_accountPtr{nullptr}
+        m_entityListPtr{ nullptr },
+        m_worldPtr{ nullptr },
+        m_accountPtr{ nullptr }
     {
         log("Entering Game constructor.");
 
@@ -51,7 +51,7 @@ namespace kanan {
             error("Failed to find CWorldPtr.");
         }
 
-         // Find the games global account pointer.
+        // Find the games global account pointer.
         auto accountAddress = scan("client.exe", "8B 0D ? ? ? ? 6A ? 6A ? 53 E8 ? ? ? ? 8B 06");
 
         if (accountAddress) {
@@ -117,8 +117,8 @@ namespace kanan {
             log("Change channel function = %p", cc);
             logged = true;
         }
-
-        if (channel < 1 || channel > 7) {
+        //upadted to work on all 10 nao chs.
+        if (channel < 1 || channel > 10) {
             return;
         }
 
@@ -175,10 +175,10 @@ namespace kanan {
     }
 
     CAccount* Game::getAccount() const {
-		if (m_accountPtr == nullptr || m_accountPtr->account == nullptr) {
-			return nullptr;
-		}
+        if (m_accountPtr == nullptr || m_accountPtr->account == nullptr) {
+            return nullptr;
+        }
 
-		return m_accountPtr->account;
+        return m_accountPtr->account;
     }
-    }
+}
