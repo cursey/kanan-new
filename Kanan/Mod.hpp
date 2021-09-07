@@ -18,5 +18,8 @@ namespace kanan {
         virtual void onConfigSave(Config& cfg) {}
 
         virtual bool onMessage(HWND wnd, UINT message, WPARAM wParam, LPARAM lParam) { return true; }
+
+        virtual void onKeyDown(DWORD key) {}
+        virtual void onKeyUp(DWORD key) {}
     };
 }

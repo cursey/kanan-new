@@ -133,6 +133,17 @@ namespace kanan {
 
         m_dinputHook = make_unique<DInputHook>(m_wnd);
 
+        m_dinputHook->onKeyDown = [this](DInputHook& dinput, DWORD key) {
+            for (auto&& mod : m_mods.getMods()) {
+                mod->onKeyDown(key);
+            }
+        };
+        m_dinputHook->onKeyUp = [this](DInputHook& dinput, DWORD key) {
+            for (auto&& mod : m_mods.getMods()) {
+                mod->onKeyUp(key);
+            }
+        };
+
         if (!m_dinputHook->isValid()) {
             error("Failed to hook DInput.");
         }
