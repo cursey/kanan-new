@@ -117,8 +117,8 @@ namespace kanan {
             log("Change channel function = %p", cc);
             logged = true;
         }
-
-        if (channel < 1 || channel > 7) {
+        //patching to allow to work on nao
+        if (channel < 1 || channel > 10) {
             return;
         }
 
