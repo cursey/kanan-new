@@ -106,6 +106,7 @@
     <ClCompile Include="AutoChangeChannels.cpp" />
     <ClCompile Include="AutoSetMTU.cpp" />
     <ClCompile Include="BorderlessWindow.cpp" />
+    <ClCompile Include="ChangeChannelHotkey.cpp" />
     <ClCompile Include="ColorAltText.cpp" />
     <ClCompile Include="D3D9Hook.cpp" />
     <ClCompile Include="DInputHook.cpp" />
@@ -137,6 +138,7 @@
     <ClInclude Include="AutoChangeChannels.hpp" />
     <ClInclude Include="AutoSetMTU.hpp" />
     <ClInclude Include="BorderlessWindow.hpp" />
+    <ClInclude Include="ChangeChannelHotkey.hpp" />
     <ClInclude Include="ColorAltText.hpp" />
     <ClInclude Include="D3D9Hook.hpp" />
     <ClInclude Include="DInputHook.hpp" />

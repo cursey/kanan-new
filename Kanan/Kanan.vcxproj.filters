@@ -123,6 +123,9 @@
     <ClCompile Include="AutoChangeChannels.cpp">
       <Filter>Source Files\Mods</Filter>
     </ClCompile>
+    <ClCompile Include="ChangeChannelHotkey.cpp">
+      <Filter>Source Files\Mods</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D3D9Hook.hpp">
@@ -259,6 +262,9 @@
     </ClInclude>
     <ClInclude Include="Mabinogi\CAccountPtr.hpp">
       <Filter>Header Files\Mabinogi\Generated</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeChannelHotkey.hpp">
+      <Filter>Header Files\Mods</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -24,6 +24,7 @@
 #include "LoginScreen.hpp"
 #include "DontMoveToSquadChat.hpp"
 #include "AutoChangeChannels.hpp"
+#include "ChangeChannelHotkey.hpp"
 
 #include "Log.hpp"
 
@@ -118,6 +119,7 @@ namespace kanan {
         addMod(make_unique<SecondaryPassword>());
         addMod(make_unique<StatusUI>());
         addMod(make_unique<AutoChangeChannels>());
+        addMod(make_unique<ChangeChannelHotkey>());
 
         log("[Mods] Finished loading mods.");
     }
