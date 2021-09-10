@@ -769,18 +769,15 @@
         "category": "Speedup",
         "patches": [
             {
-                "pattern": "8B 5F 7C 80 3B ?",
-                "offset": 6,
+                "pattern": "74 ? 8B 45 F0 51",
                 "patch": "EB"
             },
             {
-                "pattern": "74 ? 90 E8 ? ? ? ? 8B 96 80 00 00 00 2B 44 96 08",
-                "offset": 0,
-                "patch": "EB"
+                "pattern": "75 ? B0 ? 5E C3 90",
+                "patch": "90 90"
             },
             {
-                "pattern": "74 ? 90 E8 ? ? ? ? 8B 96 80 00 00 00 89 44 96 08",
-                "offset": 0,
+                "pattern": "74 ? 90 E8 ? ? ? ? 8B 56 08",
                 "patch": "EB"
             }
         ]
