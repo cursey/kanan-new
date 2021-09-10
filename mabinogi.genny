@@ -271,7 +271,7 @@ class CRendererPtr {
 }
 
 class CWorld {
-    uint64_t localPlayerID @ 0xB0
+    uint64_t localPlayerID @ 0xB8
 }
 
 class CWorldPtr {
