@@ -875,9 +875,12 @@ void LauncherApp::unlockPromptUI() {
         ImGui::TextWrapped(
             "Please enter your master password to unlock your saved profiles."
         );
-        ImGui::InputText("Master Password", m_masterPassword.data(), m_masterPassword.size(), ImGuiInputTextFlags_Password);
+        
+        auto unlock = ImGui::InputText("Master Password", m_masterPassword.data(), m_masterPassword.size(), ImGuiInputTextFlags_Password | ImGuiInputTextFlags_EnterReturnsTrue);
 
-        if (ImGui::Button("Unlock")) {
+        unlock = unlock || ImGui::Button("Unlock");
+
+        if (unlock) {
             copy(m_masterPassword.begin(), m_masterPassword.end(), m_masterPasswordRepeat.begin());
 
             if (loadProfiles()) {
