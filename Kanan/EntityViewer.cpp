@@ -9,8 +9,20 @@
 using namespace std;
 
 namespace kanan {
+    int countOfPlayerEnt;
+
+
+
+
     void EntityViewer::onUI() {
         if (ImGui::CollapsingHeader("Character List")) {
+            if (countOfPlayerEnt) {
+                std::string s = std::to_string(countOfPlayerEnt);
+                char const* pchar = s.c_str();
+                ImGui::TextWrapped(pchar);
+            }
+
+
             buildCharacterList();
             createCharacterTree();
         }
@@ -51,7 +63,7 @@ namespace kanan {
         // Sort our list.
         m_characters.sort([](auto a, auto b) {
             return (a->getName().value_or("") < b->getName().value_or(""));
-        });
+            });
     }
 
     void EntityViewer::buildItemList() {
@@ -84,10 +96,11 @@ namespace kanan {
         // Sort our list.
         m_items.sort([](auto a, auto b) {
             return (a->getName().value_or("") < b->getName().value_or(""));
-        });
+            });
     }
 
     void EntityViewer::createCharacterTree() {
+        countOfPlayerEnt = 0;
         if (m_characters.empty()) {
             ImGui::Text("There are no characters yet.");
             return;
@@ -99,7 +112,7 @@ namespace kanan {
             if (!name) {
                 continue;
             }
-
+            countOfPlayerEnt++;
             if (ImGui::TreeNode(character, "%s", name->c_str())) {
                 displayCharacter(character);
                 ImGui::TreePop();
@@ -108,6 +121,7 @@ namespace kanan {
     }
 
     void EntityViewer::createItemTree() {
+
         if (m_items.empty()) {
             ImGui::Text("There are no items yet.");
             return;
@@ -125,6 +139,7 @@ namespace kanan {
                 ImGui::TreePop();
             }
         }
+
     }
 
     void EntityViewer::displayCharacter(KCharacter* character) {
@@ -175,7 +190,7 @@ namespace kanan {
         { 18, "Tail" }
         };
 
-        for (auto[id, name] : equipmentNames) {
+        for (auto [id, name] : equipmentNames) {
             auto& itemInfo = equipment->itemInfo[id];
 
             // Skip empty slots.
