@@ -33,4 +33,5 @@ namespace kanan {
         double durabilityToDouble(uint32_t maxDura);
         char* raceToString(uint32_t raceType);
     };
+
 }
