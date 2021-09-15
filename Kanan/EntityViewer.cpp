@@ -9,8 +9,52 @@
 using namespace std;
 
 namespace kanan {
+    int countOfPlayer, countOfNPC, countOfPet, countOfOther;
+
     void EntityViewer::onUI() {
+
         if (ImGui::CollapsingHeader("Character List")) {
+
+
+            //by default we will assume that no entitys exist
+            bool noentitexists = true;
+            
+
+            if (countOfPlayer != 0) {
+
+                // just some bad int to string to char const* cause idk how to show ints in imgui lol
+                std::string s = std::to_string(countOfPlayer);
+                char const* pchar = s.c_str();
+                ImGui::TextWrapped("Player entitys: %s", pchar);
+                noentitexists = false;
+            }
+            if (countOfPet != 0) {
+                std::string s = std::to_string(countOfPet);
+                char const* pchar = s.c_str();
+                ImGui::TextWrapped("Pet entitys: %s", pchar);
+                noentitexists = false;
+            }
+            if (countOfNPC != 0) {
+                std::string s = std::to_string(countOfNPC);
+                char const* pchar = s.c_str();
+                ImGui::TextWrapped("NPC entitys: %s", pchar);
+                noentitexists = false;
+            }
+            if (countOfOther != 0) {
+                if (countOfOther < 0) {}
+                else {
+                    std::string s = std::to_string(countOfOther);
+                    char const* pchar = s.c_str();
+                    ImGui::TextWrapped("Misc entitys: %s", pchar);
+                    noentitexists = false;
+                }
+            }
+
+            //if no entitys exists say so
+            if (noentitexists) {
+                ImGui::Text("No known entity types in range");
+            }
+
             buildCharacterList();
             createCharacterTree();
         }
@@ -20,6 +64,7 @@ namespace kanan {
             createItemTree();
         }
     }
+
 
     void EntityViewer::buildCharacterList() {
         // Clear the current list.
@@ -51,7 +96,7 @@ namespace kanan {
         // Sort our list.
         m_characters.sort([](auto a, auto b) {
             return (a->getName().value_or("") < b->getName().value_or(""));
-        });
+            });
     }
 
     void EntityViewer::buildItemList() {
@@ -84,30 +129,63 @@ namespace kanan {
         // Sort our list.
         m_items.sort([](auto a, auto b) {
             return (a->getName().value_or("") < b->getName().value_or(""));
-        });
+            });
     }
 
     void EntityViewer::createCharacterTree() {
+        //set counts to 0 at start
+        countOfPlayer = 0;
+        countOfNPC = 0;
+        countOfPet = 0;
+        countOfOther = 0;
+
         if (m_characters.empty()) {
             ImGui::Text("There are no characters yet.");
             return;
         }
 
+
+
+        int totalConfirmedEnt = 0;
         for (auto& character : m_characters) {
             auto name = character->getName();
+            //get the id for all chars in cahnge
+            auto id = character->getID();
+            //count all ents
+            countOfOther++;
+            //check if id is that of a player
+            if (*id >= 0x0010000000000001 && *id <= 0x0010000000FFFFFF) {
+                countOfPlayer++;
+                totalConfirmedEnt++;
+            }
+            //check if id is that of a pet
+            if (*id >= 0x0010010000000001 && *id <= 0x0010010000FFFFFF) {
+                countOfPet++;
+                totalConfirmedEnt++;
+            }
+            //check if id is that of a npc
+            if (*id >= 0x0010f00000000001 && *id <= 0x0010f00000FFFFFF) {
+                countOfNPC++;
+                totalConfirmedEnt++;
+            }
+            //remove all counted entitys from total
+            countOfOther = countOfOther - totalConfirmedEnt;
+
+
 
             if (!name) {
                 continue;
             }
-
             if (ImGui::TreeNode(character, "%s", name->c_str())) {
                 displayCharacter(character);
                 ImGui::TreePop();
             }
+
         }
     }
 
     void EntityViewer::createItemTree() {
+
         if (m_items.empty()) {
             ImGui::Text("There are no items yet.");
             return;
@@ -125,6 +203,7 @@ namespace kanan {
                 ImGui::TreePop();
             }
         }
+
     }
 
     void EntityViewer::displayCharacter(KCharacter* character) {
@@ -140,7 +219,6 @@ namespace kanan {
 
         auto target = g_kanan->getGame()->getCharacterByID(character->targetID);
         auto equipment = character->equipment;
-
         ImGui::BulletText("Address: %p", character);
         ImGui::BulletText("Name: %s", name->c_str());
         ImGui::BulletText("ID: %llX", *id);
@@ -175,7 +253,7 @@ namespace kanan {
         { 18, "Tail" }
         };
 
-        for (auto[id, name] : equipmentNames) {
+        for (auto [id, name] : equipmentNames) {
             auto& itemInfo = equipment->itemInfo[id];
 
             // Skip empty slots.
