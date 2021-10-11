@@ -5,7 +5,7 @@
     },
     "process": {
         "filter": "client",
-        "id": 44320,
+        "id": 40484,
         "name": "Client.exe"
     },
     "props": {
@@ -48,7 +48,6 @@
                     }
                 },
                 "condition": {
-                    "__collapsed": false,
                     "condition": {
                         "__collapsed": false,
                         "condition": {
@@ -59,12 +58,45 @@
                         }
                     }
                 },
+                "equipment": {
+                    "equipment": {
+                        "__collapsed": false
+                    }
+                },
                 "id": {
                     "__collapsed": false
                 },
                 "parameter": {
                     "parameter": {
                         "__collapsed": false,
+                        "age": {},
+                        "battleState": {},
+                        "combatPower": {},
+                        "cumulatedLevel": {},
+                        "direction": {},
+                        "dorcha": {},
+                        "dorchaMaxBase": {},
+                        "engTitle": {},
+                        "experienceInt": {},
+                        "extra1": {},
+                        "extra2": {},
+                        "extra3": {},
+                        "eyeColor": {},
+                        "eyeType": {},
+                        "food": {},
+                        "foodMinRatio": {},
+                        "level": {},
+                        "life": {},
+                        "lifeDamaged": {},
+                        "lifeMaxBase": {},
+                        "lifeMaxMod": {},
+                        "lifeTimeSkill": {},
+                        "mana": {},
+                        "manaMaxBase": {},
+                        "manaMaxMod": {},
+                        "maxLevel": {},
+                        "motionType": {},
+                        "mouthType": {},
                         "name": {
                             "__collapsed": false,
                             "value": {
@@ -73,11 +105,32 @@
                                     "__collapsed": false
                                 }
                             }
-                        }
+                        },
+                        "oddEyeLeftColor": {},
+                        "oddEyeRightColor": {},
+                        "positionX": {},
+                        "positionY": {},
+                        "rebirthCount": {},
+                        "regionID": {},
+                        "scaleFatness": {},
+                        "scaleHeight": {},
+                        "scaleLower": {},
+                        "scaleUpper": {},
+                        "skinColor": {},
+                        "stamina": {},
+                        "staminaMaxBase": {},
+                        "staminaMaxMod": {},
+                        "status": {},
+                        "statusEx": {},
+                        "statusEx2": {},
+                        "title": {},
+                        "tuairim": {},
+                        "tuairimMaxBase": {},
+                        "type": {},
+                        "weaponSet": {}
                     }
                 },
                 "skill": {
-                    "__collapsed": false,
                     "skill": {
                         "__collapsed": false,
                         "skillInfo": {
@@ -139,8 +192,7 @@
                                     }
                                 }
                             }
-                        },
-                        "items": {}
+                        }
                     }
                 }
             }
@@ -229,13 +281,13 @@
     "type": {
         "addresses": {
             "CAccountPtr": "0x3a4ef3c",
-            "CCharacter": "0x7c1317b0",
+            "CCharacter": "0x964d1968",
             "CEntityList": "0x4a04410",
             "CEntityListPtr": "0x3ceef74",
             "CItem": "0x7cb223c8",
             "CRenderer": "0xa9d0998",
             "CWorldPtr": "0x3c2c080"
         },
-        "chosen": "CWorldPtr"
+        "chosen": "CCharacter"
     }
 }
