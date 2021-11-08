@@ -34,6 +34,12 @@
     <Filter Include="Header Files\Mabinogi\Generated">
       <UniqueIdentifier>{5ae2dad6-406e-4ccf-bf92-c17ae54fb7a9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Metrics">
+      <UniqueIdentifier>{81616267-334c-4615-8881-0de191a8874d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Metrics">
+      <UniqueIdentifier>{2850a10f-2ec6-4fe2-bbb0-c4c5191d1569}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KananInit.cpp">
@@ -125,6 +131,12 @@
     </ClCompile>
     <ClCompile Include="ChangeChannelHotkey.cpp">
       <Filter>Source Files\Mods</Filter>
+    </ClCompile>
+    <ClCompile Include="metrics_gui\metrics_gui.cpp">
+      <Filter>Source Files\Metrics</Filter>
+    </ClCompile>
+    <ClCompile Include="metrics_gui\ProggyTiny.cpp">
+      <Filter>Source Files\Metrics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -265,6 +277,18 @@
     </ClInclude>
     <ClInclude Include="ChangeChannelHotkey.hpp">
       <Filter>Header Files\Mods</Filter>
+    </ClInclude>
+    <ClInclude Include="metrics_gui\metrics_gui.h">
+      <Filter>Header Files\Metrics</Filter>
+    </ClInclude>
+    <ClInclude Include="metrics_gui\perf_timer.h">
+      <Filter>Header Files\Metrics</Filter>
+    </ClInclude>
+    <ClInclude Include="metrics_gui\snprintf.h">
+      <Filter>Header Files\Metrics</Filter>
+    </ClInclude>
+    <ClInclude Include="metrics_gui\countof.h">
+      <Filter>Header Files\Metrics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
