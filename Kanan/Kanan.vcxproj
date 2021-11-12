@@ -125,6 +125,8 @@
     <ClCompile Include="KItem.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="LoginScreen.cpp" />
+    <ClCompile Include="metrics_gui\metrics_gui.cpp" />
+    <ClCompile Include="metrics_gui\ProggyTiny.cpp" />
     <ClCompile Include="Mods.cpp" />
     <ClCompile Include="PatchMod.cpp" />
     <ClCompile Include="RangedAttackSwap.cpp" />
@@ -172,6 +174,10 @@
     <ClInclude Include="Mabinogi\Matrix4x4.hpp" />
     <ClInclude Include="Mabinogi\Vector3.hpp" />
     <ClInclude Include="Mabinogi\Vector4.hpp" />
+    <ClInclude Include="metrics_gui\countof.h" />
+    <ClInclude Include="metrics_gui\metrics_gui.h" />
+    <ClInclude Include="metrics_gui\perf_timer.h" />
+    <ClInclude Include="metrics_gui\snprintf.h" />
     <ClInclude Include="Mod.hpp" />
     <ClInclude Include="Mods.hpp" />
     <ClInclude Include="PatchMod.hpp" />

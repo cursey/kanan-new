@@ -10,6 +10,7 @@
 #include "FontData.hpp"
 #include "Log.hpp"
 #include "Kanan.hpp"
+#include "../Kanan/metrics_gui/metrics_gui.h"
 
 using namespace std;
 
@@ -17,6 +18,12 @@ IMGUI_IMPL_API LRESULT  ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPAR
 
 namespace kanan {
     unique_ptr<Kanan> g_kanan{ nullptr };
+
+    //metrics
+    MetricsGuiMetric frameTimeMetric("Frame time", "s", MetricsGuiMetric::USE_SI_UNIT_PREFIX);
+
+    MetricsGuiPlot frameTimePlot;
+
 
     Kanan::Kanan(string path)
         : m_path{ move(path) },
@@ -57,6 +64,33 @@ namespace kanan {
         // from the startup thread so we can take as long as necessary to do so here.
         //
         initializeMods();
+
+
+        //metrics settings
+
+        frameTimeMetric.mSelected = true;
+
+        frameTimePlot.mBarRounding = 0.f;    // amount of rounding on bars
+        frameTimePlot.mRangeDampening = 0.95f;  // weight of historic range on axis range [0,1]
+        frameTimePlot.mInlinePlotRowCount = 2;      // height of DrawList() inline plots, in text rows
+        frameTimePlot.mPlotRowCount = 5;      // height of DrawHistory() plots, in text rows
+        frameTimePlot.mVBarMinWidth = 6;      // min width of bar graph bar in pixels
+        frameTimePlot.mVBarGapWidth = 1;      // width of bar graph inter-bar gap in pixels
+        frameTimePlot.mShowAverage = true;  // draw horizontal line at series average
+        frameTimePlot.mShowInlineGraphs = false;  // show history plot in DrawList()
+        frameTimePlot.mShowOnlyIfSelected = false;  // draw show selected metrics
+        frameTimePlot.mShowLegendDesc = true;   // show series description in legend
+        frameTimePlot.mShowLegendColor = true;   // use series color in legend
+        frameTimePlot.mShowLegendUnits = true;   // show units in legend values
+        frameTimePlot.mShowLegendAverage = false;  // show series average in legend
+        frameTimePlot.mShowLegendMin = true;   // show plot y-axis minimum in legend
+        frameTimePlot.mShowLegendMax = true;   // show plot y-axis maximum in legend
+        frameTimePlot.mBarGraph = true;  // use bars to draw history
+        frameTimePlot.mStacked = true;  // stack series when drawing history
+        frameTimePlot.mSharedAxis = false;  // use first series' axis range
+        frameTimePlot.mFilterHistory = true;   // allow single plot point to represent more than on history value
+
+        frameTimePlot.AddMetric(&frameTimeMetric);
 
         log("Leaving Kanan constructor.");
     }
@@ -182,6 +216,11 @@ namespace kanan {
         ImGui_ImplWin32_NewFrame();
         ImGui::NewFrame();
 
+
+        //update our metrics with framerate data
+        frameTimeMetric.AddNewValue(1.f / ImGui::GetIO().Framerate);
+        frameTimePlot.UpdateAxes();
+
         if (m_areModsReady) {
             // Make sure the config for all the mods gets loaded.
             if (!m_areModsLoaded) {
@@ -226,10 +265,17 @@ namespace kanan {
                 // UI is closed so always pass input to the game.
                 m_dinputHook->acknowledgeInput();
             }
+
+            //draw metric window
+            if (m_ismetricsopen) {
+                Drawmetrics();
+            }
+
+
         }
         else {
             ImGui::OpenPopup("Loading...");
-            ImGui::SetNextWindowPosCenter();
+            ImGui::SetNextWindowPosCenter(ImGuiCond_Always);
             ImGui::SetNextWindowSize(ImVec2{ 450.0f, 200.0f });
 
             if (ImGui::BeginPopupModal("Loading...", nullptr, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize)) {
@@ -248,6 +294,11 @@ namespace kanan {
         }
 
         ImGui::EndFrame();
+
+
+
+
+
 
         // This fixes mabi's Film Style Post Shader making ImGui render as a black box.
         auto device = m_d3d9Hook->getDevice();
@@ -300,7 +351,7 @@ namespace kanan {
         }
 
         log("Config loading done.");
-        
+
         m_areModsLoaded = true;
     }
 
@@ -330,7 +381,7 @@ namespace kanan {
     }
 
     void Kanan::drawUI() {
-        ImGui::SetNextWindowSize(ImVec2{ 450.0f, 200.0f }, ImGuiSetCond_FirstUseEver);
+        ImGui::SetNextWindowSize(ImVec2{ 450.0f, 200.0f }, ImGuiCond_FirstUseEver);
 
         if (!ImGui::Begin("Kanan's New Mabinogi Mod", &m_isUIOpen, ImGuiWindowFlags_MenuBar)) {
             ImGui::End();
@@ -345,9 +396,9 @@ namespace kanan {
                 if (ImGui::MenuItem("Save Config")) {
                     saveConfig();
                 }
-				if (ImGui::MenuItem("Force close Game")) {
-					ExitProcess(0);
-				}
+                if (ImGui::MenuItem("Force close Game")) {
+                    ExitProcess(0);
+                }
                 ImGui::EndMenu();
             }
 
@@ -358,6 +409,7 @@ namespace kanan {
 
             if (ImGui::BeginMenu("Settings")) {
                 ImGui::MenuItem("UI Open By Default", nullptr, &m_isUIOpenByDefault);
+                ImGui::MenuItem("Metrics", nullptr, &m_ismetricsopen);
                 ImGui::EndMenu();
             }
 
@@ -411,7 +463,7 @@ namespace kanan {
     }
 
     void Kanan::drawAbout() {
-        ImGui::SetNextWindowSize(ImVec2{ 475.0f, 275.0f }, ImGuiSetCond_Appearing);
+        ImGui::SetNextWindowSize(ImVec2{ 475.0f, 275.0f }, ImGuiCond_Appearing);
 
         if (!ImGui::Begin("About", &m_isAboutOpen)) {
             ImGui::End();
@@ -433,6 +485,35 @@ namespace kanan {
         ImGui::Text("    JSON for Modern C++ (https://github.com/nlohmann/json)");
         ImGui::Text("    MinHook (https://github.com/TsudaKageyu/minhook)");
         ImGui::Text("    Roboto Font (https://fonts.google.com/specimen/Roboto)");
+        ImGui::Text("    Metrics GUI (https://github.com/GameTechDev/MetricsGui)");
+
+        ImGui::End();
+    }
+
+
+
+    void Kanan::Drawmetrics() {
+
+        //different style for if kanan is open or if kanan is closed. if metric is showing is true it will always render on screen.
+        ImGui::SetNextWindowSize(ImVec2{ 619.0f, 186.0f }, ImGuiCond_FirstUseEver);
+        if (m_isUIOpen) {
+            if (!ImGui::Begin("Metrics display", &m_ismetricsopen)) {
+                ImGui::End();
+                return;
+            }
+        }
+        else {
+            if (!ImGui::Begin("Metrics display", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar)) {
+                ImGui::End();
+                return;
+            }
+        }
+
+
+        frameTimePlot.DrawList();
+        frameTimePlot.DrawHistory();
+
+
 
         ImGui::End();
     }
