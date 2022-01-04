@@ -111,6 +111,8 @@ namespace kanan {
         }
         else {
             // If a problem occurred, reset the hook.
+            m_presentHook.reset();
+            m_resetHook.reset();
             g_d3d9Hook = nullptr;
             return false;
         }
