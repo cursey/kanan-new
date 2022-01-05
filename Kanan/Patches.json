@@ -769,10 +769,6 @@
         "category": "Speedup",
         "patches": [
             {
-                "pattern": "74 ? 8B 45 F0 51",
-                "patch": "EB"
-            },
-            {
                 "pattern": "75 ? B0 ? 5E C3 90",
                 "patch": "90 90"
             },
