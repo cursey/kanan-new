@@ -24,10 +24,10 @@ namespace kanan {
 
 	private:
 		bool m_is_enabled{};
-		bool hastarget{};
-		bool showpos{};
-		bool showothertarget{};
-		bool showtargethp{};
+		bool m_has_target{};
+		bool m_show_pos{};
+		bool m_show_targetoftarget{};
+		bool m_show_targethp{};
 		std::forward_list<KCharacter*> m_characters;
 		std::string m_hp;
 	};

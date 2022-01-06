@@ -28,19 +28,18 @@ namespace kanan {
 		KCharacter* target = nullptr;
 
 		//check if there is a local char or target for local char. if not dont bother rendering window
-		if (!localCharacter) { hastarget = false; }
-		else { hastarget = true; }
-		if (localCharacter) {
+		if (!localCharacter) { m_has_target = false; }
+		else if (localCharacter) {
 			target = g_kanan->getGame()->getCharacterByID(localCharacter->targetID);
-			if (target == nullptr) { hastarget = false; }
-			else { hastarget = true; }
+			if (target == nullptr) { m_has_target = false; }
+			else { m_has_target = true; }
 		}
 
 
-		if (g_kanan->isUIOpen()) { hastarget = true; }
+		if (g_kanan->isUIOpen()) { m_has_target = true; }
 
 		//if enabled create new window for details
-		if (m_is_enabled && hastarget) {
+		if (m_is_enabled && m_has_target) {
 			createtargetwindow();
 		}
 	}
@@ -50,14 +49,11 @@ namespace kanan {
 		if (ImGui::CollapsingHeader("Show details of targeted mob")) {
 			if (ImGui::Checkbox("Show details", &m_is_enabled)) {}
 			if (m_is_enabled) {
-				if (ImGui::Checkbox("Show Target Pos", &showpos)) {}
-				if (ImGui::Checkbox("Show Targets, Target", &showothertarget)) {}
-				if (ImGui::Checkbox("Show Target HP", &showtargethp)) {}
+				if (ImGui::Checkbox("Show Target Pos", &m_show_pos)) {}
+				if (ImGui::Checkbox("Show Targets, Target", &m_show_targetoftarget)) {}
+				if (ImGui::Checkbox("Show Target HP", &m_show_targethp)) {}
 			}
 		}
-
-
-
 
 	}
 
@@ -75,45 +71,12 @@ namespace kanan {
 		//if no local char do nothing
 
 		//get target of local char
-		KCharacter* target = nullptr;
 		KCharacter* targetchar = nullptr;
 
 		//if we have a localCharacter do rest of logic, if not do nothing
 		if (localCharacter) {
-			// Iterate over every character and add it to our list.
-			target = g_kanan->getGame()->getCharacterByID(localCharacter->targetID);
-			auto entityList = game->getEntityList();
-			//get all other characters
-			auto& characters = entityList->characters;
-			auto highestIndex = characters.count;
-			auto node = characters.root;
-
-
-
-			//create a list of all local chars
-
-			for (uint32_t i = 0; i <= highestIndex && node != nullptr; ++i, node = node->next) {
-				auto character = (KCharacter*)node->entry->character;
-
-				if (character == nullptr || !character->getID()) {
-					continue;
-				}
-
-				m_characters.emplace_front(character);
-			}
-
-
-
-			//check over all the enitys and find the one being targeted
-			for (auto& character : m_characters) {
-				if (target) {
-					std::string targetstring = target->getName()->c_str();
-					auto name = character->getName();
-					if (name == targetstring) {
-						targetchar = character;
-					}
-				}
-			}
+			//get target char
+			targetchar = g_kanan->getGame()->getCharacterByID(localCharacter->targetID);
 		}
 
 		//create imgui window
@@ -143,7 +106,7 @@ namespace kanan {
 
 			//fill out imgui window
 			auto localname = localCharacter->getName();
-			if (target) { ImGui::TextWrapped("%s's Target: %s", localname->c_str(), (!target) ? "No Target" : target->getName()->c_str()); }
+			if (targetchar) { ImGui::TextWrapped("%s's Target: %s", localname->c_str(), (!targetchar) ? "No Target" : targetchar->getName()->c_str()); }
 			else { ImGui::TextWrapped("%s has no target", localname->c_str()); }
 
 			if (targetchar != nullptr) {
@@ -159,15 +122,15 @@ namespace kanan {
 				auto hpRatio = ffdiv(hp, maxHP);
 
 				ImGui::Indent();
-				if (showpos) {
+				if (m_show_pos) {
 					ImGui::BulletText("Pos: %f, %f", pos->x, pos->y);
 
 				}
-				if (showothertarget) {
+				if (m_show_targetoftarget) {
 					ImGui::BulletText("Target: %s", (!targetoftarget) ? "No Target" : targetoftarget->getName()->c_str());
 
 				}
-				if (showtargethp) {
+				if (m_show_targethp) {
 					ImGui::BulletText("Health: %f/%f", parameter->life.value, parameter->lifeMaxBase.value + parameter->lifeMaxMod.value);
 
 					
@@ -175,7 +138,7 @@ namespace kanan {
 
 				}
 				ImGui::Unindent();
-				if (showtargethp) {
+				if (m_show_targethp) {
 					progressBar(hpRatio, ImVec2{ -1.0f, 0.0f }, 0xFF9140CF, "Target hp");
 				}
 
