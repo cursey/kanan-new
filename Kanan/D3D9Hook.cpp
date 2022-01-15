@@ -19,7 +19,6 @@ namespace kanan {
         if (g_d3d9Hook == nullptr) {
             if (hook()) {
                 log("D3D9Hook hooked successfully.");
-                g_d3d9Hook = this;
             }
             else {
                 log("D3D9Hook failed to hook.");
@@ -37,6 +36,10 @@ namespace kanan {
 
     bool D3D9Hook::hook() {
         log("Entering D3D9Hook::hook().");
+
+        // Set hook object preemptively -- otherwise, the hook is written and is likely
+        // to execute and crash before we verify success.
+        g_d3d9Hook = this;
 
         // All we do here is create a IDirect3DDevice9 so that we can get the address
         // of the methods we want to hook from its vtable.
@@ -103,7 +106,16 @@ namespace kanan {
         m_presentHook = make_unique<FunctionHook>(present, (uintptr_t)&D3D9Hook::present);
         m_resetHook = make_unique<FunctionHook>(reset, (uintptr_t)&D3D9Hook::reset);
 
-        return m_presentHook->isValid() && m_resetHook->isValid();
+        if (m_presentHook->isValid() && m_resetHook->isValid()) {
+            return true;
+        }
+        else {
+            // If a problem occurred, reset the hook.
+            m_presentHook.reset();
+            m_resetHook.reset();
+            g_d3d9Hook = nullptr;
+            return false;
+        }
     }
 
     HRESULT D3D9Hook::present(IDirect3DDevice9* device, CONST RECT* src, CONST RECT* dest, HWND wnd, CONST RGNDATA* dirtyRgn) {
