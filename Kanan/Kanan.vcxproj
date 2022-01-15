@@ -108,6 +108,7 @@
     <ClCompile Include="BorderlessWindow.cpp" />
     <ClCompile Include="ChangeChannelHotkey.cpp" />
     <ClCompile Include="ColorAltText.cpp" />
+    <ClCompile Include="CookingMod.cpp" />
     <ClCompile Include="Currtarget.cpp" />
     <ClCompile Include="D3D9Hook.cpp" />
     <ClCompile Include="DInputHook.cpp" />
@@ -143,6 +144,7 @@
     <ClInclude Include="BorderlessWindow.hpp" />
     <ClInclude Include="ChangeChannelHotkey.hpp" />
     <ClInclude Include="ColorAltText.hpp" />
+    <ClInclude Include="CookingMod.hpp" />
     <ClInclude Include="Currtarget.hpp" />
     <ClInclude Include="D3D9Hook.hpp" />
     <ClInclude Include="DInputHook.hpp" />
