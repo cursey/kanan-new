@@ -296,10 +296,10 @@
     <ClInclude Include="metrics_gui\countof.h">
       <Filter>Header Files\Metrics</Filter>
     </ClInclude>
-    <ClInclude Include="Currtarget.hpp">
-      <Filter>Header Files\Mabinogi</Filter>
-    </ClInclude>
     <ClInclude Include="CookingMod.hpp">
+      <Filter>Header Files\Mods</Filter>
+    </ClInclude>
+    <ClInclude Include="Currtarget.hpp">
       <Filter>Header Files\Mods</Filter>
     </ClInclude>
   </ItemGroup>
