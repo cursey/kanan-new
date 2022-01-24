@@ -1,5 +1,6 @@
 #pragma once
 
+#include <functional>
 #include <memory>
 #include <vector>
 
@@ -11,6 +12,10 @@
 namespace kanan {
     class DInputHook {
     public:
+        // Callbacks.
+        std::function<void(DInputHook&, DWORD key)> onKeyDown{};
+        std::function<void(DInputHook&, DWORD key)> onKeyUp{};
+
         DInputHook() = delete;
         DInputHook(const DInputHook& other) = delete;
         DInputHook(DInputHook&& other) = delete;

@@ -1,0 +1,286 @@
+type int8_t 1 [[i8]]
+type int16_t 2 [[i16]]
+type int32_t 4 [[i32]]
+type int64_t 8 [[i64]]
+type uint8_t 1 [[u8]]
+type uint16_t 2 [[u16]]
+type uint32_t 4 [[u32]]
+type uint64_t 8 [[u64]]
+type char8_t 1
+type char16_t 2
+type float 4 [[f32]]
+type double 8 [[f64]]
+
+struct Vector3 {
+    float x
+    float y
+    float z
+}
+
+struct Vector4 {
+    float x
+    float y
+    float z
+    float w
+}
+
+struct Matrix4x4 {
+    float m[16]
+}
+
+class CString {
+    int32_t referenceCount @ 0x4
+    uint32_t length @ 0xC
+    uint32_t capacity @ 0x10
+    char16_t buffer[70] @ 0x1C [[utf16*]]
+}
+
+class CCharacter {
+    class CParameter {
+        class CMemberString 0x10 {
+            CString* value @ 0x4
+        }
+
+        class CMemberChar 0xC {
+            int8_t value @ 0x4
+        }
+
+        class CMemberUChar 0xC {
+            uint8_t value @ 0x4
+        }
+
+        class CMemberUShort 0xC {
+            uint16_t value @ 0x4
+        }
+
+        class CMemberULong 0x10 {
+            uint32_t value @ 0x4
+        }
+
+        class CMemberUInt64 0x18 {
+            uint64_t value @ 0x4
+        }
+
+        class CMemberFloat 0x10 {
+            float value @ 0x4
+        }
+
+        CMemberString name @ 0x20
+        CMemberString title; //0x0030
+        CMemberString engTitle; //0x0040
+        CMemberULong type; //0x0050
+        CMemberUChar skinColor; //0x0060
+        CMemberUShort eyeType; //0x006C
+        CMemberUChar eyeColor; //0x0078
+        CMemberUChar mouthType; //0x0084
+        CMemberULong status; //0x0090
+        CMemberULong statusEx; //0x00A0
+        CMemberULong statusEx2; //0x00B0
+        CMemberFloat scaleHeight; //0x00C0
+        CMemberFloat scaleFatness; //0x00D0
+        CMemberFloat scaleUpper; //0x00E0
+        CMemberFloat scaleLower; //0x00F0
+        CMemberULong regionID; //0x0100
+        CMemberULong positionX; //0x0110
+        CMemberULong positionY; //0x0120
+        CMemberChar direction; //0x0130
+        CMemberULong battleState; //0x013C
+        CMemberUChar weaponSet; //0x014C
+        CMemberULong extra1; //0x0158
+        CMemberULong extra2; //0x0168
+        CMemberULong extra3; //0x0178
+        CMemberFloat combatPower; //0x0188
+        CMemberString motionType; //0x0198
+        CMemberUChar oddEyeLeftColor; //0x01A8
+        CMemberUChar oddEyeRightColor; //0x01B4
+        CMemberFloat life; //0x01C0
+        CMemberFloat lifeMaxBase; //0x01D0
+        CMemberFloat lifeDamaged; //0x01E0
+        CMemberFloat lifeMaxMod; //0x01F0
+        CMemberFloat mana; //0x0200
+        CMemberFloat manaMaxBase; //0x0210
+        CMemberFloat manaMaxMod; //0x0220
+        CMemberFloat stamina; //0x0230
+        CMemberFloat staminaMaxBase; //0x0240
+        CMemberFloat staminaMaxMod; //0x0250
+        CMemberFloat food; //0x0260
+        CMemberFloat foodMinRatio; //0x0270
+        CMemberUShort level; //0x0280
+        CMemberULong cumulatedLevel; //0x028C
+        CMemberUShort maxLevel; //0x029C
+        CMemberUShort rebirthCount; //0x02A8
+        CMemberUShort lifeTimeSkill; //0x02B4
+        CMemberUInt64 experienceInt; //0x02C0
+        CMemberUShort age; //0x02D8
+        CMemberFloat dorcha @ 0xA7C; //0x0A7C
+        CMemberFloat dorchaMaxBase; //0x0A8C
+        CMemberFloat tuairim; //0x0A9C For Bachram Boost
+        CMemberFloat tuairimMaxBase; //0x0AAC For Bachram Boost
+    }
+
+    class CAction {
+        class CAnimatorContext {
+            class CFramework {
+                Vector3 position @ 0xA0
+            }
+
+            CFramework* framework @ 0x4
+        }
+
+        CCharacter* character @ 0x40
+        CAnimatorContext* animatorContext
+    }
+
+    class CSkillMgr {
+        class CActiveSkill {
+            uint16_t skillID @ 0x10
+            uint8_t charges
+            uint8_t state +9
+        }
+
+        CActiveSkill* skillInfo @ 0x4
+    }
+
+    class CConditionMgr 0x50 {
+        class CCondition 0x25 {
+            int32_t statusCount @ 0x4
+        }
+
+        CCondition* condition @ 0x8
+    }
+
+    class CEquipmentItemInfo 0x50 {
+        uint32_t classID @ 0xC
+        uint32_t color1 @ 0x1C
+        uint32_t color2
+        uint32_t color3
+        uint32_t color4 @ 0x2c
+        uint32_t color5
+        uint32_t color6
+    }
+
+    class CEquipment {
+        CEquipmentItemInfo itemInfo[20]
+    }
+
+    uint64_t* entityID @ 0x4
+    CParameter* parameter @ 0xA8
+    CAction* action
+    CSkillMgr* skill 
+    CConditionMgr* condition +16
+    CEquipment* equipment @ 0x278
+    uint64_t targetID @ 0x2D0
+    uint64_t mouseTarget @ 0x2E0
+}
+
+class CItem {
+    struct SItemDBDesc {
+        CString* type @ 0x4
+        CString* displayName @ 0x34
+        CString* name @ 0x3C
+        CString* description @ 0x40
+        uint16_t maxStackCount @ 0xcc
+    }
+
+    uint64_t* entityID @ 0x4
+    uint32_t inventoryID; //0x0008
+    uint32_t itemID; //0x000C
+    uint32_t color1; //0x0010
+    uint32_t color2; //0x0014
+    uint32_t color3; //0x0018
+    uint32_t color4 +4; //0x0020
+    uint32_t color5; //0x0024
+    uint32_t color6; //0x0028
+    uint32_t stackCount; //0x002C
+    uint32_t positionX + 4; //0x0034
+    uint32_t positionY; //0x0038
+    uint32_t price +40; //0x0064
+    uint32_t sellPrice; //0x0068
+    uint32_t durability +4; //0x0070
+    uint32_t maxDurability; //0x0074
+    uint32_t originalDurability; //0x0078
+    SItemDBDesc* dbDesc +92; //0x00D8
+    uint64_t ownerID +28; //0x00F8
+    CString* name +36; //0x0124
+}
+
+// 0x4a04410
+class CEntityList {
+    class CItemList {
+        class CCItemListNode {}
+        class CItemListNode {
+            class CItemListNodeEntry {
+                CItem* item @ 0x10;     
+            }
+
+            CItemListNodeEntry* entry
+            CItemListNode* next
+        }
+
+        CItemListNode* root @ 0x4
+        uint32_t count
+    }
+
+    class CCharacterList {
+        class CCharacterListNode {}
+        class CCharacterListNode {
+            class CCharacterListNodeEntry {
+                CCharacter* character @ 0x10;     
+            }
+
+            CCharacterListNodeEntry* entry
+            CCharacterListNode* next
+        }
+
+        CCharacterListNode* root @ 0x4
+        uint32_t count
+    }
+
+    CItemList items @ 0x8
+    CCharacterList characters @ 0x28
+}
+
+class CEntityListPtr {
+    CEntityList* entityList
+}
+
+class CRenderer {
+    class CCamera {
+        class CCameraState {
+            Vector3 target @ 0xC
+            Vector3 position +4
+            Vector4 forward +8
+            float drawDistance
+            float zNear
+            float zFar
+            float fov
+            float screenWidth
+            float screenHeight
+            float aspectRatio +28
+            Matrix4x4 transformMatrix @ 0x14C
+        }
+
+        CCameraState* state;
+    }
+
+    CCamera* camera @ 0x24
+}
+
+class CRendererPtr {
+    CRenderer* renderer
+}
+
+class CWorld {
+    uint64_t localPlayerID @ 0xB8
+}
+
+class CWorldPtr {
+    CWorld* world
+}
+
+class CAccount 0x50 {
+}
+
+class CAccountPtr {
+    CAccount* account
+}

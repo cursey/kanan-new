@@ -2,6 +2,7 @@
 
 #include <string>
 #include <string_view>
+#include <vector>
 
 namespace kanan {
     //
@@ -13,4 +14,6 @@ namespace kanan {
     std::wstring widen(std::string_view str);
 
     std::string formatString(const char* format, va_list args);
+
+    std::vector<std::string> split(std::string str, const std::string& delim);
 }

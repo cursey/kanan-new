@@ -1,0 +1,293 @@
+{
+    "extension": {
+        "header": ".hpp",
+        "source": ".cpp"
+    },
+    "process": {
+        "filter": "client",
+        "id": 40484,
+        "name": "Client.exe"
+    },
+    "props": {
+        "CAccountPtr": {
+            "__collapsed": false,
+            "root": {
+                "__collapsed": false,
+                "account": {
+                    "__collapsed": false,
+                    "account": {
+                        "__collapsed": false,
+                        "s": {
+                            "s": {
+                                "__collapsed": false
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "CCharacter": {
+            "__collapsed": false,
+            "root": {
+                "__collapsed": false,
+                "action": {
+                    "action": {
+                        "__collapsed": false,
+                        "animatorContext": {
+                            "__collapsed": false,
+                            "animatorContext": {
+                                "__collapsed": false,
+                                "framework": {
+                                    "__collapsed": false,
+                                    "framework": {
+                                        "__collapsed": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "condition": {
+                    "condition": {
+                        "__collapsed": false,
+                        "condition": {
+                            "__collapsed": false,
+                            "condition": {
+                                "__collapsed": false
+                            }
+                        }
+                    }
+                },
+                "equipment": {
+                    "equipment": {
+                        "__collapsed": false
+                    }
+                },
+                "id": {
+                    "__collapsed": false
+                },
+                "parameter": {
+                    "parameter": {
+                        "__collapsed": false,
+                        "age": {},
+                        "battleState": {},
+                        "combatPower": {},
+                        "cumulatedLevel": {},
+                        "direction": {},
+                        "dorcha": {},
+                        "dorchaMaxBase": {},
+                        "engTitle": {},
+                        "experienceInt": {},
+                        "extra1": {},
+                        "extra2": {},
+                        "extra3": {},
+                        "eyeColor": {},
+                        "eyeType": {},
+                        "food": {},
+                        "foodMinRatio": {},
+                        "level": {},
+                        "life": {},
+                        "lifeDamaged": {},
+                        "lifeMaxBase": {},
+                        "lifeMaxMod": {},
+                        "lifeTimeSkill": {},
+                        "mana": {},
+                        "manaMaxBase": {},
+                        "manaMaxMod": {},
+                        "maxLevel": {},
+                        "motionType": {},
+                        "mouthType": {},
+                        "name": {
+                            "__collapsed": false,
+                            "value": {
+                                "__collapsed": false,
+                                "value": {
+                                    "__collapsed": false
+                                }
+                            }
+                        },
+                        "oddEyeLeftColor": {},
+                        "oddEyeRightColor": {},
+                        "positionX": {},
+                        "positionY": {},
+                        "rebirthCount": {},
+                        "regionID": {},
+                        "scaleFatness": {},
+                        "scaleHeight": {},
+                        "scaleLower": {},
+                        "scaleUpper": {},
+                        "skinColor": {},
+                        "stamina": {},
+                        "staminaMaxBase": {},
+                        "staminaMaxMod": {},
+                        "status": {},
+                        "statusEx": {},
+                        "statusEx2": {},
+                        "title": {},
+                        "tuairim": {},
+                        "tuairimMaxBase": {},
+                        "type": {},
+                        "weaponSet": {}
+                    }
+                },
+                "skill": {
+                    "skill": {
+                        "__collapsed": false,
+                        "skillInfo": {
+                            "__collapsed": false,
+                            "skillInfo": {
+                                "__collapsed": false
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "CEntityList": {
+            "__collapsed": false,
+            "root": {
+                "__collapsed": false
+            }
+        },
+        "CEntityListPtr": {
+            "__collapsed": false,
+            "root": {
+                "__collapsed": false,
+                "entityList": {
+                    "__collapsed": false,
+                    "entityList": {
+                        "__collapsed": false,
+                        "characters": {
+                            "__collapsed": false,
+                            "root": {
+                                "__collapsed": false,
+                                "root": {
+                                    "__collapsed": false,
+                                    "entry": {
+                                        "__collapsed": false,
+                                        "entry": {
+                                            "__collapsed": false,
+                                            "character": {
+                                                "__collapsed": false,
+                                                "character": {
+                                                    "__collapsed": false,
+                                                    "condition": {
+                                                        "condition": {
+                                                            "__collapsed": false
+                                                        }
+                                                    },
+                                                    "parameter": {
+                                                        "parameter": {
+                                                            "__collapsed": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "next": {
+                                        "next": {
+                                            "__collapsed": false
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "CItem": {
+            "__collapsed": false,
+            "root": {
+                "__collapsed": false,
+                "dbDesc": {
+                    "__collapsed": false,
+                    "dbDesc": {
+                        "__collapsed": false,
+                        "description": {
+                            "description": {
+                                "__collapsed": false
+                            }
+                        },
+                        "displayName": {
+                            "displayName": {
+                                "__collapsed": false
+                            }
+                        },
+                        "name": {
+                            "name": {
+                                "__collapsed": false
+                            }
+                        },
+                        "type": {
+                            "type": {
+                                "__collapsed": false
+                            }
+                        }
+                    }
+                },
+                "entityID": {
+                    "__collapsed": false
+                },
+                "name": {
+                    "__collapsed": false,
+                    "name": {
+                        "__collapsed": false
+                    }
+                }
+            }
+        },
+        "CRenderer": {
+            "__collapsed": false,
+            "root": {
+                "__collapsed": false,
+                "camera": {
+                    "__collapsed": false,
+                    "camera": {
+                        "__collapsed": false,
+                        "state": {
+                            "__collapsed": false,
+                            "state": {
+                                "__collapsed": false,
+                                "forward": {
+                                    "__collapsed": false
+                                },
+                                "position": {
+                                    "__collapsed": false
+                                },
+                                "target": {
+                                    "__collapsed": false
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "CWorldPtr": {
+            "__collapsed": false,
+            "root": {
+                "__collapsed": false,
+                "world": {
+                    "__collapsed": false,
+                    "world": {
+                        "__collapsed": false
+                    }
+                }
+            }
+        }
+    },
+    "type": {
+        "addresses": {
+            "CAccountPtr": "0x3a4ef3c",
+            "CCharacter": "0x964d1968",
+            "CEntityList": "0x4a04410",
+            "CEntityListPtr": "0x3ceef74",
+            "CItem": "0x7cb223c8",
+            "CRenderer": "0xa9d0998",
+            "CWorldPtr": "0x3c2c080"
+        },
+        "chosen": "CCharacter"
+    }
+}

@@ -28,6 +28,9 @@ namespace kanan {
             std::array<float, 4> color1;
             std::array<float, 4> color2;
             std::array<float, 4> color3;
+            std::array<float, 4> color4;
+            std::array<float, 4> color5;
+            std::array<float, 4> color6;
 
             bool isOverridingItem;
             uint32_t itemID;
@@ -37,6 +40,6 @@ namespace kanan {
         std::unique_ptr<FunctionHook> m_setEquipmentInfoHook;
         bool m_isNoFlashyEquipmentEnabled;
 
-        static void __fastcall hookedSetEquipmentInfo(CEquipment* equipment, uint32_t EDX, int inventoryID, int itemID, int a4, int a5, uint32_t* color, int a7, int* a8, int a9, int a10, int* a11);
+        static void __fastcall hookedSetEquipmentInfo(CCharacter::CEquipment* equipment, uint32_t EDX, int inventoryID, int itemID, int a4, int a5, uint32_t* color, int a7, int* a8, int a9, int a10, int* a11);
     };
 }

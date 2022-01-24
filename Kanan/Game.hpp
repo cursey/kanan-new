@@ -15,6 +15,8 @@ namespace kanan {
         KCharacter* getCharacterByID(uint64_t id);
         KCharacter* getLocalCharacter();
 
+        void changeChannel(int channel);
+
         CRenderer* getRenderer() const;
         CEntityList* getEntityList() const;
         CWorld* getWorld() const;

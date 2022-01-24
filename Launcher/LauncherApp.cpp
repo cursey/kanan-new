@@ -1,8 +1,11 @@
 #include <algorithm>
+#include <ctime>
 #include <filesystem>
 #include <fstream>
 #include <sstream>
 #include <stdexcept>
+
+#include <rpc.h>
 
 #include <imgui.h>
 #include <imgui_freetype.h>
@@ -20,6 +23,7 @@
 #include "HttpClient.hpp"
 #include "WmiQuery.hpp"
 #include "RegQuery.hpp"
+#include "ScopeExit.hpp"
 #include "LauncherApp.hpp"
 
 using namespace std;
@@ -39,6 +43,31 @@ string getDeviceID() {
     auto uuidHash = hashString("SHA256", uuid);
 
     return stringEncode(CRYPT_STRING_HEXRAW, uuidHash);
+}
+
+string getAmznTraceID() {
+    UUID uuid{};
+
+    if (UuidCreate(&uuid) != RPC_S_OK) {
+        throw std::runtime_error("Failed to create a UUID for X-Amzn-Trace-Id header");
+    }
+
+    RPC_WSTR uuid_str{};
+
+    if (UuidToString(&uuid, &uuid_str) != RPC_S_OK) {
+        throw std::runtime_error("Failed to create a UUID string for X-Amzn-Trace-Id header");
+    }
+
+    ScopeExit on_exit{[&] { RpcStringFree(&uuid_str); }};
+    auto trace_id = narrow((wchar_t*)uuid_str);
+
+    // Make it all lowercase.
+    std::transform(trace_id.begin(), trace_id.end(), trace_id.begin(), [](auto c) { return std::tolower(c); });
+
+    // Remove dashes.
+    trace_id.erase(std::remove_if(trace_id.begin(), trace_id.end(), [](auto c) { return c == '-'; }));
+
+    return trace_id;
 }
 
 LauncherApp::LauncherApp()
@@ -192,8 +221,12 @@ bool LauncherApp::loadProfiles() {
             profile.at("username").get_to(username);
             profile.at("password").get_to(password);
 
-            if (profile.find("cmdLine") != profile.end()) {
-                profile.at("cmdLine").get_to(cmdLine);
+            if (auto search = profile.find("cmdLine"); search != profile.end()) {
+                search->get_to(cmdLine);
+            }
+
+            if (auto search = profile.find("launchWithKanan"); search != profile.end()) {
+                search->get_to(p.launch_with_kanan);
             }
 
             strcpy_s(p.username.data(), p.username.size(), username.c_str());
@@ -231,7 +264,8 @@ void LauncherApp::saveProfiles() {
         profiles.emplace_back(json{
             { "username", string{ profile.username.data() } },
             { "password", string{ profile.password.data() } },
-            { "cmdLine", string{ profile.cmdLine.data() } }
+            { "cmdLine", string{ profile.cmdLine.data() } },
+            { "launchWithKanan", profile.launch_with_kanan },
          });
     }
 
@@ -366,31 +400,63 @@ void LauncherApp::mainUI() {
             openCustomizeCommandLine = true;
         }
 
+        ImGui::Checkbox("Launch with Kanan", &profile.launch_with_kanan);
+
         if (ImGui::Button("Launch Client")) {
             saveProfiles();
             m_launchResult = async(launch::async, [=] {
                 try {
+                    HttpClient http{};
+
                     // Get the API access token.
-                    auto hashedPassword = stringEncode(CRYPT_STRING_HEXRAW, hashString("SHA512", password.data()));
+                    auto sha512_password = stringEncode(CRYPT_STRING_HEXRAW, hashString("SHA512", password.data()));
+                    auto device_id = getDeviceID();
+                    auto trace_id = getAmznTraceID();
                     string header{ "Content-Type: application/json" };
-                    string body{ json{
+                    auto body = json{
                         { "id", string_view{ username.data() } },
-                        { "password", hashedPassword },
-                        { "client_id", "7853644408" },
+                        { "password", sha512_password },
+                        { "clientId", "7853644408" },
                         { "scope", "us.launcher.all" },
-                        { "device_id", getDeviceID() }
-                    }.dump() };
-                    auto response = httpPost("https://accounts.nexon.net/account/login/launcher", header, body);
-                    auto jsonResponse = json::parse(response);
-                    auto token = jsonResponse.at("access_token").get<string>();
-                    auto b64Token = stringEncode(CRYPT_STRING_BASE64, (const uint8_t*)token.data(), token.length());
+                        { "deviceId", device_id },
+                        { "captchaToken", "0xDEADBEEF" },
+                        { "captchaVersion", "v3"},
+                        { "localTime", std::time(nullptr) },
+                        { "timeOffset", 420 },
+                    }.dump();
+                    http.post("https://www.nexon.com/api/account/v1/no-auth/login/launcher", header, body);
+                    auto cookie0 = kanan::split(http.header("set-cookie", 0), "; ");
+                    auto cookie1 = kanan::split(http.header("set-cookie", 1), "; ");
+                    std::vector<std::string> cookie_pieces{};
+
+                    std::sort(cookie0.begin(), cookie0.end());
+                    std::sort(cookie1.begin(), cookie1.end());
+                    std::set_union(cookie0.begin(), cookie0.end(), cookie1.begin(), cookie1.end(), std::back_inserter(cookie_pieces));
+
+                    auto cookie = std::accumulate(cookie_pieces.begin(), cookie_pieces.end(), std::string{}, [](const auto& a, const auto& b) { return a + "; " + b; }).substr(2);
+
+                    // Must check that it's playable otherwise getting the passport will fail.
+                    header = (ostringstream{} <<
+                        "Content-Type: application/json\r\n" <<
+                        "Cookie: " << cookie 
+                        ).str();
+                    body = json{
+                        { "productId", "10200" },
+                    }.dump();
+                    http.post("https://www.nexon.com/api/game-auth2/v1/playable", header, body);
 
                     // Get the passport.
                     header = (ostringstream{} <<
-                        "Cookie: nxtk=" << token << ";domain=.nexon.net;path=/;\r\n" <<
-                        "Authorization: bearer " << b64Token).str();
-                    response = httpGet("https://api.nexon.io/users/me/passport", header, "");
-                    jsonResponse = json::parse(response);
+                        "Content-Type: application/json\r\n" <<
+                        "Cookie: " << cookie
+                        ).str();
+                     body = json{
+                        { "productId", "10200" },
+                    }.dump();
+                    http.post("https://www.nexon.com/api/passport/v2/passport", header, body);
+                    auto response = http.response();
+                    auto json_response = json::parse(response);
+                    auto passport = json_response.at("passport").get<string>();
 
                     // Startup the client.
                     STARTUPINFO si{};
@@ -406,11 +472,11 @@ void LauncherApp::mainUI() {
                             "locale:USA " <<
                             "env:Regular " <<
                             "setting:file://data/features.xml " <<
-                            "logip:208.85.109.35 " <<
+                            "logip:35.162.171.43 " <<
                             "logport:11000 " <<
-                            "chatip:208.85.109.37 " <<
+                            "chatip:54.214.176.167 " <<
                             "chatport:8002 " <<
-                            "/P:" << jsonResponse.at("passport").get<string>() << " " <<
+                            "/P:" << passport << " " <<
                             "-bgloader").str();
                     }
                     else {
@@ -420,7 +486,7 @@ void LauncherApp::mainUI() {
                         replace(cmdLine.begin(), cmdLine.end(), '\n', ' ');
 
                         // Passport also needs to be added.
-                        cmdLine += " /P:" + jsonResponse.at("passport").get<string>();
+                        cmdLine += " /P:" + json_response.at("passport").get<string>();
                     }
 
                     auto workDir = fs::path{ m_clientPath }.remove_filename().native();
@@ -444,6 +510,33 @@ void LauncherApp::mainUI() {
 
                     CloseHandle(pi.hThread);
                     CloseHandle(pi.hProcess);
+
+                    // Create the launcher process if the profile wants to launch w/ kanan.
+                    if (profile.launch_with_kanan) {
+                        STARTUPINFO loader_si{};
+                        PROCESS_INFORMATION loader_pi{};
+                        auto loader_path = fs::current_path() / "loader.exe";
+                        auto loader_cmdline = (ostringstream{} <<
+                            "\"" << loader_path.string() << "\" " << pi.dwProcessId).str();
+
+                        if (CreateProcess(
+                            nullptr, 
+                            (LPWSTR)widen(loader_cmdline).c_str(), 
+                            nullptr, 
+                            nullptr, 
+                            FALSE, 
+                            0, 
+                            nullptr, 
+                            fs::current_path().wstring().c_str(), 
+                            &loader_si, 
+                            &loader_pi
+                        ) == FALSE) {
+                            throw runtime_error{ "Failed to create the loader process" };
+                        }
+
+                        CloseHandle(loader_pi.hThread);
+                        CloseHandle(loader_pi.hProcess);
+                    }
                 }
                 catch (const exception& e) {
                     MessageBox(m_window, widen(e.what()).c_str(), L"Error", MB_ICONERROR | MB_OK);
@@ -782,9 +875,12 @@ void LauncherApp::unlockPromptUI() {
         ImGui::TextWrapped(
             "Please enter your master password to unlock your saved profiles."
         );
-        ImGui::InputText("Master Password", m_masterPassword.data(), m_masterPassword.size(), ImGuiInputTextFlags_Password);
+        
+        auto unlock = ImGui::InputText("Master Password", m_masterPassword.data(), m_masterPassword.size(), ImGuiInputTextFlags_Password | ImGuiInputTextFlags_EnterReturnsTrue);
 
-        if (ImGui::Button("Unlock")) {
+        unlock = unlock || ImGui::Button("Unlock");
+
+        if (unlock) {
             copy(m_masterPassword.begin(), m_masterPassword.end(), m_masterPasswordRepeat.begin());
 
             if (loadProfiles()) {

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29123.88
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Core", "Core\Core.vcxproj", "{015DA2A6-4E4B-4AC1-8D5D-60B8B542C7CD}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -103,6 +103,7 @@ Global
 		{DB1A4C0B-6AD9-437D-A244-98D65CA72965}.Debug|x64.Build.0 = Debug|x64
 		{DB1A4C0B-6AD9-437D-A244-98D65CA72965}.Debug|x86.ActiveCfg = Debug|Win32
 		{DB1A4C0B-6AD9-437D-A244-98D65CA72965}.Debug|x86.Build.0 = Debug|Win32
+		{DB1A4C0B-6AD9-437D-A244-98D65CA72965}.Debug|x86.Deploy.0 = Debug|Win32
 		{DB1A4C0B-6AD9-437D-A244-98D65CA72965}.Release|x64.ActiveCfg = Release|x64
 		{DB1A4C0B-6AD9-437D-A244-98D65CA72965}.Release|x64.Build.0 = Release|x64
 		{DB1A4C0B-6AD9-437D-A244-98D65CA72965}.Release|x86.ActiveCfg = Release|Win32

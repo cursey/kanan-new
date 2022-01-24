@@ -6,6 +6,8 @@
 
 #include "Kanan.hpp"
 #include "Log.hpp"
+#include "Utility.hpp"
+
 #include "EquipmentOverride.hpp"
 
 using namespace std;
@@ -23,10 +25,10 @@ namespace kanan {
 	};
 
 	static array<float, 4> convertIntColorToFloat(int color) {
-        auto r = color & 0x00FF0000;
-        auto g = color & 0x0000FF00;
+        auto a = (color & 0xFF000000) >> 24;
+        auto r = (color & 0x00FF0000) >> 16;
+        auto g = (color & 0x0000FF00) >> 8;
         auto b = color & 0x000000FF;
-        auto a = color & 0xFF000000;
 
 		return {
 			clamp((float)r / 255.0f, 0.0f, 1.0f),
@@ -136,18 +138,20 @@ namespace kanan {
         m_equipmentOverrides[11].name = "Weapon 2";
         m_equipmentOverrides[12].name = "Arrow\\Shield 1";
         m_equipmentOverrides[13].name = "Arrow\\Shield 2";
-        m_equipmentOverrides[15].name = "Tail";
+        m_equipmentOverrides[15].name = "Face Accessory";
         m_equipmentOverrides[16].name = "Accessory 1";
         m_equipmentOverrides[17].name = "Accessory 2";
+        m_equipmentOverrides[18].name = "Tail";
 
-        auto address = scan("client.exe", "55 8B EC 6A ? 68 ? ? ? ? 64 A1 ? ? ? ? 50 83 EC ? 53 56 57 A1 ? ? ? ? 33 C5 50 8D 45 F4 64 A3 ? ? ? ? 8B F9 8B 45 0C 8B 0D ? ? ? ?");
+        if (auto call_address = scan("client.exe", "E8 ? ? ? ? C7 45 FC ? ? ? ? 8D 4D C0 E8 ? ? ? ? 8B 45 B8")) {
+            log("[EquipmentOverride] Found address of call setEquipmentInfo %p", *call_address);
 
-        if (address) {
-            log("[EquipmentOverride] Found address of setEquipmentInfo %p", *address);
+            auto set_equip_info = rel_to_abs(*call_address + 1);
 
-            m_setEquipmentInfoHook = make_unique<FunctionHook>(*address, (uintptr_t)&EquipmentOverride::hookedSetEquipmentInfo);
-        }
-        else {
+            log("[EquipmentOverride] Found address of setEquipmentInfo %p", set_equip_info);
+
+            m_setEquipmentInfoHook = make_unique<FunctionHook>(set_equip_info, (uintptr_t)&EquipmentOverride::hookedSetEquipmentInfo);
+        } else {
             log("[EquipmentOverride] Failed to find address of setEquipmentInfo!");
         }
 
@@ -178,6 +182,9 @@ namespace kanan {
                     ImGui::ColorEdit4("Color 1", overrideInfo.color1.data(), ImGuiColorEditFlags_HEX);
                     ImGui::ColorEdit4("Color 2", overrideInfo.color2.data(), ImGuiColorEditFlags_HEX);
                     ImGui::ColorEdit4("Color 3", overrideInfo.color3.data(), ImGuiColorEditFlags_HEX);
+                    ImGui::ColorEdit4("Color 4", overrideInfo.color4.data(), ImGuiColorEditFlags_HEX);
+                    ImGui::ColorEdit4("Color 5", overrideInfo.color5.data(), ImGuiColorEditFlags_HEX);
+                    ImGui::ColorEdit4("Color 6", overrideInfo.color6.data(), ImGuiColorEditFlags_HEX);
                     ImGui::Checkbox("Enable item override", &overrideInfo.isOverridingItem);
                     ImGui::InputInt("Item ID", (int*)&overrideInfo.itemID);
                     ImGui::TreePop();
@@ -204,6 +211,9 @@ namespace kanan {
 			overrideInfo.color1 = convertIntColorToFloat(cfg.get<int>("EquipmentOverride." + to_string(j) + ".Color1").value_or(0));
 			overrideInfo.color2 = convertIntColorToFloat(cfg.get<int>("EquipmentOverride." + to_string(j) + ".Color2").value_or(0));
 			overrideInfo.color3 = convertIntColorToFloat(cfg.get<int>("EquipmentOverride." + to_string(j) + ".Color3").value_or(0));
+			overrideInfo.color4 = convertIntColorToFloat(cfg.get<int>("EquipmentOverride." + to_string(j) + ".Color4").value_or(0));
+			overrideInfo.color5 = convertIntColorToFloat(cfg.get<int>("EquipmentOverride." + to_string(j) + ".Color5").value_or(0));
+			overrideInfo.color6 = convertIntColorToFloat(cfg.get<int>("EquipmentOverride." + to_string(j) + ".Color6").value_or(0));
 
             if (g_equipmentOverrideOnLoad) {
                 overrideInfo.isOverridingItem = cfg.get<bool>("EquipmentOverride." + to_string(j) + ".IsOverridingItem").value_or(false);
@@ -228,13 +238,16 @@ namespace kanan {
 			cfg.set<int>("EquipmentOverride." + to_string(j) + ".Color1", convertFloatColorToInt(overrideInfo.color1));
 			cfg.set<int>("EquipmentOverride." + to_string(j) + ".Color2", convertFloatColorToInt(overrideInfo.color2));
 			cfg.set<int>("EquipmentOverride." + to_string(j) + ".Color3", convertFloatColorToInt(overrideInfo.color3));
+			cfg.set<int>("EquipmentOverride." + to_string(j) + ".Color4", convertFloatColorToInt(overrideInfo.color4));
+			cfg.set<int>("EquipmentOverride." + to_string(j) + ".Color5", convertFloatColorToInt(overrideInfo.color5));
+			cfg.set<int>("EquipmentOverride." + to_string(j) + ".Color6", convertFloatColorToInt(overrideInfo.color6));
 			cfg.set<bool>("EquipmentOverride." + to_string(j) + ".IsOverridingItem", g_equipmentOverrideOnLoad ? overrideInfo.isOverridingItem : false);
 
 			++j;
 		}
     }
 
-    void EquipmentOverride::hookedSetEquipmentInfo(CEquipment* equipment, uint32_t EDX, int inventoryID, int itemID, int a4, int a5, uint32_t* color, int a7, int * a8, int a9, int a10, int * a11) {
+    void EquipmentOverride::hookedSetEquipmentInfo(CCharacter::CEquipment* equipment, uint32_t EDX, int inventoryID, int itemID, int a4, int a5, uint32_t* color, int a7, int * a8, int a9, int a10, int * a11) {
         auto orig = (decltype(hookedSetEquipmentInfo)*)g_equipmentOverride->m_setEquipmentInfoHook->getOriginal();
         auto equipmentSlot = convertInventoryIDToEquipmentSlot(inventoryID);
 
@@ -266,6 +279,9 @@ namespace kanan {
             color[0] = convertFloatColorToInt(overrideInfo.color1);
             color[1] = convertFloatColorToInt(overrideInfo.color2);
             color[2] = convertFloatColorToInt(overrideInfo.color3);
+            color[4] = convertFloatColorToInt(overrideInfo.color4);
+            color[5] = convertFloatColorToInt(overrideInfo.color5);
+            color[6] = convertFloatColorToInt(overrideInfo.color6);
 
             log("[EquipmentOverride] Color overwritten!");
         }

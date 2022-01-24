@@ -1,6 +1,9 @@
 .vs/
+.xmake/
+.vscode/
 Release/
 Debug/
+build/
 
 *.orig
 *.user

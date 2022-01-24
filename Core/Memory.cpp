@@ -54,14 +54,17 @@ namespace kanan {
     }
 
     bool isGoodReadPtr(uintptr_t ptr, size_t len) {
-        return isGoodPtr(ptr, len, PAGE_READONLY | PAGE_READWRITE | PAGE_WRITECOPY | PAGE_EXECUTE_READ | PAGE_EXECUTE_READWRITE | PAGE_EXECUTE_WRITECOPY);
+        //return isGoodPtr(ptr, len, PAGE_READONLY | PAGE_READWRITE | PAGE_WRITECOPY | PAGE_EXECUTE_READ | PAGE_EXECUTE_READWRITE | PAGE_EXECUTE_WRITECOPY);
+        return IsBadReadPtr((const void*)ptr, len) == FALSE;
     }
 
     bool isGoodWritePtr(uintptr_t ptr, size_t len) {
-        return isGoodPtr(ptr, len, PAGE_READWRITE | PAGE_EXECUTE_READWRITE);
+        //return isGoodPtr(ptr, len, PAGE_READWRITE | PAGE_EXECUTE_READWRITE);
+        return IsBadWritePtr((LPVOID)ptr, len) == FALSE;
     }
 
     bool isGoodCodePtr(uintptr_t ptr, size_t len) {
-        return isGoodPtr(ptr, len, PAGE_EXECUTE | PAGE_EXECUTE_READ | PAGE_EXECUTE_READWRITE);
+        //return isGoodPtr(ptr, len, PAGE_EXECUTE | PAGE_EXECUTE_READ | PAGE_EXECUTE_READWRITE);
+        return IsBadCodePtr((FARPROC)ptr) == FALSE;
     }
 }

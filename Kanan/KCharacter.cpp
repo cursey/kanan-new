@@ -10,7 +10,7 @@ namespace kanan {
             return {};
         }
 
-        return entityID->id;
+        return *entityID;
     }
 
     optional<std::string> KCharacter::getName() const {
@@ -24,7 +24,7 @@ namespace kanan {
             return {};
         }
 
-        return narrow(name->buffer);
+        return narrow((wchar_t*)&name->buffer[0]);
     }
 
     optional<Vector3> KCharacter::getPosition() const {

@@ -10,7 +10,7 @@ namespace kanan {
             return {};
         }
 
-        return entityID->id;
+        return *entityID;
     }
 
     optional<std::string> KItem::getName() const {
@@ -18,6 +18,14 @@ namespace kanan {
             return {};
         }
 
-        return narrow(name->buffer);
+        return narrow((wchar_t*)&name->buffer[0]);
+    }
+
+    optional<uint16_t> KItem::getMaxStackCount() const {
+        if (dbDesc == nullptr) {
+            return {};
+        }
+
+        return dbDesc->maxStackCount;
     }
 }

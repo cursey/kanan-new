@@ -141,6 +141,7 @@ namespace kanan {
         uint32_t *TimeVar;
         uint8_t gap_AC[4];
         uint32_t new1;
+        uint8_t gap_D0[36];
         CString *FullName;
         uint8_t field_B4;
         uint8_t isVisible;
@@ -153,6 +154,10 @@ namespace kanan {
         CString *LayoutName;
         CString *BaseClass;
     };
+
+    constexpr auto full_name_offset = offsetof(CWindow, FullName);
+    constexpr auto layout_name_offset = offsetof(CWindow, LayoutName);
+    constexpr auto diff = offsetof(CWindow, LayoutName) - offsetof(CWindow, FullName);
 
     class CButton : public CWindow
     {
@@ -254,7 +259,7 @@ namespace kanan {
     {
     public:
         uint8_t gap_14A[2];
-        uint32_t field_14C;
+        //uint32_t field_14C;
         uint32_t *letterVector;
         uint32_t *field_154;
         CEdit *inputBox;
@@ -285,6 +290,9 @@ namespace kanan {
 
 #pragma pack(pop)
 
+    constexpr auto input_box_offset = offsetof(CVisualKeyboardView, inputBox);
+    constexpr auto mode_offset = offsetof(CVisualKeyboardView, Mode);
+
     class SecondaryPassword : public Mod {
     public:
         SecondaryPassword();
@@ -296,6 +304,7 @@ namespace kanan {
 
     private:
         bool m_isEnabled;
+        bool m_isSetup{};
         CString *password;
         char savedPassword[60];
         std::unique_ptr<FunctionHook> m_setCVisualKeyboardViewOnPostCreateHook;

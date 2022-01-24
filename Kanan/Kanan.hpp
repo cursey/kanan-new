@@ -46,11 +46,14 @@ namespace kanan {
         bool m_isUIOpen;
         bool m_isLogOpen;
         bool m_isAboutOpen;
+        bool m_ismetricsopen;
 
         bool m_isInitialized;
         std::atomic_bool m_areModsReady;
         bool m_areModsLoaded;
         HWND m_wnd;
+
+        bool m_isUIOpenByDefault{};
 
         void initializeMods();
 
@@ -64,6 +67,7 @@ namespace kanan {
 
         void drawUI();
         void drawAbout();
+        void Drawmetrics();
     };
 
     extern std::unique_ptr<Kanan> g_kanan;

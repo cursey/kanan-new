@@ -21,14 +21,18 @@
 #include "TTFFontSize.hpp"
 #include "SecondaryPassword.hpp"
 #include "StatusUI.hpp"
-#include "CursorUnhide.hpp"
+#include "LoginScreen.hpp"
+#include "DontMoveToSquadChat.hpp"
+#include "AutoChangeChannels.hpp"
+#include "ChangeChannelHotkey.hpp"
+#include "Currtarget.hpp"
 
 #include "Log.hpp"
 
 #include "Mods.hpp"
 
 using namespace std;
-using namespace std::experimental::filesystem;
+using namespace std::filesystem;
 using nlohmann::json;
 
 namespace kanan {
@@ -46,7 +50,7 @@ namespace kanan {
         log("[Mods] Loading time critical mods...");
 
         addMod(make_unique<UseDataFolder>());
-        addMod(make_unique<CursorUnhide>());
+        addMod(make_unique<LoginScreen>());
 
         // Time critical mods need to have their settings loaded from the config
         // right away.
@@ -93,6 +97,7 @@ namespace kanan {
         }
 
         addPatchMod("Quality of Life", make_unique<RangedAttackSwap>());
+        addPatchMod("Speedup", make_unique<DontMoveToSquadChat>());
 		addPatchMod("Text", make_unique<TTFFontSize>());
         addPatchMod("Text", make_unique<ColorAltText>());
 
@@ -114,6 +119,9 @@ namespace kanan {
         addMod(make_unique<FreezeTimeOfDay>());
         addMod(make_unique<SecondaryPassword>());
         addMod(make_unique<StatusUI>());
+        addMod(make_unique<AutoChangeChannels>());
+        addMod(make_unique<ChangeChannelHotkey>());
+        addMod(make_unique<Currtarget>());
 
         log("[Mods] Finished loading mods.");
     }

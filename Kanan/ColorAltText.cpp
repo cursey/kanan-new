@@ -19,7 +19,7 @@ namespace kanan {
 		m_patchSelf{},
 		m_patchOthers {}
 	{
-		auto address = scan("client.exe", "C7 47 ? ? ? ? ? C7 47 ? ? ? ? ? 68'");
+		auto address = scan("client.exe", "C7 46 60 ? ? ? ? C7 46 64 ? ? ? ? 68 ? ? ? ?");
 
 		if (address) {
 			log("Got ColorAltText %p", *address);

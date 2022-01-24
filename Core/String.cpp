@@ -48,4 +48,17 @@ namespace kanan {
 
         return buffer;
     }
+
+    std::vector<std::string> split(std::string str, const std::string& delim) {
+        std::vector<std::string> pieces{};
+        std::size_t last{};
+        std::size_t next{};
+
+        while ((next = str.find(delim, last)) != std::string::npos) {
+            pieces.emplace_back(str.substr(last, next - last));
+            last = next + delim.length();
+        }
+
+        return pieces;
+    }
 }
