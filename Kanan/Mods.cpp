@@ -26,6 +26,7 @@
 #include "AutoChangeChannels.hpp"
 #include "ChangeChannelHotkey.hpp"
 #include "Currtarget.hpp"
+#include "CookingMod.hpp"
 
 #include "Log.hpp"
 
@@ -114,6 +115,7 @@ namespace kanan {
         addMod(make_unique<BorderlessWindow>());
         addMod(make_unique<EnableMultiClient>());
         addMod(make_unique<EntityViewer>());
+        addMod(make_unique<CookingMod>());
         addMod(make_unique<EquipmentOverride>());
         addMod(make_unique<FieldOfView>());
         addMod(make_unique<FreezeTimeOfDay>());

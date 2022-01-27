@@ -141,6 +141,9 @@
     <ClCompile Include="Currtarget.cpp">
       <Filter>Source Files\Mods</Filter>
     </ClCompile>
+    <ClCompile Include="CookingMod.cpp">
+      <Filter>Source Files\Mods</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D3D9Hook.hpp">
@@ -293,8 +296,11 @@
     <ClInclude Include="metrics_gui\countof.h">
       <Filter>Header Files\Metrics</Filter>
     </ClInclude>
+    <ClInclude Include="CookingMod.hpp">
+      <Filter>Header Files\Mods</Filter>
+    </ClInclude>
     <ClInclude Include="Currtarget.hpp">
-      <Filter>Header Files\Mabinogi</Filter>
+      <Filter>Header Files\Mods</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
