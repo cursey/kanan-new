@@ -35,13 +35,13 @@ namespace kanan {
         {
             mov eax, 00000000
             mov esi, [cookingOne]
-            mov[edi + eax * 4 + 0x000001AC], esi
+            mov[edi + eax * 4 + 0x0000020C], esi
             mov eax, 00000001
             mov esi, [cookingTwo]
-            mov[edi + eax * 4 + 0x000001AC], esi
+            mov[edi + eax * 4 + 0x0000020C], esi
             mov eax, 00000002
             mov esi, [cookingThree]
-            mov[edi + eax * 4 + 0x000001AC], esi
+            mov[edi + eax * 4 + 0x0000020C], esi
             ret
 
         }
@@ -86,7 +86,7 @@ namespace kanan {
 
     //find the addresses we need for patching
     CookingMod::CookingMod() {
-        auto cookingAddress = scan("client.exe", "0F 83 ? ? ? ? 8B 75 ? 8D 04");
+        auto cookingAddress = scan("client.exe", "55 8B EC 6A ? 68 ? ? ? ? 64 ? ? ? ? ? ? ? ? ? 80 22 ? 03 33 C5 50 8D ? F4 64 ? ? ? ? ? ? ? ? ? 14 ? 00 00");
         DWORD cookingAddresst = *cookingAddress;
         if (!cookingAddresst) {
             log("unable to find cooking address");
@@ -97,13 +97,13 @@ namespace kanan {
 
         if (cookingAddresst) {
 
-            addressOfCooking = cookingAddresst + 33;
+            addressOfCooking = cookingAddresst + 95;
             log("Address of func to change @ %p", addressOfCooking);
 
         }
     }
 
-    
+
     //imgui ui stuff
     void CookingMod::onUI() {
         if (ImGui::CollapsingHeader("Cooking mod"))
@@ -132,15 +132,15 @@ namespace kanan {
     //apply or remove our patch
     void CookingMod::applycook(bool m_cooking_is_enabled) {
         if (m_cooking_is_enabled) {
-                log("Cooking applying patch");
-                //inject our custom cooking asm
-                Hookcall((void*)addressOfCooking, HookForCooking, 7);
+            log("Cooking applying patch");
+            //inject our custom cooking asm
+            Hookcall((void*)addressOfCooking, HookForCooking, 7);
 
         }
         else if (!m_cooking_is_enabled) {
-                log("Cooking removing patch");
-                //patch back to default
-                Patchmem((BYTE*)(addressOfCooking), (BYTE*)"\x01\xb4\x87\xAC\x01\x00\x00", 7);
+            log("Cooking removing patch");
+            //patch back to default
+            Patchmem((BYTE*)(addressOfCooking), (BYTE*)"\x01\xb4\x87\x0C\x02\x00\x00", 7);
         }
     }
 

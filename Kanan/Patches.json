@@ -973,14 +973,9 @@
         "category": "Graphics",
         "patches": [
             {
-                "pattern": "8B 10 8B C8 8B 42 04 FF D0 84 C0 0F 84 EE 09 00 00 8B 0E",
-                "offset": 11,
-                "patch": "90 90 90 90 90 90"
-            },
-            {
-                "pattern": "FF D0 3A C3 0F 85",
-                "offset": 4,
-                "patch": "90 E9"
+                "pattern": "8B C8 8B 10 8B 42 ? FF D0 84 C0 0F 85 ? ? ? ? 64",
+                "offset": 7,
+                "patch": "B0 01"
             }
         ]
     },
@@ -989,14 +984,46 @@
         "desc": "Shows FPS and other game performance infos",
         "category": "Graphics",
         "patches": [
-            {
-                "pattern": "8B 10 8B C8 8B 42 04 FF D0 84 C0 0F 84 EE 09 00 00 8B 0E",
-                "offset": 11,
-                "patch": "90 90 90 90 90 90"
-            },
-            {
-                "pattern": "FF D0 84 C0 0F 84 AD 08 00 00 2B 3D",
-                "patch": "90 90"
+            {         
+                "pattern": "8B C8 8B 10 8B 52 ? FF D2 84 C0 0F 84 ? ? ? ? 8B C7",
+                "offset": 7,
+                "patch": "B0 01"
+            }
+        ]
+    },
+    {
+        "name": "Disable character rendering",
+        "desc": "",
+        "category": "Graphics",
+        "patches": [
+            {         
+                "pattern": "8B C8 8B 10 8B 42 ? FF D0 84 C0 0F 84 ? ? ? ? 8B 9F",
+                "offset": 56,
+                "patch": "EB"
+            }
+        ]
+    },
+    {
+        "name": "Disable prop rendering",
+        "desc": "",
+        "category": "Graphics",
+        "patches": [
+            {         
+                "pattern": "8B C8 8B 10 8B 42 ? FF D0 84 C0 0F 84 ? ? ? ? 8B 9F",
+                "offset": 125,
+                "patch": "EB"
+            }
+        ]
+    },
+    {
+        "name": "shadows and clouds",
+        "desc": "shows some screens that show details about clouds and shadows",
+        "category": "Graphics",
+        "patches": [
+            {         
+                "pattern": "8B C8 8B 10 8B 42 ? B0 ? 84 C0 0F 84 ? ? ? ? 8B 4E",
+                "offset": 7,
+                "patch": "B0 01"
             }
         ]
     },
@@ -1023,14 +1050,9 @@
         "category": "Graphics",
         "patches": [
             {
-                "pattern": "8B 10 8B C8 8B 42 04 FF D0 84 C0 0F 84 EE 09 00 00 8B 0E",
-                "offset": 11,
-                "patch": "90 90 90 90 90 90"
-            },
-            {
-                "pattern": "8B 42 04 FF D0 84 C0 74 40 8B 0E",
-                "offset": 3,
-                "patch": "90 90"
+                "pattern": "8B C8 8B 10 8B 42 ? FF D0 84 C0 0F 84 ? ? ? ? 8B 4F ? E8",
+                "offset": 7,
+                "patch": "B0 01"
             }
         ]
     },
