@@ -472,8 +472,8 @@ void LauncherApp::mainUI() {
                             "locale:USA " <<
                             "env:Regular " <<
                             "setting:file://data/features.xml " <<
-                            "logip:35.162.171.43 " <<
-                            "logport:11000 " <<
+                            "logip:54.214.43.237 " <<
+                            "logport:11002 " <<
                             "chatip:54.214.176.167 " <<
                             "chatport:8002 " <<
                             "/P:" << passport << " " <<
