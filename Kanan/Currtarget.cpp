@@ -26,9 +26,11 @@ namespace kanan {
 		auto game = g_kanan->getGame();
 		auto localCharacter = game->getLocalCharacter();
 		KCharacter* target = nullptr;
-
 		//check if there is a local char or target for local char. if not dont bother rendering window
-		if (!localCharacter) { m_has_target = false; }
+		if (localCharacter == nullptr) {
+			m_has_target = false;
+			return;
+		}
 		else if (localCharacter) {
 			target = g_kanan->getGame()->getCharacterByID(localCharacter->targetID);
 			if (target == nullptr) { m_has_target = false; }
