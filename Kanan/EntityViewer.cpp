@@ -305,7 +305,7 @@ namespace kanan {
         else return (double)maxDura * 0.001;
     }
 
-    char* EntityViewer::raceToString(uint32_t raceType) {
+    const char* EntityViewer::raceToString(uint32_t raceType) {
         switch (raceType) {
         case  8001: return "Female Giant";
         case  8002: return "Male Giant";

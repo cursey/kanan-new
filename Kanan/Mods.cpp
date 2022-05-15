@@ -2,7 +2,7 @@
 #include <filesystem>
 #include <thread>
 
-#include <json.hpp>
+#include <nlohmann/json.hpp>
 #include <String.hpp>
 #include <Config.hpp>
 

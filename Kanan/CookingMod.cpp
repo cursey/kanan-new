@@ -81,6 +81,8 @@ namespace kanan {
 
         DWORD temp;
         VirtualProtect(toHook, len, curProtection, &temp);
+
+        return true;
     }
 
 

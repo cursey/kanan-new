@@ -275,7 +275,7 @@ namespace kanan {
         }
         else {
             ImGui::OpenPopup("Loading...");
-            ImGui::SetNextWindowPosCenter(ImGuiCond_Always);
+            ImGui::SetNextWindowPos({ImGui::GetIO().DisplaySize.x / 2, ImGui::GetIO().DisplaySize.y / 2}, ImGuiCond_Always, ImVec2{0.5f, 0.5f});
             ImGui::SetNextWindowSize(ImVec2{ 450.0f, 200.0f });
 
             if (ImGui::BeginPopupModal("Loading...", nullptr, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize)) {

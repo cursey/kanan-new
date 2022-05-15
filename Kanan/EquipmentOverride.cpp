@@ -179,12 +179,12 @@ namespace kanan {
 
                 if (ImGui::TreeNode(&overrideInfo, "%s", overrideInfo.name.c_str())) {
                     ImGui::Checkbox("Enable color override", &overrideInfo.isOverridingColor);
-                    ImGui::ColorEdit4("Color 1", overrideInfo.color1.data(), ImGuiColorEditFlags_HEX);
-                    ImGui::ColorEdit4("Color 2", overrideInfo.color2.data(), ImGuiColorEditFlags_HEX);
-                    ImGui::ColorEdit4("Color 3", overrideInfo.color3.data(), ImGuiColorEditFlags_HEX);
-                    ImGui::ColorEdit4("Color 4", overrideInfo.color4.data(), ImGuiColorEditFlags_HEX);
-                    ImGui::ColorEdit4("Color 5", overrideInfo.color5.data(), ImGuiColorEditFlags_HEX);
-                    ImGui::ColorEdit4("Color 6", overrideInfo.color6.data(), ImGuiColorEditFlags_HEX);
+                    ImGui::ColorEdit4("Color 1", overrideInfo.color1.data(), ImGuiColorEditFlags_DisplayHex);
+                    ImGui::ColorEdit4("Color 2", overrideInfo.color2.data(), ImGuiColorEditFlags_DisplayHex);
+                    ImGui::ColorEdit4("Color 3", overrideInfo.color3.data(), ImGuiColorEditFlags_DisplayHex);
+                    ImGui::ColorEdit4("Color 4", overrideInfo.color4.data(), ImGuiColorEditFlags_DisplayHex);
+                    ImGui::ColorEdit4("Color 5", overrideInfo.color5.data(), ImGuiColorEditFlags_DisplayHex);
+                    ImGui::ColorEdit4("Color 6", overrideInfo.color6.data(), ImGuiColorEditFlags_DisplayHex);
                     ImGui::Checkbox("Enable item override", &overrideInfo.isOverridingItem);
                     ImGui::InputInt("Item ID", (int*)&overrideInfo.itemID);
                     ImGui::TreePop();

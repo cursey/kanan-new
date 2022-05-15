@@ -27,7 +27,7 @@ namespace kanan {
             return;
         }
 
-        ImGui::SetNextWindowSize(ImVec2{ 400.0f, 200.0f }, ImGuiSetCond_FirstUseEver);
+        ImGui::SetNextWindowSize(ImVec2{ 400.0f, 200.0f }, ImGuiCond_FirstUseEver);
 
         // Give the window a different style when the UI is closed indicating that
         // the status window can't be interacted with.

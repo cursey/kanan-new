@@ -1,0 +1,60 @@
+# Reference: https://build-cpp.github.io/cmkr/cmake-toml
+[project]
+name = "Kanan"
+cmake-after = """
+set(VCPKG_TARGET_TRIPLET x86-windows-static)
+"""
+
+[vcpkg]
+version = "2022.05.10"
+packages = ["minhook", "imgui[freetype,dx9-binding,win32-binding]", "nlohmann-json", "stb"]
+
+[find-package]
+minhook = { config = true, required = true }
+imgui = { config = true, required = true }
+nlohmann_json = { config = true, required = true }
+
+[target.kanan-core]
+type = "static"
+sources = ["Core/**.cpp"]
+headers = ["Core/**.hpp"]
+include-directories = ["Core/"]
+compile-features = ["cxx_std_20"]
+compile-definitions = ["UNICODE"]
+link-libraries = ["minhook::minhook"]
+properties.MSVC_RUNTIME_LIBRARY = "MultiThreaded$<$<CONFIG:Debug>:Debug>"
+
+[target.kanan]
+type = "shared"
+sources = ["Kanan/**.cpp"]
+headers = ["Kanan/**.hpp", "Kanan/**.h"]
+include-directories = ["Kanan/"]
+compile-definitions = ["IMGUI_DISABLE_INCLUDE_IMCONFIG_H"]
+link-libraries = ["kanan-core", "imgui::imgui", "nlohmann_json::nlohmann_json", "ws2_32"]
+properties.MSVC_RUNTIME_LIBRARY = "MultiThreaded$<$<CONFIG:Debug>:Debug>"
+
+[target.loader]
+type = "executable"
+sources = ["Loader/Main.cpp"]
+link-libraries = ["kanan-core"]
+properties.MSVC_RUNTIME_LIBRARY = "MultiThreaded$<$<CONFIG:Debug>:Debug>"
+
+[target.launcher]
+type = "executable"
+sources = ["Launcher/**.cpp"]
+headers = ["Launcher/**.hpp"]
+include-directories = ["Kanan/"] # For FontData.hpp
+compile-definitions = ["IMGUI_DISABLE_INCLUDE_IMCONFIG_H"]
+link-libraries = ["kanan-core", "imgui::imgui", "nlohmann_json::nlohmann_json", "Bcrypt", "Crypt32", "Winhttp", "Rpcrt4", "D3d9", "Wbemuuid"]
+properties.MSVC_RUNTIME_LIBRARY = "MultiThreaded$<$<CONFIG:Debug>:Debug>"
+properties.WIN32_EXECUTABLE = true
+
+[[install]]
+targets = ["kanan", "loader", "launcher"]
+destination = "bin"
+component = "kanan"
+
+[[install]]
+files = ["Loader/Loader.txt", "Kanan/Patches.json"]
+destination =  "bin"
+component = "kanan"

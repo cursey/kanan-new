@@ -24,7 +24,7 @@ namespace kanan {
         log("[LoginScreen] Entering constructor...");
         HMODULE mod = GetModuleHandle(widen("client.exe").c_str());
         auto size = getModuleSize(mod).value_or(0);
-        char *pat1 = ".?AVCLoginScene@pleione";
+        const char *pat1 = ".?AVCLoginScene@pleione";
         auto loginSceneRTIIBase = scan((uintptr_t)mod + 0x2600000, size - 0x2600000, hexify((const uint8_t*)pat1, strnlen_s(pat1, 100)));
         if (loginSceneRTIIBase)
         {
@@ -32,7 +32,7 @@ namespace kanan {
         }
         else {
             log("[LoginScreen] Failed to get address of .?AVCLoginScene@pleione");
-            goto fail;
+            return;
         }
         auto rttiStrAddr = *loginSceneRTIIBase + 1;
         auto RTTICompleteObjectLocator = (uintptr_t)mod + 0x2600000;
@@ -40,7 +40,7 @@ namespace kanan {
         auto constructorRefAddr = (uintptr_t)mod;
         while (1)
         {
-            char *pat2 = ".?AVCLoginScene";
+            const char *pat2 = ".?AVCLoginScene";
             auto rttiStrAddrP = scan(rttiStrAddr, size - (rttiStrAddr - (uintptr_t)mod), hexify((const uint8_t*)pat2, strnlen_s(pat2, 100)));
             if (!rttiStrAddrP) break;
             rttiStrAddr = *rttiStrAddrP;
@@ -84,7 +84,6 @@ namespace kanan {
         m_comboStr += "$";
         for (size_t i = 0; i < m_comboStr.length(); ++i)
             if (m_comboStr.c_str()[i] == '$') ((char*)&m_comboStr.at(0))[i] = 0; // I'm terrible person.
-        fail:
         log("[LoginScreen] Leaving constructor.");
     }
 

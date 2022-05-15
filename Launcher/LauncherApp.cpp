@@ -12,7 +12,7 @@
 #include <imgui_impl_dx9.h>
 #include <imgui_impl_win32.h>
 
-#include <json.hpp>
+#include <nlohmann/json.hpp>
 
 #include <Config.hpp>
 #include <FontData.hpp>
@@ -575,7 +575,7 @@ void LauncherApp::mainUI() {
         openLaunchingPrompt = false;
     }
 
-    ImGui::SetNextWindowPosCenter(ImGuiCond_Always);
+    ImGui::SetNextWindowPos({ImGui::GetIO().DisplaySize.x / 2, ImGui::GetIO().DisplaySize.y / 2}, ImGuiCond_Always, ImVec2{0.5f, 0.5f});
     ImGui::SetNextWindowSize(ImVec2{ 450.0f, -1.0f });
 
     if (ImGui::BeginPopupModal("Launching...")) {
@@ -606,7 +606,7 @@ void LauncherApp::mainUI() {
         openCustomizeCommandLine = false;
     }
 
-    //ImGui::SetNextWindowPosCenter(ImGuiCond_Always);
+    ImGui::SetNextWindowPos({ImGui::GetIO().DisplaySize.x / 2, ImGui::GetIO().DisplaySize.y / 2}, ImGuiCond_Always, ImVec2{0.5f, 0.5f});
     ImGui::SetNextWindowSize(ImVec2{ 450.0f, -1.0f }, ImGuiCond_Once);
 
     if (ImGui::BeginPopupModal("Customize Command Line")) {
@@ -647,7 +647,7 @@ void LauncherApp::mainUI() {
     }
 
     if (m_isAboutOpen) {
-        ImGui::SetNextWindowPosCenter(ImGuiCond_Always);
+        ImGui::SetNextWindowPos({ImGui::GetIO().DisplaySize.x / 2, ImGui::GetIO().DisplaySize.y / 2}, ImGuiCond_Always, ImVec2{0.5f, 0.5f});
         ImGui::SetNextWindowSize(ImVec2{ 450.0f, -1.0f });
 
         if (ImGui::BeginPopupModal("About", &m_isAboutOpen)) {
@@ -746,7 +746,7 @@ void LauncherApp::firstTimeSetupUI() {
         m_openFirstTimeSetup = false;
     }
 
-    ImGui::SetNextWindowPosCenter(ImGuiCond_Always);
+    ImGui::SetNextWindowPos({ImGui::GetIO().DisplaySize.x / 2, ImGui::GetIO().DisplaySize.y / 2}, ImGuiCond_Always, ImVec2{0.5f, 0.5f});
     ImGui::SetNextWindowSize(ImVec2{ 350.0f, -1.0f });
 
     if (ImGui::BeginPopupModal("First Time Setup")) {
@@ -774,7 +774,7 @@ void LauncherApp::firstTimeSetupUI() {
         openSetMasterPassword = false;
     }
 
-    ImGui::SetNextWindowPosCenter(ImGuiCond_Always);
+    ImGui::SetNextWindowPos({ImGui::GetIO().DisplaySize.x / 2, ImGui::GetIO().DisplaySize.y / 2}, ImGuiCond_Always, ImVec2{0.5f, 0.5f});
     ImGui::SetNextWindowSize(ImVec2{ 500.0f, -1.0f });
 
     if (ImGui::BeginPopupModal("Set Master Password")) {
@@ -817,7 +817,7 @@ void LauncherApp::firstTimeSetupUI() {
         ImGui::OpenPopup("Set Client Path");
     }
 
-    ImGui::SetNextWindowPosCenter(ImGuiCond_Always);
+    ImGui::SetNextWindowPos({ImGui::GetIO().DisplaySize.x / 2, ImGui::GetIO().DisplaySize.y / 2}, ImGuiCond_Always, ImVec2{0.5f, 0.5f});
     ImGui::SetNextWindowSize(ImVec2{ 500.0f, -1.0f });
 
     if (ImGui::BeginPopupModal("Set Client Path")) {
@@ -868,7 +868,7 @@ void LauncherApp::unlockPromptUI() {
         m_openUnlockPrompt = false;
     }
 
-    ImGui::SetNextWindowPosCenter(ImGuiCond_Always);
+    ImGui::SetNextWindowPos({ImGui::GetIO().DisplaySize.x / 2, ImGui::GetIO().DisplaySize.y / 2}, ImGuiCond_Always, ImVec2{0.5f, 0.5f});
     ImGui::SetNextWindowSize(ImVec2{ 500.0f, -1.0f });
 
     if (ImGui::BeginPopupModal("Unlock profiles.dat")) {
