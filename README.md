@@ -4,9 +4,6 @@ A reimagining of Kanan for Mabinogi written in C++ with many improvements.
 ## Download
 Downloads for the latest _official_ releases are located [here](https://github.com/cursey/kanan-new/releases).
 
-## Requirements
-You need the Microsoft Visual C++ Redistributable for Visual Studio 2017 available at the bottom of [this page](https://www.visualstudio.com/downloads/). Make sure to choose the x86 version of the download!
-
 ## What's new
 * Entirely written from the ground up in modern C++17. 
 * Overall design was kept simple and *most* of it is commented so beginners can understand whats going on.
@@ -21,7 +18,21 @@ You need the Microsoft Visual C++ Redistributable for Visual Studio 2017 availab
 * Probably other things!
 
 ## Build requirements
-* Visual Studio 2017
+* Visual Studio 2017-2022
+* CMake
+
+## Build steps
+From the command line you must generate a project using CMake:
+```
+> cmake -B build -G "Visual Studio 17 2022" -A Win32
+```
+
+At this point you can now open `/build/Kanan.sln` with visual studio, or continue the build from the command line with:
+
+```
+> cmake --build build --config Release
+> cmake --install build --prefix out
+```
 
 ## Usage
 Once the project has been built successfully in Release mode just run Loader.exe as an administrator. Loader.exe will automatically look for any instances of Mabinogi and load Kanan.dll into it. Press the INSERT key to toggle the UI.
