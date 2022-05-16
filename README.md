@@ -1,4 +1,4 @@
-# Kanan's New Mabinogi Mod [![Build status](https://ci.appveyor.com/api/projects/status/frp20d9y14rpxha0?svg=true)](https://ci.appveyor.com/project/cursey/kanan-new)
+# Kanan's New Mabinogi Mod [![.github/workflows/build.yml](https://github.com/cursey/kanan-new/actions/workflows/build.yml/badge.svg)](https://github.com/cursey/kanan-new/actions/workflows/build.yml)
 A reimagining of Kanan for Mabinogi written in C++ with many improvements.
 
 ## Download
