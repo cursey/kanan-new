@@ -11,7 +11,7 @@ jobs:
         run: cmake -B build -A Win32
 
       - name: Build
-        run: cmake --build build --config Release
+        run: cmake --build build --config Release --parallel
 
       - name: Install
         run: cmake --install build --prefix out
