@@ -46,11 +46,11 @@ find_package(imgui REQUIRED CONFIG)
 
 find_package(nlohmann_json REQUIRED CONFIG)
 
-# Target kanan-core
-set(CMKR_TARGET kanan-core)
-set(kanan-core_SOURCES "")
+# Target Core
+set(CMKR_TARGET Core)
+set(Core_SOURCES "")
 
-list(APPEND kanan-core_SOURCES
+list(APPEND Core_SOURCES
 	"Core/Config.cpp"
 	"Core/FunctionHook.cpp"
 	"Core/Memory.cpp"
@@ -81,36 +81,36 @@ list(APPEND kanan-core_SOURCES
 	"Core/Utility.hpp"
 )
 
-list(APPEND kanan-core_SOURCES
+list(APPEND Core_SOURCES
 	cmake.toml
 )
 
-set(CMKR_SOURCES ${kanan-core_SOURCES})
-add_library(kanan-core STATIC)
+set(CMKR_SOURCES ${Core_SOURCES})
+add_library(Core STATIC)
 
-if(kanan-core_SOURCES)
-	target_sources(kanan-core PRIVATE ${kanan-core_SOURCES})
+if(Core_SOURCES)
+	target_sources(Core PRIVATE ${Core_SOURCES})
 endif()
 
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${kanan-core_SOURCES})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${Core_SOURCES})
 
-target_compile_definitions(kanan-core PUBLIC
+target_compile_definitions(Core PUBLIC
 	UNICODE
 )
 
-target_compile_features(kanan-core PUBLIC
+target_compile_features(Core PUBLIC
 	cxx_std_20
 )
 
-target_include_directories(kanan-core PUBLIC
+target_include_directories(Core PUBLIC
 	"Core/"
 )
 
-target_link_libraries(kanan-core PUBLIC
+target_link_libraries(Core PUBLIC
 	minhook::minhook
 )
 
-set_target_properties(kanan-core PROPERTIES
+set_target_properties(Core PROPERTIES
 	MSVC_RUNTIME_LIBRARY
 		MultiThreaded$<$<CONFIG:Debug>:Debug>
 )
@@ -118,11 +118,11 @@ set_target_properties(kanan-core PROPERTIES
 unset(CMKR_TARGET)
 unset(CMKR_SOURCES)
 
-# Target kanan
-set(CMKR_TARGET kanan)
-set(kanan_SOURCES "")
+# Target Kanan
+set(CMKR_TARGET Kanan)
+set(Kanan_SOURCES "")
 
-list(APPEND kanan_SOURCES
+list(APPEND Kanan_SOURCES
 	"Kanan/AutoChangeChannels.cpp"
 	"Kanan/AutoSetMTU.cpp"
 	"Kanan/BorderlessWindow.cpp"
@@ -211,35 +211,35 @@ list(APPEND kanan_SOURCES
 	"Kanan/metrics_gui/snprintf.h"
 )
 
-list(APPEND kanan_SOURCES
+list(APPEND Kanan_SOURCES
 	cmake.toml
 )
 
-set(CMKR_SOURCES ${kanan_SOURCES})
-add_library(kanan SHARED)
+set(CMKR_SOURCES ${Kanan_SOURCES})
+add_library(Kanan SHARED)
 
-if(kanan_SOURCES)
-	target_sources(kanan PRIVATE ${kanan_SOURCES})
+if(Kanan_SOURCES)
+	target_sources(Kanan PRIVATE ${Kanan_SOURCES})
 endif()
 
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${kanan_SOURCES})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${Kanan_SOURCES})
 
-target_compile_definitions(kanan PUBLIC
+target_compile_definitions(Kanan PUBLIC
 	IMGUI_DISABLE_INCLUDE_IMCONFIG_H
 )
 
-target_include_directories(kanan PUBLIC
+target_include_directories(Kanan PUBLIC
 	"Kanan/"
 )
 
-target_link_libraries(kanan PUBLIC
-	kanan-core
+target_link_libraries(Kanan PUBLIC
+	Core
 	imgui::imgui
 	nlohmann_json::nlohmann_json
 	ws2_32
 )
 
-set_target_properties(kanan PROPERTIES
+set_target_properties(Kanan PROPERTIES
 	MSVC_RUNTIME_LIBRARY
 		MultiThreaded$<$<CONFIG:Debug>:Debug>
 )
@@ -247,37 +247,37 @@ set_target_properties(kanan PROPERTIES
 unset(CMKR_TARGET)
 unset(CMKR_SOURCES)
 
-# Target loader
-set(CMKR_TARGET loader)
-set(loader_SOURCES "")
+# Target Loader
+set(CMKR_TARGET Loader)
+set(Loader_SOURCES "")
 
-list(APPEND loader_SOURCES
+list(APPEND Loader_SOURCES
 	"Loader/Main.cpp"
 )
 
-list(APPEND loader_SOURCES
+list(APPEND Loader_SOURCES
 	cmake.toml
 )
 
-set(CMKR_SOURCES ${loader_SOURCES})
-add_executable(loader)
+set(CMKR_SOURCES ${Loader_SOURCES})
+add_executable(Loader)
 
-if(loader_SOURCES)
-	target_sources(loader PRIVATE ${loader_SOURCES})
+if(Loader_SOURCES)
+	target_sources(Loader PRIVATE ${Loader_SOURCES})
 endif()
 
 get_directory_property(CMKR_VS_STARTUP_PROJECT DIRECTORY ${PROJECT_SOURCE_DIR} DEFINITION VS_STARTUP_PROJECT)
 if(NOT CMKR_VS_STARTUP_PROJECT)
-	set_property(DIRECTORY ${PROJECT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT loader)
+	set_property(DIRECTORY ${PROJECT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Loader)
 endif()
 
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${loader_SOURCES})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${Loader_SOURCES})
 
-target_link_libraries(loader PRIVATE
-	kanan-core
+target_link_libraries(Loader PRIVATE
+	Core
 )
 
-set_target_properties(loader PROPERTIES
+set_target_properties(Loader PROPERTIES
 	MSVC_RUNTIME_LIBRARY
 		MultiThreaded$<$<CONFIG:Debug>:Debug>
 )
@@ -285,11 +285,11 @@ set_target_properties(loader PROPERTIES
 unset(CMKR_TARGET)
 unset(CMKR_SOURCES)
 
-# Target launcher
-set(CMKR_TARGET launcher)
-set(launcher_SOURCES "")
+# Target Launcher
+set(CMKR_TARGET Launcher)
+set(Launcher_SOURCES "")
 
-list(APPEND launcher_SOURCES
+list(APPEND Launcher_SOURCES
 	"Launcher/App.cpp"
 	"Launcher/Crypto.cpp"
 	"Launcher/HttpClient.cpp"
@@ -311,34 +311,34 @@ list(APPEND launcher_SOURCES
 	"Launcher/WmiQuery.hpp"
 )
 
-list(APPEND launcher_SOURCES
+list(APPEND Launcher_SOURCES
 	cmake.toml
 )
 
-set(CMKR_SOURCES ${launcher_SOURCES})
-add_executable(launcher)
+set(CMKR_SOURCES ${Launcher_SOURCES})
+add_executable(Launcher)
 
-if(launcher_SOURCES)
-	target_sources(launcher PRIVATE ${launcher_SOURCES})
+if(Launcher_SOURCES)
+	target_sources(Launcher PRIVATE ${Launcher_SOURCES})
 endif()
 
 get_directory_property(CMKR_VS_STARTUP_PROJECT DIRECTORY ${PROJECT_SOURCE_DIR} DEFINITION VS_STARTUP_PROJECT)
 if(NOT CMKR_VS_STARTUP_PROJECT)
-	set_property(DIRECTORY ${PROJECT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT launcher)
+	set_property(DIRECTORY ${PROJECT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Launcher)
 endif()
 
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${launcher_SOURCES})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${Launcher_SOURCES})
 
-target_compile_definitions(launcher PRIVATE
+target_compile_definitions(Launcher PRIVATE
 	IMGUI_DISABLE_INCLUDE_IMCONFIG_H
 )
 
-target_include_directories(launcher PRIVATE
+target_include_directories(Launcher PRIVATE
 	"Kanan/"
 )
 
-target_link_libraries(launcher PRIVATE
-	kanan-core
+target_link_libraries(Launcher PRIVATE
+	Core
 	imgui::imgui
 	nlohmann_json::nlohmann_json
 	Bcrypt
@@ -349,7 +349,7 @@ target_link_libraries(launcher PRIVATE
 	Wbemuuid
 )
 
-set_target_properties(launcher PROPERTIES
+set_target_properties(Launcher PROPERTIES
 	MSVC_RUNTIME_LIBRARY
 		MultiThreaded$<$<CONFIG:Debug>:Debug>
 	WIN32_EXECUTABLE
@@ -361,13 +361,13 @@ unset(CMKR_SOURCES)
 
 install(
 	TARGETS
-		kanan
-		loader
-		launcher
+		Kanan
+		Loader
+		Launcher
 	DESTINATION
 		bin
 	COMPONENT
-		kanan
+		Kanan
 )
 install(
 	FILES
@@ -375,6 +375,4 @@ install(
 		"Kanan/Patches.json"
 	DESTINATION
 		bin
-	COMPONENT
-		kanan
 )

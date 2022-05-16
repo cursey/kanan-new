@@ -14,7 +14,7 @@ minhook = { config = true, required = true }
 imgui = { config = true, required = true }
 nlohmann_json = { config = true, required = true }
 
-[target.kanan-core]
+[target.Core]
 type = "static"
 sources = ["Core/**.cpp"]
 headers = ["Core/**.hpp"]
@@ -24,37 +24,35 @@ compile-definitions = ["UNICODE"]
 link-libraries = ["minhook::minhook"]
 properties.MSVC_RUNTIME_LIBRARY = "MultiThreaded$<$<CONFIG:Debug>:Debug>"
 
-[target.kanan]
+[target.Kanan]
 type = "shared"
 sources = ["Kanan/**.cpp"]
 headers = ["Kanan/**.hpp", "Kanan/**.h"]
 include-directories = ["Kanan/"]
 compile-definitions = ["IMGUI_DISABLE_INCLUDE_IMCONFIG_H"]
-link-libraries = ["kanan-core", "imgui::imgui", "nlohmann_json::nlohmann_json", "ws2_32"]
+link-libraries = ["Core", "imgui::imgui", "nlohmann_json::nlohmann_json", "ws2_32"]
 properties.MSVC_RUNTIME_LIBRARY = "MultiThreaded$<$<CONFIG:Debug>:Debug>"
 
-[target.loader]
+[target.Loader]
 type = "executable"
 sources = ["Loader/Main.cpp"]
-link-libraries = ["kanan-core"]
+link-libraries = ["Core"]
 properties.MSVC_RUNTIME_LIBRARY = "MultiThreaded$<$<CONFIG:Debug>:Debug>"
 
-[target.launcher]
+[target.Launcher]
 type = "executable"
 sources = ["Launcher/**.cpp"]
 headers = ["Launcher/**.hpp"]
 include-directories = ["Kanan/"] # For FontData.hpp
 compile-definitions = ["IMGUI_DISABLE_INCLUDE_IMCONFIG_H"]
-link-libraries = ["kanan-core", "imgui::imgui", "nlohmann_json::nlohmann_json", "Bcrypt", "Crypt32", "Winhttp", "Rpcrt4", "D3d9", "Wbemuuid"]
+link-libraries = ["Core", "imgui::imgui", "nlohmann_json::nlohmann_json", "Bcrypt", "Crypt32", "Winhttp", "Rpcrt4", "D3d9", "Wbemuuid"]
 properties.MSVC_RUNTIME_LIBRARY = "MultiThreaded$<$<CONFIG:Debug>:Debug>"
 properties.WIN32_EXECUTABLE = true
 
 [[install]]
-targets = ["kanan", "loader", "launcher"]
+targets = ["Kanan", "Loader", "Launcher"]
 destination = "bin"
-component = "kanan"
 
 [[install]]
 files = ["Loader/Loader.txt", "Kanan/Patches.json"]
 destination =  "bin"
-component = "kanan"
