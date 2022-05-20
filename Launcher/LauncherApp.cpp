@@ -349,6 +349,7 @@ void LauncherApp::mainUI() {
     //
     if (ImGui::BeginMainMenuBar()) {
         if (ImGui::BeginMenu("File")) {
+            if (ImGui::MenuItem("New Profile")) { m_profiles.emplace_back(Profile{}); }
             if (ImGui::MenuItem("Save")) { saveProfiles(); }
             if (ImGui::MenuItem("Exit")) { PostQuitMessage(0); }
             ImGui::EndMenu();
