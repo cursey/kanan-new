@@ -275,6 +275,10 @@ target_link_libraries(Loader PRIVATE
 	Core
 )
 
+target_link_options(Loader PRIVATE
+	"/MANIFESTUAC:level=requireAdministrator"
+)
+
 set_target_properties(Loader PROPERTIES
 	MSVC_RUNTIME_LIBRARY
 		MultiThreaded$<$<CONFIG:Debug>:Debug>
@@ -345,6 +349,10 @@ target_link_libraries(Launcher PRIVATE
 	Rpcrt4
 	D3d9
 	Wbemuuid
+)
+
+target_link_options(Launcher PRIVATE
+	"/MANIFESTUAC:level=requireAdministrator"
 )
 
 set_target_properties(Launcher PROPERTIES
