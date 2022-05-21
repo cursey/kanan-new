@@ -25,7 +25,7 @@ namespace kanan {
         log("Entering AutoSetMTU constructor.");
         log("Looking for connection address...");
 
-        auto connectionAddress = scan("client.exe", "55 8B EC 83 EC ? 56 8B 75 0C 8B CE");
+        auto connectionAddress = scan("client.exe", "55 8B EC 83 EC ? 56 8B 75 0C 8B CE 57 E8 ? ? ? ? 6A ?");
 
         if (connectionAddress) {
             log("Got connection address %p", *connectionAddress);
