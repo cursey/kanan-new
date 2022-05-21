@@ -22,6 +22,9 @@ namespace kanan {
 
 	void Currtarget::onFrame()
 	{
+		if (!m_is_enabled) {
+			return;
+		}
 
 		auto game = g_kanan->getGame();
 		auto localCharacter = game->getLocalCharacter();
