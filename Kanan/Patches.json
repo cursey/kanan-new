@@ -855,17 +855,17 @@
         "category": "Speedup",
         "patches": [
             {
-                "pattern": "74 19 8B 45 0C 8B 75 08 50 56 E8",
+                "pattern": "74 ? FF 75 0C 8B 75 08 56 E8 ? ? ? ? C7 45 FC ? ? ? ? C7 45 F0 ? ? ? ? 8B C6 8B 4D ? 64 89 ? ? ? ? ? 59 5E 8B E5 5D C2 ? ? C7 45 0C ? ? ? ? C7 45 FC ? ? ? ? 8D 45 ?",
                 "patch": "EB",
                 "n": 0
             },
             {
-                "pattern": "74 19 8B 45 0C 8B 75 08 50 56 E8",
+                "pattern": "74 ? FF 75 0C 8B 75 08 56 E8 ? ? ? ? C7 45 FC ? ? ? ? C7 45 F0 ? ? ? ? 8B C6 8B 4D ? 64 89 ? ? ? ? ? 59 5E 8B E5 5D C2 ? ? C7 45 0C ? ? ? ? C7 45 FC ? ? ? ? 8D 45 ?",
                 "patch": "EB",
                 "n": 1
             },
             {
-                "pattern": "74 19 8B 45 0C 8B 75 08 50 56 E8",
+                "pattern": "74 ? FF 75 0C 8B 75 08 56 E8 ? ? ? ? C7 45 FC ? ? ? ? C7 45 F0 ? ? ? ? 8B C6 8B 4D ? 64 89 ? ? ? ? ? 59 5E 8B E5 5D C2 ? ? C7 45 0C ? ? ? ? C7 45 FC ? ? ? ? 8D 45 ?",
                 "patch": "EB",
                 "n": 2
             }
