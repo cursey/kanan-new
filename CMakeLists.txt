@@ -39,8 +39,21 @@ if(CMKR_ROOT_PROJECT AND NOT CMKR_DISABLE_VCPKG)
 	include("${vcpkg_SOURCE_DIR}/scripts/buildsystems/vcpkg.cmake")
 endif()
 
+include(FetchContent)
+
+message(STATUS "Fetching safetyhook (ff5eb17ece60397463acae3da02509e305496407)...")
+FetchContent_Declare(safetyhook
+	GIT_REPOSITORY
+		"https://github.com/cursey/safetyhook.git"
+	GIT_TAG
+		ff5eb17ece60397463acae3da02509e305496407
+)
+FetchContent_MakeAvailable(safetyhook)
+
+set_target_properties(safetyhook PROPERTIES MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+
 # Packages
-find_package(minhook REQUIRED CONFIG)
+find_package(bddisasm REQUIRED CONFIG)
 
 find_package(imgui REQUIRED CONFIG)
 
@@ -107,7 +120,7 @@ target_include_directories(Core PUBLIC
 )
 
 target_link_libraries(Core PUBLIC
-	minhook::minhook
+	safetyhook::safetyhook
 )
 
 set_target_properties(Core PROPERTIES

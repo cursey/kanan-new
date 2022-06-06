@@ -7,12 +7,19 @@ set(VCPKG_TARGET_TRIPLET x86-windows-static)
 
 [vcpkg]
 version = "2022.05.10"
-packages = ["minhook", "imgui[freetype,dx9-binding,win32-binding]", "nlohmann-json", "stb"]
+packages = ["bddisasm", "imgui[freetype,dx9-binding,win32-binding]", "nlohmann-json", "stb"]
 
 [find-package]
-minhook = { config = true, required = true }
+bddisasm = { config = true, required = true }
 imgui = { config = true, required = true }
 nlohmann_json = { config = true, required = true }
+
+[fetch-content.safetyhook]
+git = "https://github.com/cursey/safetyhook.git"
+tag = "ff5eb17ece60397463acae3da02509e305496407"
+cmake-after = """
+set_target_properties(safetyhook PROPERTIES MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+"""
 
 [target.Core]
 type = "static"
@@ -21,7 +28,7 @@ headers = ["Core/**.hpp"]
 include-directories = ["Core/"]
 compile-features = ["cxx_std_20"]
 compile-definitions = ["UNICODE"]
-link-libraries = ["minhook::minhook"]
+link-libraries = ["safetyhook::safetyhook"]
 properties.MSVC_RUNTIME_LIBRARY = "MultiThreaded$<$<CONFIG:Debug>:Debug>"
 
 [target.Kanan]

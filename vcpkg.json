@@ -3,7 +3,7 @@
   "$cmkr-url": "https://github.com/build-cpp/cmkr",
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg/master/scripts/vcpkg.schema.json",
   "dependencies": [
-    "minhook",
+    "bddisasm",
     {
       "name": "imgui",
       "features": ["freetype","dx9-binding","win32-binding"]
