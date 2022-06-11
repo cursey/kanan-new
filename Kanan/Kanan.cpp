@@ -40,7 +40,8 @@ namespace kanan {
         m_areModsReady{ false },
         m_areModsLoaded{ false },
         m_wnd{ nullptr },
-        m_isUIOpenByDefault{ true }
+        m_isUIOpenByDefault{ true },
+        m_ismetricsopen{ false }
     {
         log("Entering Kanan constructor.");
 
@@ -337,6 +338,7 @@ namespace kanan {
         Config cfg{ m_path + "/config.txt" };
 
         m_isUIOpenByDefault = cfg.get<bool>("UI.OpenByDefault").value_or(true);
+        m_ismetricsopen = cfg.get<bool>("UI.metricsopen").value_or(false);
         m_isUIOpen = m_isUIOpenByDefault;
 
         for (auto& mod : m_mods.getMods()) {
@@ -361,6 +363,7 @@ namespace kanan {
         Config cfg{};
 
         cfg.set<bool>("UI.OpenByDefault", m_isUIOpenByDefault);
+        cfg.set<bool>("UI.metricsopen", m_ismetricsopen);
 
         for (auto& mod : m_mods.getMods()) {
             mod->onConfigSave(cfg);
