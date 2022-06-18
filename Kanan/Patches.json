@@ -1195,5 +1195,17 @@
           "patch": "90 90 90 90 90 90"
         }
       ]
-    }
+    },
+      {
+    "name": "Bulk Buy x99",
+    "desc": "Alters the Bulk buy increase of items from +10 to +99",
+    "category": "Speedup",
+    "patches": [
+      {
+        "pattern": "75 ? B8 0A000000 5D C3",
+        "offset": 3,
+        "patch": "63"
+      }
+    ]
+  }
 ]
