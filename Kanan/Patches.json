@@ -1224,5 +1224,17 @@
         "patch": "1E"
       }
     ]
+  },
+  {
+    "name": "Enable Prop Target With Skill Loaded",
+    "desc": "Allows the use of the prop target hotkey with a skill loaded",
+    "category": "Quality of Life",
+    "patches": [
+      {
+        "pattern": "0F B7 F8 66 85 FF 0F 84 ? ? ? ? 8B 8D 78 FF FF FF",
+        "offset": 6,
+        "patch": "90 E9"
+      }
+    ]
   }
 ]
