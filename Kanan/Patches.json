@@ -1207,5 +1207,22 @@
         "patch": "63"
       }
     ]
+  },  
+  {
+    "name": "Ego Auto Select x30",
+    "desc": "Alters the Ego feed auto select button to select 30 items instead of 10",
+    "category": "Speedup",
+    "patches": [
+      {
+        "pattern": "66 83 7D F0 0A 73 ? 8B 4D 08  66 83 F9 1E 73 ? 8B 5D E8 BA 1E000000 0FB7 C1 B9 0A000000",
+        "offset": 4,
+        "patch": "1E"
+      },
+      {
+        "pattern": "66 83 7D F0 0A 73 ? 8B 4D 08  66 83 F9 1E 73 ? 8B 5D E8 BA 1E000000 0FB7 C1 B9 0A000000",
+        "offset": 28,
+        "patch": "1E"
+      }
+    ]
   }
 ]
