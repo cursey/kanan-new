@@ -1231,9 +1231,8 @@
     "category": "Quality of Life",
     "patches": [
       {
-        "pattern": "0F B7 F8 66 85 FF 0F 84 ? ? ? ? 8B 8D 78 FF FF FF",
-        "offset": 6,
-        "patch": "90 E9"
+        "pattern": "74 ? 2B BD 7C FF FF FF 83 EF 1C D1 FF EB 03 83 CF FF C6 45 FC 00 85 F6 74 11",
+        "patch": "90 90"
       }
     ]
   }
