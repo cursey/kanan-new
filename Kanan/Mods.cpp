@@ -26,7 +26,6 @@
 #include "ChangeChannelHotkey.hpp"
 #include "Currtarget.hpp"
 #include "CookingMod.hpp"
-#include "CharacterWindowTitle.hpp"
 
 #include "Log.hpp"
 
@@ -123,7 +122,6 @@ namespace kanan {
         addMod(make_unique<AutoChangeChannels>());
         addMod(make_unique<ChangeChannelHotkey>());
         addMod(make_unique<Currtarget>());
-        addMod(make_unique<CharacterWindowTitle>());
 
         log("[Mods] Finished loading mods.");
     }
