@@ -5,6 +5,8 @@
 #include "Kanan.hpp"
 #include "Log.hpp"
 
+#include "winuser.h"
+
 namespace kanan {
 CharacterWindowTitle::CharacterWindowTitle() : m_is_enabled{}, m_currentCharTitle{} {
 }
