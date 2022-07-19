@@ -1235,5 +1235,22 @@
         "patch": "90 90"
       }
     ]
+  },
+  {
+    "name": "Reforge Guide Skip",
+    "desc": "Skips drawing of the reforge guide UI when reforging a new item (patch1) and sets the clicked confirm button flag to true (patch2)",
+    "category": "Speedup",
+    "patches": [
+      {
+        "pattern": "E8 ? ? ? ? 8B F0 89 75 E4 85 F6 0F 84 ? ? ? ? 8B CB",
+        "offset": 12,
+        "patch": "90 E9"
+      },
+      {
+        "pattern": "6A ? 8B 01 FF 50 ? 68 ? ? ? ? C7 45 EC ? ? ? ? E8 ? ? ? ? 8B F8 8D 77 ? 56 E8 ? ? ? ? 68 ? ? ? ? 89 45 ? 83 C0 ? 56 50 E8 ? ? ? ? 8B 45 ? 83 C4 ? 89 78 ? C6 45 FC ? 8D 45 ? 50 8D 45 ? 50 E8 ? ? ? ? 8B C8 E8 ? ? ? ? C6 45 FC ? 8D 4D ? 51 8B C8 E8 ? ? ? ? C6 45 FC ? 8D 55",
+        "offset": 1,
+        "patch": "01"
+      }
+    ]
   }
 ]
