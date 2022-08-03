@@ -87,7 +87,7 @@ namespace kanan {
             ifstream patchesFile{ path };
 
             if (!patchesFile) {
-                log("Failed to load patches file: %s", path.c_str());
+                log("Failed to load patches file: %s", path.string().c_str());
             }
 
             json patches{};
