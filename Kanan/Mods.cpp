@@ -75,11 +75,19 @@ namespace kanan {
                 continue;
             }
 
+            auto filename = path.filename().string();
+
+            std::transform(filename.begin(), filename.end(), filename.begin(), ::tolower);
+
+            if (filename.find("patch") == std::string::npos) {
+                continue;
+            }
+
             // Load patches from the patches json file.
             ifstream patchesFile{ path };
 
             if (!patchesFile) {
-                log("Failed to load patches file: %s", path.c_str());
+                log("Failed to load patches file: %s", path.string().c_str());
             }
 
             json patches{};
