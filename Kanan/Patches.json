@@ -1252,5 +1252,16 @@
         "patch": "01"
       }
     ]
+  },
+  {
+    "name": "Don't Close Title Window",
+    "desc": "Disables the automatic closing of the title window when switching titles.",
+    "category": "Quality of Life",
+    "patches": [
+      {
+        "pattern": "FF 50 ? E9 ? ? ? ? 8B 86 ? ? ? ? 3B 48 ? 75 ? 8B CE",
+        "patch": "90 90 90"
+      }
+    ]
   }
 ]
