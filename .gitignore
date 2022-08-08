@@ -4,6 +4,8 @@
 Release/
 Debug/
 build/
+out/
+__pycache__/
 
 *.orig
 *.user

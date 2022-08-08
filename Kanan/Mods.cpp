@@ -2,7 +2,7 @@
 #include <filesystem>
 #include <thread>
 
-#include <json.hpp>
+#include <nlohmann/json.hpp>
 #include <String.hpp>
 #include <Config.hpp>
 
@@ -19,13 +19,14 @@
 #include "UseDataFolder.hpp"
 #include "FreezeTimeOfDay.hpp"
 #include "TTFFontSize.hpp"
-#include "SecondaryPassword.hpp"
 #include "StatusUI.hpp"
 #include "LoginScreen.hpp"
 #include "DontMoveToSquadChat.hpp"
 #include "AutoChangeChannels.hpp"
 #include "ChangeChannelHotkey.hpp"
 #include "Currtarget.hpp"
+#include "CookingMod.hpp"
+#include "CharacterWindowTitle.hpp"
 
 #include "Log.hpp"
 
@@ -74,11 +75,19 @@ namespace kanan {
                 continue;
             }
 
+            auto filename = path.filename().string();
+
+            std::transform(filename.begin(), filename.end(), filename.begin(), ::tolower);
+
+            if (filename.find("patch") == std::string::npos) {
+                continue;
+            }
+
             // Load patches from the patches json file.
             ifstream patchesFile{ path };
 
             if (!patchesFile) {
-                log("Failed to load patches file: %s", path.c_str());
+                log("Failed to load patches file: %s", path.string().c_str());
             }
 
             json patches{};
@@ -114,14 +123,15 @@ namespace kanan {
         addMod(make_unique<BorderlessWindow>());
         addMod(make_unique<EnableMultiClient>());
         addMod(make_unique<EntityViewer>());
+        addMod(make_unique<CookingMod>());
         addMod(make_unique<EquipmentOverride>());
         addMod(make_unique<FieldOfView>());
         addMod(make_unique<FreezeTimeOfDay>());
-        addMod(make_unique<SecondaryPassword>());
         addMod(make_unique<StatusUI>());
         addMod(make_unique<AutoChangeChannels>());
         addMod(make_unique<ChangeChannelHotkey>());
         addMod(make_unique<Currtarget>());
+        addMod(make_unique<CharacterWindowTitle>());
 
         log("[Mods] Finished loading mods.");
     }

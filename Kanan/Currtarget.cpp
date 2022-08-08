@@ -22,13 +22,18 @@ namespace kanan {
 
 	void Currtarget::onFrame()
 	{
+		if (!m_is_enabled) {
+			return;
+		}
 
 		auto game = g_kanan->getGame();
 		auto localCharacter = game->getLocalCharacter();
 		KCharacter* target = nullptr;
-
 		//check if there is a local char or target for local char. if not dont bother rendering window
-		if (!localCharacter) { m_has_target = false; }
+		if (localCharacter == nullptr) {
+			m_has_target = false;
+			return;
+		}
 		else if (localCharacter) {
 			target = g_kanan->getGame()->getCharacterByID(localCharacter->targetID);
 			if (target == nullptr) { m_has_target = false; }
@@ -201,11 +206,17 @@ namespace kanan {
 	void Currtarget::onConfigLoad(const Config& cfg)
 	{
 		m_is_enabled = cfg.get<bool>("targetdetail.Enabled").value_or(false);
+		m_show_pos = cfg.get<bool>("showpos.Enabled").value_or(false);
+		m_show_targetoftarget = cfg.get<bool>("targetoftarget.Enabled").value_or(false);
+		m_show_targethp = cfg.get<bool>("targethp.Enabled").value_or(false);
 	}
 
 	void Currtarget::onConfigSave(Config& cfg)
 	{
 		cfg.set<bool>("targetdetail.Enabled", m_is_enabled);
+		cfg.set<bool>("showpos.Enabled", m_show_pos);
+		cfg.set<bool>("targetoftarget.Enabled", m_show_targetoftarget);
+		cfg.set<bool>("targethp.Enabled", m_show_targethp);
 	}
 
 	void Currtarget::onKeyUp(DWORD key)

@@ -43,7 +43,7 @@ namespace kanan {
 		bool reapply = false;
 		ImGui::Checkbox("Color Alt Text Others", &m_isEnabledOthers);
 		if (m_isEnabledOthers) {
-			if (ImGui::ColorEdit4("Others", rgbaOthers, ImGuiColorEditFlags_HEX)) {
+			if (ImGui::ColorEdit4("Others", rgbaOthers, ImGuiColorEditFlags_DisplayHex)) {
 				u_int r = (u_int)(255 * rgbaOthers[0]);
 				u_int g = (u_int)(255 * rgbaOthers[1]);
 				u_int b = (u_int)(255 * rgbaOthers[2]);
@@ -54,7 +54,7 @@ namespace kanan {
 		}
 		ImGui::Checkbox("Color Alt Text Self", &m_isEnabledSelf);
 		if (m_isEnabledSelf) {
-			if (ImGui::ColorEdit4("Self", rgbaSelf, ImGuiColorEditFlags_HEX)) {
+			if (ImGui::ColorEdit4("Self", rgbaSelf, ImGuiColorEditFlags_DisplayHex)) {
 				u_int r = (u_int)(255 * rgbaSelf[0]);
 				u_int g = (u_int)(255 * rgbaSelf[1]);
 				u_int b = (u_int)(255 * rgbaSelf[2]);

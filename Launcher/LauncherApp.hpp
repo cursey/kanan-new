@@ -37,8 +37,8 @@ private:
     std::string m_clientPath{};
     Image m_bg;
 
-    std::array<char, 64> m_masterPassword;
-    std::array<char, 64> m_masterPasswordRepeat;
+    std::array<char, 64> m_masterPassword{};
+    std::array<char, 64> m_masterPasswordRepeat{};
 
     std::future<bool> m_launchResult{};
 

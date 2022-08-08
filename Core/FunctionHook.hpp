@@ -2,6 +2,8 @@
 
 #include <cstdint>
 
+#include <SafetyHook.hpp>
+
 namespace kanan {
     class FunctionHook {
     public:
@@ -9,26 +11,23 @@ namespace kanan {
         FunctionHook(const FunctionHook& other) = delete;
         FunctionHook(FunctionHook&& other) = delete;
         FunctionHook(uintptr_t target, uintptr_t destination);
-        virtual ~FunctionHook();
 
         // Called automatically by the destructor, but you can call it explicitly
         // if you need to remove the hook.
         bool remove();
 
         auto getOriginal() const {
-            return m_original;
+            return m_hook->trampoline();
         }
 
         auto isValid() const {
-            return m_original != 0;
+            return m_hook != nullptr;
         }
 
         FunctionHook& operator=(const FunctionHook& other) = delete;
         FunctionHook& operator=(FunctionHook&& other) = delete;
 
     private:
-        uintptr_t m_target;
-        uintptr_t m_destination;
-        uintptr_t m_original;
+        std::unique_ptr<SafetyHook> m_hook{};
     };
 }
