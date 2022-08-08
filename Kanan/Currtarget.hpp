@@ -16,6 +16,7 @@ namespace kanan {
 		void onUI() override;
 		void createtargetwindow();
 		float ffdiv(float x, float y);
+        float v2dist(std::optional<Vector3> v1, std::optional<Vector3> v2);
 		void progressBar(float fraction, const ImVec2& sizeArg, ImU32 color, const char* overlay);
 		void onConfigLoad(const Config& cfg) override;
 		void onConfigSave(Config& cfg) override;
@@ -25,6 +26,7 @@ namespace kanan {
 	private:
 		bool m_is_enabled{};
 		bool m_has_target{};
+        bool m_show_distance{};
 		bool m_show_pos{};
 		bool m_show_targetoftarget{};
 		bool m_show_targethp{};
