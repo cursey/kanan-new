@@ -55,6 +55,7 @@ namespace kanan {
 			if (ImGui::Checkbox("Show details", &m_is_enabled)) {}
 			if (m_is_enabled) {
 				if (ImGui::Checkbox("Show Target Pos", &m_show_pos)) {}
+                if (ImGui::Checkbox("Show Target Distance", &m_show_distance)) {}
 				if (ImGui::Checkbox("Show Targets, Target", &m_show_targetoftarget)) {}
 				if (ImGui::Checkbox("Show Target HP", &m_show_targethp)) {}
 			}
@@ -111,6 +112,7 @@ namespace kanan {
 
 			//fill out imgui window
 			auto localname = localCharacter->getName();
+            auto localpos = localCharacter->getPosition();
 			if (targetchar) { ImGui::TextWrapped("%s's Target: %s", localname->c_str(), (!targetchar) ? "No Target" : targetchar->getName()->c_str()); }
 			else { ImGui::TextWrapped("%s has no target", localname->c_str()); }
 
@@ -128,18 +130,18 @@ namespace kanan {
 
 				ImGui::Indent();
 				if (m_show_pos) {
-					ImGui::BulletText("Pos: %f, %f", pos->x, pos->y);
+					ImGui::BulletText("Pos: %f, %f", pos->x, pos->z);
 
 				}
+                if (m_show_distance) {
+                    ImGui::BulletText("Distance: %f", v2dist(localpos, pos));
+                }
 				if (m_show_targetoftarget) {
 					ImGui::BulletText("Target: %s", (!targetoftarget) ? "No Target" : targetoftarget->getName()->c_str());
 
 				}
 				if (m_show_targethp) {
 					ImGui::BulletText("Health: %f/%f", parameter->life.value, parameter->lifeMaxBase.value + parameter->lifeMaxMod.value);
-
-					
-					
 
 				}
 				ImGui::Unindent();
@@ -162,6 +164,12 @@ namespace kanan {
 		}
 
 		return x / y;
+	}
+
+	float Currtarget::v2dist(std::optional<Vector3> v1, std::optional<Vector3> v2) {
+            float deltaY = v1->z - v2->z;
+            float deltaX = v1->x - v2->x;
+            return sqrt((deltaY * deltaY) + (deltaX * deltaX));
 	}
 
 	//edited imgui progress bar to have custom colour. stolen from statusUI and reused here
@@ -206,7 +214,8 @@ namespace kanan {
 	void Currtarget::onConfigLoad(const Config& cfg)
 	{
 		m_is_enabled = cfg.get<bool>("targetdetail.Enabled").value_or(false);
-		m_show_pos = cfg.get<bool>("showpos.Enabled").value_or(false);
+        m_show_pos = cfg.get<bool>("showpos.Enabled").value_or(false);
+        m_show_distance = cfg.get<bool>("showdistance.Enabled").value_or(false);
 		m_show_targetoftarget = cfg.get<bool>("targetoftarget.Enabled").value_or(false);
 		m_show_targethp = cfg.get<bool>("targethp.Enabled").value_or(false);
 	}
@@ -214,7 +223,8 @@ namespace kanan {
 	void Currtarget::onConfigSave(Config& cfg)
 	{
 		cfg.set<bool>("targetdetail.Enabled", m_is_enabled);
-		cfg.set<bool>("showpos.Enabled", m_show_pos);
+        cfg.set<bool>("showpos.Enabled", m_show_pos);
+        cfg.set<bool>("showdistance.Enabled", m_show_distance);
 		cfg.set<bool>("targetoftarget.Enabled", m_show_targetoftarget);
 		cfg.set<bool>("targethp.Enabled", m_show_targethp);
 	}
