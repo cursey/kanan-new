@@ -1,7 +1,6 @@
 #pragma once
-#include ".\Vector3.hpp"
+#include "Vector3.hpp"
 class CString;
-class CCharacter;
 #pragma pack(push, 1)
 class CCharacter {
 public:
@@ -187,11 +186,11 @@ public:
     CSkillMgr* skill; // 0xb0
     char pad_b4[0x10];
     CConditionMgr* condition; // 0xc4
-    char pad_c8[0x1b0];
-    CEquipment* equipment; // 0x278
-    char pad_27c[0x54];
-    uint64_t targetID; // 0x2d0
-    char pad_2d8[0x8];
-    uint64_t mouseTarget; // 0x2e0
-}; // Size: 0x2e8
+    char pad_c8[0x1b4];
+    CEquipment* equipment; // 0x27c
+    char pad_280[0x58];
+    uint64_t targetID; // 0x2d8
+    char pad_2e0[0x8];
+    uint64_t mouseTarget; // 0x2e8
+}; // Size: 0x2f0
 #pragma pack(pop)

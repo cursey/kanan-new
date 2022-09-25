@@ -168,9 +168,9 @@ class CCharacter {
     CAction* action
     CSkillMgr* skill 
     CConditionMgr* condition +16
-    CEquipment* equipment @ 0x278
-    uint64_t targetID @ 0x2D0
-    uint64_t mouseTarget @ 0x2E0
+    CEquipment* equipment @ 0x27C
+    uint64_t targetID @ 0x2D8
+    uint64_t mouseTarget +8
 }
 
 class CItem {

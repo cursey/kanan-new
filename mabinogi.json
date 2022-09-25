@@ -5,7 +5,7 @@
     },
     "process": {
         "filter": "client",
-        "id": 40484,
+        "id": 20812,
         "name": "Client.exe"
     },
     "props": {
@@ -60,7 +60,39 @@
                 },
                 "equipment": {
                     "equipment": {
-                        "__collapsed": false
+                        "__collapsed": false,
+                        "itemInfo": {
+                            "itemInfo[0]": {
+                                "__collapsed": false
+                            },
+                            "itemInfo[1]": {
+                                "__collapsed": false
+                            },
+                            "itemInfo[2]": {
+                                "__collapsed": false
+                            },
+                            "itemInfo[3]": {
+                                "__collapsed": false
+                            },
+                            "itemInfo[4]": {
+                                "__collapsed": false
+                            },
+                            "itemInfo[5]": {
+                                "__collapsed": false
+                            },
+                            "itemInfo[6]": {
+                                "__collapsed": false
+                            },
+                            "itemInfo[7]": {
+                                "__collapsed": false
+                            },
+                            "itemInfo[8]": {
+                                "__collapsed": false
+                            },
+                            "itemInfo[9]": {
+                                "__collapsed": false
+                            }
+                        }
                     }
                 },
                 "id": {
@@ -281,7 +313,7 @@
     "type": {
         "addresses": {
             "CAccountPtr": "0x3a4ef3c",
-            "CCharacter": "0x964d1968",
+            "CCharacter": "0x88c7eb78",
             "CEntityList": "0x4a04410",
             "CEntityListPtr": "0x3ceef74",
             "CItem": "0x7cb223c8",

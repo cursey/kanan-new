@@ -1,7 +1,7 @@
 #pragma once
-#include ".\Vector3.hpp"
-#include ".\Matrix4x4.hpp"
-#include ".\Vector4.hpp"
+#include "Matrix4x4.hpp"
+#include "Vector3.hpp"
+#include "Vector4.hpp"
 #pragma pack(push, 1)
 class CRenderer {
 public:

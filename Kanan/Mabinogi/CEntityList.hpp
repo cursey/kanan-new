@@ -7,7 +7,6 @@ public:
     class CItemList {
     public:
         class CCItemListNode {
-        public:
         }; // Size: 0x0
 
         class CItemListNode {
