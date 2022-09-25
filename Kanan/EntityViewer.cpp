@@ -16,7 +16,7 @@ namespace kanan {
         if (ImGui::CollapsingHeader("Character List")) {
 
 
-            //by default we will assume that no entitys exist
+            //by default we will assume that no entities exist
             bool noentitexists = true;
             
 
@@ -25,19 +25,19 @@ namespace kanan {
                 // just some bad int to string to char const* cause idk how to show ints in imgui lol
                 std::string s = std::to_string(countOfPlayer);
                 char const* pchar = s.c_str();
-                ImGui::TextWrapped("Player entitys: %s", pchar);
+                ImGui::TextWrapped("Player entities: %s", pchar);
                 noentitexists = false;
             }
             if (countOfPet != 0) {
                 std::string s = std::to_string(countOfPet);
                 char const* pchar = s.c_str();
-                ImGui::TextWrapped("Pet entitys: %s", pchar);
+                ImGui::TextWrapped("Pet entities: %s", pchar);
                 noentitexists = false;
             }
             if (countOfNPC != 0) {
                 std::string s = std::to_string(countOfNPC);
                 char const* pchar = s.c_str();
-                ImGui::TextWrapped("NPC entitys: %s", pchar);
+                ImGui::TextWrapped("NPC entities: %s", pchar);
                 noentitexists = false;
             }
             if (countOfOther != 0) {
@@ -45,12 +45,12 @@ namespace kanan {
                 else {
                     std::string s = std::to_string(countOfOther);
                     char const* pchar = s.c_str();
-                    ImGui::TextWrapped("Misc entitys: %s", pchar);
+                    ImGui::TextWrapped("Misc entities: %s", pchar);
                     noentitexists = false;
                 }
             }
 
-            //if no entitys exists say so
+            //if no entities exists say so
             if (noentitexists) {
                 ImGui::Text("No known entity types in range");
             }
@@ -168,7 +168,7 @@ namespace kanan {
                 countOfNPC++;
                 totalConfirmedEnt++;
             }
-            //remove all counted entitys from total
+            //remove all counted entities from total
             countOfOther = countOfOther - totalConfirmedEnt;
 
 
