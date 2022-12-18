@@ -291,7 +291,7 @@ target_link_libraries(Loader PRIVATE
 )
 
 target_link_options(Loader PRIVATE
-	"/MANIFESTUAC:level=requireAdministrator"
+	"/MANIFESTUAC:level=\"requireAdministrator\""
 )
 
 set_target_properties(Loader PROPERTIES
@@ -367,7 +367,7 @@ target_link_libraries(Launcher PRIVATE
 )
 
 target_link_options(Launcher PRIVATE
-	"/MANIFESTUAC:level=requireAdministrator"
+	"/MANIFESTUAC:level=\"requireAdministrator\""
 )
 
 set_target_properties(Launcher PROPERTIES
