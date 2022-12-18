@@ -186,9 +186,9 @@ public:
     CSkillMgr* skill; // 0xb0
     char pad_b4[0x10];
     CConditionMgr* condition; // 0xc4
-    char pad_c8[0x1b4];
-    CEquipment* equipment; // 0x27c
-    char pad_280[0x58];
+    char pad_c8[0x1b8];
+    CEquipment* equipment; // 0x280
+    char pad_284[0x54];
     uint64_t targetID; // 0x2d8
     char pad_2e0[0x8];
     uint64_t mouseTarget; // 0x2e8
