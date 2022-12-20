@@ -44,7 +44,7 @@ properties.MSVC_RUNTIME_LIBRARY = "MultiThreaded$<$<CONFIG:Debug>:Debug>"
 type = "executable"
 sources = ["Loader/Main.cpp"]
 link-libraries = ["Core"]
-link-options = ["/MANIFESTUAC:level=\"requireAdministrator\""]
+link-options = ["/MANIFESTUAC:level=requireAdministrator"]
 properties.MSVC_RUNTIME_LIBRARY = "MultiThreaded$<$<CONFIG:Debug>:Debug>"
 
 [target.Launcher]
@@ -54,7 +54,7 @@ headers = ["Launcher/**.hpp"]
 include-directories = ["Kanan/"] # For FontData.hpp
 compile-definitions = ["IMGUI_DISABLE_INCLUDE_IMCONFIG_H"]
 link-libraries = ["Core", "imgui::imgui", "nlohmann_json::nlohmann_json", "Bcrypt", "Crypt32", "Winhttp", "Rpcrt4", "D3d9", "Wbemuuid"]
-link-options = ["/MANIFESTUAC:level=\"requireAdministrator\""]
+link-options = ["/MANIFESTUAC:level=requireAdministrator"]
 properties.MSVC_RUNTIME_LIBRARY = "MultiThreaded$<$<CONFIG:Debug>:Debug>"
 properties.WIN32_EXECUTABLE = true
 
