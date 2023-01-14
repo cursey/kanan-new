@@ -88,7 +88,7 @@ namespace kanan {
 
     //find the addresses we need for patching
     CookingMod::CookingMod() {
-        auto cookingAddress = scan("client.exe", "55 8B EC 6A ? 68 ? ? ? ? 64 ? ? ? ? ? ? ? ? ? A8 ? CF 03 33 C5 50 8D ? F4 64 ? ? ? ? ? ? ? ? ? 14 ? 00 00");
+        auto cookingAddress = scan("client.exe", "55 8B EC 6A ? 68 ? ? ? ? 64 ? ? ? ? ? ? ? ? A1 ? ? ? ? 33 C5 50 8D ? F4 64 ? ? ? ? ? ? ? 8B 97 14 ? 00 00");
         DWORD cookingAddresst = *cookingAddress;
         if (!cookingAddresst) {
             log("unable to find cooking address");
