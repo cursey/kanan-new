@@ -29,6 +29,7 @@ namespace kanan {
 
 
     //the asm we want to inject
+#if 0
     void __declspec(naked) HookForCooking()
     {
         __asm
@@ -45,8 +46,11 @@ namespace kanan {
             ret
 
         }
-
     }
+#else
+    void HookForCooking() {
+    }
+#endif
 
 
     //the code i use for injecting stuff

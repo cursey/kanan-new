@@ -29,7 +29,7 @@ endif()
 
 project(Kanan)
 
-set(VCPKG_TARGET_TRIPLET x86-windows-static)
+set(VCPKG_TARGET_TRIPLET x64-windows-static)
 
 if(CMKR_ROOT_PROJECT AND NOT CMKR_DISABLE_VCPKG)
 	include(FetchContent)
@@ -197,16 +197,12 @@ list(APPEND Kanan_SOURCES
 	"Kanan/LoginScreen.hpp"
 	"Kanan/Mabinogi.hpp"
 	"Kanan/Mabinogi/CAccount.hpp"
-	"Kanan/Mabinogi/CAccountPtr.hpp"
 	"Kanan/Mabinogi/CCharacter.hpp"
 	"Kanan/Mabinogi/CEntityList.hpp"
-	"Kanan/Mabinogi/CEntityListPtr.hpp"
 	"Kanan/Mabinogi/CItem.hpp"
 	"Kanan/Mabinogi/CRenderer.hpp"
-	"Kanan/Mabinogi/CRendererPtr.hpp"
 	"Kanan/Mabinogi/CString.hpp"
 	"Kanan/Mabinogi/CWorld.hpp"
-	"Kanan/Mabinogi/CWorldPtr.hpp"
 	"Kanan/Mabinogi/Matrix4x4.hpp"
 	"Kanan/Mabinogi/Vector3.hpp"
 	"Kanan/Mabinogi/Vector4.hpp"
@@ -291,7 +287,7 @@ target_link_libraries(Loader PRIVATE
 )
 
 target_link_options(Loader PRIVATE
-	"/MANIFESTUAC:level=requireAdministrator"
+	"/MANIFESTUAC:level='requireAdministrator'"
 )
 
 set_target_properties(Loader PROPERTIES
@@ -367,7 +363,7 @@ target_link_libraries(Launcher PRIVATE
 )
 
 target_link_options(Launcher PRIVATE
-	"/MANIFESTUAC:level=requireAdministrator"
+	"/MANIFESTUAC:level='requireAdministrator'"
 )
 
 set_target_properties(Launcher PROPERTIES
