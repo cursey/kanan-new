@@ -17,15 +17,15 @@ namespace kanan {
 
         void changeChannel(int channel);
 
-        CRenderer* getRenderer() const { return m_renderer; }
-        CEntityList* getEntityList() const { return m_entityList; }
-        CWorld* getWorld() const { return m_world; }
-        CAccount* getAccount() const { return m_account; }
+        CRenderer* getRenderer() const { return *m_renderer; }
+        CEntityList* getEntityList() const { return *m_entityList; }
+        CWorld* getWorld() const { return *m_world; }
+        CAccount* getAccount() const { return *m_account; }
 
     private:
-        CRenderer* m_renderer;
-        CEntityList* m_entityList;
-        CWorld* m_world;
-        CAccount* m_account;
+        CRenderer** m_renderer;
+        CEntityList** m_entityList;
+        CWorld** m_world;
+        CAccount** m_account;
     };
 }
