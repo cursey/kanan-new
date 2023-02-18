@@ -1,112 +1,26 @@
 #include "CookingMod.hpp"
-#include "Kanan.hpp"
-#include <Scan.hpp>
-#include <Utility.hpp>
-#include <imgui.h>
-#include <vector>
-#include <windows.h>
-#include <TlHelp32.h>
-#include <Utility.hpp>
-#include <iostream>
-
 #include "Log.hpp"
+
+#include <SafetyHook.hpp>
 
 
 namespace kanan {
-    //our cooking vaules we will set
-    int cookingOne = 0;
-    int cookingTwo = 0;
-    int cookingThree = 0;
-
     // just a temp vector for the imgui ui
     int cookingTemp[3] = { 0, 0, 0 };
 
-
-    //cooking address
-    DWORD cookingAddressx;
-    DWORD addressOfCooking;
-
-
-
-    //the asm we want to inject
-#if 0
-    void __declspec(naked) HookForCooking()
-    {
-        __asm
-        {
-            mov eax, 00000000
-            mov esi, [cookingOne]
-            mov[edi + eax * 4 + 0x0000020C], esi
-            mov eax, 00000001
-            mov esi, [cookingTwo]
-            mov[edi + eax * 4 + 0x0000020C], esi
-            mov eax, 00000002
-            mov esi, [cookingThree]
-            mov[edi + eax * 4 + 0x0000020C], esi
-            ret
-
-        }
-    }
-#else
-    void HookForCooking() {
-    }
-#endif
-
-
-    //the code i use for injecting stuff
-    //patch bytes
-    void Patchmem(BYTE* dst, BYTE* src, unsigned int size)
-    {
-        DWORD oldprotect;
-        //set prems of area of memory to execute&read&write, copy the old perms into oldprotect
-        VirtualProtect(dst, size, PAGE_EXECUTE_READWRITE, &oldprotect);
-        //write our new bytes into the dst with the bytes in src
-        memcpy(dst, src, size);
-        //set the perms of the area of memory back to what ever it was before we were here
-        VirtualProtect(dst, size, oldprotect, &oldprotect);
-
-    }
-
+     
 
     //write a call to the custom code eg the hook
-    bool Hookcall(void* toHook, void* ourFunct, int len)
-    {
-        if (len < 5)
-        {
-            return false;
-        }
-        DWORD curProtection;
-        VirtualProtect(toHook, len, PAGE_EXECUTE_READWRITE, &curProtection);
-        memset(toHook, 0x90, len);
-
-        DWORD relativeAddress = ((DWORD)ourFunct - (DWORD)toHook) - 5;
-        *(BYTE*)toHook = 0xE8;
-        *(DWORD*)((DWORD)toHook + 1) = relativeAddress;
-
-        DWORD temp;
-        VirtualProtect(toHook, len, curProtection, &temp);
-
-        return true;
-    }
-
-
     //find the addresses we need for patching
     CookingMod::CookingMod() {
-        auto cookingAddress = scan("client.exe", "55 8B EC 6A ? 68 ? ? ? ? 64 ? ? ? ? ? ? ? ? A1 ? ? ? ? 33 C5 50 8D ? F4 64 ? ? ? ? ? ? ? 8B 97 14 ? 00 00");
-        DWORD cookingAddresst = *cookingAddress;
-        if (!cookingAddresst) {
-            log("unable to find cooking address");
+        auto cookingAddress = scan("client.exe", "44 01 ? ? ? ? ? ? E8 ? ? ? ? 84 C0 0F 84 ? ? ? ? 48 C7 44 24 58 ? ? ? ? 48 8D ? ? ? ? ? E8 ? ? ? ? 8B F8 8D 48 ? E8 ? ? ? ? 48 89 ? ? ? 48 8D ? ? 4C 8D ? ? ? ? ? 8D 57 ? E8 ? ? ? ? 48 8B ? ? ? 89 79 ? 48 8B ? ? ? ? ? E8 ? ? ? ? 48 8B ? E8 ? ? ? ? 48 8B ? 41 B0 ? 48 8D ? ? ? E8 ? ? ? ? 90 48 8B ? ? ? 48 85 ? 74 ? E8 ? ? ? ? 48 C7 44 24 58 ? ? ? ? 41 B8 ? ? ? ? 48 8D ? ? ? ? ? 48 8B ? ? ? ? ? E8 ? ? ? ? 48 8B ? ? ? ? ? 48 8B ? B2 ? FF 90 ? ? ? ? 48 8B ? ? ? 48 8B ? ? ? 48 83 C4 ? 5F C3 CC CC CC CC CC CC CC 40");
+        if (!cookingAddress) {
+            log("[Cooking]unable to find cooking address");
         }
         else {
-            log("found cooking address base @ %p", cookingAddresst);
+            log("[Cooking]found cooking address base @ %p", *cookingAddress);
         }
 
-        if (cookingAddresst) {
-
-            addressOfCooking = cookingAddresst + 95;
-            log("Address of func to change @ %p", addressOfCooking);
-
-        }
     }
 
 
@@ -121,32 +35,25 @@ namespace kanan {
 
                 ImGui::TextWrapped("Cooking %");
                 ImGui::InputInt3("", (int*)&cookingTemp);
-                CookingMod::cookingMath(cookingTemp);
+                cookingOne = cookingTemp[0] * 10000;
+                cookingTwo = cookingTemp[1] * 10000;
+                cookingThree = cookingTemp[2] * 10000;
 
             }
         }
 
     }
 
-
-    //assign the vaules to the correct places
-    void CookingMod::cookingMath(int cookingTemp[3]) {
-        cookingOne = cookingTemp[0] * 10000;
-        cookingTwo = cookingTemp[1] * 10000;
-        cookingThree = cookingTemp[2] * 10000;
-    }
     //apply or remove our patch
     void CookingMod::applycook(bool m_cooking_is_enabled) {
         if (m_cooking_is_enabled) {
-            log("Cooking applying patch");
+            log("[Cooking]Cooking applying patch");
             //inject our custom cooking asm
-            Hookcall((void*)addressOfCooking, HookForCooking, 7);
-
+            //todo: add patch
         }
         else if (!m_cooking_is_enabled) {
-            log("Cooking removing patch");
-            //patch back to default
-            Patchmem((BYTE*)(addressOfCooking), (BYTE*)"\x01\xb4\x87\x0C\x02\x00\x00", 7);
+            log("[Cooking]Cooking removing patch");
+            //todo: reverse patch
         }
     }
 
