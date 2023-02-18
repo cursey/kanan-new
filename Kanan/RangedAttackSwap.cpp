@@ -13,7 +13,7 @@ namespace kanan {
         m_choice{ 0 },
         m_patch{}
     {
-        auto address = scan("client.exe", "B8 09 52 00 00 5F");
+        auto address = scan("client.exe", "B8 09 52 00 00 48");
 
         if (address) {
             log("Got RangedAttackSwap %p", *address);
