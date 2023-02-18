@@ -24,7 +24,7 @@ Downloads for the latest _official_ releases are located [here](https://github.c
 ## Build steps
 From the command line you must generate a project using CMake:
 ```
-> cmake -B build -G "Visual Studio 17 2022" -A Win32
+> cmake -B build -G "Visual Studio 17 2022" -A x64
 ```
 
 At this point you can now open `/build/Kanan.sln` with visual studio, or continue the build from the command line with:
