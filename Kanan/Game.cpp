@@ -86,10 +86,10 @@ namespace kanan {
         // ID.
         auto& characters = entityList->characters;
         auto highestIndex = characters.count;
-        auto node = characters.root;
+        auto node = *characters.root;
 
-        for (uint32_t i = 0; i <= highestIndex && node != nullptr; ++i, node = node->next) {
-            auto character = (KCharacter*)node->entry->character;
+        for (uint32_t i = 0; i < highestIndex && node != nullptr; ++i, node = node->next) {
+            auto character = (KCharacter*)node->character;
 
             if (character == nullptr) {
                 continue;
