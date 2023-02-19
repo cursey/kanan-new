@@ -208,29 +208,21 @@ class CItem {
 class CEntityList 0x100 {
     class CItemList {
         class CItemListNode {
-            class CItemListNodeEntry {
-                CItem* item @ 0x18;     
-            }
-
-            CItemListNodeEntry* entry
             CItemListNode* next
+            CItem* item @ 0x18
         }
 
-        CItemListNode* root @ 0x10
+        CItemListNode** root @ 0x10
         uint32_t count
     }
 
     class CCharacterList {
-        class CCharacterListNode {
-            class CCharacterListNodeEntry {
-                CCharacter* character @ 0x18;     
-            }
-
-            CCharacterListNodeEntry* entry
+        class CCharacterListNode 0x28 {
             CCharacterListNode* next
+            CCharacter* character @ 0x18
         }
 
-        CCharacterListNode* root @ 0x10
+        CCharacterListNode** root @ 0x10
         uint32_t count
     }
 
