@@ -71,10 +71,10 @@ void AutoChangeChannels::onFrame() {
     }
 
     auto& characters = ents->characters;
-    auto node = characters.root;
+    auto node = *characters.root;
 
-    for (uint32_t i = 0; i <= characters.count && node != nullptr; ++i, node = node->next) {
-        auto character = (KCharacter*)node->entry->character;
+    for (uint32_t i = 0; i < characters.count && node != nullptr; ++i, node = node->next) {
+        auto character = (KCharacter*)node->character;
 
         if (character == nullptr) {
             continue;

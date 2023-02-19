@@ -20,9 +20,11 @@ namespace kanan {
         auto rendererAddress = scan("client.exe", "48 8B 0D ? ? ? ? E8 ? ? ? ? 84 C0 74 ? C7 07 ? ? ? ? 32 C0");
 
         if (rendererAddress) {
-            m_renderer = *(CRenderer**)rel_to_abs(*rendererAddress + 3);
+            do {
+                m_renderer = (CRenderer**)rel_to_abs(*rendererAddress + 3);
+            } while (*m_renderer == nullptr);
 
-            log("Got CRenderer %p", m_renderer);
+            log("Got CRenderer %p", *m_renderer);
         }
         else {
             error("Failed to find address of CRenderer.");
@@ -32,9 +34,11 @@ namespace kanan {
         auto entityListAddress = scan("client.exe", "48 8B 0D ? ? ? ? E8 ? ? ? ? 48 85 C0 0F 84 ? ? ? ? 48 8B 0D ? ? ? ? 48 8B 91 60 01 00 00 E8 ? ? ? ?");
 
         if (entityListAddress) {
-            m_entityList = *(CEntityList**)rel_to_abs(*entityListAddress + 3);
+            do {
+                m_entityList = (CEntityList**)rel_to_abs(*entityListAddress + 3);
+            } while (*m_entityList == nullptr);
 
-            log("Got CEntityList %p", m_entityList);
+            log("Got CEntityList %p", *m_entityList);
         }
         else {
             error("Failed to find CEntityList.");
@@ -44,9 +48,11 @@ namespace kanan {
         auto worldAddress = scan("client.exe", "48 8B 0D ? ? ? ? E8 ? ? ? ? 84 C0 0F 85 ? ? ? ? 48 8B 86 A0 01 00 00");
 
         if (worldAddress) {
-            m_world = *(CWorld**)rel_to_abs(*worldAddress + 3);
+            do {
+                m_world = (CWorld**)rel_to_abs(*worldAddress + 3);
+            } while (*m_world == nullptr);
 
-            log("Got CWorld %p", m_world);
+            log("Got CWorld %p", *m_world);
         }
         else {
             error("Failed to find CWorld.");
@@ -56,9 +62,11 @@ namespace kanan {
         auto accountAddress = scan("client.exe", "48 8B 0D ? ? ? ? E8 ? ? ? ? 84 C0 74 ? 49 8B CE E8 ? ? ? ? 84 C0 75 ? 49 8B 06");
 
         if (accountAddress) {
-            m_account = *(CAccount**)rel_to_abs(*accountAddress + 3);
+            do {
+                m_account = (CAccount**)rel_to_abs(*accountAddress + 3);
+            } while (*m_account == nullptr);
 
-            log("Got CAccount %p", m_account);
+            log("Got CAccount %p", *m_account);
         }
         else {
             error("Failed to find CAccount.");
@@ -78,10 +86,10 @@ namespace kanan {
         // ID.
         auto& characters = entityList->characters;
         auto highestIndex = characters.count;
-        auto node = characters.root;
+        auto node = *characters.root;
 
-        for (uint32_t i = 0; i <= highestIndex && node != nullptr; ++i, node = node->next) {
-            auto character = (KCharacter*)node->entry->character;
+        for (uint32_t i = 0; i < highestIndex && node != nullptr; ++i, node = node->next) {
+            auto character = (KCharacter*)node->character;
 
             if (character == nullptr) {
                 continue;

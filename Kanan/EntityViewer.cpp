@@ -81,10 +81,10 @@ namespace kanan {
 
         auto& characters = entityList->characters;
         auto highestIndex = characters.count;
-        auto node = characters.root;
+        auto node = *characters.root;
 
-        for (uint32_t i = 0; i <= highestIndex && node != nullptr; ++i, node = node->next) {
-            auto character = (KCharacter*)node->entry->character;
+        for (uint32_t i = 0; i < highestIndex && node != nullptr; ++i, node = node->next) {
+            auto character = (KCharacter*)node->character;
 
             if (character == nullptr || !character->getID()) {
                 continue;
@@ -114,10 +114,10 @@ namespace kanan {
 
         auto& items = entityList->items;
         auto highestIndex = items.count;
-        auto node = items.root;
+        auto node = *items.root;
 
-        for (uint32_t i = 0; i <= highestIndex && node != nullptr; ++i, node = node->next) {
-            auto item = (KItem*)node->entry->item;
+        for (uint32_t i = 0; i < highestIndex && node != nullptr; ++i, node = node->next) {
+            auto item = (KItem*)node->item;
 
             if (item == nullptr || !item->getID()) {
                 continue;
