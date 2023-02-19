@@ -1187,11 +1187,11 @@
     },
     {
       "name": "Disable WaitProcess Skill Locks",
-      "desc": "Allows the use of changing skills without needing to first cancel the skill for cetain skills (Windmill, Deathmark, Anchor Rush, etc) \nMay interact with some skills in strange ways.",
+      "desc": "Allows the ability to load a new skill without needing to first cancel the currently loaded skill for cetain skills with waitprocess locks enabled (Windmill, Deathmark, Anchor Rush, etc) \nMay interact with some skills in strange ways.",
       "category": "Speedup",
       "patches": [
         {
-          "pattern": "OF85 ? ? ? ? 8B B3 ? ? ? ? 85 F6 74 29",
+          "pattern": "0F 85 ? ? ? ? 48 8B ? ? ? ? ? 48 85 ? 74 ? 48 8D",
           "patch": "90 90 90 90 90 90"
         }
       ]
