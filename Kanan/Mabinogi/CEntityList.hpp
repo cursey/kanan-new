@@ -8,18 +8,13 @@ public:
     public:
         class CItemListNode {
         public:
-            class CItemListNodeEntry {
-            public:
-                char pad_0[0x18];
-                CItem* item; // 0x18
-            }; // Size: 0x20
-
-            CItemListNodeEntry* entry; // 0x0
-            CEntityList::CItemList::CItemListNode* next; // 0x8
-        }; // Size: 0x10
+            CEntityList::CItemList::CItemListNode* next; // 0x0
+            char pad_8[0x10];
+            CItem* item; // 0x18
+        }; // Size: 0x20
 
         char pad_0[0x10];
-        CItemListNode* root; // 0x10
+        CItemListNode** root; // 0x10
         uint32_t count; // 0x18
     }; // Size: 0x1c
 
@@ -27,18 +22,14 @@ public:
     public:
         class CCharacterListNode {
         public:
-            class CCharacterListNodeEntry {
-            public:
-                char pad_0[0x18];
-                CCharacter* character; // 0x18
-            }; // Size: 0x20
-
-            CCharacterListNodeEntry* entry; // 0x0
-            CEntityList::CCharacterList::CCharacterListNode* next; // 0x8
-        }; // Size: 0x10
+            CEntityList::CCharacterList::CCharacterListNode* next; // 0x0
+            char pad_8[0x10];
+            CCharacter* character; // 0x18
+            char pad_20[0x8];
+        }; // Size: 0x28
 
         char pad_0[0x10];
-        CCharacterListNode* root; // 0x10
+        CCharacterListNode** root; // 0x10
         uint32_t count; // 0x18
     }; // Size: 0x1c
 
