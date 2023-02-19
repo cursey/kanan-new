@@ -143,7 +143,7 @@ namespace kanan {
         m_equipmentOverrides[17].name = "Accessory 2";
         m_equipmentOverrides[18].name = "Tail";
 
-        if (auto call_address = scan("client.exe", "E8 ? ? ? ? C7 45 FC ? ? ? ? 8D 4D C0 E8 ? ? ? ? 8B 45 B8")) {
+        if (auto call_address = scan("client.exe", "E8 ? ? ? ? 90 E9 ? ? ? ? 44 39 B6 A4 1B 00 00")) {
             log("[EquipmentOverride] Found address of call setEquipmentInfo %p", *call_address);
 
             auto set_equip_info = rel_to_abs(*call_address + 1);
@@ -247,7 +247,7 @@ namespace kanan {
 		}
     }
 
-    void EquipmentOverride::hookedSetEquipmentInfo(CCharacter::CEquipment* equipment, uint32_t EDX, int inventoryID, int itemID, int a4, int a5, uint32_t* color, int a7, int * a8, int a9, int a10, int * a11) {
+    void EquipmentOverride::hookedSetEquipmentInfo(CCharacter::CEquipment* equipment,int inventoryID, int itemID, int a4, int a5, uint32_t* color, int a7, int * a8, int a9, int a10, int * a11) {
         auto orig = (decltype(hookedSetEquipmentInfo)*)g_equipmentOverride->m_setEquipmentInfoHook->getOriginal();
         auto equipmentSlot = convertInventoryIDToEquipmentSlot(inventoryID);
 
@@ -264,12 +264,12 @@ namespace kanan {
         auto localCharacter = game->getLocalCharacter();
 
         if (localCharacter == nullptr || equipment != localCharacter->equipment) {
-            return orig(equipment, EDX, inventoryID, itemID, a4, a5, color, a7, a8, a9, a10, a11);
+            return orig(equipment, inventoryID, itemID, a4, a5, color, a7, a8, a9, a10, a11);
         }
 
         // Filter out inventoryIDs.
         if (equipmentSlot < 0 || equipmentSlot >= (int)g_equipmentOverride->m_equipmentOverrides.size()) {
-            return orig(equipment, EDX, inventoryID, itemID, a4, a5, color, a7, a8, a9, a10, a11);
+            return orig(equipment, inventoryID, itemID, a4, a5, color, a7, a8, a9, a10, a11);
         }
 
         auto& overrideInfo = g_equipmentOverride->m_equipmentOverrides[equipmentSlot];
@@ -292,6 +292,6 @@ namespace kanan {
             log("[EquipmentOverride] Item overwritten!");
         }
 
-        return orig(equipment, EDX, inventoryID, itemID, a4, a5, color, a7, a8, a9, a10, a11);
+        return orig(equipment, inventoryID, itemID, a4, a5, color, a7, a8, a9, a10, a11);
     }
 }

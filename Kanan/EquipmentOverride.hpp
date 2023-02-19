@@ -40,6 +40,6 @@ namespace kanan {
         std::unique_ptr<FunctionHook> m_setEquipmentInfoHook;
         bool m_isNoFlashyEquipmentEnabled;
 
-        static void __fastcall hookedSetEquipmentInfo(CCharacter::CEquipment* equipment, uint32_t EDX, int inventoryID, int itemID, int a4, int a5, uint32_t* color, int a7, int* a8, int a9, int a10, int* a11);
+        static void hookedSetEquipmentInfo(CCharacter::CEquipment* equipment, int inventoryID, int itemID, int a4, int a5, uint32_t* color, int a7, int* a8, int a9, int a10, int* a11);
     };
 }
