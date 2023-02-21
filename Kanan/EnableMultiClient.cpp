@@ -1,6 +1,7 @@
 #include <imgui.h>
 
 #include <Scan.hpp>
+#include <Utility.hpp>
 
 #include "Log.hpp"
 #include "EnableMultiClient.hpp"
@@ -14,12 +15,12 @@ namespace kanan {
     {
         log("Entering EnableMultiClient.");
 
-        auto address = scan("client.exe", "B9 ? ? ? ? E8 ? ? ? ? 84 C0 74 ? 8B 0D ? ? ? ? 8D 45 C0");
+        auto address = scan("client.exe", "48 8D 0D ? ? ? ? E8 ? ? ? ? 84 C0 74 ? 48 8B 0D ? ? ? ? E8 ? ? ? ?");
 
         if (address) {
             log("Got EnableMultiClient %p", *address);
 
-            m_handlePtr = (HANDLE**)(*address + 1);
+            m_handlePtr = (HANDLE*)rel_to_abs(*address + 3);
         }
         else {
             log("Failed to find EnableMultiClient address.");
@@ -72,12 +73,12 @@ namespace kanan {
 
         log("Toggling EnableMultiClient...");
 
-        if (SetHandleInformation(**m_handlePtr, HANDLE_FLAG_PROTECT_FROM_CLOSE, 0) == FALSE) {
+        if (SetHandleInformation(*m_handlePtr, HANDLE_FLAG_PROTECT_FROM_CLOSE, 0) == FALSE) {
             log("Failed to SetHandleInformation on the handle %p", *m_handlePtr);
             return;
         }
 
-        if (CloseHandle(**m_handlePtr) == FALSE) {
+        if (CloseHandle(*m_handlePtr) == FALSE) {
             log("Failed to CloseHandle on the handle %p", *m_handlePtr);
             return;
         }

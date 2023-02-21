@@ -1,6 +1,7 @@
 #include <imgui.h>
 
 #include <Scan.hpp>
+#include <Utility.hpp>
 
 #include "Log.hpp"
 #include "UseDataFolder.hpp"
@@ -15,10 +16,10 @@ namespace kanan {
     {
         log("[UseDataFolder] Entering constructor...");
 
-        auto address = scan("client.exe", "B9 ? ? ? ? E8 ? ? ? ? 80 7B 13 ?");
+        auto address = scan("client.exe", "48 8D 0D ? ? ? ? E8 ? ? ? ? 84 C0 74 ? 48 8B 0D ? ? ? ? 4C 8B C3");
 
         if (address) {
-            m_fileSystem = *(uintptr_t*)(*address + 1);
+            m_fileSystem = (uintptr_t)rel_to_abs(*address + 3);
 
             log("[UseDataFolder] Got address of CFileSystem %p", m_fileSystem);
         }
@@ -26,10 +27,10 @@ namespace kanan {
             log("[UseDataFolder] Failed to get address of CFileSystem");
         }
 
-        address = scan("client.exe", "55 8B EC 6A ? 68 ? ? ? ? 64 A1 ? ? ? ? 50 83 EC ? 53 56 57 A1 ? ? ? ? 33 C5 50 8D 45 F4 64 A3 ? ? ? ? 8B D9 89 5D F0 E8 ? ? ? ? 84 C0 0F 84 ? ? ? ? 8B 53 04");
+        address = scan("client.exe", "E8 ? ? ? ? 48 8B 4E 08 E8 ? ? ? ? 48 8B 5C 24 58");
 
         if (address) {
-            m_setLookUpOrder = (decltype(m_setLookUpOrder))*address;
+            m_setLookUpOrder = (decltype(m_setLookUpOrder))rel_to_abs(*address + 1);
 
             log("[UseDataFolder] Got address of SetLookUpOrder %p", m_setLookUpOrder);
         }

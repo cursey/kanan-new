@@ -16,7 +16,7 @@ namespace kanan {
 
     private:
         bool m_isEnabled;
-        HANDLE** m_handlePtr;
+        HANDLE* m_handlePtr;
 
         void apply();
     };
