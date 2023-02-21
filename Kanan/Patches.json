@@ -23,10 +23,11 @@
         "desc": "Shows the combat power of players and enemies.\nCredits: Rydian",
         "category": "Information",
         "patches": [
-            {
-                "pattern": "0F 85 ? ? ? ? FF B3 14 01 00 00",
-                "patch": "90 90 90 90 90 90"
-            }
+          {
+            "pattern": "3D ? ? ? ? 0F 85 ? ? ? ? 49 8B ? ? ? ? ? 48 8B ? ? ? ? ? E8",
+            "offset": 5,
+            "patch": "90 90 90 90 90 90"
+          }
         ]
     },
     {
