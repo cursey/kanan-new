@@ -23,10 +23,11 @@
         "desc": "Shows the combat power of players and enemies.\nCredits: Rydian",
         "category": "Information",
         "patches": [
-            {
-                "pattern": "0F 85 ? ? ? ? FF B3 14 01 00 00",
-                "patch": "90 90 90 90 90 90"
-            }
+          {
+            "pattern": "3D ? ? ? ? 0F 85 ? ? ? ? 49 8B ? ? ? ? ? 48 8B ? ? ? ? ? E8",
+            "offset": 5,
+            "patch": "90 90 90 90 90 90"
+          }
         ]
     },
     {
@@ -116,11 +117,10 @@
         "desc": "Allows you to logout in the middle of a conversation with an NPC.",
         "category": "Fixes",
         "patches": [
-            {
-                "pattern": "84 C0 74 ? B8 ? ? ? ? 8B 4D F4 64 89 0D ? ? ? ? 59 5F 5E 5B 8B E5 5D C2 ? ? 8B 0D ? ? ? ?",
-                "offset": 2,
-                "patch": "EB"
-            }
+          {
+            "pattern": "E8 ? ? ? ? 84 C0 74 ? 41 8D ? ? E9",
+            "patch": "B8 00 FF FF FF"
+          }
         ]
     },
     {
@@ -141,17 +141,6 @@
         "patches": [
             {
                 "pattern": "0F 84 ? ? ? ? 84 D2 0F 84 ? ? ? ? 85 FF",
-                "patch": "90 E9"
-            }
-        ]
-    },
-    {
-        "name": "Disable Channel Move Denial",
-        "desc": "Allows you change channel while in conversation with an NPC.",
-        "category": "Speedup",
-        "patches": [
-            {
-                "pattern": "0F 84 ? ? ? ? C7 45 F0 ? ? ? ? C7 45 FC ? ? ? ? 8B CB E8 ? ? ? ? 8D 4D E4",
                 "patch": "90 E9"
             }
         ]
