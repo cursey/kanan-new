@@ -1130,8 +1130,8 @@
         "category": "Speedup",
         "patches": [
             {
-                "pattern": "0F 84 ? ? ? ? 83 BE 04 01 00 00",
-                "patch": "0F 85"
+                "pattern": "0F 84 ? ? ? ? 49 83 BE 40 01 00 00 ? 0F 85",
+                "patch": "90 E9"
             }
         ]
     },
@@ -1141,8 +1141,8 @@
     "category": "Graphics",
     "patches": [
       {
-        "pattern": "FF D2 84 C0 0F 84 ? ? ? ? 6A ? 68 ? ? ? ?",
-        "offset": 4,
+        "pattern": "FF 52 ? 84 C0 0F 84 ? ? ? ? 45 33",
+        "offset": 5,
         "patch": "90 E9"
       }
     ]
