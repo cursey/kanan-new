@@ -1252,5 +1252,28 @@
         "patch": "90 90 90"
       }
     ]
+  },
+  {
+    "name": "Enable Mounted Prop Attack",
+    "desc": "Enables ability to attack props with all mounts (tuann, horses, etc)",
+    "category": "Quality of Life",
+    "patches": [
+      {
+        "pattern": "B0 01 EB ? 48 8B ? ? ? 48 85 ? 74 ? 4C 8B ? ? ? 4C 2B ? 49 C1 F8 ? 48 8D ? ? ? E8 ? ? ? ? 0F 57 ? F3 0F ? ? ? ? 48 C7 44 24 38 ? ? ? ? 32 C0 48 8B ? ? ? 48 8B",
+        "offset": 1,
+        "patch": "00"
+      }
+    ]
+  },
+  {
+    "name": "Enable Hidden Mob attack (Mimic-Unhide)",
+    "desc": "Enables targetting of hidden mobs such as mimics and golems",
+    "category": "Quality of Life",
+    "patches": [
+      {
+        "pattern": "0F 84 ? ? ? ? 48 8B ? FF 90 ? ? ? ? 48 8B ? E8 ? ? ? ? 48 8B ? 48 85 ? 0F 84 ? ? ? ? 49 8B",
+        "patch": "90 E9"
+      }
+    ]
   }
 ]
