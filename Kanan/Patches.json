@@ -297,7 +297,7 @@
         "category": "Information",
         "patches": [
             {
-                "pattern": "74 ? 8B 06 8B CE FF 90 94 00 00 00 8B C8 E8 ? ? ? ? 3D ? ? ? ? 74 04",
+                "pattern": "74 ? 48 8B ? 48 8B ? FF 90 ? ? ? ? 48 8B ? E8 ? ? ? ? 3D ? ? ? ? 74 ? 32 C0",
                 "patch": "EB"
             }
         ]
