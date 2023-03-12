@@ -23,10 +23,11 @@
         "desc": "Shows the combat power of players and enemies.\nCredits: Rydian",
         "category": "Information",
         "patches": [
-            {
-                "pattern": "0F 85 ? ? ? ? FF B3 14 01 00 00",
-                "patch": "90 90 90 90 90 90"
-            }
+          {
+            "pattern": "3D ? ? ? ? 0F 85 ? ? ? ? 49 8B ? ? ? ? ? 48 8B ? ? ? ? ? E8",
+            "offset": 5,
+            "patch": "90 90 90 90 90 90"
+          }
         ]
     },
     {
@@ -94,10 +95,10 @@
         "desc": "Lets you mount/dismount your pet as fast as you want.\nCredits: Licat",
         "category": "Speedup",
         "patches": [
-            {
-                "pattern": "89 88 78 02 00 00 B0 ?",
-                "patch": "90 90 90 90 90 90"
-            }
+          {
+            "pattern": "45 89 ? ? ? ? ? B0 ? 4C 8D",
+            "patch": "90 90 90 90 90 90 90"
+          }
         ]
     },
     {
@@ -116,11 +117,10 @@
         "desc": "Allows you to logout in the middle of a conversation with an NPC.",
         "category": "Fixes",
         "patches": [
-            {
-                "pattern": "84 C0 74 ? B8 ? ? ? ? 8B 4D F4 64 89 0D ? ? ? ? 59 5F 5E 5B 8B E5 5D C2 ? ? 8B 0D ? ? ? ?",
-                "offset": 2,
-                "patch": "EB"
-            }
+          {
+            "pattern": "E8 ? ? ? ? 84 C0 74 ? 41 8D ? ? E9",
+            "patch": "B8 00 FF FF FF"
+          }
         ]
     },
     {
@@ -128,10 +128,10 @@
         "desc": "Allows you to move to the same channel you're currently on.",
         "category": "Speedup",
         "patches": [
-            {
-                "pattern": "0F 84 ? ? ? ? 68 ? ? ? ? 8D 4D E8 E8 ? ? ? ? C6 45 FC ? 8D 45 E8 50 8D 45 CC 50 E8 ? ? ? ? 8B C8 E8 ? ? ? ? C6 45 FC ? 8D 4D EC 51 8B C8 E8 ? ? ? ? C6 45 FC ? C7 45 F0 ? ? ? ?",
-                "patch": "90 E9"
-            }
+          {
+            "pattern": "74 ? 48 83 C1 ? EB ? 49 8B ? E8 ? ? ? ? 85 C0 0F 85 ? ? ? ? 4C 89 ? ? 48 8D ? ? ? ? ? E8 ? ? ? ? 8B F8 8D 48 ? E8 ? ? ? ? 48 89 ? ? 48 8D ? ? 4C 8D ? ? ? ? ? 8D 57 ? E8 ? ? ? ? 48 8B ? ? 89 79 ? E8 ? ? ? ? 48 8B ? 4C 8D ? ? 48 8D ? ? E8 ? ? ? ? 90 48 8D ? ? 48 8B ? E8 ? ? ? ? 90 4C 89 ? ? 4C 89 ? ? C6 44 24 60 ? 48 8D ? ? 48 89 ? ? ? C6 44 24 50 ? C6 44 24 48 ? C6 44 24 40 ? C6 44 24 38 ? C6 44 24 30 ? C6 44 24 28 ? C7 44 24 20 ? ? ? ? 4D 8B ? 4C 8D ? ? 48 8D ? ? 48 8B ? ? ? ? ? E8 ? ? ? ? 90 48 8B ? ? 48 85 ? 74 ? E8 ? ? ? ? 4C 89 ? ? 48 8B ? ? 48 85 ? 74 ? E8 ? ? ? ? 4C 89 ? ? 48 8B ? ? 48 85 ? 74 ? E8 ? ? ? ? 4C 89 ? ? 48 8D ? ? E8 ? ? ? ? 90 48 8B ? ? 48 85 ? 0F 84",
+            "patch": "EB"
+          }
         ]
     },
     {
@@ -141,17 +141,6 @@
         "patches": [
             {
                 "pattern": "0F 84 ? ? ? ? 84 D2 0F 84 ? ? ? ? 85 FF",
-                "patch": "90 E9"
-            }
-        ]
-    },
-    {
-        "name": "Disable Channel Move Denial",
-        "desc": "Allows you change channel while in conversation with an NPC.",
-        "category": "Speedup",
-        "patches": [
-            {
-                "pattern": "0F 84 ? ? ? ? C7 45 F0 ? ? ? ? C7 45 FC ? ? ? ? 8B CB E8 ? ? ? ? 8D 4D E4",
                 "patch": "90 E9"
             }
         ]
@@ -308,7 +297,7 @@
         "category": "Information",
         "patches": [
             {
-                "pattern": "74 ? 8B 06 8B CE FF 90 94 00 00 00 8B C8 E8 ? ? ? ? 3D ? ? ? ? 74 04",
+                "pattern": "74 ? 48 8B ? 48 8B ? FF 90 ? ? ? ? 48 8B ? E8 ? ? ? ? 3D ? ? ? ? 74 ? 32 C0",
                 "patch": "EB"
             }
         ]
@@ -796,8 +785,8 @@
         "category": "Speedup",
         "patches": [
             {
-                "pattern": "8B C8 C7 45 E8 98 3A",
-                "offset": 6,
+                "pattern": "BF 98 3A 00 00",
+                "offset": 1,
                 "patch": "00 00"
             }
         ]
@@ -1130,8 +1119,8 @@
         "category": "Speedup",
         "patches": [
             {
-                "pattern": "0F 84 ? ? ? ? 83 BE 04 01 00 00",
-                "patch": "0F 85"
+                "pattern": "0F 84 ? ? ? ? 49 83 BE 40 01 00 00 ? 0F 85",
+                "patch": "90 E9"
             }
         ]
     },
@@ -1141,8 +1130,8 @@
     "category": "Graphics",
     "patches": [
       {
-        "pattern": "FF D2 84 C0 0F 84 ? ? ? ? 6A ? 68 ? ? ? ?",
-        "offset": 4,
+        "pattern": "FF 52 ? 84 C0 0F 84 ? ? ? ? 45 33",
+        "offset": 5,
         "patch": "90 E9"
       }
     ]
@@ -1187,11 +1176,11 @@
     },
     {
       "name": "Disable WaitProcess Skill Locks",
-      "desc": "Allows the use of changing skills without needing to first cancel the skill for cetain skills (Windmill, Deathmark, Anchor Rush, etc) \nMay interact with some skills in strange ways.",
+      "desc": "Allows the ability to load a new skill without needing to first cancel the currently loaded skill for cetain skills with waitprocess locks enabled (Windmill, Deathmark, Anchor Rush, etc) \nMay interact with some skills in strange ways.",
       "category": "Speedup",
       "patches": [
         {
-          "pattern": "OF85 ? ? ? ? 8B B3 ? ? ? ? 85 F6 74 29",
+          "pattern": "0F 85 ? ? ? ? 48 8B ? ? ? ? ? 48 85 ? 74 ? 48 8D",
           "patch": "90 90 90 90 90 90"
         }
       ]
@@ -1231,7 +1220,7 @@
     "category": "Quality of Life",
     "patches": [
       {
-        "pattern": "74 ? 2B BD 7C FF FF FF 83 EF 1C D1 FF EB 03 83 CF FF C6 45 FC 00 85 F6 74 11",
+        "pattern": "74 ? 48 2B ? ? ? 48 83 EF ? 48 D1 ? EB ? 83 CF ? 48 8B ? E8 ? ? ? ? 33 F6 48 89 ? ? ? 48 8D",
         "patch": "90 90"
       }
     ]
@@ -1255,12 +1244,35 @@
   },
   {
     "name": "Don't Close Title Window",
-    "desc": "Disables the automatic closing of the title window when switching titles.",
+    "desc": "Disables the automatic closing of the title window when switching titles. \n(Use the X in top right to close title window as this disables cancel button too)",
     "category": "Quality of Life",
     "patches": [
       {
-        "pattern": "FF 50 ? E9 ? ? ? ? 8B 86 ? ? ? ? 3B 48 ? 75 ? 8B CE",
+        "pattern": "FF 50 ? B0 ? 48 8B ? ? ? 48 83 C4 ? 5F C3 CC CC CC CC 40 ? 48 83 EC",
         "patch": "90 90 90"
+      }
+    ]
+  },
+  {
+    "name": "Enable Mounted Prop Attack",
+    "desc": "Enables ability to attack props with all mounts (tuann, horses, etc)",
+    "category": "Quality of Life",
+    "patches": [
+      {
+        "pattern": "B0 01 EB ? 48 8B ? ? ? 48 85 ? 74 ? 4C 8B ? ? ? 4C 2B ? 49 C1 F8 ? 48 8D ? ? ? E8 ? ? ? ? 0F 57 ? F3 0F ? ? ? ? 48 C7 44 24 38 ? ? ? ? 32 C0 48 8B ? ? ? 48 8B",
+        "offset": 1,
+        "patch": "00"
+      }
+    ]
+  },
+  {
+    "name": "Enable Hidden Mob attack (Mimic-Unhide)",
+    "desc": "Enables targetting of hidden mobs such as mimics and golems",
+    "category": "Quality of Life",
+    "patches": [
+      {
+        "pattern": "0F 84 ? ? ? ? 48 8B ? FF 90 ? ? ? ? 48 8B ? E8 ? ? ? ? 48 8B ? 48 85 ? 0F 84 ? ? ? ? 49 8B",
+        "patch": "90 E9"
       }
     ]
   }

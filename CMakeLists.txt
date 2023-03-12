@@ -29,7 +29,7 @@ endif()
 
 project(Kanan)
 
-set(VCPKG_TARGET_TRIPLET x86-windows-static)
+set(VCPKG_TARGET_TRIPLET x64-windows-static)
 
 if(CMKR_ROOT_PROJECT AND NOT CMKR_DISABLE_VCPKG)
 	include(FetchContent)
@@ -197,16 +197,12 @@ list(APPEND Kanan_SOURCES
 	"Kanan/LoginScreen.hpp"
 	"Kanan/Mabinogi.hpp"
 	"Kanan/Mabinogi/CAccount.hpp"
-	"Kanan/Mabinogi/CAccountPtr.hpp"
 	"Kanan/Mabinogi/CCharacter.hpp"
 	"Kanan/Mabinogi/CEntityList.hpp"
-	"Kanan/Mabinogi/CEntityListPtr.hpp"
 	"Kanan/Mabinogi/CItem.hpp"
 	"Kanan/Mabinogi/CRenderer.hpp"
-	"Kanan/Mabinogi/CRendererPtr.hpp"
 	"Kanan/Mabinogi/CString.hpp"
 	"Kanan/Mabinogi/CWorld.hpp"
-	"Kanan/Mabinogi/CWorldPtr.hpp"
 	"Kanan/Mabinogi/Matrix4x4.hpp"
 	"Kanan/Mabinogi/Vector3.hpp"
 	"Kanan/Mabinogi/Vector4.hpp"
@@ -257,6 +253,13 @@ set_target_properties(Kanan PROPERTIES
 		MultiThreaded$<$<CONFIG:Debug>:Debug>
 )
 
+# Copy Kanan/Patches.json to the output directory.
+add_custom_command(TARGET Kanan POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        ${CMAKE_CURRENT_SOURCE_DIR}/Kanan/Patches.json
+        $<TARGET_FILE_DIR:Kanan>
+)
+
 unset(CMKR_TARGET)
 unset(CMKR_SOURCES)
 
@@ -291,12 +294,19 @@ target_link_libraries(Loader PRIVATE
 )
 
 target_link_options(Loader PRIVATE
-	"/MANIFESTUAC:level=requireAdministrator"
+	"/MANIFESTUAC:level='requireAdministrator'"
 )
 
 set_target_properties(Loader PROPERTIES
 	MSVC_RUNTIME_LIBRARY
 		MultiThreaded$<$<CONFIG:Debug>:Debug>
+)
+
+# Copy Loader/Loader.txt to the output directory
+add_custom_command(TARGET Loader POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        ${CMAKE_CURRENT_SOURCE_DIR}/Loader/Loader.txt
+        $<TARGET_FILE_DIR:Loader>
 )
 
 unset(CMKR_TARGET)
@@ -367,7 +377,7 @@ target_link_libraries(Launcher PRIVATE
 )
 
 target_link_options(Launcher PRIVATE
-	"/MANIFESTUAC:level=requireAdministrator"
+	"/MANIFESTUAC:level='requireAdministrator'"
 )
 
 set_target_properties(Launcher PROPERTIES

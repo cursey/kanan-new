@@ -29,116 +29,116 @@ struct Matrix4x4 {
 }
 
 class CString {
-    int32_t referenceCount @ 0x4
-    uint32_t length @ 0xC
-    uint32_t capacity @ 0x10
-    char16_t buffer[70] @ 0x1C [[utf16*]]
+    int32_t referenceCount @ 0x8
+    uint32_t length @ 0x10
+    uint32_t capacity @ 0x14
+    char16_t buffer[70] @ 0x20 [[utf16*]]
 }
 
 class CCharacter {
     class CParameter {
-        class CMemberString 0x10 {
-            CString* value @ 0x4
+        class CMemberString 0x20 {
+            CString* value @ 0x8
         }
 
-        class CMemberChar 0xC {
-            int8_t value @ 0x4
+        class CMemberChar 0x18 {
+            int8_t value @ 0x8
         }
 
-        class CMemberUChar 0xC {
-            uint8_t value @ 0x4
+        class CMemberUChar 0x18 {
+            uint8_t value @ 0x8
         }
 
-        class CMemberUShort 0xC {
-            uint16_t value @ 0x4
+        class CMemberUShort 0x18 {
+            uint16_t value @ 0x8
         }
 
-        class CMemberULong 0x10 {
-            uint32_t value @ 0x4
+        class CMemberULong 0x18 {
+            uint32_t value @ 0x8
         }
 
-        class CMemberUInt64 0x18 {
-            uint64_t value @ 0x4
+        class CMemberUInt64 0x20 {
+            uint64_t value @ 0x8
         }
 
-        class CMemberFloat 0x10 {
-            float value @ 0x4
+        class CMemberFloat 0x18 {
+            float value @ 0x8
         }
 
-        CMemberString name @ 0x20
-        CMemberString title; //0x0030
-        CMemberString engTitle; //0x0040
-        CMemberULong type; //0x0050
-        CMemberUChar skinColor; //0x0060
-        CMemberUShort eyeType; //0x006C
-        CMemberUChar eyeColor; //0x0078
-        CMemberUChar mouthType; //0x0084
-        CMemberULong status; //0x0090
-        CMemberULong statusEx; //0x00A0
-        CMemberULong statusEx2; //0x00B0
-        CMemberFloat scaleHeight; //0x00C0
-        CMemberFloat scaleFatness; //0x00D0
-        CMemberFloat scaleUpper; //0x00E0
-        CMemberFloat scaleLower; //0x00F0
-        CMemberULong regionID; //0x0100
-        CMemberULong positionX; //0x0110
-        CMemberULong positionY; //0x0120
-        CMemberChar direction; //0x0130
-        CMemberULong battleState; //0x013C
-        CMemberUChar weaponSet; //0x014C
-        CMemberULong extra1; //0x0158
-        CMemberULong extra2; //0x0168
-        CMemberULong extra3; //0x0178
-        CMemberFloat combatPower; //0x0188
-        CMemberString motionType; //0x0198
-        CMemberUChar oddEyeLeftColor; //0x01A8
-        CMemberUChar oddEyeRightColor; //0x01B4
-        CMemberFloat life; //0x01C0
-        CMemberFloat lifeMaxBase; //0x01D0
-        CMemberFloat lifeDamaged; //0x01E0
-        CMemberFloat lifeMaxMod; //0x01F0
-        CMemberFloat mana; //0x0200
-        CMemberFloat manaMaxBase; //0x0210
-        CMemberFloat manaMaxMod; //0x0220
-        CMemberFloat stamina; //0x0230
-        CMemberFloat staminaMaxBase; //0x0240
-        CMemberFloat staminaMaxMod; //0x0250
-        CMemberFloat food; //0x0260
-        CMemberFloat foodMinRatio; //0x0270
-        CMemberUShort level; //0x0280
-        CMemberULong cumulatedLevel; //0x028C
-        CMemberUShort maxLevel; //0x029C
-        CMemberUShort rebirthCount; //0x02A8
-        CMemberUShort lifeTimeSkill; //0x02B4
-        CMemberUInt64 experienceInt; //0x02C0
-        CMemberUShort age; //0x02D8
-        CMemberFloat dorcha @ 0xA7C; //0x0A7C
-        CMemberFloat dorchaMaxBase; //0x0A8C
-        CMemberFloat tuairim; //0x0A9C For Bachram Boost
-        CMemberFloat tuairimMaxBase; //0x0AAC For Bachram Boost
+        CMemberString name @ 0x30
+        CMemberString title;
+        CMemberString engTitle;
+        CMemberULong type;
+        CMemberUChar skinColor;
+        CMemberUShort eyeType;
+        CMemberUChar eyeColor;
+        CMemberUChar mouthType;
+        CMemberULong status;
+        CMemberULong statusEx;
+        CMemberULong statusEx2;
+        CMemberFloat scaleHeight;
+        CMemberFloat scaleFatness;
+        CMemberFloat scaleUpper;
+        CMemberFloat scaleLower;
+        CMemberULong regionID;
+        CMemberULong positionX;
+        CMemberULong positionY;
+        CMemberChar direction;
+        CMemberULong battleState;
+        CMemberUChar weaponSet;
+        CMemberULong extra1;
+        CMemberULong extra2;
+        CMemberULong extra3;
+        CMemberFloat combatPower;
+        CMemberString motionType;
+        CMemberUChar oddEyeLeftColor;
+        CMemberUChar oddEyeRightColor;
+        CMemberFloat life;
+        CMemberFloat lifeMaxBase;
+        CMemberFloat lifeDamaged;
+        CMemberFloat lifeMaxMod;
+        CMemberFloat mana;
+        CMemberFloat manaMaxBase;
+        CMemberFloat manaMaxMod;
+        CMemberFloat stamina;
+        CMemberFloat staminaMaxBase;
+        CMemberFloat staminaMaxMod;
+        CMemberFloat food;
+        CMemberFloat foodMinRatio;
+        CMemberUShort level;
+        CMemberULong cumulatedLevel;
+        CMemberUShort maxLevel;
+        CMemberUShort rebirthCount;
+        CMemberUShort lifeTimeSkill;
+        CMemberUInt64 experienceInt;
+        CMemberUShort age;
+        CMemberFloat dorcha @ 0x1220;
+        CMemberFloat dorchaMaxBase; 
+        CMemberFloat tuairim; // For Bachram Boost
+        CMemberFloat tuairimMaxBase; // For Bachram Boost
     }
 
     class CAction {
         class CAnimatorContext {
-            class CFramework {
-                Vector3 position @ 0xA0
+            class CFramework 0x200 {
+                Vector3 position @ 0xD0
             }
 
-            CFramework* framework @ 0x4
+            CFramework* framework @ 0x8
         }
 
-        CCharacter* character @ 0x40
+        CCharacter* character @ 0x48
         CAnimatorContext* animatorContext
     }
 
     class CSkillMgr {
         class CActiveSkill {
-            uint16_t skillID @ 0x10
+            uint16_t skillID @ 0x18
             uint8_t charges
             uint8_t state +9
         }
 
-        CActiveSkill* skillInfo @ 0x4
+        CActiveSkill* skillInfo @ 0x8
     }
 
     class CConditionMgr 0x50 {
@@ -146,108 +146,94 @@ class CCharacter {
             int32_t statusCount @ 0x4
         }
 
-        CCondition* condition @ 0x8
+        CCondition* condition @ 0x10
     }
 
-    class CEquipmentItemInfo 0x50 {
-        uint32_t classID @ 0xC
-        uint32_t color1 @ 0x1C
+    class CEquipmentItemInfo 0x58 {
+        uint32_t classID
+        uint32_t color1 + 0xC
         uint32_t color2
         uint32_t color3
-        uint32_t color4 @ 0x2c
+        uint32_t color4 + 0x14
         uint32_t color5
         uint32_t color6
     }
 
     class CEquipment {
-        CEquipmentItemInfo itemInfo[20]
+        CEquipmentItemInfo itemInfo[20] @ 0x6C
     }
 
-    uint64_t* entityID @ 0x4
-    CParameter* parameter @ 0xA8
+    uint64_t* entityID @ 0x8
+    CParameter* parameter @ 0xD8
     CAction* action
     CSkillMgr* skill 
-    CConditionMgr* condition +16
-    CEquipment* equipment @ 0x280
-    uint64_t targetID @ 0x2D8
+    CConditionMgr* condition +32
+    CEquipment* equipment @ 0x488
+    uint64_t targetID @ 0x538
     uint64_t mouseTarget +8
 }
 
 class CItem {
     struct SItemDBDesc {
-        CString* type @ 0x4
-        CString* displayName @ 0x34
-        CString* name @ 0x3C
-        CString* description @ 0x40
+        CString* type @ 0x8
+        CString* displayName @ 0x38
+        CString* name +16
+        CString* description +8
+        CString* longDescription 
         uint16_t maxStackCount @ 0xcc
     }
 
-    uint64_t* entityID @ 0x4
-    uint32_t inventoryID; //0x0008
-    uint32_t itemID; //0x000C
-    uint32_t color1; //0x0010
-    uint32_t color2; //0x0014
-    uint32_t color3; //0x0018
-    uint32_t color4 +4; //0x0020
-    uint32_t color5; //0x0024
-    uint32_t color6; //0x0028
-    uint32_t stackCount; //0x002C
-    uint32_t positionX + 4; //0x0034
-    uint32_t positionY; //0x0038
-    uint32_t price +40; //0x0064
-    uint32_t sellPrice; //0x0068
-    uint32_t durability +4; //0x0070
-    uint32_t maxDurability; //0x0074
-    uint32_t originalDurability; //0x0078
-    SItemDBDesc* dbDesc +92; //0x00D8
-    uint64_t ownerID +28; //0x00F8
-    CString* name +36; //0x0124
+    uint64_t* entityID @ 0x8
+    uint32_t inventoryID
+    uint32_t itemID
+    uint32_t color1
+    uint32_t color2
+    uint32_t color3
+    uint32_t color4 +4
+    uint32_t color5
+    uint32_t color6
+    uint32_t stackCount
+    uint32_t positionX + 4
+    uint32_t positionY
+    uint32_t price + 48
+    uint32_t sellPrice
+    uint32_t durability +4
+    uint32_t maxDurability
+    uint32_t originalDurability
+    SItemDBDesc* dbDesc @ 0x100
+    uint64_t ownerID @ 0x130
+    CString* name @ 0x170
 }
 
-// 0x4a04410
-class CEntityList {
+class CEntityList 0x100 {
     class CItemList {
-        class CCItemListNode {}
         class CItemListNode {
-            class CItemListNodeEntry {
-                CItem* item @ 0x10;     
-            }
-
-            CItemListNodeEntry* entry
             CItemListNode* next
+            CItem* item @ 0x18
         }
 
-        CItemListNode* root @ 0x4
+        CItemListNode** root @ 0x10
         uint32_t count
     }
 
     class CCharacterList {
-        class CCharacterListNode {}
-        class CCharacterListNode {
-            class CCharacterListNodeEntry {
-                CCharacter* character @ 0x10;     
-            }
-
-            CCharacterListNodeEntry* entry
+        class CCharacterListNode 0x28 {
             CCharacterListNode* next
+            CCharacter* character @ 0x18
         }
 
-        CCharacterListNode* root @ 0x4
+        CCharacterListNode** root @ 0x10
         uint32_t count
     }
 
     CItemList items @ 0x8
-    CCharacterList characters @ 0x28
+    CCharacterList characters @ 0x48
 }
 
-class CEntityListPtr {
-    CEntityList* entityList
-}
-
-class CRenderer {
+class CRenderer 0x100 {
     class CCamera {
         class CCameraState {
-            Vector3 target @ 0xC
+            Vector3 target @ 0x10
             Vector3 position +4
             Vector4 forward +8
             float drawDistance
@@ -263,24 +249,12 @@ class CRenderer {
         CCameraState* state;
     }
 
-    CCamera* camera @ 0x24
+    CCamera* camera @ 0x38
 }
 
-class CRendererPtr {
-    CRenderer* renderer
-}
-
-class CWorld {
-    uint64_t localPlayerID @ 0xB8
-}
-
-class CWorldPtr {
-    CWorld* world
+class CWorld 0x200 {
+    uint64_t localPlayerID @ 0x160
 }
 
 class CAccount 0x50 {
-}
-
-class CAccountPtr {
-    CAccount* account
 }

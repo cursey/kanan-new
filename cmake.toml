@@ -2,7 +2,7 @@
 [project]
 name = "Kanan"
 cmake-after = """
-set(VCPKG_TARGET_TRIPLET x86-windows-static)
+set(VCPKG_TARGET_TRIPLET x64-windows-static)
 """
 
 [vcpkg]
@@ -39,13 +39,29 @@ include-directories = ["Kanan/"]
 compile-definitions = ["IMGUI_DISABLE_INCLUDE_IMCONFIG_H"]
 link-libraries = ["Core", "imgui::imgui", "nlohmann_json::nlohmann_json", "ws2_32"]
 properties.MSVC_RUNTIME_LIBRARY = "MultiThreaded$<$<CONFIG:Debug>:Debug>"
+cmake-after = """
+# Copy Kanan/Patches.json to the output directory.
+add_custom_command(TARGET Kanan POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        ${CMAKE_CURRENT_SOURCE_DIR}/Kanan/Patches.json
+        $<TARGET_FILE_DIR:Kanan>
+)
+"""
 
 [target.Loader]
 type = "executable"
 sources = ["Loader/Main.cpp"]
 link-libraries = ["Core"]
-link-options = ["/MANIFESTUAC:level=requireAdministrator"]
+link-options = ["/MANIFESTUAC:level='requireAdministrator'"]
 properties.MSVC_RUNTIME_LIBRARY = "MultiThreaded$<$<CONFIG:Debug>:Debug>"
+cmake-after = """
+# Copy Loader/Loader.txt to the output directory
+add_custom_command(TARGET Loader POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        ${CMAKE_CURRENT_SOURCE_DIR}/Loader/Loader.txt
+        $<TARGET_FILE_DIR:Loader>
+)
+"""
 
 [target.Launcher]
 type = "executable"
@@ -54,7 +70,7 @@ headers = ["Launcher/**.hpp"]
 include-directories = ["Kanan/"] # For FontData.hpp
 compile-definitions = ["IMGUI_DISABLE_INCLUDE_IMCONFIG_H"]
 link-libraries = ["Core", "imgui::imgui", "nlohmann_json::nlohmann_json", "Bcrypt", "Crypt32", "Winhttp", "Rpcrt4", "D3d9", "Wbemuuid"]
-link-options = ["/MANIFESTUAC:level=requireAdministrator"]
+link-options = ["/MANIFESTUAC:level='requireAdministrator'"]
 properties.MSVC_RUNTIME_LIBRARY = "MultiThreaded$<$<CONFIG:Debug>:Debug>"
 properties.WIN32_EXECUTABLE = true
 

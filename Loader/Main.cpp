@@ -37,7 +37,11 @@ bool inject(DWORD clientID) {
     string dllConfigLine{};
 
     while (getline(dllConfig, dllConfigLine)) {
-        dllNames.push_back(move(dllConfigLine));
+        dllNames.emplace_back(move(dllConfigLine));
+    }
+
+    if (dllNames.empty()) {
+        dllNames.emplace_back("Kanan.dll");
     }
 
     for (auto& dllName : dllNames) {

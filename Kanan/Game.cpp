@@ -1,5 +1,6 @@
 #include <Scan.hpp>
 #include <String.hpp>
+#include <Utility.hpp>
 
 #include "Log.hpp"
 #include "Game.hpp"
@@ -8,59 +9,67 @@ using namespace std;
 
 namespace kanan {
     Game::Game()
-        : m_rendererPtr{ nullptr },
-        m_entityListPtr{ nullptr }, 
-        m_worldPtr{nullptr}, 
-        m_accountPtr{nullptr}
+        : m_renderer{ nullptr },
+        m_entityList{ nullptr }, 
+        m_world{nullptr}, 
+        m_account{nullptr}
     {
         log("Entering Game constructor.");
 
         // Find the games global renderer pointer.
-        auto rendererAddress = scan("client.exe", "8B 0D ? ? ? ? 8D 45 DC 6A ? 6A ? 50");
+        auto rendererAddress = scan("client.exe", "48 8B 0D ? ? ? ? E8 ? ? ? ? 84 C0 74 ? C7 07 ? ? ? ? 32 C0");
 
         if (rendererAddress) {
-            m_rendererPtr = *(CRendererPtr**)(*rendererAddress + 2);
+            do {
+                m_renderer = (CRenderer**)rel_to_abs(*rendererAddress + 3);
+            } while (*m_renderer == nullptr);
 
-            log("Got CRendererPtr %p", m_rendererPtr);
+            log("Got CRenderer %p", *m_renderer);
         }
         else {
-            error("Failed to find address of CRendererPtr.");
+            error("Failed to find address of CRenderer.");
         }
 
         // Find the games global entity list pointer.
-        auto entityListAddress = scan("client.exe", "8B 0D ? ? ? ? 56 FF 75 08 E8 ? ? ? ? 85 C0 0F 84 ? ? ? ?");
+        auto entityListAddress = scan("client.exe", "48 8B 0D ? ? ? ? E8 ? ? ? ? 48 85 C0 0F 84 ? ? ? ? 48 8B 0D ? ? ? ? 48 8B 91 60 01 00 00 E8 ? ? ? ?");
 
         if (entityListAddress) {
-            m_entityListPtr = *(CEntityListPtr**)(*entityListAddress + 2);
+            do {
+                m_entityList = (CEntityList**)rel_to_abs(*entityListAddress + 3);
+            } while (*m_entityList == nullptr);
 
-            log("Got CEntityListPtr %p", m_entityListPtr);
+            log("Got CEntityList %p", *m_entityList);
         }
         else {
-            error("Failed to find CEntityListPtr.");
+            error("Failed to find CEntityList.");
         }
 
         // Find the games global world pointer.
-        auto worldAddress = scan("client.exe", "A1 ? ? ? ? 8B 48 1C E8 ? ? ? ? 0F B6 C0");
+        auto worldAddress = scan("client.exe", "48 8B 0D ? ? ? ? E8 ? ? ? ? 84 C0 0F 85 ? ? ? ? 48 8B 86 A0 01 00 00");
 
         if (worldAddress) {
-            m_worldPtr = *(CWorldPtr**)(*worldAddress + 1);
+            do {
+                m_world = (CWorld**)rel_to_abs(*worldAddress + 3);
+            } while (*m_world == nullptr);
 
-            log("Got CWorldPtr %p", m_worldPtr);
+            log("Got CWorld %p", *m_world);
         }
         else {
-            error("Failed to find CWorldPtr.");
+            error("Failed to find CWorld.");
         }
 
          // Find the games global account pointer.
-        auto accountAddress = scan("client.exe", "8B 0D ? ? ? ? 6A ? 6A ? 53 E8 ? ? ? ? 8B 06");
+        auto accountAddress = scan("client.exe", "48 8B 0D ? ? ? ? E8 ? ? ? ? 84 C0 74 ? 49 8B CE E8 ? ? ? ? 84 C0 75 ? 49 8B 06");
 
         if (accountAddress) {
-            m_accountPtr = *(CAccountPtr**)(*accountAddress + 2);
+            do {
+                m_account = (CAccount**)rel_to_abs(*accountAddress + 3);
+            } while (*m_account == nullptr);
 
-            log("Got CAccountPtr %p", m_accountPtr);
+            log("Got CAccount %p", *m_account);
         }
         else {
-            error("Failed to find CAccountPtr.");
+            error("Failed to find CAccount.");
         }
 
         log("Leaving Game constructor.");
@@ -77,10 +86,10 @@ namespace kanan {
         // ID.
         auto& characters = entityList->characters;
         auto highestIndex = characters.count;
-        auto node = characters.root;
+        auto node = *characters.root;
 
-        for (uint32_t i = 0; i <= highestIndex && node != nullptr; ++i, node = node->next) {
-            auto character = (KCharacter*)node->entry->character;
+        for (uint32_t i = 0; i < highestIndex && node != nullptr; ++i, node = node->next) {
+            auto character = (KCharacter*)node->character;
 
             if (character == nullptr) {
                 continue;
@@ -149,36 +158,4 @@ namespace kanan {
 
         cc(account, &val2, 0, 0);
     }
-
-    CRenderer* Game::getRenderer() const {
-        if (m_rendererPtr == nullptr || m_rendererPtr->renderer == nullptr) {
-            return nullptr;
-        }
-
-        return m_rendererPtr->renderer;
-    }
-
-    CEntityList* Game::getEntityList() const {
-        if (m_entityListPtr == nullptr || m_entityListPtr->entityList == nullptr) {
-            return nullptr;
-        }
-
-        return m_entityListPtr->entityList;
-    }
-
-    CWorld* Game::getWorld() const {
-        if (m_worldPtr == nullptr || m_worldPtr->world == nullptr) {
-            return nullptr;
-        }
-
-        return m_worldPtr->world;
-    }
-
-    CAccount* Game::getAccount() const {
-		if (m_accountPtr == nullptr || m_accountPtr->account == nullptr) {
-			return nullptr;
-		}
-
-		return m_accountPtr->account;
-    }
-    }
+}

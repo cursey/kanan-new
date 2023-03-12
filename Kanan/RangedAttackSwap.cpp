@@ -13,16 +13,16 @@ namespace kanan {
         m_choice{ 0 },
         m_patch{}
     {
-        auto address = scan("client.exe", "B8 09 52 00 00 5F");
+        auto address = scan("client.exe", "B8 09 52 00 00 48");
 
         if (address) {
-            log("Got RangedAttackSwap %p", *address);
+            log("[RangedAttackSwap]Got Address %p", *address);
 
             m_patch.address = *address + 1;
             m_patch.bytes = { 0x09, 0x52 };
         }
         else {
-            log("Failed to find RangedAttackSwap address.");
+            log("[RangedAttackSwap]Failed to find address.");
         }
     }
 
