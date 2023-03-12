@@ -253,6 +253,13 @@ set_target_properties(Kanan PROPERTIES
 		MultiThreaded$<$<CONFIG:Debug>:Debug>
 )
 
+# Copy Kanan/Patches.json to the output directory.
+add_custom_command(TARGET Kanan POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        ${CMAKE_CURRENT_SOURCE_DIR}/Kanan/Patches.json
+        $<TARGET_FILE_DIR:Kanan>
+)
+
 unset(CMKR_TARGET)
 unset(CMKR_SOURCES)
 
@@ -293,6 +300,13 @@ target_link_options(Loader PRIVATE
 set_target_properties(Loader PROPERTIES
 	MSVC_RUNTIME_LIBRARY
 		MultiThreaded$<$<CONFIG:Debug>:Debug>
+)
+
+# Copy Loader/Loader.txt to the output directory
+add_custom_command(TARGET Loader POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        ${CMAKE_CURRENT_SOURCE_DIR}/Loader/Loader.txt
+        $<TARGET_FILE_DIR:Loader>
 )
 
 unset(CMKR_TARGET)
