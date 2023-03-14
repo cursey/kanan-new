@@ -1,15 +1,12 @@
 #pragma once
-#include <vector>
-#include <windows.h>
-#include <TlHelp32.h>
+#include "FunctionHook.hpp"
 #include "Mod.hpp"
 namespace kanan {
 	class CookingMod :
 		public Mod
 	{
 	public:
-		CookingMod();
-		void applycook(bool m_cooking_is_enabled);
+		CookingMod();		
 
 		void onUI() override;
 
@@ -24,6 +21,8 @@ namespace kanan {
 		//void onKeyDown(DWORD key);
 
 	private:
+        std::unique_ptr<FunctionHook> m_hook;
 		bool m_is_enabled{};
+        static void __fastcall HookForCooking(int* _this, int ingredientIdx, int amount);
 	};
 }
