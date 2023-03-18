@@ -24,6 +24,10 @@ namespace kanan {
             return m_hook != nullptr;
         }
 
+        template <typename RetT = void, typename... Args> auto callOriginal(Args... args) {
+            return m_hook->call<RetT>(args...);
+        }
+
         FunctionHook& operator=(const FunctionHook& other) = delete;
         FunctionHook& operator=(FunctionHook&& other) = delete;
 
