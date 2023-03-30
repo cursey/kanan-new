@@ -27,6 +27,7 @@
 #include "Currtarget.hpp"
 #include "CookingMod.hpp"
 #include "CharacterWindowTitle.hpp"
+#include "DrawDistance.hpp"
 
 #include "Log.hpp"
 
@@ -126,12 +127,14 @@ namespace kanan {
         addMod(make_unique<CookingMod>());
         addMod(make_unique<EquipmentOverride>());
         addMod(make_unique<FieldOfView>());
+        addMod(make_unique<DrawDistance>());
         addMod(make_unique<FreezeTimeOfDay>());
         /* addMod(make_unique<StatusUI>());
         addMod(make_unique<AutoChangeChannels>());
         addMod(make_unique<ChangeChannelHotkey>());*/
         addMod(make_unique<Currtarget>());
         //addMod(make_unique<CharacterWindowTitle>());
+        
 
         log("[Mods] Finished loading mods.");
     }
