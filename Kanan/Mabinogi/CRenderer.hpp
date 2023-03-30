@@ -15,7 +15,8 @@ public:
             Vector3 position; // 0x20
             private: char pad_2c[0x8]; public:
             Vector4 forward; // 0x34
-            private: char pad_44[0x8]; public:
+            float zNear; // 0x44
+            float zFar; // 0x48
             float drawDistance; // 0x4c
             float fov; // 0x50
             float screenWidth; // 0x54
