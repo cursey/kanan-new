@@ -133,7 +133,7 @@ namespace kanan {
         addMod(make_unique<AutoChangeChannels>());
         addMod(make_unique<ChangeChannelHotkey>());*/
         addMod(make_unique<Currtarget>());
-        //addMod(make_unique<CharacterWindowTitle>());
+        addMod(make_unique<CharacterWindowTitle>());
         
 
         log("[Mods] Finished loading mods.");
