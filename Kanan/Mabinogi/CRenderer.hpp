@@ -9,29 +9,29 @@ public:
     public:
         class CCameraState {
         public:
-            char pad_0[0x10];
+            private: char pad_0[0x10]; public:
             Vector3 target; // 0x10
-            char pad_1c[0x4];
+            private: char pad_1c[0x4]; public:
             Vector3 position; // 0x20
-            char pad_2c[0x8];
+            private: char pad_2c[0x8]; public:
             Vector4 forward; // 0x34
-            float drawDistance; // 0x44
-            float zNear; // 0x48
-            float zFar; // 0x4c
+            float zNear; // 0x44
+            float zFar; // 0x48
+            float drawDistance; // 0x4c
             float fov; // 0x50
             float screenWidth; // 0x54
             float screenHeight; // 0x58
-            char pad_5c[0x1c];
+            private: char pad_5c[0x1c]; public:
             float aspectRatio; // 0x78
-            char pad_7c[0xd0];
+            private: char pad_7c[0xd0]; public:
             Matrix4x4 transformMatrix; // 0x14c
         }; // Size: 0x18c
 
         CCameraState* state; // 0x0
     }; // Size: 0x8
 
-    char pad_0[0x38];
+    private: char pad_0[0x38]; public:
     CCamera* camera; // 0x38
-    char pad_40[0xc0];
+    private: char pad_40[0xc0]; public:
 }; // Size: 0x100
 #pragma pack(pop)

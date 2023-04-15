@@ -107,8 +107,8 @@
         "category": "Graphics",
         "patches": [
             {
-                "pattern": "F3 0F 10 46 14 F3 0F 5D C1",
-                "patch": "90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90"
+                "pattern": "f3 0f 10 73 1c f3 0f 5d c1",
+                "patch": "90 90 90 90 90"
             }
         ]
     },
