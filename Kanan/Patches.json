@@ -23,11 +23,11 @@
         "desc": "Shows the combat power of players and enemies.\nCredits: Rydian",
         "category": "Information",
         "patches": [
-            {
-                "pattern": "3D ? ? ? ? 0F 85 ? ? ? ? 49 8B ? ? ? ? ? 48 8B ? ? ? ? ? E8",
-                "offset": 5,
-                "patch": "90 90 90 90 90 90"
-            }
+          {
+            "pattern": "3D ? ? ? ? 0F 85 ? ? ? ? 49 8B ? ? ? ? ? 48 8B ? ? ? ? ? E8",
+            "offset": 5,
+            "patch": "90 90 90 90 90 90"
+          }
         ]
     },
     {
@@ -43,7 +43,7 @@
                 "pattern": "74 ? 80 BE B0 00 00 00 ?",                            
                 "patch": "EB"
             },
-            {                         
+            {                                
                 "pattern": "74 ? 80 BE A3 00 00 00 ?",
                 "patch": "EB"
             },
@@ -59,7 +59,7 @@
         "category": "Fixes",
         "patches": [
             {
-                "pattern": "55 8B EC 56 57 8B F9 8B 07 FF 50 0C 8B C8",
+                "pattern": "48 89 5C 24 08 57 48 83 EC 20 48 8B 01 0F",
                 "patch": "32 C0 C2 04 00"
             }
         ]
@@ -95,10 +95,10 @@
         "desc": "Lets you mount/dismount your pet as fast as you want.\nCredits: Licat",
         "category": "Speedup",
         "patches": [
-            {
-                "pattern": "45 89 ? ? ? ? ? B0 ? 4C 8D",
-                "patch": "90 90 90 90 90 90 90"
-            }
+          {
+            "pattern": "45 89 ? ? ? ? ? B0 ? 4C 8D",
+            "patch": "90 90 90 90 90 90 90"
+          }
         ]
     },
     {
@@ -117,10 +117,10 @@
         "desc": "Allows you to logout in the middle of a conversation with an NPC.",
         "category": "Fixes",
         "patches": [
-            {
-                "pattern": "E8 ? ? ? ? 84 C0 74 ? 41 8D ? ? E9",
-                "patch": "B8 00 FF FF FF"
-            }
+          {
+            "pattern": "E8 ? ? ? ? 84 C0 74 ? 41 8D ? ? E9",
+            "patch": "B8 00 FF FF FF"
+          }
         ]
     },
     {
@@ -128,10 +128,10 @@
         "desc": "Allows you to move to the same channel you're currently on.",
         "category": "Speedup",
         "patches": [
-            {
-                "pattern": "74 ? 48 83 C1 ? EB ? 49 8B ? E8 ? ? ? ? 85 C0 0F 85 ? ? ? ? 4C 89 ? ? 48 8D ? ? ? ? ? E8 ? ? ? ? 8B F8 8D 48 ? E8 ? ? ? ? 48 89 ? ? 48 8D ? ? 4C 8D ? ? ? ? ? 8D 57 ? E8 ? ? ? ? 48 8B ? ? 89 79 ? E8 ? ? ? ? 48 8B ? 4C 8D ? ? 48 8D ? ? E8 ? ? ? ? 90 48 8D ? ? 48 8B ? E8 ? ? ? ? 90 4C 89 ? ? 4C 89 ? ? C6 44 24 60 ? 48 8D ? ? 48 89 ? ? ? C6 44 24 50 ? C6 44 24 48 ? C6 44 24 40 ? C6 44 24 38 ? C6 44 24 30 ? C6 44 24 28 ? C7 44 24 20 ? ? ? ? 4D 8B ? 4C 8D ? ? 48 8D ? ? 48 8B ? ? ? ? ? E8 ? ? ? ? 90 48 8B ? ? 48 85 ? 74 ? E8 ? ? ? ? 4C 89 ? ? 48 8B ? ? 48 85 ? 74 ? E8 ? ? ? ? 4C 89 ? ? 48 8B ? ? 48 85 ? 74 ? E8 ? ? ? ? 4C 89 ? ? 48 8D ? ? E8 ? ? ? ? 90 48 8B ? ? 48 85 ? 0F 84",
-                "patch": "EB"
-            }
+          {
+            "pattern": "74 ? 48 83 C1 ? EB ? 49 8B ? E8 ? ? ? ? 85 C0 0F 85 ? ? ? ? 4C 89 ? ? 48 8D ? ? ? ? ? E8 ? ? ? ? 8B F8 8D 48 ? E8 ? ? ? ? 48 89 ? ? 48 8D ? ? 4C 8D ? ? ? ? ? 8D 57 ? E8 ? ? ? ? 48 8B ? ? 89 79 ? E8 ? ? ? ? 48 8B ? 4C 8D ? ? 48 8D ? ? E8 ? ? ? ? 90 48 8D ? ? 48 8B ? E8 ? ? ? ? 90 4C 89 ? ? 4C 89 ? ? C6 44 24 60 ? 48 8D ? ? 48 89 ? ? ? C6 44 24 50 ? C6 44 24 48 ? C6 44 24 40 ? C6 44 24 38 ? C6 44 24 30 ? C6 44 24 28 ? C7 44 24 20 ? ? ? ? 4D 8B ? 4C 8D ? ? 48 8D ? ? 48 8B ? ? ? ? ? E8 ? ? ? ? 90 48 8B ? ? 48 85 ? 74 ? E8 ? ? ? ? 4C 89 ? ? 48 8B ? ? 48 85 ? 74 ? E8 ? ? ? ? 4C 89 ? ? 48 8B ? ? 48 85 ? 74 ? E8 ? ? ? ? 4C 89 ? ? 48 8D ? ? E8 ? ? ? ? 90 48 8B ? ? 48 85 ? 0F 84",
+            "patch": "EB"
+          }
         ]
     },
     {
@@ -461,11 +461,11 @@
         "desc": "Ignore the maintain frame setting during character minimization so it always minimizes.\nNOTE: This makes the setting active only if you have it turned on.",
         "category": "Speedup",
         "patches": [
-            {
-                "pattern": "8B 31 89 46 14",
-                "offset": 3,
-                "patch": "76"
-            }
+          {
+            "pattern": "8B 31 89 46 14",
+            "offset": 3,
+            "patch": "76"
+          }
         ]
     },
     {
@@ -1124,167 +1124,167 @@
             }
         ]
     },
-    {
-        "name": "Remove Sunglare",
-        "desc": "Removes the annoying and ugly sunglare effect",
-        "category": "Graphics",
-        "patches": [
-            {
-                "pattern": "FF 52 ? 84 C0 0F 84 ? ? ? ? 45 33",
-                "offset": 5,
-                "patch": "90 E9"
-            }
-        ]
+  {
+    "name": "Remove Sunglare",
+    "desc": "Removes the annoying and ugly sunglare effect",
+    "category": "Graphics",
+    "patches": [
+      {
+        "pattern": "FF 52 ? 84 C0 0F 84 ? ? ? ? 45 33",
+        "offset": 5,
+        "patch": "90 E9"
+      }
+    ]
+  },
+      {
+      "name": "Remove Pet Summon Notification",
+      "desc": "Removes the Summoning... notification that pops up when summoning pets",
+      "category": "Speedup",
+      "patches": [
+        {
+          "pattern": "0F 84 14 02 00 00 8B 01 8B 80 ? ? ? ? FF D0 84 C0 0F 84 02 02 00 00 8B CB E8",
+          "patch": "90 E9"
+        }
+      ]
     },
     {
-        "name": "Remove Pet Summon Notification",
-        "desc": "Removes the Summoning... notification that pops up when summoning pets",
-        "category": "Speedup",
-        "patches": [
-            {
-            "pattern": "0F 84 14 02 00 00 8B 01 8B 80 ? ? ? ? FF D0 84 C0 0F 84 02 02 00 00 8B CB E8",
-            "patch": "90 E9"
-            }
-        ]
+      "name": "Disable CatSidhe Talent Bonus Training Select Popup",
+      "desc": "Disables the CatSidhe talent training selection pupup that appears when you summon a CatSidhe and haven't selected a talent yet. \nDisable this patch to show the popup once more when you have decided on a talent for the bonus and would like to select it to recieve that bonus.",
+      "category": "Interface",
+      "patches": [
+        {
+          "pattern": "? ? AD 00 00 0F 87 ? ? ? ? 0F 84 ? ? ? ? 2D A4 A8 00 00",
+          "offset": 5,
+          "patch": "90 E9"
+        }
+      ]
     },
     {
-        "name": "Disable CatSidhe Talent Bonus Training Select Popup",
-        "desc": "Disables the CatSidhe talent training selection pupup that appears when you summon a CatSidhe and haven't selected a talent yet. \nDisable this patch to show the popup once more when you have decided on a talent for the bonus and would like to select it to recieve that bonus.",
-        "category": "Interface",
-        "patches": [
-            {
-            "pattern": "? ? AD 00 00 0F 87 ? ? ? ? 0F 84 ? ? ? ? 2D A4 A8 00 00",
-            "offset": 5,
-            "patch": "90 E9"
-            }
-        ]
+      "name": "Disable Hotkey Removal",
+      "desc": "Disables the ability to right click a hotkey to remove it from the hotkey bars",
+      "category": "Interface",
+      "patches": [
+        {
+          "pattern": "e8 ? ? ? ? 84 c0 74 0b ff 75 10 8b cf",
+          "patch": "90 90 90 90 90"
+        },
+        {
+          "pattern": "74 3D 53 FF B6 ? ? ? ? 8D 8E ? ? ? ? 57",
+          "patch":  "EB"
+        }
+      ]
     },
     {
-        "name": "Disable Hotkey Removal",
-        "desc": "Disables the ability to right click a hotkey to remove it from the hotkey bars",
-        "category": "Interface",
-        "patches": [
-            {
-            "pattern": "e8 ? ? ? ? 84 c0 74 0b ff 75 10 8b cf",
-            "patch": "90 90 90 90 90"
-            },
-            {
-            "pattern": "74 3D 53 FF B6 ? ? ? ? 8D 8E ? ? ? ? 57",
-            "patch":  "EB"
-            }
-        ]
+      "name": "Disable WaitProcess Skill Locks",
+      "desc": "Allows the ability to load a new skill without needing to first cancel the currently loaded skill for cetain skills with waitprocess locks enabled (Windmill, Deathmark, Anchor Rush, etc) \nMay interact with some skills in strange ways.",
+      "category": "Speedup",
+      "patches": [
+        {
+          "pattern": "0F 85 ? ? ? ? 48 8B ? ? ? ? ? 48 85 ? 74 ? 48 8D",
+          "patch": "90 90 90 90 90 90"
+        }
+      ]
     },
-    {
-        "name": "Disable WaitProcess Skill Locks",
-        "desc": "Allows the ability to load a new skill without needing to first cancel the currently loaded skill for cetain skills with waitprocess locks enabled (Windmill, Deathmark, Anchor Rush, etc) \nMay interact with some skills in strange ways.",
-        "category": "Speedup",
-        "patches": [
-            {
-            "pattern": "0F 85 ? ? ? ? 48 8B ? ? ? ? ? 48 85 ? 74 ? 48 8D",
-            "patch": "90 90 90 90 90 90"
-            }
-        ]
-    },
-    {
-        "name": "Bulk Buy x99",
-        "desc": "Alters the Bulk buy increase of items from +10 to +99",
-        "category": "Speedup",
-        "patches": [
-            {
-                "pattern": "75 ? B8 0A000000 5D C3",
-                "offset": 3,
-                "patch": "63"
-            }
-        ]
-    },  
-    {
+      {
+    "name": "Bulk Buy x99",
+    "desc": "Alters the Bulk buy increase of items from +10 to +99",
+    "category": "Speedup",
+    "patches": [
+      {
+        "pattern": "75 ? B8 0A000000 5D C3",
+        "offset": 3,
+        "patch": "63"
+      }
+    ]
+  },  
+  {
     "name": "Ego Auto Select x30",
     "desc": "Alters the Ego feed auto select button to select 30 items instead of 10",
     "category": "Speedup",
-        "patches": [
-            {
-                "pattern": "66 83 7D F0 0A 73 ? 8B 4D 08  66 83 F9 1E 73 ? 8B 5D E8 BA 1E000000 0FB7 C1 B9 0A000000",
-                "offset": 4,
-                "patch": "1E"
-            },
-            {
-                "pattern": "66 83 7D F0 0A 73 ? 8B 4D 08  66 83 F9 1E 73 ? 8B 5D E8 BA 1E000000 0FB7 C1 B9 0A000000",
-                "offset": 28,
-                "patch": "1E"
-            }
-        ]
-    },
-    {
+    "patches": [
+      {
+        "pattern": "66 83 7D F0 0A 73 ? 8B 4D 08  66 83 F9 1E 73 ? 8B 5D E8 BA 1E000000 0FB7 C1 B9 0A000000",
+        "offset": 4,
+        "patch": "1E"
+      },
+      {
+        "pattern": "66 83 7D F0 0A 73 ? 8B 4D 08  66 83 F9 1E 73 ? 8B 5D E8 BA 1E000000 0FB7 C1 B9 0A000000",
+        "offset": 28,
+        "patch": "1E"
+      }
+    ]
+  },
+  {
     "name": "Enable Prop Target With Skill Loaded",
     "desc": "Allows the use of the prop target hotkey with a skill loaded",
     "category": "Quality of Life",
-        "patches": [
-            {
-                "pattern": "74 ? 48 2B ? ? ? 48 83 EF ? 48 D1 ? EB ? 83 CF ? 48 8B ? E8 ? ? ? ? 33 F6 48 89 ? ? ? 48 8D",
-                "patch": "90 90"
-            }
-        ]
-    },
-    {
+    "patches": [
+      {
+        "pattern": "74 ? 48 2B ? ? ? 48 83 EF ? 48 D1 ? EB ? 83 CF ? 48 8B ? E8 ? ? ? ? 33 F6 48 89 ? ? ? 48 8D",
+        "patch": "90 90"
+      }
+    ]
+  },
+  {
     "name": "Reforge Guide Skip",
     "desc": "Skips drawing of the reforge guide UI when reforging a new item (patch1) and sets the clicked confirm button flag to true (patch2)",
     "category": "Speedup",
-        "patches": [
-            {
-                "pattern": "E8 ? ? ? ? 8B F0 89 75 E4 85 F6 0F 84 ? ? ? ? 8B CB",
-                "offset": 12,
-                "patch": "90 E9"
-            },
-            {
-                "pattern": "6A ? 8B 01 FF 50 ? 68 ? ? ? ? C7 45 EC ? ? ? ? E8 ? ? ? ? 8B F8 8D 77 ? 56 E8 ? ? ? ? 68 ? ? ? ? 89 45 ? 83 C0 ? 56 50 E8 ? ? ? ? 8B 45 ? 83 C4 ? 89 78 ? C6 45 FC ? 8D 45 ? 50 8D 45 ? 50 E8 ? ? ? ? 8B C8 E8 ? ? ? ? C6 45 FC ? 8D 4D ? 51 8B C8 E8 ? ? ? ? C6 45 FC ? 8D 55",
-                "offset": 1,
-                "patch": "01"
-            }
-        ]
-    },
-    {
+    "patches": [
+      {
+        "pattern": "E8 ? ? ? ? 8B F0 89 75 E4 85 F6 0F 84 ? ? ? ? 8B CB",
+        "offset": 12,
+        "patch": "90 E9"
+      },
+      {
+        "pattern": "6A ? 8B 01 FF 50 ? 68 ? ? ? ? C7 45 EC ? ? ? ? E8 ? ? ? ? 8B F8 8D 77 ? 56 E8 ? ? ? ? 68 ? ? ? ? 89 45 ? 83 C0 ? 56 50 E8 ? ? ? ? 8B 45 ? 83 C4 ? 89 78 ? C6 45 FC ? 8D 45 ? 50 8D 45 ? 50 E8 ? ? ? ? 8B C8 E8 ? ? ? ? C6 45 FC ? 8D 4D ? 51 8B C8 E8 ? ? ? ? C6 45 FC ? 8D 55",
+        "offset": 1,
+        "patch": "01"
+      }
+    ]
+  },
+  {
     "name": "Don't Close Title Window",
     "desc": "Disables the automatic closing of the title window when switching titles. \n(Use the X in top right to close title window as this disables cancel button too)",
     "category": "Quality of Life",
-        "patches": [
-            {
-                "pattern": "FF 50 ? B0 ? 48 8B ? ? ? 48 83 C4 ? 5F C3 CC CC CC CC 40 ? 48 83 EC",
-                "patch": "90 90 90"
-            }
-        ]
-    },
-    {
+    "patches": [
+      {
+        "pattern": "FF 50 ? B0 ? 48 8B ? ? ? 48 83 C4 ? 5F C3 CC CC CC CC 40 ? 48 83 EC",
+        "patch": "90 90 90"
+      }
+    ]
+  },
+  {
     "name": "Enable Mounted Prop Attack",
     "desc": "Enables ability to attack props with all mounts (tuann, horses, etc)",
     "category": "Quality of Life",
-        "patches": [
-            {
-                "pattern": "B0 01 EB ? 48 8B ? ? ? 48 85 ? 74 ? 4C 8B ? ? ? 4C 2B ? 49 C1 F8 ? 48 8D ? ? ? E8 ? ? ? ? 0F 57 ? F3 0F ? ? ? ? 48 C7 44 24 38 ? ? ? ? 32 C0 48 8B ? ? ? 48 8B",
-                "offset": 1,
-                "patch": "00"
-            }
-        ]
-    },
-    {
+    "patches": [
+      {
+        "pattern": "B0 01 EB ? 48 8B ? ? ? 48 85 ? 74 ? 4C 8B ? ? ? 4C 2B ? 49 C1 F8 ? 48 8D ? ? ? E8 ? ? ? ? 0F 57 ? F3 0F ? ? ? ? 48 C7 44 24 38 ? ? ? ? 32 C0 48 8B ? ? ? 48 8B",
+        "offset": 1,
+        "patch": "00"
+      }
+    ]
+  },
+  {
     "name": "Enable Hidden Mob attack (Mimic-Unhide)",
     "desc": "Enables targetting of hidden mobs such as mimics and golems",
     "category": "Quality of Life",
-        "patches": [
-            {
-                "pattern": "0F 84 ? ? ? ? 48 8B ? FF 90 ? ? ? ? 48 8B ? E8 ? ? ? ? 48 8B ? 48 85 ? 0F 84 ? ? ? ? 49 8B",
-                "patch": "90 E9"
-            }
-        ]
-    },
-    {
+    "patches": [
+      {
+        "pattern": "0F 84 ? ? ? ? 48 8B ? FF 90 ? ? ? ? 48 8B ? E8 ? ? ? ? 48 8B ? 48 85 ? 0F 84 ? ? ? ? 49 8B",
+        "patch": "90 E9"
+      }
+    ]
+  },
+  {
     "name": "Disable AdSurvey",
     "desc": "Should block Ad/Survey window when quitting.",
     "category": "Interface",
-        "patches": [
-            {
-                "pattern": "E8 10 1F 29 00 48 8B CF",            
-                "patch": "90 90 90 90 90"
-            }
-        ]
+    "patches": [
+        {
+            "pattern": "E8 10 1F 29 00 48 8B CF",            
+            "patch": "90 90 90 90 90"
+        }
+      ]
     }  
 ]
