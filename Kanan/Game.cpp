@@ -17,7 +17,7 @@ namespace kanan {
         log("Entering Game constructor.");
 
         // Find the games global renderer pointer.
-        auto rendererAddress = scan("client.exe", "48 8B 0D ? ? ? ? E8 ? ? ? ? 84 C0 74 ? C7 07 ? ? ? ? 32 C0");
+        auto rendererAddress = scan("client.exe", "48 8B 0D ? ? ? ? E8 ? ? ? ? 84 C0 74 ? C7 07 ? ? ? ? 33 D2");
 
         if (rendererAddress) {
             do {
