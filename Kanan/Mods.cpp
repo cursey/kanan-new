@@ -28,6 +28,8 @@
 #include "CookingMod.hpp"
 #include "CharacterWindowTitle.hpp"
 #include "DrawDistance.hpp"
+#include "PetSummonGroups.hpp"
+#include "PetDesummonFix.hpp"
 
 #include "Log.hpp"
 
@@ -110,6 +112,7 @@ namespace kanan {
         addPatchMod("Speedup", make_unique<DontMoveToSquadChat>());
 		addPatchMod("Text", make_unique<TTFFontSize>());
         addPatchMod("Text", make_unique<ColorAltText>());
+        addPatchMod("Fixes", make_unique<PetDesummonFix>());
 
         for (auto& categories : m_patchMods) {
             auto& mods = categories.second;
@@ -134,6 +137,8 @@ namespace kanan {
         addMod(make_unique<ChangeChannelHotkey>());*/
         addMod(make_unique<Currtarget>());
         addMod(make_unique<CharacterWindowTitle>());
+        addMod(make_unique<PetSummonGroups>());
+
         
 
         log("[Mods] Finished loading mods.");
