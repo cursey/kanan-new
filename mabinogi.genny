@@ -149,6 +149,10 @@ class CCharacter {
         CCondition* condition @ 0x10
     }
 
+    class CSummonMaster 0x38 {
+        uint64_t slaveEntityID @ 0x28
+    }
+
     class CEquipmentItemInfo 0x58 {
         uint32_t classID
         uint32_t color1 + 0xC
@@ -168,6 +172,7 @@ class CCharacter {
     CAction* action
     CSkillMgr* skill 
     CConditionMgr* condition +32
+    CSummonMaster* summonMaster @ 0x198
     CEquipment* equipment @ 0x488
     uint64_t targetID @ 0x538
     uint64_t mouseTarget +8
