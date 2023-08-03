@@ -233,6 +233,13 @@ namespace kanan {
             displayEquipment(equipment);
             ImGui::TreePop();
         }
+        if (ImGui::TreeNode("Physical Stats")) {
+            ImGui::BulletText("Height: %f", parameter->scaleHeight.value);
+            ImGui::BulletText("Weight: %f", parameter->scaleFatness.value);
+            ImGui::BulletText("Upper: %f", parameter->scaleUpper.value);
+            ImGui::BulletText("Lower: %f", parameter->scaleLower.value);
+            ImGui::TreePop();
+        }
     }
 
     void EntityViewer::displayEquipment(CCharacter::CEquipment* equipment) {
