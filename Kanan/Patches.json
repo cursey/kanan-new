@@ -4,18 +4,16 @@
         "desc": "Read.  It uncaps production.",
         "category": "Fixes",
         "patches": [
-            {
-                "pattern": "66 39 86 ? ? ? ? 76 07 66",
-                "offset": 7,
-                "patch": "EB",
-                "n": 0
-            },
-            {
-                "pattern": "66 39 86 ? ? ? ? 76 07 66",
-                "offset": 7,
-                "patch": "EB",
-                "n": 1
-            }
+          {
+            "pattern": "48 89 ? ? ? E9 ? ? ? ? 8B BC",
+            "offset": 32,
+            "patch": "B8 FFFF0000 90"
+          },
+          {
+            "pattern": "41 0F ? ? ? 33 FF 48 8B ? ? ? ? ? 66 85 ? 75 ? 0F B7",
+            "n": 1,
+            "patch": "B8 FFFF0000"
+          }
         ]
     },
     {
