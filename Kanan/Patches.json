@@ -1276,10 +1276,10 @@
     "desc": "Should block Ad/Survey window when quitting.",
     "category": "Interface",
     "patches": [
-        {
-            "pattern": "E8 10 1F 29 00 48 8B CF",            
-            "patch": "90 90 90 90 90"
-        }
-      ]
-    }  
+      {
+        "pattern": "E8 10 1F 29 00 48 8B CF",
+        "patch": "90 90 90 90 90"
+      }
+    ]
+  }
 ]

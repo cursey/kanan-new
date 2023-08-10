@@ -17,7 +17,7 @@ namespace kanan {
         log("Entering Game constructor.");
 
         // Find the games global renderer pointer.
-        auto rendererAddress = scan("client.exe", "48 8B 0D ? ? ? ? E8 ? ? ? ? 84 C0 74 ? ? ? ? ? ? ? 32 C0");
+        auto rendererAddress = scan("client.exe", "48 8B ? ? ? ? ? E8 ? ? ? ? 84 C0 0F 84 ? ? ? ? 48 8B ? ? ? ? ? 48 8B ? 48 8B ? 44 89");
 
         if (rendererAddress) {
             do {
@@ -45,7 +45,7 @@ namespace kanan {
         }
 
         // Find the games global world pointer.
-        auto worldAddress = scan("client.exe", "48 8B 0D ? ? ? ? E8 ? ? ? ? 84 C0 0F 85 ? ? ? ? 48 8B 86 A0 01 00 00");
+        auto worldAddress = scan("client.exe", "48 8B ? ? ? ? ? E8 ? ? ? ? 84 C0 0F 85 ? ? ? ? 49 8B ? ? ? ? ? 48 85 ? 74");
 
         if (worldAddress) {
             do {
@@ -59,7 +59,7 @@ namespace kanan {
         }
 
          // Find the games global account pointer.
-        auto accountAddress = scan("client.exe", "48 8B 0D ? ? ? ? E8 ? ? ? ? 84 C0 74 ? 49 8B CE E8 ? ? ? ? 84 C0 75 ? 49 8B 06");
+        auto accountAddress = scan("client.exe", "48 8B ? ? ? ? ? E8 ? ? ? ? 84 C0 74 ? 49 8B ? E8 ? ? ? ? 84 C0 75 ? 49 8B");
 
         if (accountAddress) {
             do {
