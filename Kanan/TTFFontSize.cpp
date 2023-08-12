@@ -16,11 +16,11 @@ namespace kanan {
 
 	{
 		// Pattern for locating location of the byte that controls text font size
-		auto address = scan("client.exe", "C7 86 D0 00 00 00 ? ? ? ? C7 86 D4 00 00 00 ? ? ? ? C7 86 E8 00 00 00 ? ? ? ? C7 86 EC 00 00 00 ? ? ? ? 88 86 ? ? ? ? C6 86 B0 00 00 00 ? 83 46 10 ? 4C 8B");
+		auto address = scan("client.exe", "41 C7 86 D0 00 00 00 ? ? ? ? 41 C7 86 D4 00 00 00");
 		if (address) {
 			log("[TTF Font Size] Found address TTF Font Size %p", *address);
 
-			m_patch.address = *address + 6;
+			m_patch.address = *address + 7;
 			m_originalByte = { *reinterpret_cast<unsigned char*>(m_patch.address) };
                 } else {
                     log("[TTF Font Size] Failed to find TTFFontSize address.");
