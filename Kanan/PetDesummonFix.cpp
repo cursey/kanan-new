@@ -16,10 +16,10 @@ static PetDesummonFix* g_petHotkeyManager;
 PetDesummonFix::PetDesummonFix()
     : PatchMod{"Pet Desummon Fix",
           "Alters the Summon X Pet hotkeys in hotkey settings to desummon the currently summoned pet, if a pet is "
-          "summoned, to match behavior of hotbar hotkeys contaiing pets."},
+          "summoned, to match behavior of hotbar hotkeys containing pets."},
       m_petHotkeyHook(nullptr) {
     auto petHotkeyManagerAddress =
-        scan("client.exe", "40 ? 48 8B ? 48 83 EC ? 48 C7 45 F0 ? ? ? ? 48 89 ? ? ? 48 89 ? ? ? 48 89 ? ? ? 8B DA");
+        scan("client.exe", "48 89 ? ? ? 48 89 ? ? ? 57 48 83 EC ? 48 8B ? ? ? ? ? 48 8D ? ? ? ? ? 8B FA");
     //  scan("client.exe", "8D 4B ? 85 C9 0F 88 ? ? ? ? 33 D2");Old scan, comes before actual function call with sub to
     //  find summonslot index in the hotkey manager
     if (!petHotkeyManagerAddress) {
@@ -31,7 +31,7 @@ PetDesummonFix::PetDesummonFix()
     }
     g_petHotkeyManager = this;
 
-    auto HotkeyHookParam1 = scan("client.exe", "48 8B ? ? ? ? ? E8 ? ? ? ? E9 ? ? ? ? 48 8B ? E8 ? ? ? ? 84 C0 0F 84");
+    auto HotkeyHookParam1 = scan("client.exe", "48 8B ? ? ? ? ? E8 ? ? ? ? B0 ? 48 8B ? ? ? 48 83 C4 ? 5F 5E 5D C3 48 8B ? E8 ? ? ? ? 84 C0");
 
     if (HotkeyHookParam1) {
         do {
