@@ -5,14 +5,14 @@
         "category": "Fixes",
         "patches": [
           {
-            "pattern": "48 89 ? ? ? E9 ? ? ? ? 8B BC",
-            "offset": 32,
-            "patch": "B8 FFFF0000 90"
+            "pattern": "0F B7 ? ? 3B D8 0F 47 ? 89 9C ? ? ? ? ? BA ? ? ? ? 48 8B",
+            "n": 1,
+            "patch": "66 B8 FFFF"
           },
           {
-            "pattern": "41 0F ? ? ? 33 FF 48 8B ? ? ? ? ? 66 85 ? 75 ? 0F B7",
+            "pattern": "0F B7 ? ? 66 85 ? 75 ? 41 0F ? ? 40 32 ? EB ? 40 B6",
             "n": 1,
-            "patch": "B8 FFFF0000"
+            "patch": "66 BF FFFF"
           }
         ]
     },

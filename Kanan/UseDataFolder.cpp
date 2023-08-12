@@ -27,7 +27,7 @@ namespace kanan {
             log("[UseDataFolder] Failed to get address of CFileSystem");
         }
 
-        address = scan("client.exe", "E8 ? ? ? ? 48 8B ? ? E8 ? ? ? ? 48 8B ? ? ? 48 8B ? ? ? 48 8B ? ? ? 48 83 C4 ? 41");//E8 ? ? ? ? 48 8B 4E 08 E8 ? ? ? ? 48 8B 5C 24 58
+        address = scan("client.exe", "E8 ? ? ? ? 48 8B ? ? E8 ? ? ? ? 48 8B ? ? ? 48 8B ? ? ? 48 8B ? ? ? 48 83 C4 ? 41");
 
         if (address) {
             m_setLookUpOrder = (decltype(m_setLookUpOrder))rel_to_abs(*address + 1);
