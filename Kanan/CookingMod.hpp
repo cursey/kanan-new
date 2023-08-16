@@ -23,6 +23,6 @@ namespace kanan {
 	private:
         std::unique_ptr<FunctionHook> m_hook;
 		bool m_is_enabled{};
-        static void __fastcall HookForCooking(int* _this, int ingredientIdx, int amount);
+        static void __fastcall HookForCooking(int* _this, int amount);
 	};
 }
