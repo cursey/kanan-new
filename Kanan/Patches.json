@@ -1127,7 +1127,7 @@
     "category": "Graphics",
     "patches": [
       {
-        "pattern": "FF 52 ? 84 C0 0F 84 ? ? ? ? 45 33",
+        "pattern": "FF 52 ? 84 C0 0F 84 ? ? ? ? C7 44 24 20",
         "offset": 5,
         "patch": "90 E9"
       }
