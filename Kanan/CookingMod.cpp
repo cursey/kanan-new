@@ -17,23 +17,23 @@ namespace kanan {
     static CookingMod* g_cooking;
 
     //variable names may not accurately reflect the true names of the class. The original hooked function (see kanan pull request # 278)
-    //had args for this, ingredientIdx and Amount. Ingredient Idx is now part of the CookingViewClass (0x2FC). This is a pointer to CCookingView2 
+    //had args for _this, ingredientIdx and Amount. Ingredient Idx is now part of the CookingViewClass (0x2FC). _this is a pointer to CCookingView2 
     void CookingMod::HookForCooking(int* _this, int amount) {
         if (!g_cooking->m_is_enabled) {
             g_cooking->m_hook->callOriginal(_this, amount);
             return;
         }
         auto ingredientIdx = _this[193]; //Interface button we are currently clicking
-        if (ingredientIdx > -1 && ingredientIdx < 3) { //-1 is a state of not clicking any button. 0 through 2 are each Add button starting left
+        if (ingredientIdx > -1 && ingredientIdx < 3) { //-1 is a state of not clicking any button. 0 through 2 are each Add button starting from the left
             //Manually set each food percent of the object from our kanan UI
                 _this[188] = cookingOne;//+2F0
                 _this[189] = cookingTwo;
                 _this[190] = cookingThree;
 
                 //subtract 1 from the button we are pressing to allow the the original function to set the cooking bar full flag correctly
-                //If we don't do this the code thast handles activating the start button does not get executed
+                //If we don't do this the code that handles activating the start button does not get executed
                 _this[188 + ingredientIdx] = _this[188 + ingredientIdx] - 1;
-                //we call the original function - effecdtively adding the 1 value we just subtracted
+                //we call the original function - effectively adding the 1 value we just subtracted and allowing the start button to appear.
                 g_cooking->m_hook->callOriginal(_this, amount);
                 return;
         } else {
