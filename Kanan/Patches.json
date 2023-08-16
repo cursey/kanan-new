@@ -104,10 +104,10 @@
         "desc": "Lets you zoom in and out as far as you want.",
         "category": "Graphics",
         "patches": [
-            {
-                "pattern": "f3 0f 10 73 1c f3 0f 5d c1",
-                "patch": "90 90 90 90 90"
-            }
+          {
+            "pattern": "F3 0F ? ? ? F3 0F ? ? 72 ? BA 0C",
+            "patch": "90 90 90 90 90"
+          }
         ]
     },
     {
