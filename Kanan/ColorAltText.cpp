@@ -19,15 +19,15 @@ namespace kanan {
 		m_patchSelf{},
 		m_patchOthers {}
 	{
-		auto address = scan("client.exe", "C7 46 60 ? ? ? ? C7 46 64 ? ? ? ? 68 ? ? ? ?");
+		auto address = scan("client.exe", "B8 ? ? ? ? B9 ? ? ? ? 0F 45 ? 41 89");
 
 		if (address) {
 			log("Got ColorAltText %p", *address);
 
-			m_patchOthers.address = *address + 3;
+			m_patchOthers.address = *address + 1;
 			m_patchOthers.bytes = { 0xFF, 0xFF, 0xFF, 0xFF }; //in the order b g r a
 
-			m_patchSelf.address = *address - 13;
+			m_patchSelf.address = *address + 6;
 			m_patchSelf.bytes = { 0xFF, 0xFF, 0xFF, 0xFF }; //in the order b g r a
 		}
 		else {
