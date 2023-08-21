@@ -1243,7 +1243,7 @@
     "category": "Quality of Life",
     "patches": [
       {
-        "pattern": "FF 50 ? B0 ? 48 8B ? ? ? 48 83 C4 ? 5F C3 CC CC CC CC 40 ? 48 83 EC",
+        "pattern": "FF 50 ? B0 ? 48 8B ? ? ? 48 83 C4 ? 5F C3 E8",
         "patch": "90 90 90"
       }
     ]
