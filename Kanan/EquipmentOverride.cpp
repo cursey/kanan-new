@@ -143,7 +143,7 @@ namespace kanan {
         m_equipmentOverrides[17].name = "Accessory 2";
         m_equipmentOverrides[18].name = "Tail";
 
-        if (auto call_address = scan("client.exe", "E8 ? ? ? ? 90 E9 ? ? ? ? 44 39 B6 A4 1B 00 00")) {
+        if (auto call_address = scan("client.exe", "E8 ? ? ? ? 90 48 8B ? ? ? 48 85 ? 74 ? E8 ? ? ? ? 4C 89 ? ? ? 41 8D")) {
             log("[EquipmentOverride] Found address of call setEquipmentInfo %p", *call_address);
 
             auto set_equip_info = rel_to_abs(*call_address + 1);
