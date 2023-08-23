@@ -244,20 +244,20 @@ namespace kanan {
 
     void EntityViewer::displayEquipment(CCharacter::CEquipment* equipment) {
         static const map<int, string> equipmentNames{
-        { 1, "Torso\\Armor\\Shirt" },
-        { 2, "Head\\Helmet\\Hat" },
-        { 4, "Hands\\Gauntlets\\Gloves" },
-        { 5, "Feet\\Boots\\Shoes" },
-        { 7, "Hair" },
-        { 8, "Back\\Wings\\Robe" },
-        { 10, "Weapon 1" },
-        { 11, "Weapon 2" },
-        { 12, "Arrow\\Shield 1" },
-        { 13, "Arrow\\Shield 2" },
-        { 15, "Face Accessory" },
-        { 16, "Accessory 1" },
-        { 17, "Accessory 2" },
-        { 18, "Tail" }
+        { 0, "Torso\\Armor\\Shirt" },
+        { 1, "Head\\Helmet\\Hat" },
+        { 3, "Hands\\Gauntlets\\Gloves" },
+        { 4, "Feet\\Boots\\Shoes" },
+        { 6, "Hair" },
+        { 9, "Weapon 1" },
+        { 10, "Weapon 2" },
+        { 11, "Arrow\\Shield 1" },
+        { 12, "Arrow\\Shield 2" },
+        { 13, "Back\\Wings\\Robe" },
+        { 14, "Face Accessory"}, 
+        { 15, "Accessory 1" },
+        { 16, "Accessory 2" },
+        { 17, "Tail" }
         };
 
         for (auto [id, name] : equipmentNames) {
