@@ -273,7 +273,7 @@
         "category": "Quality of Life",
         "patches": [
             {
-                "pattern": "76 ? 4C 8B ? ? ? ? ? 48 89",
+                "pattern": "76 ? 4C 8B ? ? ? ? ? 48 89 ? ? E8 ? ? ? ? 4C 8B",
                 "patch": "EB"
             }
         ]
@@ -1369,8 +1369,8 @@
         },
         {
             "pattern": "F3 48 ? ? ? C3 F3 0F",
-            "offset": 10,
-            "patch": "6A 04 E1 02"
+            "offset": 6,
+            "patch": "F3 0F 10 C6 90 90 90 90"
         }
     ]
 },
