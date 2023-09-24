@@ -100,6 +100,19 @@
         ]
     },
     {
+        "name": "Equip Slot Swap Delay Fix",
+        "desc": "Removes the delay when swapping with Equip Slot.",
+        "category": "Speedup",
+        "patches": [
+            {
+                "pattern": "48 05 ? ? ? ? 49 3B ? 0F 86 ? ? ? ? E8",
+				"offset": 2,
+                "patch": "00 00"
+            }
+         
+        ]
+    },
+    {
         "name": "Unlimited Zoom",
         "desc": "Lets you zoom in and out as far as you want.",
         "category": "Graphics",
