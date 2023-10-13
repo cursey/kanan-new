@@ -34,20 +34,20 @@
         "category": "Text",
         "patches": [
             {                
-                "pattern": "74 ? E8 ? ? ? ? EB ? E8 ? ? ? ? ? 8B CB ? ? ? ? ? ? C7 47 10 ? ? ? ?",
+                "pattern": "74 ? E8 ? ? ? ? EB ? E8 ? ? ? ? 48 8B ? E8 ? ? ? ? 48 C7 47 10",
                 "patch": "90 90"
             },
             {
-                "pattern": "74 ? 80 BE B0 00 00 00 ?",                            
+                "pattern": "75 ? 83 BF B8 00 00 00",                            
                 "patch": "EB"
             },
             {                                
-                "pattern": "74 ? 80 BE A3 00 00 00 ?",
+                "pattern": "74 ? 44 38 ? ? ? ? ? 75 ? 44 88",
                 "patch": "EB"
             },
             {
-                "pattern": "0F 84 ? ? ? ? 48 8B ? ? ? ? 03 ? ? ? ? FF 48",
-                "patch": "90 90 90 90 90 90 ? ? ? ? ? ? 90 90 90 B0 01 ? ? ? ? EB"
+                "pattern": "0F 84 ? ? ? ? 48 8B ? ? ? ? ? E8 ? ? ? ? 48 8B ? 0F B7",
+                "patch": "90 90 90 90 90 90 ? ? ? ? ? ? ? 90 90 90 B0 01 48 8B ? 0F B7 ? ? ? EB"
             }
         ] 
     },
@@ -68,12 +68,12 @@
         "category": "Speedup",
         "patches": [
             {
-                "pattern": "74 ? E8 ? ? ? ? 8B C8 EB ? 41 8B ? 0F B7",
+                "pattern": "74 ? E8 ? ? ? ? 48 85 ? 74 ? F6 43 20 ? 75 ? 48 8B ? 48 8B ? FF 92",
                 "patch": "EB"
             },
             {
-                "pattern": "8B 54 ? ? 45 33 ? 48 8B ? ? ? ? ? E8 ? ? ? ? 48 8B ? ? ? ? ? B2 ? E8",
-                "patch": "48 31 D2 90"
+                "pattern": "8B 54 ? ? 45 33 ? 48 8B ? E8 ? ? ? ? 48 8B ? ? ? ? ? B2 ? E8",
+                "patch": "33 D2 90 90"
             }
         ]
     },
@@ -486,8 +486,8 @@
         "category": "Graphics",
         "patches": [
             {
-                "pattern": "83 78 04 ? 75 ? 85 F6 74 ? 8B C6",
-                "offset": 4,
+                "pattern": "48 83 79 08 ? 75 ? 48 85 ? 74 ? 48 8B",
+                "offset": 5,
                 "patch": "90 90"
             }
         ]
@@ -615,8 +615,9 @@
         "category": "Interface",
         "patches": [
             {
-                "pattern": "0F 85 ? ? ? ? 3B D7 0F 85 ? ? ? ? 8B 8E 90 00 00 00",
-                "patch": "90 E9"
+                "pattern": "0F 85 ? ? ? ? 49 8B ? ? ? ? ? E8 ? ? ? ? 84 C0 74 ? 48 8B",
+				"offset": 1,
+                "patch": "81"
             }
         ]
     },
@@ -641,12 +642,10 @@
             },
             {
                 "pattern": "33 C9 85 FF 0F 49",
-                "n": 0,
                 "patch": "90 90 90 90 90 90 90 8B CF"
             },
             {
                 "pattern": "33 F6 8B CE 85 FF",
-                "n": 1,
                 "patch": "90 90 90 90 90 90 90 8B CF"
             },
             {
@@ -707,8 +706,9 @@
         "category": "Information",
         "patches": [
             {
-                "pattern": "84 C0 75 ? 8B CF E8 ? ? ? ? 84 C0 75 ? 83 7D DC ?",
-                "patch": "38 ? 7B"
+                "pattern": "0F 85 ? ? ? ? 49 8B ? E8 ? ? ? ? 84 C0 75 ? 49 8B ? ? ? ? ? ? E8",
+				"offset": 1,
+                "patch": "80"
             }
         ]
     },
@@ -769,15 +769,15 @@
         "category": "Speedup",
         "patches": [
             {
-                "pattern": "75 ? B0 ? 5E C3 90",
+                "pattern": "75 ? B0 ? 48 83 C4 ? 5B C3 FF 15",
                 "patch": "90 90"
             },
             {
-                "pattern": "74 ? 90 E8 ? ? ? ? 8B 56 08",
+                "pattern": "74 ? FF 15 ? ? ? ? 8B 53",
                 "patch": "EB"
             }
         ]
-    },
+	},
     {
         "name": "Disable Avon Curtains",
         "desc": "Removes the curtains from Avon missions.\nCredits: Iceling/Koorimio",
@@ -796,9 +796,14 @@
         "category": "Speedup",
         "patches": [
             {
-                "pattern": "BF 98 3A 00 00",
+                "pattern": "E8 ? ? ? ? 48 8B ? 48 89 ? ? 48 85 ? 0F 84 ? ? ? ? E8 ? ? ? ? 48 8B ? 48 2B",
+                "offset": 6,
+                "patch": "33 C0"
+            },
+			            {
+                "pattern": "BB ? ? ? ? 48 89 ? ? ? ? ? ? 48 8B ? ? ? ? ? E8 ? ? ? ? 48 85",
                 "offset": 1,
-                "patch": "00 00"
+                "patch": "01 00 00 00"
             }
         ]
     },
@@ -844,7 +849,7 @@
         "category": "Information",
         "patches": [
             {
-                "pattern": "0F 84 ? ? ? ? 8B 0D ? ? ? ? 68 ? ? ? ? C7 45 BC ? ? ? ? E8 ? ? ? ? 84 C0",
+                "pattern": "0F 84 ? ? ? ? 89 7D ? BA",
                 "patch": "90 90 90 90 90 90"
             }
         ]
@@ -913,9 +918,9 @@
         "category": "Information",
         "patches": [
             {
-                "pattern": "38 5E 0D 75 17",
-                "offset": 3,
-                "patch": "EB"
+            "pattern": "0F 85 ? ? ? ? 41 80 7C 24 1A",
+            "offset": 1,
+            "patch": "81"
             }
         ]
     },
@@ -1151,7 +1156,7 @@
       "category": "Speedup",
       "patches": [
         {
-          "pattern": "0F 84 14 02 00 00 8B 01 8B 80 ? ? ? ? FF D0 84 C0 0F 84 02 02 00 00 8B CB E8",
+          "pattern": "0F 84 ? ? ? ? 48 8B ? FF 90 ? ? ? ? 84 C0 0F 84 ? ? ? ? 49 8B ? E8 ? ? ? ? 4C 89",
           "patch": "90 E9"
         }
       ]
