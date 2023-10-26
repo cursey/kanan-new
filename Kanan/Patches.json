@@ -6,7 +6,6 @@
         "patches": [
           {
             "pattern": "0F B7 ? ? 3B D8 0F 47 ? 89 9C ? ? ? ? ? BA ? ? ? ? 48 8B",
-            "n": 1,
             "patch": "66 B8 FFFF"
           },
           {
