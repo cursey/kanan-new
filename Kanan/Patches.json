@@ -784,5 +784,16 @@
             "patch": "01 00 00"
           }
         ]
+    },
+    {
+        "name": "Disable Censorship",
+        "desc": "Disables the word filter for your outgoing chat.",
+        "category": "Quality of Life",
+        "patches": [
+          {
+            "pattern": "0F 84 ? ? ? ? 32 D2 45 32",
+            "patch": "90 E9"
+          }
+        ]
     }
 ]

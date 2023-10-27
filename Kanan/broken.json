@@ -1,22 +1,5 @@
 [
     {
-        "name": "Uncap Production",
-        "desc": "Read.  It uncaps production.",
-        "category": "Fixes",
-        "patches": [
-          {
-            "pattern": "0F B7 ? ? 3B D8 0F 47 ? 89 9C ? ? ? ? ? BA ? ? ? ? 48 8B",
-            "n": 1,
-            "patch": "66 B8 FFFF"
-          },
-          {
-            "pattern": "0F B7 ? ? 66 85 ? 75 ? 41 0F ? ? 40 32 ? EB ? 40 B6",
-            "n": 1,
-            "patch": "66 BF FFFF"
-          }
-        ]
-    },
-    {
         "name": "Show Combat Power",
         "desc": "Shows the combat power of players and enemies.\nCredits: Rydian",
         "category": "Information",
@@ -143,17 +126,6 @@
             "pattern": "74 ? 41 8B ? ? EB ? 8B CF 41 2B ? 44 03 ? 44 8B ? 45 03 ? E9 ? ? ? ? 41 8B ? 3B 48 ? 0F 85 ? ? ? ? 48 8D ? ? 49 8D ? ? 4D 85 ? 49 0F ? ? E8 ? ? ? ? 85 C0 0F 85 ? ? ? ? 4C 8B ? ? ? ? ? 4C 89 ? ? 4C 89 ? ? E8 ? ? ? ? 48 8B ? 4C 89 ? ? 48 8D ? ? ? ? ? E8 ? ? ? ? 8B F8 8D 48 ? E8 ? ? ? ? 48 89 ? ? 48 8D ? ? 4C 8D ? ? ? ? ? 8D 57 ? E8 ? ? ? ? 48 8B ? ? 89 79 ? 4C 8D ? ? 48 8D ? ? 48 8B ? E8 ? ? ? ? 90 45 33 ? 48 8D ? ? 48 8B ? E8 ? ? ? ? BF",
             "patch": "EB"
           }
-        ]
-    },
-    {
-        "name": "Disable Censorship",
-        "desc": "Disables the word filter for your outgoing chat.",
-        "category": "Quality of Life",
-        "patches": [
-            {
-                "pattern": "0F 84 ? ? ? ? 84 D2 0F 84 ? ? ? ? 85 FF",
-                "patch": "90 E9"
-            }
         ]
     },
     {
