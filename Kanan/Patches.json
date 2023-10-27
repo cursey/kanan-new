@@ -795,5 +795,17 @@
             "patch": "90 E9"
           }
         ]
-    }
+    },
+      {
+    "name": "Enable Mounted Prop Attack",
+    "desc": "Enables ability to attack props with all mounts (tuann, horses, etc)",
+    "category": "Quality of Life",
+    "patches": [
+      {
+        "pattern": "F3 0F ? ? ? ? 48 C7 44 24 30 ? ? ? ? B0 01 48 8B ? ? ? 48 8B",
+        "offset": 16,
+        "patch": "00"
+      }
+    ]
+  }
 ]
