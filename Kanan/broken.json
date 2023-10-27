@@ -72,17 +72,6 @@
         ]
     },
     {
-        "name": "Disable Mount Timeout",
-        "desc": "Lets you mount/dismount your pet as fast as you want.\nCredits: Licat",
-        "category": "Speedup",
-        "patches": [
-          {
-            "pattern": "48 81 C1 ? ? ? ? 48 3B ? 0F 96 ? 48 83 C4 ? 5B C3 CC CC CC CC CC CC CC CC 40",
-            "patch": "90 90 90 90 90 90 90"
-          }
-        ]
-    },
-    {
         "name": "Equip Slot Swap Delay Fix",
         "desc": "Removes the delay when swapping with Equip Slot.",
         "category": "Speedup",
