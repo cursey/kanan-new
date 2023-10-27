@@ -1,101 +1,5 @@
 [
     {
-        "name": "Show Combat Power",
-        "desc": "Shows the combat power of players and enemies.\nCredits: Rydian",
-        "category": "Information",
-        "patches": [
-          {
-            "pattern": "3D ? ? ? ? 0F 85 ? ? ? ? 49 8B ? ? ? ? ? 48 8B ? ? ? ? ? E8",
-            "offset": 5,
-            "patch": "90 90 90 90 90 90"
-          }
-        ]
-    },
-    {
-        "name": "Use Bitmap Font",
-        "desc": "Uses a sharper and much faster to render font.\nCredits: Blade3575",
-        "category": "Text",
-        "patches": [
-            {                
-                "pattern": "74 ? E8 ? ? ? ? EB ? E8 ? ? ? ? 48 8B ? E8 ? ? ? ? 48 C7 47 10",
-                "patch": "90 90"
-            },
-            {
-                "pattern": "75 ? 83 BF B8 00 00 00",                            
-                "patch": "EB"
-            },
-            {                                
-                "pattern": "74 ? 44 38 ? ? ? ? ? 75 ? 44 88",
-                "patch": "EB"
-            },
-            {
-                "pattern": "0F 84 ? ? ? ? 48 8B ? ? ? ? ? E8 ? ? ? ? 48 8B ? 0F B7",
-                "patch": "90 90 90 90 90 90 ? ? ? ? ? ? ? 90 90 90 B0 01 48 8B ? 0F B7 ? ? ? EB"
-            }
-        ] 
-    },
-    {
-        "name": "Elf Lag Fix",
-        "desc": "Removes lag elves have with archery.\nCredits: Blade3575",
-        "category": "Fixes",
-        "patches": [
-            {
-                "pattern": "48 89 ? ? ? 57 48 83 EC ? 48 8B ? 0F B7 ? 48 8B ? FF 50 ? 48 8B ? E8 ? ? ? ? 84 C0 74",
-                "patch": "30 C0 30 C9 C3"
-            }
-        ]
-    },
-    {
-        "name": "Windows Appear Faster",
-        "desc": "Various interface windows will appear faster.\nCredits: Step29",
-        "category": "Speedup",
-        "patches": [
-            {
-                "pattern": "74 ? E8 ? ? ? ? 48 85 ? 74 ? F6 43 20 ? 75 ? 48 8B ? 48 8B ? FF 92",
-                "patch": "EB"
-            },
-            {
-                "pattern": "8B 54 ? ? 45 33 ? 48 8B ? E8 ? ? ? ? 48 8B ? ? ? ? ? B2 ? E8",
-                "patch": "33 D2 90 90"
-            }
-        ]
-    },
-    {
-        "name": "One Click Revive",
-        "desc": "Lets you revive by just clicking 'Revive Here' without the confirmation dialog.\nCredits: Step29",
-        "category": "Speedup",
-        "patches": [
-            {
-                "pattern": "0F 86 ? ? ? ? 49 8B ? ? 49 8B ? FF 50",
-                "patch": "90 E9"
-            }
-        ]
-    },
-    {
-        "name": "Equip Slot Swap Delay Fix",
-        "desc": "Removes the delay when swapping with Equip Slot.",
-        "category": "Speedup",
-        "patches": [
-            {
-                "pattern": "48 05 ? ? ? ? 49 3B ? 0F 86 ? ? ? ? E8",
-				"offset": 2,
-                "patch": "00 00"
-            }
-         
-        ]
-    },
-    {
-        "name": "Unlimited Zoom",
-        "desc": "Lets you zoom in and out as far as you want.",
-        "category": "Graphics",
-        "patches": [
-          {
-            "pattern": "F3 0F ? ? ? F3 0F ? ? 72 ? BA 0C",
-            "patch": "90 90 90 90 90"
-          }
-        ]
-    },
-    {
         "name": "Logout In Conversation",
         "desc": "Allows you to logout in the middle of a conversation with an NPC.",
         "category": "Fixes",
@@ -104,39 +8,6 @@
             "pattern": "E8 ? ? ? ? 84 C0 74 ? 41 8D ? ? E9",
             "patch": "B8 00 FF FF FF"
           }
-        ]
-    },
-    {
-        "name": "Allow Moving To Same Channel",
-        "desc": "Allows you to move to the same channel you're currently on.",
-        "category": "Speedup",
-        "patches": [
-          {
-            "pattern": "74 ? 41 8B ? ? EB ? 8B CF 41 2B ? 44 03 ? 44 8B ? 45 03 ? E9 ? ? ? ? 41 8B ? 3B 48 ? 0F 85 ? ? ? ? 48 8D ? ? 49 8D ? ? 4D 85 ? 49 0F ? ? E8 ? ? ? ? 85 C0 0F 85 ? ? ? ? 4C 8B ? ? ? ? ? 4C 89 ? ? 4C 89 ? ? E8 ? ? ? ? 48 8B ? 4C 89 ? ? 48 8D ? ? ? ? ? E8 ? ? ? ? 8B F8 8D 48 ? E8 ? ? ? ? 48 89 ? ? 48 8D ? ? 4C 8D ? ? ? ? ? 8D 57 ? E8 ? ? ? ? 48 8B ? ? 89 79 ? 4C 8D ? ? 48 8D ? ? 48 8B ? E8 ? ? ? ? 90 45 33 ? 48 8D ? ? 48 8B ? E8 ? ? ? ? BF",
-            "patch": "EB"
-          }
-        ]
-    },
-    {
-        "name": "Disable Channel Move Description",
-        "desc": "Hides the warning when selecting which channel to change to.",
-        "category": "Speedup",
-        "patches": [
-            {
-                "pattern": "C6 44 24 60 ? 48 8D ? ? 48 89 ? ? ? C6 44 24 50 ? C6 44 24 48 ? C6 44 24 40 ? C6 44 24 38 ? C6 44 24 30 ? C6 44 24 28 ? C7 44 24 20 ? ? ? ? 4D 8B ? 4C 8D ? ? 48 8D ? ? E8 ? ? ? ? 90 48 8B ? ? 48 85 ? 74 ? E8 ? ? ? ? 4C 89 ? ? 48 8B ? ? 48 85 ? 74 ? E8 ? ? ? ? 4C 89 ? ? 49 8B",
-                "patch": "90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90"
-            }
-        ]
-    },
-    {
-        "name": "Disable Logout Penalty Msg",
-        "desc": "Automatically skips the logout penalty warning message if you've recently been in combat.",
-        "category": "Speedup",
-        "patches": [
-            {
-                "pattern": "0F 84 ? ? ? ? 32 DB 88 5D",
-                "patch": "90 E9"
-            }
         ]
     },
     {
@@ -151,29 +22,6 @@
             {
                 "pattern": "0F 84 ? ? ? ? 8B 01 8B 35 ? ? ? ? FF 50 58 8B C8 E8 ? ? ? ? 50",
                 "patch": "90 E9"
-            }
-        ]
-    },
-    {
-        "name": "Infinite Party Ad Time",
-        "desc": "Keeps your party ad open until you choose to close it.",
-        "category": "Quality of Life",
-        "patches": [
-            {
-                "pattern": "48 89 ? ? ? 57 48 83 EC ? 8B DA 48 8B ? 48 8B ? ? 48 83 78 08",
-                "offset": 24,
-                "patch": "EB"
-            }
-        ]
-    },
-    {
-        "name": "Remove Dungeon Fog",
-        "desc": "Remove the fog on the map while in dungeons, automatically revealing it.",
-        "category": "Quality of Life",
-        "patches": [
-            {
-                "pattern": "0F B6 41 05 C0 E8 ?",
-                "patch": "33 C0 C3 90 90 90 90 90 90 90 90"
             }
         ]
     },
@@ -253,28 +101,6 @@
         ]
     },
     {
-        "name": "Enable Chat To Mini-gamers",
-        "desc": "Allow you to start a chat with friends who have their status set to In Mini-game.",
-        "category": "Quality of Life",
-        "patches": [
-            {
-                "pattern": "75 ? 8B D0 48 8D ? ? E8 ? ? ? ? 48 8B ? 4C 8B ? 48 8B ? ? 49 3B ? 74 ? 48 85 ? 74 ? E8 ? ? ? ? 49 8B ? 48 89 ? ? 4C 8B ? 4D 85 ? 74 ? 48 85 ? 74 ? E8 ? ? ? ? 4C 89 ? ? 4C 8B ? 4D 85 ? 74 ? 33 D2 49 8B ? E8 ? ? ? ? 48 89 ? ? EB",
-                "patch": "EB"
-            }
-        ]
-    },
-    {
-        "name": "Force Client Side DevCAT",
-        "desc": "Enables client side effects provided by the DevCAT title.\nNOTE: This mod can cause random issues, use with caution!",
-        "category": "Information",
-        "patches": [
-            {
-                "pattern": "74 ? 48 8B ? 48 8B ? FF 90 ? ? ? ? 48 8B ? E8 ? ? ? ? 3D ? ? ? ? 74 ? 32 C0",
-                "patch": "EB"
-            }
-        ]
-    },
-    {
         "name": "Disable Screen Flash",
         "desc": "Disables white screen flashes from occuring while loading or executing certain skills.",
         "category": "Graphics",
@@ -299,40 +125,6 @@
                 "pattern": "BF ? ? ? ? 6A ? 89 75 C8",
                 "offset": 1,
                 "patch": "19"
-            }
-        ]
-    },
-    {
-        "name": "Allow Interface While Dead",
-        "desc": "Allows you to interact with your entire user interface while unconcious.",
-        "category": "Interface",
-        "patches": [
-            {                   
-                "pattern": "FF C0 EB ? 85 C0 74 ? FF C8 89 81 ? ? ? ? 48 89",                
-                "patch": "90 90"
-            }
-        ]
-    },
-    {
-        "name": "Allow Minimap Zoom",
-        "desc": "Allows zooming out on all minimaps.",
-        "category": "Interface",
-        "patches": [
-            {
-                "pattern": "89 46 70 80 79 40 ?",
-                "offset": 1,
-                "patch": "6E"
-            }
-        ]
-    },
-    {
-        "name": "Increase Alt Text Distance",
-        "desc": "Allows you to see name tags while holding down ALT from much further away.",
-        "category": "Text",
-        "patches": [
-            {
-                "pattern": "0F 86 ? ? ? ? 41 0F ? ? 0F 82",
-                "patch": "90 90 90 90 90 90"
             }
         ]
     },
@@ -379,28 +171,6 @@
         ]
     },
     {
-        "name": "Hide Second Titles",
-        "desc": "Hides all second titles for all players.",
-        "category": "Text",
-        "patches": [
-            {
-                "pattern": "75 ? 48 8B ? ? ? ? ? 48 8B ? 4D 8B ? 41 0F ? ? FF 50 ? 85 C0 44 0F ? ? 48 8B ? ? ? ? ? E8",
-                "patch": "EB"
-            }
-        ]
-    },
-    {
-        "name": "Hide NPC Curtains",
-        "desc": "Hides the upper and lower black curtains that show up when talking to NPCs.",
-        "category": "Graphics",
-        "patches": [
-            {
-                "pattern": "40 ? 48 83 EC ? 48 8B ? 38 11 74",
-                "patch": "30 C0 30 C9 C3 90 90 90 90 90 90"
-            }
-        ]
-    },
-    {
         "name": "Hide Objects",
         "desc": "Stops all objects from loading.",
         "category": "Graphics",
@@ -409,24 +179,6 @@
                 "pattern": "75 ? 8B 06 51 8B CE FF 90 38 01 00 00",
                 "patch": "90 90"
             }
-        ]
-    },
-    {
-        "name": "Allow Hotkey For Any Item",
-        "desc": "Allows usable items to be hotkeyed.",
-        "category": "Quality of Life",
-        "patches": [
-          {
-            "pattern": "48 83 EC ? 48 8B ? 48 85 ? 74 ? BA ? ? ? ? 48 8B ? E8 ? ? ? ? 84 C0 74 ? B0 ? 48 83 C4 ? C3 32 C0 48 83 C4",
-            "n": 1,
-            "offset": 36,
-            "patch": "B0 01"
-          },
-          {
-            "pattern": "48 8D ? ? E8 ? ? ? ? 32 C0 4C 8D ? ? ? 49 8B ? ? 49 8B ? ? 49 8B ? 41 ? 5F",
-            "offset": 9,
-            "patch": "90 90"
-          }
         ]
     },
     {
@@ -439,18 +191,6 @@
             "offset": 3,
             "patch": "76"
           }
-        ]
-    },
-    {
-        "name": "Disable Translucency Changes",
-        "desc": "Stops players and objects from becoming translucent when blocking the view of your character.",
-        "category": "Graphics",
-        "patches": [
-            {
-                "pattern": "48 83 79 08 ? 75 ? 48 85 ? 74 ? 48 8B",
-                "offset": 5,
-                "patch": "90 90"
-            }
         ]
     },
     {
@@ -472,21 +212,6 @@
                 "pattern": "85 C0 0F 88 ? ? ? ? 83 F8 01 7E ? 83 F8 02 0F 85 ? ? ? ? 8B 0D",
                 "offset": 17,
                 "patch": "84"
-            }
-        ]
-    },
-    {
-        "name": "Show Clock Minutes",
-        "desc": "Updates the in-game clock on a 1 minute basis as opposed to every 10 minutes.",
-        "category": "Interface",
-        "patches": [
-            {
-                "pattern": "89 85 ? ? ? ? 4D 39 ? ? ? ? ? 0F 84 ? ? ? ? 48 8D",
-                "patch": "90 90 90 90 90 90"
-            },
-            {
-                "pattern": "89 85 ? ? ? ? 4D 8B ? ? ? ? ? 4D 85 ? 0F 84 ? ? ? ? 49 8B ? ? 4C 8B",
-                "patch": "90 90 90 90 90 90"
             }
         ]
     },
@@ -571,51 +296,6 @@
         ]
     },
     {
-        "name": "Enable Right-Clicking Self",
-        "desc": "Allows you to right-click yourself",
-        "category": "Interface",
-        "patches": [
-            {
-                "pattern": "0F 85 ? ? ? ? 49 8B ? ? ? ? ? E8 ? ? ? ? 84 C0 74 ? 48 8B",
-				"offset": 1,
-                "patch": "81"
-            }
-        ]
-    },
-    {
-        "name": "Show Negative HP When Deadly",
-        "desc": "Shows what your negative HP actually is when you're in DEADLY status.",
-        "category": "Information",
-        "patches": [
-            {
-                "pattern": "75 ? 48 8B ? ? ? 48 8D ? ? ? ? ? 48 85",
-                "n": 0,
-                "patch": "EB"
-            },
-            {
-                "pattern": "75 ? 48 8B ? ? ? 48 8D ? ? ? ? ? 48 85",
-                "n": 1,
-                "patch": "EB"
-            },
-            {
-                "pattern": "75 ? 48 8B ? ? ? 4C 8D ? ? ? ? ? 48 85",
-                "patch": "EB"
-            },
-            {
-                "pattern": "33 C9 85 FF 0F 49",
-                "patch": "90 90 90 90 90 90 90 8B CF"
-            },
-            {
-                "pattern": "33 F6 8B CE 85 FF",
-                "patch": "90 90 90 90 90 90 90 8B CF"
-            },
-            {
-                "pattern": "33 F6 8B CE 85 DB",
-                "patch": "90 90 90 90 90 90 90 8B CB"
-            }
-        ]
-    },
-    {
         "name": "Show Item Class",
         "desc": "Toggles on the dev item class ID and attribute flag view.\nNOTE: The AttrActionFlag denotes tradability of the item class.",
         "category": "Information",
@@ -658,18 +338,6 @@
             {
                 "pattern": "0F 85 A0 00 00 00 68 ? ? ? ? 8D 4D DC E8 ? ? ? ? C7 45 FC 00 00 00 00 8D 45 DC",
                 "patch": "90 E9"
-            }
-        ]
-    },
-    {
-        "name": "Enable NPC Equipment View",
-        "desc": "Adds the option to view the equipment of NPCs and monsters.",
-        "category": "Information",
-        "patches": [
-            {
-                "pattern": "0F 85 ? ? ? ? 49 8B ? E8 ? ? ? ? 84 C0 75 ? 49 8B ? ? ? ? ? ? E8",
-				"offset": 1,
-                "patch": "80"
             }
         ]
     },
@@ -725,21 +393,6 @@
         ]
     },
     {
-        "name": "Faster Networking",
-        "desc": "Reduce latency by using better networking techniques",
-        "category": "Speedup",
-        "patches": [
-            {
-                "pattern": "75 ? B0 ? 48 83 C4 ? 5B C3 FF 15",
-                "patch": "90 90"
-            },
-            {
-                "pattern": "74 ? FF 15 ? ? ? ? 8B 53",
-                "patch": "EB"
-            }
-        ]
-	},
-    {
         "name": "Disable Avon Curtains",
         "desc": "Removes the curtains from Avon missions.\nCredits: Iceling/Koorimio",
         "category": "Graphics",
@@ -748,23 +401,6 @@
                 "pattern": "0F 84 ? ? ? ? 8B 0E 6A ? 6A ?",
                 "offset": 0,
                 "patch": "90 E9"
-            }
-        ]
-    },
-    {
-        "name": "Disable Item Magnet Cooldown",
-        "desc": "Removes the cooldown timer from the Magnet button so item sorting can be done repeatedly.",
-        "category": "Speedup",
-        "patches": [
-            {
-                "pattern": "E8 ? ? ? ? 48 8B ? 48 89 ? ? 48 85 ? 0F 84 ? ? ? ? E8 ? ? ? ? 48 8B ? 48 2B",
-                "offset": 6,
-                "patch": "33 C0"
-            },
-			            {
-                "pattern": "BB ? ? ? ? 48 89 ? ? ? ? ? ? 48 8B ? ? ? ? ? E8 ? ? ? ? 48 85",
-                "offset": 1,
-                "patch": "01 00 00 00"
             }
         ]
     },
@@ -805,17 +441,6 @@
         ]
     },
     {
-        "name": "Show entity HP",
-        "desc": "Entities will show their HP values under the HP bar.",
-        "category": "Information",
-        "patches": [
-            {
-                "pattern": "0F 84 ? ? ? ? 89 7D ? BA",
-                "patch": "90 90 90 90 90 90"
-            }
-        ]
-    },
-    {
         "name": "Skip Cutscenes",
         "desc": "Exactly what it says on the tin.",
         "category": "Speedup",
@@ -834,18 +459,6 @@
                 "pattern": "74 ? FF 75 0C 8B 75 08 56 E8 ? ? ? ? C7 45 FC ? ? ? ? C7 45 F0 ? ? ? ? 8B C6 8B 4D ? 64 89 ? ? ? ? ? 59 5E 8B E5 5D C2 ? ? C7 45 0C ? ? ? ? C7 45 FC ? ? ? ? 8D 45 ?",
                 "patch": "EB",
                 "n": 2
-            }
-        ]
-    },
-    {
-        "name": "Disable Summoning Status Windows",
-        "desc": "Removes the temporary 'Summoning...' popup while summoning a pet.",
-        "category": "Interface",
-        "patches": [
-            {
-                "pattern": "8D 4D EC 38  5D 08 74 5A",
-                "offset": -19,
-                "patch": "90 E9"
             }
         ]
     },
@@ -870,18 +483,6 @@
                 "pattern": "84 C0 0F 84 1F 05 00 00 8B 4E 28",
                 "offset": 3,
                 "patch": "81"
-            }
-        ]
-    },
-    {
-        "name": "Show Unknown Quest Objectives",
-        "desc": "Display quest objectives that would normally be displayed as '?????????'",
-        "category": "Information",
-        "patches": [
-            {
-            "pattern": "0F 85 ? ? ? ? 41 80 7C 24 1A",
-            "offset": 1,
-            "patch": "81"
             }
         ]
     },
@@ -934,52 +535,6 @@
         ]
     },
     {
-        "name": "Render Wireframe",
-        "desc": "Set camera render to wireframe mode",
-        "category": "Graphics",
-        "patches": [
-            {
-                "pattern": "FF 52 ? 84 C0 0F 85 ? ? ? ? 8B 0D",
-                "patch": "B0 01 90"
-            }
-        ]
-    },
-    {
-        "name": "Render FPS info",
-        "desc": "Shows FPS and other game performance infos",
-        "category": "Graphics",
-        "patches": [
-            {         
-                "pattern": "FF 52 ? 84 C0 0F 84 ? ? ? ? 8B C7",
-                "patch": "B0 01 90"
-            }
-        ]
-    },
-    {
-        "name": "Disable character rendering",
-        "desc": "",
-        "category": "Graphics",
-        "patches": [
-            {         
-                "pattern": "48 8B ? 48 8B ? FF 52 ? 84 C0 0F 84 ? ? ? ? 49 8B ? ? ? ? ? 48 85",
-                "offset": 80,
-                "patch": "EB"
-            }
-        ]
-    },
-    {
-        "name": "Disable prop rendering",
-        "desc": "",
-        "category": "Graphics",
-        "patches": [
-            {         
-                "pattern": "48 8B ? 48 8B ? FF 52 ? 84 C0 0F 84 ? ? ? ? 49 8B ? ? ? ? ? 48 85",
-                "offset": 168,
-                "patch": "EB"
-            }
-        ]
-    },
-    {
         "name": "shadows and clouds",
         "desc": "shows some screens that show details about clouds and shadows",
         "category": "Graphics",
@@ -1009,18 +564,6 @@
         ]
     },
     {
-        "name": "Render Light Radius",
-        "desc": "",
-        "category": "Graphics",
-        "patches": [
-            {
-                "pattern": "48 8B ? FF 52 ? 84 C0 0F 84 ? ? ? ? 49 8B ? ? ? E8",
-                "offset": 3,
-                "patch": "90 90 90"
-            }
-        ]
-    },
-    {
         "name": "Render Light Information",
         "desc": "",
         "category": "Graphics",
@@ -1032,23 +575,6 @@
             },
             {
                 "pattern": "48 8B ? FF 52 ? 84 C0 74 ? 44 8B ? 48 8B ? 48 8B ? ? ? ? ? 42 8B",
-                "offset": 3,
-                "patch": "90 90 90"
-            }
-        ]
-    },
-    {
-        "name": "Render Collision Boxes",
-        "desc": "",
-        "category": "Graphics",
-        "patches": [
-            {
-                "pattern": "48 8B ? 48 8B ? FF 52 ? 84 C0 0F 84 ? ? ? ? 48 8B ? 48 8B ? ? ? ? ? E8",
-                "offset": 11,
-                "patch": "90 90 90 90 90 90"
-            },
-            {
-                "pattern": "48 8B ? FF 52 ? 84 C0 74 ? 48 8B ? 33 D2",
                 "offset": 3,
                 "patch": "90 90 90"
             }
@@ -1070,57 +596,6 @@
                 "patch": "90 90"
             }
         ]
-    },
-    {
-        "name": "Render Bones Hitboxes",
-        "desc": "",
-        "category": "Graphics",
-        "patches": [
-            {
-                "pattern": "48 8B ? 48 8B ? FF 52 ? 84 C0 0F 84 ? ? ? ? 48 8B ? 48 8B ? ? ? ? ? E8",
-                "offset": 11,
-                "patch": "90 90 90 90 90 90"
-            },
-            {
-                "pattern": "B2 ? 48 8B ? FF 90 ? ? ? ? 48 8B ? 48 8B ? ? ? ? ? E8",
-                "offset": 32,
-                "patch": "90 90 90"
-            }
-        ]
-    },
-    {
-        "name": "Remove Item Drop animation",
-        "desc": "",
-        "category": "Speedup",
-        "patches": [
-            {
-                "pattern": "0F 84 ? ? ? ? 49 83 BE 40 01 00 00 ? 0F 85",
-                "patch": "90 E9"
-            }
-        ]
-    },
-  {
-    "name": "Remove Sunglare",
-    "desc": "Removes the annoying and ugly sunglare effect",
-    "category": "Graphics",
-    "patches": [
-      {
-        "pattern": "FF 52 ? 84 C0 0F 84 ? ? ? ? C7 44 24 20",
-        "offset": 5,
-        "patch": "90 E9"
-      }
-    ]
-  },
-      {
-      "name": "Remove Pet Summon Notification",
-      "desc": "Removes the Summoning... notification that pops up when summoning pets",
-      "category": "Speedup",
-      "patches": [
-        {
-          "pattern": "0F 84 ? ? ? ? 48 8B ? FF 90 ? ? ? ? 84 C0 0F 84 ? ? ? ? 49 8B ? E8 ? ? ? ? 4C 89",
-          "patch": "90 E9"
-        }
-      ]
     },
     {
       "name": "Disable CatSidhe Talent Bonus Training Select Popup",
@@ -1150,17 +625,6 @@
       ]
     },
     {
-      "name": "Disable WaitProcess Skill Locks",
-      "desc": "Allows the ability to load a new skill without needing to first cancel the currently loaded skill for cetain skills with waitprocess locks enabled (Windmill, Deathmark, Anchor Rush, etc) \nMay interact with some skills in strange ways.",
-      "category": "Speedup",
-      "patches": [
-        {
-          "pattern": "0F 85 ? ? ? ? 49 8B ? ? ? ? ? ? 48 85 ? 74 ? 48 8D ? ? 48 89",
-          "patch": "90 90 90 90 90 90"
-        }
-      ]
-    },
-      {
     "name": "Bulk Buy x99",
     "desc": "Alters the Bulk buy increase of items from +10 to +99",
     "category": "Speedup",
@@ -1190,43 +654,6 @@
     ]
   },
   {
-    "name": "Enable Prop Target With Skill Loaded",
-    "desc": "Allows the use of the prop target hotkey with a skill loaded",
-    "category": "Quality of Life",
-    "patches": [
-      {
-        "pattern": "0F 84 ? ? ? ? 48 8D ? ? ? ? ? 48 85 ? 74 ? 48 8D ? ? 48 3B ? 0F 84 ? ? ? ? 48 8B ? E8 ? ? ? ? 8B D8 83 F8",
-        "patch": "90 90 90 90 90 90"
-      }
-    ]
-  },
-  {
-    "name": "Reforge Guide Skip",
-    "desc": "Skips drawing of the reforge guide UI when reforging a new item (patch1) and sets the clicked confirm button flag to true (patch2). Causes some client-side graphical bugs in reforging UI.",
-    "category": "Speedup",
-    "patches": [
-      {
-        "pattern": "E8 ? ? ? ? 48 8B ? ? ? ? ? 48 85 ? 0F 84 ? ? ? ? 48 8B ? ? ? ? ? 48 85 ? 0F 84 ? ? ? ? 48 8B",
-        "patch": "90 90 90 90 90"
-      },
-      {
-        "pattern": "33 D2 FF 90 ? ? ? ? 4D 8B ? ? ? ? ? 49 8B ? 4C 8B ? ? E8 ? ? ? ? 48 8B ? 48 C7 45 77",
-        "patch": "B2 01"
-      }
-    ]
-  },
-  {
-    "name": "Don't Close Title Window",
-    "desc": "Disables the automatic closing of the title window when switching titles. \n(Use the X in top right to close title window as this disables cancel button too)",
-    "category": "Quality of Life",
-    "patches": [
-      {
-        "pattern": "FF 50 ? B0 ? 48 8B ? ? ? 48 83 C4 ? 5F C3 E8",
-        "patch": "90 90 90"
-      }
-    ]
-  },
-  {
     "name": "Enable Mounted Prop Attack",
     "desc": "Enables ability to attack props with all mounts (tuann, horses, etc)",
     "category": "Quality of Life",
@@ -1235,17 +662,6 @@
         "pattern": "B0 01 EB ? 48 8B ? ? ? 48 85 ? 74 ? 4C 8B ? ? ? 4C 2B ? 49 C1 F8 ? 48 8D ? ? ? E8 ? ? ? ? 0F 57 ? F3 0F ? ? ? ? 48 C7 44 24 38 ? ? ? ? 32 C0 48 8B ? ? ? 48 8B",
         "offset": 1,
         "patch": "00"
-      }
-    ]
-  },
-  {
-    "name": "Enable Hidden Mob attack (Mimic-Unhide)",
-    "desc": "Enables targetting of hidden mobs such as mimics and golems",
-    "category": "Quality of Life",
-    "patches": [
-      {
-        "pattern": "0F 84 ? ? ? ? 48 8B ? FF 90 ? ? ? ? 48 8B ? E8 ? ? ? ? 48 8B ? 48 85 ? 0F 84 ? ? ? ? 49 8B",
-        "patch": "90 E9"
       }
     ]
   },
@@ -1260,17 +676,6 @@
       }
     ]
   },
-  {
-    "name": "Disable Combat Timeout",
-    "desc": "Removes the combat timeout. \nCredits: Blade3575",
-    "category": "Quality of Life",
-    "patches": [
-      {
-        "pattern": "74 ? 48 8B ? E8 ? ? ? ? 83 F8 ? 75 ? 48 8B ? E8 ? ? ? ? 84 C0 74",
-        "patch": "EB"
-      }
-    ]
-},
 {
     "name": "Render Bones",
     "desc": "",
@@ -1302,109 +707,6 @@
             "pattern": "48 8B ? 48 8B ? FF 52 ? 84 C0 74 ? 48 8B ? 48 8B ? FF 90 ? ? ? ? 48 83 C3",
             "offset": 6,
             "patch": "B0 01 90"
-        }
-    ]
-},
-{
-    "name": "Enable Golem Hit Props",
-    "desc": "",
-    "category": "Misc",
-    "patches": [
-        {
-            "pattern": "E8 ? ? ? ? 84 C0 0F 85 ? ? ? ? 48 8B ? E8 ? ? ? ? 48 8B ? 83 F8",
-            "patch": "B8 00 00 00 00"
-        }
-    ]
-},
-{
-    "name": "Enable Golem Speak",
-    "desc": "",
-    "category": "Misc",
-    "patches": [
-        {
-            "pattern": "74 ? 4C 89 ? ? 48 8D ? ? ? ? ? E8 ? ? ? ? 8B F8 8D 48 ? E8 ? ? ? ? 48 89 ? ? 48 8D ? ? 4C 8D ? ? ? ? ? 8D 57 ? E8 ? ? ? ? 48 8B ? ? 89 7A ? 48 8D ? ? 48 8B ? 41 FF",
-            "patch": "71"
-        },
-        {
-            "pattern": "48 8B ? E8 ? ? ? ? 84 C0 0F 85 ? ? ? ? 48 8B ? 48 8B ? E8 ? ? ? ? 84 C0 0F 85 ? ? ? ? 48 8B ? 48 8B",
-            "offset": 3,
-            "patch": "B8 00 00 00 00"
-        }
-    ]
-},
-{
-    "name": "Uncap Flight",
-    "desc": "",
-    "category": "Misc",
-    "patches": [
-        {
-            "pattern": "0F 84 ? ? ? ? E8 ? ? ? ? 48 8B ? E8 ? ? ? ? 48 8B ? 48 C7 44 24 48",
-            "offset": 1,
-            "patch": "80"
-        },
-        {
-            "pattern": "74 ? 48 8B ? ? 0F 57 ? 8B 48 ? F3 48",
-            "patch": "EB"
-        },
-        {
-            "pattern": "F3 48 ? ? ? C3 F3 0F",
-            "offset": 6,
-            "patch": "F3 0F 10 C6 90 90 90 90"
-        }
-    ]
-},
-{
-    "name": "No Aviation Check",
-    "desc": "Fly Through Obstacles",
-    "category": "Misc",
-    "patches": [
-        {
-            "pattern": "76 ? 48 8D ? ? ? ? ? E8 ? ? ? ? 48 8D ? ? ? ? ? 48 8B",
-            "patch": "EB"
-        }
-    ]
-},
-{
-    "name": "Land Any Height",
-    "desc": "",
-    "category": "Misc",
-    "patches": [
-        {
-            "pattern": "0F 82 ? ? ? ? E8 ? ? ? ? 48 8B ? 4C 89 ? ? ? 48 8D ? ? ? ? ? E8 ? ? ? ? 8B F8 8D 48 ? E8 ? ? ? ? 48 89 ? ? ? 48 8D ? ? 4C 8D ? ? ? ? ? 8D 57 ? E8 ? ? ? ? 48 8B ? ? ? 89 79 ? 4C 8D ? ? ? 48 8D ? ? 48 8B ? E8 ? ? ? ? 90 45 33 ? 48 8D ? ? ? 48 8B",
-            "offset": 1,
-            "patch": "85"
-        }
-    ]
-},
-{
-    "name": "Nao IMMEDIATELY",
-    "desc": "",
-    "category": "Misc",
-    "patches": [
-        {
-            "pattern": "41 B8 ? ? ? ? 48 8B ? 48 8B ? E8 ? ? ? ? 90 48 8D ? ? E8 ? ? ? ? 4D 8B",
-            "offset": 2,
-            "patch": "FF 00"
-        },
-        {
-            "pattern": "BA C3 04 00 00 48 8D ? ? E8 ? ? ? ? 90 B2 ? 48 8D",
-            "offset": 58,
-            "patch": "01 00 00"
-        },
-        {
-            "pattern": "BA C3 04 00 00 48 8D ? ? E8 ? ? ? ? 90 B2 ? 48 8D",
-            "offset": 64,
-            "patch": "01 00 00"
-        },
-        {
-            "pattern": "BA C6 04 00 00 48 8D ? ? E8 ? ? ? ? 90 B2 ? 48 8D",
-            "offset": 58,
-            "patch": "01 00 00"
-        },
-        {
-            "pattern": "BA C6 04 00 00 48 8D ? ? E8 ? ? ? ? 90 B2 ? 48 8D",
-            "offset": 64,
-            "patch": "01 00 00"
         }
     ]
 }
