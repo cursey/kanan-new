@@ -6,7 +6,6 @@
         "patches": [
           {
             "pattern": "0F B7 ? ? 3B D8 0F 47 ? 89 9C ? ? ? ? ? BA ? ? ? ? 48 8B",
-            "n": 1,
             "patch": "66 B8 FFFF"
           },
           {
@@ -94,7 +93,7 @@
         "category": "Speedup",
         "patches": [
           {
-            "pattern": "48 81 C1 ? ? ? ? 48 3B ? 0F 96 ? 48 83 C4 ? 5B C3 CC CC CC CC CC CC CC CC 40",
+            "pattern": "48 81 C1 E8 03 00 00 48 3B ? 0F 96 ? 48 83 C4 ? 5B",
             "patch": "90 90 90 90 90 90 90"
           }
         ]
@@ -785,5 +784,28 @@
             "patch": "01 00 00"
           }
         ]
-    }
+    },
+    {
+        "name": "Disable Censorship",
+        "desc": "Disables the word filter for your outgoing chat.",
+        "category": "Quality of Life",
+        "patches": [
+          {
+            "pattern": "0F 84 ? ? ? ? 32 D2 45 32",
+            "patch": "90 E9"
+          }
+        ]
+    },
+      {
+    "name": "Enable Mounted Prop Attack",
+    "desc": "Enables ability to attack props with all mounts (tuann, horses, etc)",
+    "category": "Quality of Life",
+    "patches": [
+      {
+        "pattern": "F3 0F ? ? ? ? 48 C7 44 24 30 ? ? ? ? B0 01 48 8B ? ? ? 48 8B",
+        "offset": 16,
+        "patch": "00"
+      }
+    ]
+  }
 ]
