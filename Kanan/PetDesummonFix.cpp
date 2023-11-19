@@ -57,8 +57,7 @@ void PetDesummonFix::PetHotkeyHook(LONGLONG param1, INT param2) {
         // param 2 handles the ID of the hotkey pressed.
         // We check to see if we are using a summon hotkey - if so we have modified code to run.
         switch (param2) {
-        case 0x6B: // Summon pet in slot 1 hotkey - rest are just 2 through 10
-        case 0x6C:
+        case 0x6C:// Summon pet in slot 1 hotkey - rest are just 2 through 10
         case 0x6D:
         case 0x6E:
         case 0x6F:
@@ -66,7 +65,8 @@ void PetDesummonFix::PetHotkeyHook(LONGLONG param1, INT param2) {
         case 0x71:
         case 0x72:
         case 0x73:
-        case 0x74: // summon pet in slot 10 hotkey
+        case 0x74:
+        case 0x75: // summon pet in slot 10 hotkey
             // If we don't have summonMaster we log error and procede to function without the fix.
             if (!summonMaster) {
                 g_petHotkeyManager->m_petHotkeyHook->callOriginal(param1, param2);
@@ -76,7 +76,7 @@ void PetDesummonFix::PetHotkeyHook(LONGLONG param1, INT param2) {
             // If our slaveEntityID is not 0 we have a pet summoned so we'll desummon it.
             if (!summonMaster->slaveEntityID == 0x0000000000000000) {
                 // desummon the pet
-                g_petHotkeyManager->m_petHotkeyHook->callOriginal(param1, 0x7A);//7A is the param fo the desummon hotkey press
+                g_petHotkeyManager->m_petHotkeyHook->callOriginal(param1, 0x7B);//7B is the param for the desummon hotkey press
                 break;
             }
             g_petHotkeyManager->m_petHotkeyHook->callOriginal(param1, param2);
