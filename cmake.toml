@@ -6,7 +6,7 @@ set(VCPKG_TARGET_TRIPLET x64-windows-static)
 """
 
 [vcpkg]
-version = "2022.05.10"
+version = "2023.10.19"
 packages = ["bddisasm", "imgui[freetype,dx9-binding,win32-binding]", "nlohmann-json", "stb"]
 
 [find-package]

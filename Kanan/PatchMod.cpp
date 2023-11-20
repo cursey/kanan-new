@@ -64,7 +64,7 @@ namespace kanan {
         m_configName = m_patchName;
 
         // Remove spaces.
-        m_configName.erase(remove_if(begin(m_configName), end(m_configName), isspace), end(m_configName));
+        erase_if(m_configName, [](auto x) { return isspace(x); });
 
         // Add .Enabled
         m_configName.append(".Enabled");
